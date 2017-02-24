@@ -1,0 +1,16 @@
+{
+	"account_id": 1315091,
+	"name": "",
+	"uri": "SIP/1234@phone.com:5060",
+	"max_concurrent_calls": 60,
+	"max_minutes_per_month": 800,
+	"greeting": {
+		/*Recording lookup object*/
+	},
+	"error_message": {
+		/*Recording lookup object*/
+	},
+	"codecs": [
+		/*array of objects, Custom audio codec configuration*/
+	]
+}

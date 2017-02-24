@@ -1,0 +1,18 @@
+{
+	"account_id": 1315091,
+	"route_id": 4701638,
+	"name": "API V3 Tests",
+	"rules": [
+		{
+			"actions": [
+				{
+					"action": "queue",
+					"queue": {
+						"id": 21971,
+						"name": "sample queue"
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,11 @@
+{
+	"account_id": 1315091,
+	"route_id": 456,
+	"name": "Test Route B",
+	"rules": [
+		/*array of objects, Rule Sets*/
+	],
+	"extension": {
+		/*object, Extension reference. Not present in the new version of apidocs*/
+	}
+}

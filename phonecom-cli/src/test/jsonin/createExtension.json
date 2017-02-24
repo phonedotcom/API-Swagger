@@ -1,0 +1,21 @@
+{
+	"account_id": 1315091,
+	"caller_id": "+12019570328",
+	"usage_type": "unlimited",
+	"allows_call_waiting": true,
+	"extension": 12340,
+	"include_in_directory": true,
+	"name": "The name",
+	"full_name": "The full name",
+	"timezone": "America/Los_Angeles",
+	"local_area_code": 619,
+	"voicemail[greeting][enable_leave_message_prompt]": true,
+	"voicemail[enabled]": false,
+	"enable_outbound_calls": true,
+	"enable_call_waiting": false,
+	"voicemail[password]": 12345,
+	"voicemail[greeting][type]": "standard",
+	"voicemail[transcription]": "automated",
+	"voicemail[notifications][sms]": "+18587741111",
+	"call_notifications[sms]": "+18587748888"
+}

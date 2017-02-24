@@ -1,0 +1,22 @@
+{
+	"account_id": 1315091,
+	"filters[id]": [
+		""
+	],
+	"filters[start_time]": [
+		""
+	],
+	"filters[created_at]": "",
+	"filters[direction]": "",
+	"filters[called_number]": "",
+	"filters[type]": "",
+	"filters[extension]": [
+		""
+	],
+	"sort[id]": "",
+	"sort[start_time]": "",
+	"sort[created_at]": "",
+	"limit": 25,
+	"offset": 0,
+	"fields": ""
+}

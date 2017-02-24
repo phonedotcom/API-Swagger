@@ -1,0 +1,36 @@
+{	
+	"filters[country_code]": [
+		""
+	],
+	"filters[npa]": [
+		""
+	],
+	"filters[nxx]": [
+		""
+	],
+	"filters[is_toll_free]": [
+		""
+	],
+	"filters[city]": [
+		""
+	],
+	"filters[province_postal_code]": [
+		""
+	],
+	"filters[country_postal_code]": [
+		""
+	],
+	"sort[country_code]": "",
+	"sort[npa]": "",
+	"sort[nxx]": "",
+	"sort[is_toll_free]": "",
+	"sort[city]": "",
+	"sort[province_postal_code]": "",
+	"sort[country_postal_code]": "",
+	"limit": 25,
+	"offset": 0,
+	"fields": "",
+	"group_by": [
+		""
+	]
+}

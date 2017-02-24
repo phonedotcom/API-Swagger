@@ -1,0 +1,18 @@
+{
+	"account_id": 1315091,
+	"extension_id": 1764590,
+	"filters[id]": [
+		""
+	],
+	"filters[group_id]": [
+		""
+	],
+	"filters[updated_at]": [
+		""
+	],
+	"sort[id]": "",
+	"sort[updated_at]": "",
+	"limit": 25,
+	"offset": 0,
+	"fields": ""
+}

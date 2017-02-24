@@ -1,0 +1,36 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;phonecom-api&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../src/goclient" />
+      <root url="file://$PROJECT_DIR$/../src/life" />
+      <root url="file://$PROJECT_DIR$/../src/gopkg.in" />
+      <root url="file://$PROJECT_DIR$/../src/phonecom-go-sdk" />
+      <root url="file://$PROJECT_DIR$/../src/phonecom" />
+      <root url="file://$PROJECT_DIR$/../src/models" />
+      <root url="file://$PROJECT_DIR$/../src/interfaces" />
+      <root url="file://$PROJECT_DIR$/../src/vertex" />
+      <root url="file://$PROJECT_DIR$/../src/test" />
+      <root url="file://$PROJECT_DIR$/../src/github.com" />
+      <root url="file://$PROJECT_DIR$/../src/golang.org" />
+      <root url="file://$PROJECT_DIR$/../src/phonecom-go-sdk_BACKUP" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../src/goclient" />
+      <root url="file://$PROJECT_DIR$/../src/life" />
+      <root url="file://$PROJECT_DIR$/../src/gopkg.in" />
+      <root url="file://$PROJECT_DIR$/../src/phonecom-go-sdk" />
+      <root url="file://$PROJECT_DIR$/../src/phonecom" />
+      <root url="file://$PROJECT_DIR$/../src/models" />
+      <root url="file://$PROJECT_DIR$/../src/interfaces" />
+      <root url="file://$PROJECT_DIR$/../src/vertex" />
+      <root url="file://$PROJECT_DIR$/../src/test" />
+      <root url="file://$PROJECT_DIR$/../src/github.com" />
+      <root url="file://$PROJECT_DIR$/../src/golang.org" />
+      <root url="file://$PROJECT_DIR$/../src/phonecom-go-sdk_BACKUP" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>

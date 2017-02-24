@@ -1,0 +1,17 @@
+{
+	"account_id": 1315091,
+	"name": "API V3 Test",
+	"rules": [
+		{
+			"actions": [
+				{
+					"action": "queue",
+					"queue": {
+						"id": 21971,
+						"name": "sample queue"
+					}
+				}
+			]
+		}
+	]
+}

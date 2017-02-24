@@ -1,0 +1,32 @@
+{
+	"account_id": 1315091,
+	"caller_id": "+12019570328",
+	"usage_type": "unlimited",
+	"allows_call_waiting": true,
+	"extension": 12300,
+	"include_in_directory": true,
+	"name": "Bobby",
+	"full_name": "Bobby McFerrin",
+	"timezone": "America/Los_Angeles",
+	"name_greeting": {
+		/*"Recording lookup object"*/
+	},
+	"voicemail[greeting][alternate]": {
+		/*Recording lookup object*/
+	},
+	"local_area_code": 619,
+	"voicemail[greeting][enable_leave_message_prompt]": true,
+	"voicemail[enabled]": true,
+	"enable_outbound_calls": true,
+	"enable_call_waiting": true,
+	"voicemail[password]": 12345,
+	"voicemail[greeting][type]": "standard",
+	"voicemail[greeting][standard]": {
+		/*Recording lookup object*/
+	},
+	"voicemail[transcription]": "automated",
+	"voicemail[notifications][emails]": /*type mixed*/,
+	"voicemail[notifications][sms]": "+18587741111",
+	"call_notifications[emails]": /*type mixed*/,
+	"call_notifications[sms]": "+18587748888"
+}

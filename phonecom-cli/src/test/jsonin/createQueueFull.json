@@ -1,0 +1,16 @@
+{
+	"account_id": 1315091,
+	"name": "sample queue",
+	"greeting": {
+		/*Recording lookup object*/
+	},
+	"hold_music": {
+		/*Recording lookup object*/
+	},
+	"max_hold_time": 60,
+	"caller_id_type": "called_number",
+	"ring_time": 10,
+	"members": [
+		/*array of objects, Extensions or phone numbers*/
+	]
+}

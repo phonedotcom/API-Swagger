@@ -1,0 +1,8 @@
+{
+	"account_id": 1315091,
+	"device_id": 142315,
+	"name": "Back Office",
+	"lines": [
+		//array of Line objects
+	]
+}

@@ -1,0 +1,19 @@
+{
+	"account_id": 1315091,
+	"menu_id": 456,
+	"name": "Secondary Menu",
+	"greeting": {
+		/*object*/
+	},
+	"invalid_keypress": {
+		/*object*/
+	},
+	"allow_extension_dial": false,
+	"keypress_wait_time": 5,
+	"timeout_handler": {
+		/*object*/
+	},
+	"options": [
+		/*array of objects*/
+	]		
+}

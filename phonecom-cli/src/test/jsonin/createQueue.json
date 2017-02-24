@@ -1,0 +1,7 @@
+{
+	"account_id": 1315091,
+	"name": "sample queue",
+	"max_hold_time": 60,
+	"caller_id_type": "called_number",
+	"ring_time": 10
+}

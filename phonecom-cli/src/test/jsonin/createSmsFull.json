@@ -1,0 +1,7 @@
+{
+	"account_id": 1315091,
+	"from": "+12015880100",
+	"to": "+17328810138",
+	"text": "SMS can be sent to multiple recipients",
+	"extension_id": 1749841 // not present in previous version in apidocs
+}

@@ -1,0 +1,8 @@
+{
+	"account_id": 1315091,
+	"trunk_id": 1502,
+	"name": "Imeto",
+	"uri": "SIP/1234@phone.com:5060",
+	"max_concurrent_calls": 60,
+	"max_minutes_per_month": 800
+}

@@ -1,0 +1,17 @@
+{
+"name": "Bobby",
+        "company": "xyz co",
+        "address": {
+            "line_1": "100 Main St",
+            "line_2": "#4",
+            "city": "San Diego",
+            "province": "CA",
+            "postal_code": "92129",
+            "country": "US"
+        },
+        "phone": "+18585553333",
+        "fax": "+18585554444",
+        "email_1": "sample@phone.com",
+        "email_2": "sample@gmail.com",
+        "primary_email": "asd@sd.co"
+		}

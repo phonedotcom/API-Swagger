@@ -1,0 +1,18 @@
+{
+	"account_id": 1315091,
+	"name": "Business Menu",
+	"main_message": {
+		/*object*/
+	},
+	"invalid_keypress_message": {
+		/*object*/
+	},
+	"allow_extension_dial": true,
+	"keypress_wait_time": 3,
+	"timeout_handler": {
+		/*object*/	
+	},
+	"options": [
+		/*array of objects*/
+	]
+}
