@@ -1,0 +1,21 @@
+Installation
+
+1. Download and install go programming language
+https://golang.org/doc/install
+
+2. Change to the root directory of the CLI tool
+cd /path to the phonecom cli root directory
+
+3. Set the GOPATH to the current directory
+GOPATH=/path to the phonecom cli root directory
+
+4. Install the required libraries
+go get github.com/urfave/cli
+go get -u github.com/go-resty/resty
+
+5. Build the CLI tool
+go build -o phonecom phonecom
+
+6. Run the binary which is built under the current directory
+
+Please note that the config.xml needs to be under the same directory with the binary.
