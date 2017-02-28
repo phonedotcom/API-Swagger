@@ -133,7 +133,7 @@
     },
     {
       "name": "sms",
-      "description": "The Phone.com /sms service lets you send and show history of SMS messages. Phone.comâ€™s standard phone service lets you send and receive SMS messages using your Phone.com numbers. The Phone.com API extends this functionality, letting you send SMS messages from your application (through your phone number and our API server) to your users. You can also use the API to retrieve the history of sms sent from / delivered to your account.",
+      "description": "The Phone.com /sms service lets you send and show history of SMS messages. Phone.com’s standard phone service lets you send and receive SMS messages using your Phone.com numbers. The Phone.com API extends this functionality, letting you send SMS messages from your application (through your phone number and our API server) to your users. You can also use the API to retrieve the history of sms sent from / delivered to your account.",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://apidocs.phone.com/docs/account-sms"
@@ -218,7 +218,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListAccounts"
+              "$ref": "#/definitions/ListAccountsFull"
             }
           },
           "401": {
@@ -321,7 +321,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListApplications"
+              "$ref": "#/definitions/ListApplicationsFull"
             }
           },
           "401": {
@@ -389,7 +389,7 @@
           "call-logs"
         ],
         "summary": "Get a list of call details associated with your account",
-        "description": "See Call Logs for more detail.",
+        "description": "Fetch a list of call logs associated with your account.",
         "operationId": "list-account-call-logs",
         "consumes": [
           "application/json"
@@ -420,6 +420,9 @@
             "$ref": "#/parameters/filterType"
           },
           {
+            "$ref": "#/parameters/filterExtension"
+          },
+          {
             "$ref": "#/parameters/sortIdParam"
           },
           {
@@ -442,7 +445,50 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListCallLogs"
+              "$ref": "#/definitions/ListCallLogsFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/accounts/{account_id}/call-logs/{callLog_id}": {
+      "get": {
+        "tags": [
+          "call-logs"
+        ],
+        "summary": "Show details of an individual Call Log entry",
+        "description": "This service shows the details of an individual Call Logs entry.",
+        "operationId": "get-account-call-log",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/callLogIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CallLogFull"
             }
           },
           "401": {
@@ -508,7 +554,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListDevices"
+              "$ref": "#/definitions/ListDevicesFull"
             }
           },
           "401": {
@@ -570,7 +616,7 @@
         }
       }
     },
-    "/accounts/{account_id}/device/{device_id}": {
+    "/accounts/{account_id}/devices/{device_id}": {
       "get": {
         "security": [
           {
@@ -703,7 +749,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListExpressServiceCodes"
+              "$ref": "#/definitions/ListExpressServiceCodesFull"
             }
           },
           "401": {
@@ -820,7 +866,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListExtensions"
+              "$ref": "#/definitions/ListExtensionsFull"
             }
           },
           "401": {
@@ -996,7 +1042,7 @@
         ],
         "summary": "Show the Caller ID options a given extension can use",
         "description": "Get Caller ID",
-        "operationId": "get-caller-ids",
+        "operationId": "list-caller-ids",
         "consumes": [
           "application/json"
         ],
@@ -1036,7 +1082,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListCallerIds"
+              "$ref": "#/definitions/ListCallerIdsFull"
             }
           },
           "401": {
@@ -1103,7 +1149,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListContacts"
+              "$ref": "#/definitions/ListContactsFull"
             }
           },
           "401": {
@@ -1366,7 +1412,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListGroups"
+              "$ref": "#/definitions/ListGroupsFull"
             }
           },
           "401": {
@@ -1620,7 +1666,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListMedia"
+              "$ref": "#/definitions/ListMediaFull"
             }
           },
           "401": {
@@ -1731,7 +1777,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListMenus"
+              "$ref": "#/definitions/ListMenusFull"
             }
           },
           "401": {
@@ -1997,7 +2043,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListPhoneNumbers"
+              "$ref": "#/definitions/ListPhoneNumbersFull"
             }
           },
           "401": {
@@ -2210,7 +2256,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListQueues"
+              "$ref": "#/definitions/ListQueuesFull"
             }
           },
           "401": {
@@ -2470,7 +2516,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListRoutes"
+              "$ref": "#/definitions/ListRoutesFull"
             }
           },
           "401": {
@@ -2725,7 +2771,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListSchedules"
+              "$ref": "#/definitions/ListSchedulesFull"
             }
           },
           "401": {
@@ -2844,7 +2890,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListSms"
+              "$ref": "#/definitions/ListSmsFull"
             }
           },
           "401": {
@@ -2937,7 +2983,7 @@
             "name": "sms_id",
             "description": "SMS ID",
             "required": true,
-            "type": "string"
+            "type": "integer"
           }
         ],
         "responses": {
@@ -2997,7 +3043,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListAccounts"
+              "$ref": "#/definitions/ListAccountsFull"
             }
           },
           "401": {
@@ -3113,7 +3159,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListTrunks"
+              "$ref": "#/definitions/ListTrunksFull"
             }
           },
           "401": {
@@ -3375,6 +3421,9 @@
             "$ref": "#/parameters/filterCategory"
           },
           {
+            "$ref": "#/parameters/filterIsTollFree"
+          },
+          {
             "$ref": "#/parameters/sortInternal"
           },
           {
@@ -3397,7 +3446,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListAvailableNumbers"
+              "$ref": "#/definitions/ListAvailableNumbersFull"
             }
           },
           "401": {
@@ -3495,7 +3544,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListPhoneNumbersRegions"
+              "$ref": "#/definitions/ListPhoneNumbersRegionsFull"
             }
           },
           "401": {
@@ -3965,6 +4014,13 @@
       "required": true,
       "type": "integer"
     },
+    "callLogIdParam": {
+      "name": "callLog_id",
+      "in": "path",
+      "description": "Call Log ID",
+      "required": true,
+      "type": "integer"
+    },
     "extensionIdParam": {
       "name": "extension_id",
       "in": "path",
@@ -4060,7 +4116,7 @@
         "lines": {
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/Line"
           },
           "description": "List of line objects"
         }
@@ -4619,7 +4675,7 @@
       "properties": {
         "username": {
           "type": "string",
-          "description": "Sub account password"
+          "description": "Sub account user name"
         },
         "password": {
           "type": "string",
@@ -4675,7 +4731,7 @@
         }
       }
     },
-    "ListAccounts": {
+    "ListAccountsFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -4701,7 +4757,33 @@
         }
       }
     },
-    "ListApplications": {
+    "ListAccountsSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortId"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountSummary"
+          }
+        }
+      }
+    },
+    "ListApplicationsFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -4727,7 +4809,33 @@
         }
       }
     },
-    "ListCallLogs": {
+    "ListApplicationsSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdNameArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdName"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationSummary"
+          }
+        }
+      }
+    },
+    "ListCallLogsFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -4753,7 +4861,33 @@
         }
       }
     },
-    "ListDevices": {
+    "ListCallLogsSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterCallLogs"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortCallLogs"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CallLogSummary"
+          }
+        }
+      }
+    },
+    "ListDevicesFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -4772,24 +4906,24 @@
           "type": "integer"
         },
         "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeviceFull"
-          }
+          "$ref": "#/definitions/DevicesFull"
         }
       }
     },
-    "ListExpressServiceCodes": {
+    "DevicesFull": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DeviceFull"
+      }
+    },
+    "ListDevicesSummary": {
       "type": "object",
       "properties": {
         "filters": {
-          "$ref": "#/definitions/FilterIdArray"
+          "$ref": "#/definitions/FilterIdNameArray"
         },
         "sort": {
-		  "type": "array",
-          "items": {
-            "$ref": "#/definitions/SortId"
-	      }
+          "$ref": "#/definitions/SortIdName"
         },
         "total": {
           "type": "integer"
@@ -4801,14 +4935,75 @@
           "type": "integer"
         },
         "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressServiceCodeFull"
-          }
+          "$ref": "#/definitions/DevicesSummary"
         }
       }
     },
-    "ListExtensions": {
+    "DevicesSummary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DeviceSummary"
+      }
+    },
+    "ListExpressServiceCodesFull": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdArray"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "$ref": "#/definitions/ExpressServiceCodesFull"
+        }
+      }
+    },
+    "ExpressServiceCodesFull": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExpressServiceCodeFull"
+      }
+    },
+    "ListExpressServiceCodesSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdArray"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "$ref": "#/definitions/ExpressServiceCodesSummary"
+        }
+      }
+    },
+    "ExpressServiceCodesSummary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExpressServiceCodeSummary"
+      }
+    },
+    "ListExtensionsFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -4834,7 +5029,33 @@
         }
       }
     },
-    "ListCallerIds": {
+    "ListExtensionsSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdExtensionNameArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdExtensionName"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionSummary"
+          }
+        }
+      }
+    },
+    "ListCallerIdsFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -4860,7 +5081,33 @@
         }
       }
     },
-    "ListContacts": {
+    "ListCallerIdsSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterNameNumberArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortNameNumber"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CallerIdFull"
+          }
+        }
+      }
+    },
+    "ListContactsFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -4886,7 +5133,90 @@
         }
       }
     },
-    "ListGroups": {
+    "ListContactsSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdGroupIdUpdatedAtArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdUpdatedAt"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactSummary"
+          }
+        }
+      }
+    },
+    "ListGroupsFull": {
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdNameArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdName"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "$ref": "#/definitions/GroupsFull"
+        }
+      }
+    },
+    "GroupsFull": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GroupFull"
+      }
+    },
+    "ListGroupsSummary": {
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdNameArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdName"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "$ref": "#/definitions/GroupsSummary"
+        }
+      }
+    },
+    "GroupsSummary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GroupSummary"
+      }
+    },
+    "ListMediaFull": {
+      "type": "object",
       "properties": {
         "filters": {
           "$ref": "#/definitions/FilterIdNameArray"
@@ -4906,12 +5236,12 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GroupFull"
+            "$ref": "#/definitions/MediaFull"
           }
         }
       }
     },
-    "ListMedia": {
+    "ListMediaSummary": {
       "type": "object",
       "properties": {
         "filters": {
@@ -4937,7 +5267,7 @@
         }
       }
     },
-    "ListMenus": {
+    "ListMenusFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -4956,14 +5286,46 @@
           "type": "integer"
         },
         "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MenuFull"
-          }
+          "$ref": "#/definitions/MenusFull"
         }
       }
     },
-    "ListPhoneNumbers": {
+    "MenusFull": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MenuFull"
+      }
+    },
+    "ListMenusSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdNameArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdName"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "$ref": "#/definitions/MenusSummary"
+        }
+      }
+    },
+    "MenusSummary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MenuSummary"
+      }
+    },
+    "ListPhoneNumbersFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -4982,32 +5344,48 @@
           "type": "integer"
         },
         "items": {
-          "description": "Array of Contact Phone Number Objects. See below for details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PhoneNumberContact"
-          }
+          "$ref": "#/definitions/PhoneNumbersFull"
         }
       }
     },
-    "PhoneNumberContact": {
+    "PhoneNumbersFull": {
+      "description": "Array of Contact Phone Number Objects. See below for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PhoneNumberFull"
+      }
+    },
+    "ListPhoneNumbersSummary": {
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of phone number, must be one of: home, business, mobile, fax, pager. Default is home."
+        "filters": {
+          "$ref": "#/definitions/FilterIdNamePhoneNumberArray"
         },
-        "number": {
-          "type": "string",
-          "description": "Phone number, as entered. Does not need to be formatted in any particular way. Required."
+        "sort": {
+          "$ref": "#/definitions/SortIdNamePhoneNumber"
         },
-        "normalized": {
-          "type": "string",
-          "description": "Phone number in E.164 format. Read-only."
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "$ref": "#/definitions/PhoneNumbersSummary"
         }
       }
     },
-    "ListQueues": {
+    "PhoneNumbersSummary": {
+      "description": "Array of Contact Phone Number Objects. See below for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PhoneNumberSummary"
+      }
+    },
+    "ListQueuesFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -5026,14 +5404,17 @@
           "type": "integer"
         },
         "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueueFull"
-          }
+          "$ref": "#/definitions/Queues"
         }
       }
     },
-    "ListRoutes": {
+    "Queues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/QueueFull"
+      }
+    },
+    "ListQueuesSummary": {
       "type": "object",
       "properties": {
         "filters": {
@@ -5052,14 +5433,75 @@
           "type": "integer"
         },
         "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RouteFull"
-          }
+          "$ref": "#/definitions/QueuesSummary"
         }
       }
     },
-    "ListSchedules": {
+    "QueuesSummary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/QueueSummary"
+      }
+    },
+    "ListRoutesFull": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdNameArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdName"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "$ref": "#/definitions/RoutesFull"
+        }
+      }
+    },
+    "RoutesFull": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RouteFull"
+      }
+    },
+    "ListRoutesSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdNameArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdName"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "$ref": "#/definitions/RoutesSummary"
+        }
+      }
+    },
+    "RoutesSummary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RouteSummary"
+      }
+    },
+    "ListSchedulesFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -5085,7 +5527,33 @@
         }
       }
     },
-    "ListSms": {
+    "ListSchedulesSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdNameArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdName"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduleSummary"
+          }
+        }
+      }
+    },
+    "ListSmsFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -5111,7 +5579,33 @@
         }
       }
     },
-    "ListTrunks": {
+    "ListSmsSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdDirectionFrom"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdCreatedAt"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmsSummary"
+          }
+        }
+      }
+    },
+    "ListTrunksFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -5137,7 +5631,33 @@
         }
       }
     },
-    "ListAvailableNumbers": {
+    "ListTrunksSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdNameArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdName"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrunkSummary"
+          }
+        }
+      }
+    },
+    "ListAvailableNumbersFull": {
       "type": "object",
       "properties": {
         "filters": {
@@ -5156,21 +5676,50 @@
           "type": "integer"
         },
         "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AvailableNumbersFull"
-          }
+          "$ref": "#/definitions/AvailableNumbersFull"
         }
       }
     },
-    "ListPhoneNumbersRegions": {
+    "AvailableNumbersFull": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AvailableNumberFull"
+      }
+    },
+    "ListAvailableNumbersSummary": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterListAvailableNumbers"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortListAvailableNumbers"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "$ref": "#/definitions/AvailableNumbersSummary"
+        }
+      }
+    },
+    "AvailableNumbersSummary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AvailableNumberSummary"
+      }
+    },
+    "ListPhoneNumbersRegionsFull": {
       "type": "object",
       "properties": {
         "group_by": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/GroupByListPhoneNumbersRegions"
         },
         "filters": {
           "$ref": "#/definitions/FilterListPhoneNumbersRegions"
@@ -5188,10 +5737,39 @@
           "type": "integer"
         },
         "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PhoneNumbersRegionFull"
-          }
+          "$ref": "#/definitions/PhoneNumbersRegionsFull"
+        }
+      }
+    },
+    "PhoneNumbersRegionsFull": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PhoneNumbersRegionFull"
+      }
+    },
+    "ListPhoneNumbersRegionsSummary": {
+      "type": "object",
+      "properties": {
+        "group_by": {
+          "$ref": "#/definitions/GroupByListPhoneNumbersRegions"
+        },
+        "filters": {
+          "$ref": "#/definitions/FilterListPhoneNumbersRegions"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortListPhoneNumbersRegions"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "$ref": "#/definitions/PhoneNumbersRegionsFull"
         }
       }
     },
@@ -5437,6 +6015,68 @@
         }
       }
     },
+    "CallLogSummary": {
+      "description": "The Call Log Summary Object is used to briefly represent a call. It consists of properties as below:",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID"
+        },
+        "uuid": {
+          "type": "string",
+          "description": "Internal system id, may be null"
+        },
+        "extension": {
+          "$ref": "#/definitions/ExtensionSummary",
+          "description": "Account extension"
+        },
+        "caller_id": {
+          "type": "string",
+          "description": "Call made from this phone number"
+        },
+        "called_number": {
+          "type": "string",
+          "description": "Call made to this phone number"
+        },
+        "start_time": {
+          "type": "string",
+          "description": "Call start time"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "Call log creation time. Same as call end time + time needed to create call log"
+        },
+        "direction": {
+          "type": "string",
+          "description": "Call direction: in or out"
+        },
+        "type": {
+          "type": "string",
+          "description": "Call type: call, fax, audiogram ..."
+        },
+        "call_duration": {
+          "type": "integer",
+          "description": "Call duration in seconds"
+        },
+        "is_monitored": {
+          "type": "string",
+          "description": "Was call being monitored?"
+        },
+        "call_number": {
+          "type": "string",
+          "description": "Internal system call reference number"
+        },
+        "final_action": {
+          "type": "string",
+          "description": "Last action of call flow"
+        },
+        "call_recording": {
+          "type": "string",
+          "description": "URL of call recording if available. Empty string if call recording does not exist"
+        }
+      }
+    },
     "DeviceFull": {
       "description": "The Full Device Object includes the properties in the Device Summary Object, along with the following:",
       "type": "object",
@@ -5528,25 +6168,23 @@
         }
       }
     },
+    "ExpressServiceCodeSummary": {
+      "description": "The Express Service Code Summary Object is used to briefly represent a Express Service Code. It consists of the ID and code:",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "ID"
+        },
+        "express_service_code": {
+          "type": "string",
+          "description": "An 8-digit number in string format"
+        }
+      }
+    },
     "ExtensionFull": {
       "description": "The Full Extension Object has the same properties as the Extension Summary Object, along with the following:",
       "type": "object",
-      "required": [
-        "id",
-        "usage_type",
-        "extension",
-        "name",
-        "full_name",
-        "timezone",
-        "name_greeting",
-        "include_in_directory",
-        "caller_id",
-        "local_area_code",
-        "enable_call_waiting",
-        "enable_outbound_calls",
-        "voicemail",
-        "call_notifications"
-      ],
       "properties": {
         "id": {
           "type": "integer",
@@ -5694,8 +6332,13 @@
       }
     },
     "ExtensionSummary": {
-      "description": "The Extension Summary Object is used to briefly represent an extension. It can be seen in several places throughout this API. Here are the properties:",
+      "description": "The Full Extension Object has the same properties as the Extension Summary Object, along with the following:",
       "type": "object",
+      "required": [
+        "id",
+        "name",
+        "extension"
+      ],
       "properties": {
         "id": {
           "type": "integer",
@@ -5786,25 +6429,16 @@
           "description": "Contact's job title"
         },
         "emails": {
-          "description": "Array of Contact Email Objects. See below for details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Email"
-          }
+          "$ref": "#/definitions/Emails"
         },
         "phone_numbers": {
-          "description": "Array of Contact Phone Number Objects. See below for details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PhoneNumberContact"
           }
         },
         "addresses": {
-          "description": "Array of Contact Address Objects. See below for details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AddressListContacts"
-          }
+          "$ref": "#/definitions/Addresses"
         },
         "group": {
           "$ref": "#/definitions/GroupListContacts"
@@ -5819,6 +6453,13 @@
         }
       }
     },
+    "Emails": {
+      "description": "Array of Contact Email Objects. See below for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Email"
+      }
+    },
     "Email": {
       "type": "object",
       "properties": {
@@ -5830,6 +6471,30 @@
           "type": "string",
           "description": "Email address. Required."
         }
+      }
+    },
+    "PhoneNumberContact": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of phone number, must be one of: home, business, mobile, fax, pager. Default is home."
+        },
+        "number": {
+          "type": "string",
+          "description": "Phone number, as entered. Does not need to be formatted in any particular way. Required."
+        },
+        "normalized": {
+          "type": "string",
+          "description": "Phone number in E.164 format. Read-only."
+        }
+      }
+    },
+    "Addresses": {
+      "description": "Array of Contact Address Objects. See below for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AddressListContacts"
       }
     },
     "AddressListContacts": {
@@ -6007,11 +6672,27 @@
           "description": "Route that will be entered when the caller fails to choose a menu option within the allotted time. Output is a Route Summary Object if the route is named, otherwise the Full Route Object will be shown. Input must be a Route Lookup Object pointing to a named route."
         },
         "options": {
-          "description": "Array of menu option objects. See below for details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Option"
-          }
+          "$ref": "#/definitions/OptionsListMenus"
+        }
+      }
+    },
+    "OptionsListMenus": {
+      "description": "Array of menu option objects. See below for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Option"
+      }
+    },
+    "Option": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Keypad key. Must equal a single digit or the pound sign (\"#\")."
+        },
+        "route": {
+          "$ref": "#/definitions/RouteSummary",
+          "description": "Route which will be entered when the user presses the designated key. Output is a Route Summary Object if the route is named, otherwise the Full Route Object will be shown. Input must be a Route Lookup Object pointing to a named route."
         }
       }
     },
@@ -6026,19 +6707,6 @@
         "name": {
           "type": "string",
           "description": "Name. Required. Unique."
-        }
-      }
-    },
-    "Option": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Keypad key. Must equal a single digit or the pound sign (\"#\")."
-        },
-        "route": {
-          "$ref": "#/definitions/RouteSummary",
-          "description": "Route which will be entered when the user presses the designated key. Output is a Route Summary Object if the route is named, otherwise the Full Route Object will be shown. Input must be a Route Lookup Object pointing to a named route."
         }
       }
     },
@@ -6134,6 +6802,24 @@
         }
       }
     },
+    "PhoneNumberSummary": {
+      "description": "The Phone Number Summary Object is used to briefly represent a phone number that is registered to your Phone.com account. Here are the properties:",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Integer Phone number ID. This is the internal Phone.com ID for this number, not the phone number itself. Read-only."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name"
+        },
+        "phone_number": {
+          "type": "string",
+          "description": "Phone number, in E.164 format"
+        }
+      }
+    },
     "QueueFull": {
       "description": "The Full QueueObject has the same properties as the Queue Summary Object, along with the following:",
       "type": "object",
@@ -6170,11 +6856,7 @@
           "description": "Number of seconds to ring a member before cycling to the next member. If provided, must equal one of: 5, 10, 15, 20, 25, 30. Default is 5."
         },
         "members": {
-          "description": "Array of Member Objects. Non-virtual account extensions or phone numbers. See below for details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Member"
-          }
+          "$ref": "#/definitions/Members"
         }
       }
     },
@@ -6208,6 +6890,13 @@
           "type": "string",
           "description": "Name of recording"
         }
+      }
+    },
+    "Members": {
+      "description": "Array of Member Objects. Non-virtual account extensions or phone numbers. See below for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Member"
       }
     },
     "Member": {
@@ -6419,7 +7108,7 @@
       }
     },
     "SmsFull": {
-      "description": "The Full SMS Object is identical to the SMS Summary Object. See above for details.",
+      "description": "The Full SMS Object includes all of the properties in the SMS Summary Object, along with several more.",
       "type": "object",
       "required": [
         "id",
@@ -6475,6 +7164,37 @@
         "status": {
           "type": "string",
           "description": "Indicate the status of your SMS object. May be 'sent', 'received', 'queued', 'new' ..."
+        }
+      }
+    },
+    "SmsSummary": {
+      "description": "The SMS Summary Object is used to briefly represent a sms. It can be seen in several places throughout this API. Here are the properties:",
+      "type": "object",
+      "required": [
+        "id",
+        "from",
+        "to",
+        "direction"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique SMS ID. Read-only."
+        },
+        "from": {
+          "type": "string",
+          "description": "Caller ID number to display on the incoming/outgoing SMS message. For an outgoing message, it must be a phone number associated with your Phone.com account."
+        },
+        "to": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipient"
+          },
+          "description": "An array of SMS recipients."
+        },
+        "direction": {
+          "type": "string",
+          "description": "Direction of SMS. 'in' for Incoming messages, 'out' for Outgoing messages."
         }
       }
     },
@@ -6584,7 +7304,7 @@
         }
       }
     },
-    "AvailableNumbersFull": {
+    "AvailableNumberFull": {
       "description": "The Full Available Phone Number Object includes the properties in the Summary Object, along with the following:",
       "type": "object",
       "properties": {
@@ -6634,6 +7354,20 @@
         }
       }
     },
+    "AvailableNumberSummary": {
+      "description": "The Available Phone Number Summary Object is used to briefly represent a phone number. It can be seen in several places throughout this API. Here are the properties:",
+      "type": "object",
+      "properties": {
+        "phone_number": {
+          "type": "string",
+          "description": "Phone number, in E.164 format"
+        },
+        "formatted": {
+          "type": "string",
+          "description": "Human-readable formatted version of the phone number"
+        }
+      }
+    },
     "PhoneNumbersRegionFull": {
       "description": "The Region Object may include any of several fields describing the group, as well as the quantity of phone numbers available in that group. Here are the properties:",
       "type": "object",
@@ -6643,11 +7377,11 @@
           "description": "Optional. Integer representing the international calling code for the phone number's country."
         },
         "npa": {
-          "type": "integer",
+          "type": "string",
           "description": "Optional. Area Code, for North American phone numbers."
         },
         "nxx": {
-          "type": "integer",
+          "type": "string",
           "description": "Optional. Second set of 3 digits, for North American phone numbers."
         },
         "is_toll_free": {
@@ -6670,6 +7404,12 @@
           "type": "integer",
           "description": "Integer. Quantity of phone numbers currently available in the given region."
         }
+      }
+    },
+    "GroupByListPhoneNumbersRegions": {
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
     "DeleteContact": {
@@ -6854,68 +7594,44 @@
         }
       }
     },
+    "SortIdArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SortId"
+      }
+    },
     "FilterListAvailableNumbers": {
       "type": "object",
       "properties": {
         "phone_number": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "country_code": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "npa": {
-          "type": "array",
-          "items": {
-            "type": "integer"
-          }
+          "type": "string"
         },
         "nxx": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "xxxx": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "city": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "province": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "country": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "price": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "category": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     },
@@ -6923,46 +7639,25 @@
       "type": "object",
       "properties": {
         "country_code": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "npa": {
-          "type": "array",
-          "items": {
-            "type": "integer"
-          }
+          "type": "string"
         },
         "nxx": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "is_toll_free": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "city": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "province_postal_code": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "country_postal_code": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     },
@@ -6970,10 +7665,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "direction": {
           "type": "string"
@@ -6987,22 +7679,13 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "group_id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "updated_at": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     },
@@ -7010,16 +7693,10 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "start_time": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "created_at": {
           "type": "string"
@@ -7039,22 +7716,13 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "name": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "phone_number": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     },
@@ -7062,16 +7730,10 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "number": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     },
@@ -7079,22 +7741,13 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "extension": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "name": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     },
@@ -7102,16 +7755,10 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "name": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     },
@@ -7119,10 +7766,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     }
