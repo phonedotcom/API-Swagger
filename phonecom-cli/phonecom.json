@@ -4637,16 +4637,12 @@
     },
     "CreateTrunkParams": {
       "type": "object",
-      "required": [
-        "name",
-        "url"
-      ],
       "properties": {
         "name": {
           "type": "string",
           "description": "Name of Trunk"
         },
-        "url": {
+        "uri": {
           "type": "string",
           "description": "URI of Trunk (in the form of SIP/user@host.com:port)"
         },
