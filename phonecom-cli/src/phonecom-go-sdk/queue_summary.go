@@ -14,8 +14,8 @@ package swagger
 type QueueSummary struct {
 
 	// Integer ID. Read-only.
-	Id int32 `json:"id,omitempty"`
+	Id int32 `json:"id"`
 
 	// Name. Required.
-	Name string `json:"name,omitempty"`
+	Name string `json:"name"`
 }

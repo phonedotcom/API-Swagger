@@ -278,26 +278,19 @@ func (a GroupsApi) ListAccountExtensionContactGroups(accountId int32, extensionI
 	for key := range a.Configuration.DefaultHeader {
 		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
 	}
-	var collectionFormat = "multi"
-	if len(filtersId) > 0 {
-		localVarQueryParams.Add("filters[id]", a.Configuration.APIClient.ParameterToString(filtersId, collectionFormat))
-	}
+	var filtersIdCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[id]", a.Configuration.APIClient.ParameterToString(filtersId, filtersIdCollectionFormat))
 
-	if len(filtersName) > 0 {
-		localVarQueryParams.Add("filters[name]", a.Configuration.APIClient.ParameterToString(filtersName, collectionFormat))
-	}
+	var filtersNameCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[name]", a.Configuration.APIClient.ParameterToString(filtersName, filtersNameCollectionFormat))
 
-	if sortId != "" {
-		localVarQueryParams.Add("sort[id]", a.Configuration.APIClient.ParameterToString(sortId, ""))
-	}
-	if sortName != "" {
-		localVarQueryParams.Add("sort[name]", a.Configuration.APIClient.ParameterToString(sortName, ""))
-	}
+	localVarQueryParams.Add("sort[id]", a.Configuration.APIClient.ParameterToString(sortId, ""))
+	localVarQueryParams.Add("sort[name]", a.Configuration.APIClient.ParameterToString(sortName, ""))
 	localVarQueryParams.Add("limit", a.Configuration.APIClient.ParameterToString(limit, ""))
 	localVarQueryParams.Add("offset", a.Configuration.APIClient.ParameterToString(offset, ""))
-	if fields != "" {
-		localVarQueryParams.Add("fields", a.Configuration.APIClient.ParameterToString(fields, ""))
-	}
+	localVarQueryParams.Add("fields", a.Configuration.APIClient.ParameterToString(fields, ""))
+
+	clearEmptyParams(localVarQueryParams)
 
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{ "application/json",  }
@@ -342,9 +335,10 @@ func (a GroupsApi) ListAccountExtensionContactGroups(accountId int32, extensionI
  * @param accountId Account ID
  * @param extensionId Extension ID
  * @param groupId Group ID
+ * @param data Group name
  * @return *GroupFull
  */
-func (a GroupsApi) ReplaceAccountExtensionContactGroup(accountId int32, extensionId int32, groupId int32) (*GroupFull, *APIResponse, error) {
+func (a GroupsApi) ReplaceAccountExtensionContactGroup(accountId int32, extensionId int32, groupId int32, data CreateGroupParams) (*GroupFull, *APIResponse, error) {
 
 	var localVarHttpMethod = strings.ToUpper("Put")
 	// create path and map variables
@@ -385,6 +379,8 @@ func (a GroupsApi) ReplaceAccountExtensionContactGroup(accountId int32, extensio
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &data
 	var successPayload = new(GroupFull)
 	localVarHttpResponse, err := a.Configuration.APIClient.CallAPI(localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 

@@ -12,6 +12,9 @@ GOPATH=/path to the phonecom cli root directory
 4. Install the required libraries
 go get github.com/urfave/cli
 go get -u github.com/go-resty/resty
+go get github.com/yukithm/json2csv/cmd/json2csv
+
+Note: You might need to delete the src/github.com folder if you encounter build errors
 
 5. Build the CLI tool
 go build -o phonecom phonecom

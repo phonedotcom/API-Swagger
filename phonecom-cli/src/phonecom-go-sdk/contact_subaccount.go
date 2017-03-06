@@ -13,12 +13,12 @@ package swagger
 type ContactSubaccount struct {
 
 	// Contact name
-	Name string `json:"name,omitempty"`
+	Name string `json:"name"`
 
 	Address Address `json:"address,omitempty"`
 
 	// Primary email address. Required.
-	PrimaryEmail string `json:"primary_email,omitempty"`
+	PrimaryEmail string `json:"primary_email"`
 
 	// Alternate email address
 	AlternateEmail string `json:"alternate_email,omitempty"`
@@ -27,7 +27,7 @@ type ContactSubaccount struct {
 	Company string `json:"company,omitempty"`
 
 	// Phone number. Required.
-	Phone string `json:"phone,omitempty"`
+	Phone string `json:"phone"`
 
 	// Fax number
 	Fax string `json:"fax,omitempty"`

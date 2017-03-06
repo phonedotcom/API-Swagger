@@ -32,11 +32,11 @@ Class | Method | HTTP request | Description
 *ContactsApi* | [**DeleteAccountExtensionContact**](docs/ContactsApi.md#deleteaccountextensioncontact) | **Delete** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | 
 *ContactsApi* | [**GetAccountExtensionContact**](docs/ContactsApi.md#getaccountextensioncontact) | **Get** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | Retrieve the details of an address book contact
 *ContactsApi* | [**ListAccountExtensionContacts**](docs/ContactsApi.md#listaccountextensioncontacts) | **Get** /accounts/{account_id}/extensions/{extension_id}/contacts | Show a list of address book contacts
-*ContactsApi* | [**ReplaceAccountExtensionContact**](docs/ContactsApi.md#replaceaccountextensioncontact) | **Put** /accounts/{account_id}/extensions/{extension_id}/contacts | 
+*ContactsApi* | [**ReplaceAccountExtensionContact**](docs/ContactsApi.md#replaceaccountextensioncontact) | **Put** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | 
 *DevicesApi* | [**CreateAccountDevice**](docs/DevicesApi.md#createaccountdevice) | **Post** /accounts/{account_id}/devices | Register a generic VoIP device
-*DevicesApi* | [**GetAccountDevice**](docs/DevicesApi.md#getaccountdevice) | **Get** /accounts/{account_id}/device/{device_id} | Show details of an individual VoIP device
+*DevicesApi* | [**GetAccountDevice**](docs/DevicesApi.md#getaccountdevice) | **Get** /accounts/{account_id}/devices/{device_id} | Show details of an individual VoIP device
 *DevicesApi* | [**ListAccountDevices**](docs/DevicesApi.md#listaccountdevices) | **Get** /accounts/{account_id}/devices | Get a list of VoIP devices associated with your account
-*DevicesApi* | [**ReplaceAccountDevice**](docs/DevicesApi.md#replaceaccountdevice) | **Put** /accounts/{account_id}/device/{device_id} | Update the settings for an individual VoIP device
+*DevicesApi* | [**ReplaceAccountDevice**](docs/DevicesApi.md#replaceaccountdevice) | **Put** /accounts/{account_id}/devices/{device_id} | Update the settings for an individual VoIP device
 *ExpressservicecodesApi* | [**GetAccountExpressSrvCode**](docs/ExpressservicecodesApi.md#getaccountexpresssrvcode) | **Get** /accounts/{account_id}/express-service-codes/{code_id} | Show details of an account Express Service Code
 *ExpressservicecodesApi* | [**ListAccountExpressSrvCodes**](docs/ExpressservicecodesApi.md#listaccountexpresssrvcodes) | **Get** /accounts/{account_id}/express-service-codes | Get the Express Service Code associated with your account in list format
 *ExtensionsApi* | [**CreateAccountExtension**](docs/ExtensionsApi.md#createaccountextension) | **Post** /accounts/{account_id}/extensions | Create an individual extension

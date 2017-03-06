@@ -143,45 +143,27 @@ func (a CalllogsApi) ListAccountCallLogs(accountId int32, filtersId []string, fi
 	for key := range a.Configuration.DefaultHeader {
 		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
 	}
-	var collectionFormat = "multi"
-	if len(filtersId) > 0 {
-		localVarQueryParams.Add("filters[id]", a.Configuration.APIClient.ParameterToString(filtersId, collectionFormat))
-	}
+	var filtersIdCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[id]", a.Configuration.APIClient.ParameterToString(filtersId, filtersIdCollectionFormat))
 
-	if len(filtersStartTime) > 0 {
-		localVarQueryParams.Add("filters[start_time]", a.Configuration.APIClient.ParameterToString(filtersStartTime, collectionFormat))
-	}
+	var filtersStartTimeCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[start_time]", a.Configuration.APIClient.ParameterToString(filtersStartTime, filtersStartTimeCollectionFormat))
 
-	if filtersCreatedAt != "" {
-		localVarQueryParams.Add("filters[created_at]", a.Configuration.APIClient.ParameterToString(filtersCreatedAt, ""))
-	}
-	if filtersDirection != "" {
-		localVarQueryParams.Add("filters[direction]", a.Configuration.APIClient.ParameterToString(filtersDirection, ""))
-	}
-	if filtersCalledNumber != "" {
-		localVarQueryParams.Add("filters[called_number]", a.Configuration.APIClient.ParameterToString(filtersCalledNumber, ""))
-	}
-	if filtersType != "" {
-		localVarQueryParams.Add("filters[type]", a.Configuration.APIClient.ParameterToString(filtersType, ""))
-	}
-	if len(filtersExtension) > 0 {
-		localVarQueryParams.Add("filters[extension]", a.Configuration.APIClient.ParameterToString(filtersExtension, collectionFormat))
-	}
+	localVarQueryParams.Add("filters[created_at]", a.Configuration.APIClient.ParameterToString(filtersCreatedAt, ""))
+	localVarQueryParams.Add("filters[direction]", a.Configuration.APIClient.ParameterToString(filtersDirection, ""))
+	localVarQueryParams.Add("filters[called_number]", a.Configuration.APIClient.ParameterToString(filtersCalledNumber, ""))
+	localVarQueryParams.Add("filters[type]", a.Configuration.APIClient.ParameterToString(filtersType, ""))
+	var filtersExtensionCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[extension]", a.Configuration.APIClient.ParameterToString(filtersExtension, filtersExtensionCollectionFormat))
 
-	if sortId != "" {
-		localVarQueryParams.Add("sort[id]", a.Configuration.APIClient.ParameterToString(sortId, ""))
-	}
-	if sortStartTime != "" {
-		localVarQueryParams.Add("sort[start_time]", a.Configuration.APIClient.ParameterToString(sortStartTime, ""))
-	}
-	if sortCreatedAt != "" {
-		localVarQueryParams.Add("sort[created_at]", a.Configuration.APIClient.ParameterToString(sortCreatedAt, ""))
-	}
+	localVarQueryParams.Add("sort[id]", a.Configuration.APIClient.ParameterToString(sortId, ""))
+	localVarQueryParams.Add("sort[start_time]", a.Configuration.APIClient.ParameterToString(sortStartTime, ""))
+	localVarQueryParams.Add("sort[created_at]", a.Configuration.APIClient.ParameterToString(sortCreatedAt, ""))
 	localVarQueryParams.Add("limit", a.Configuration.APIClient.ParameterToString(limit, ""))
 	localVarQueryParams.Add("offset", a.Configuration.APIClient.ParameterToString(offset, ""))
-	if fields != "" {
-		localVarQueryParams.Add("fields", a.Configuration.APIClient.ParameterToString(fields, ""))
-	}
+	localVarQueryParams.Add("fields", a.Configuration.APIClient.ParameterToString(fields, ""))
+
+	clearEmptyParams(localVarQueryParams)
 
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{ "application/json",  }

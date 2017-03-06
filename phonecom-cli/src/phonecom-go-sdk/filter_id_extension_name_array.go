@@ -12,9 +12,9 @@ package swagger
 
 type FilterIdExtensionNameArray struct {
 
-	Id []string `json:"id,omitempty"`
+	Id string `json:"id,omitempty"`
 
-	Extension []string `json:"extension,omitempty"`
+	Extension string `json:"extension,omitempty"`
 
-	Name []string `json:"name,omitempty"`
+	Name string `json:"name,omitempty"`
 }

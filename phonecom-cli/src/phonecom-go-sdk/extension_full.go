@@ -14,47 +14,47 @@ package swagger
 type ExtensionFull struct {
 
 	// ID of the extension. This is the internal Phone.com ID, not the extension number callers may dial.
-	Id int32 `json:"id,omitempty"`
+	Id int32 `json:"id"`
 
 	// User-supplied name for the extension. On POST, leaving this empty will result in an auto-generated value. On PUT, this field is required.
-	Name string `json:"name,omitempty"`
+	Name string `json:"name"`
 
 	// Extension number that callers may dial. On POST, leaving this empty will result in an auto-generated value. On PUT, this field is required.
-	Extension int32 `json:"extension,omitempty"`
+	Extension int32 `json:"extension"`
 
 	// Full name of the individual or department to which this extension is assigned
-	FullName string `json:"full_name,omitempty"`
+	FullName string `json:"full_name"`
 
 	// Can be \"limited\" or \"unlimited\". In most cases, changing this will affect your monthly bill. Please see our Control Panel or contact Customer Service for pricing.
-	UsageType string `json:"usage_type,omitempty"`
+	UsageType string `json:"usage_type"`
 
 	DeviceMembership DeviceMembership `json:"device_membership,omitempty"`
 
 	// Time zone. Can be in any commonly recognized format, such as \"America/Los_Angeles\".
-	Timezone string `json:"timezone,omitempty"`
+	Timezone string `json:"timezone"`
 
 	// Greeting that communicates the extension's name. Output is a Greeting Summary Object. Input must be a Greeting Lookup Object.
-	NameGreeting MediaSummary `json:"name_greeting,omitempty"`
+	NameGreeting MediaSummary `json:"name_greeting"`
 
 	// Whether this extension should be included in the dial-by-name directory for this account. Boolean.
-	IncludeInDirectory bool `json:"include_in_directory,omitempty"`
+	IncludeInDirectory bool `json:"include_in_directory"`
 
 	// Phone number to use as Caller ID for outgoing calls. Must be a phone number belonging to this account, or one of any additional authorized phone numbers. You can use our List Caller Ids service to see a current list. To unassign, you may set this to \"private\", NULL, or an empty string.
-	CallerId string `json:"caller_id,omitempty"`
+	CallerId string `json:"caller_id"`
 
 	// For outbound calls, this is the North American area code that this extension is calling from.
-	LocalAreaCode string `json:"local_area_code,omitempty"`
+	LocalAreaCode string `json:"local_area_code"`
 
 	// Whether Call Waiting is enabled. Boolean. Default is TRUE.
-	EnableCallWaiting bool `json:"enable_call_waiting,omitempty"`
+	EnableCallWaiting bool `json:"enable_call_waiting"`
 
 	// Whether outgoing calls are enabled. Boolean. Default is TRUE.
-	EnableOutboundCalls bool `json:"enable_outbound_calls,omitempty"`
+	EnableOutboundCalls bool `json:"enable_outbound_calls"`
 
-	Voicemail Voicemail `json:"voicemail,omitempty"`
+	Voicemail Voicemail `json:"voicemail"`
 
 	// Call Notifications Object. See below for details.
-	CallNotifications Notification `json:"call_notifications,omitempty"`
+	CallNotifications Notification `json:"call_notifications"`
 
 	// Route which will handle incoming voice and fax calls. Only valid on PUT requests, not POST. Output is a Route Summary Object if the route is named, otherwise the Full Route Object will be shown. Input must be a Route Lookup Object pointing to a named route. Route must belong to this extension already.
 	Route RouteSummary `json:"route,omitempty"`

@@ -11,6 +11,7 @@ func showDryRunVerbose(cli CliParams) {
     fmt.Printf(
       msgCallingApi,
       cli.command,
-      param)
+      cli)
   }
+
 }

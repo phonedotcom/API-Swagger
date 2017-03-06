@@ -12,17 +12,17 @@ package swagger
 
 type FilterListPhoneNumbersRegions struct {
 
-	CountryCode []string `json:"country_code,omitempty"`
+	CountryCode string `json:"country_code,omitempty"`
 
-	Npa []int32 `json:"npa,omitempty"`
+	Npa int32 `json:"npa,omitempty"`
 
-	Nxx []string `json:"nxx,omitempty"`
+	Nxx string `json:"nxx,omitempty"`
 
-	IsTollFree []string `json:"is_toll_free,omitempty"`
+	IsTollFree string `json:"is_toll_free,omitempty"`
 
-	City []string `json:"city,omitempty"`
+	City string `json:"city,omitempty"`
 
-	ProvincePostalCode []string `json:"province_postal_code,omitempty"`
+	ProvincePostalCode string `json:"province_postal_code,omitempty"`
 
-	CountryPostalCode []string `json:"country_postal_code,omitempty"`
+	CountryPostalCode string `json:"country_postal_code,omitempty"`
 }

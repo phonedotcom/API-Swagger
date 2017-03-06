@@ -14,13 +14,13 @@ package swagger
 type Address struct {
 
 	// Street address line 1. Required.
-	Line1 string `json:"line_1,omitempty"`
+	Line1 string `json:"line_1"`
 
 	// Street address line 2
 	Line2 string `json:"line_2,omitempty"`
 
 	// City. Required.
-	City string `json:"city,omitempty"`
+	City string `json:"city"`
 
 	// Province. Required if country is US
 	Province string `json:"province,omitempty"`
@@ -29,5 +29,5 @@ type Address struct {
 	PostalCode string `json:"postal_code,omitempty"`
 
 	// 2-character country code. Required.
-	Country string `json:"country,omitempty"`
+	Country string `json:"country"`
 }

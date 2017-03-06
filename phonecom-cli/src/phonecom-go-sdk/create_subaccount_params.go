@@ -13,10 +13,10 @@ package swagger
 type CreateSubaccountParams struct {
 
 	// Sub account password
-	Username string `json:"username,omitempty"`
+	Username string `json:"username"`
 
 	// Sub account password
-	Password string `json:"password,omitempty"`
+	Password string `json:"password"`
 
 	// Contact Object. See below for details.
 	Contact ContactSubaccount `json:"contact,omitempty"`

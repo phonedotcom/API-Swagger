@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**DeleteAccountExtensionContact**](ContactsApi.md#DeleteAccountExtensionContact) | **Delete** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | 
 [**GetAccountExtensionContact**](ContactsApi.md#GetAccountExtensionContact) | **Get** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | Retrieve the details of an address book contact
 [**ListAccountExtensionContacts**](ContactsApi.md#ListAccountExtensionContacts) | **Get** /accounts/{account_id}/extensions/{extension_id}/contacts | Show a list of address book contacts
-[**ReplaceAccountExtensionContact**](ContactsApi.md#ReplaceAccountExtensionContact) | **Put** /accounts/{account_id}/extensions/{extension_id}/contacts | 
+[**ReplaceAccountExtensionContact**](ContactsApi.md#ReplaceAccountExtensionContact) | **Put** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | 
 
 
 # **CreateAccountExtensionContact**
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ReplaceAccountExtensionContact**
-> ContactFull ReplaceAccountExtensionContact($accountId, $extensionId, $data)
+> ContactFull ReplaceAccountExtensionContact($accountId, $extensionId, $contactId, $data)
 
 
 
@@ -156,6 +156,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **accountId** | **int32**| Account ID | 
  **extensionId** | **int32**| Extension ID | 
+ **contactId** | **int32**| Contact ID | 
  **data** | [**CreateContactParams**](CreateContactParams.md)| Contact data | [optional] 
 
 ### Return type

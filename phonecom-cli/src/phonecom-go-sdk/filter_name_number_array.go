@@ -12,7 +12,7 @@ package swagger
 
 type FilterNameNumberArray struct {
 
-	Name []string `json:"name,omitempty"`
+	Name string `json:"name,omitempty"`
 
-	Number []string `json:"number,omitempty"`
+	Number string `json:"number,omitempty"`
 }

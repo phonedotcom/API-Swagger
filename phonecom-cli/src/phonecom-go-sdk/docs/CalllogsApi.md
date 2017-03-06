@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **ListAccountCallLogs**
-> ListCallLogs ListAccountCallLogs($accountId, $filtersId, $filtersStartTime, $filtersCreatedAt, $filtersDirection, $filtersCalledNumber, $filtersType, $sortId, $sortStartTime, $sortCreatedAt, $limit, $offset, $fields)
+> ListCallLogs ListAccountCallLogs($accountId, $filtersId, $filtersStartTime, $filtersCreatedAt, $filtersDirection, $filtersCalledNumber, $filtersType, $filtersExtension, $sortId, $sortStartTime, $sortCreatedAt, $limit, $offset, $fields)
 
 Get a list of call details associated with your account
 
@@ -26,6 +26,7 @@ Name | Type | Description  | Notes
  **filtersDirection** | **string**| Call direction filter: in or out | [optional] 
  **filtersCalledNumber** | **string**| Called number | [optional] 
  **filtersType** | **string**| Call type, such as &#39;call&#39;, &#39;fax&#39;, &#39;audiogram&#39; | [optional] 
+ **filtersExtension** | [**[]string**](string.md)| Extension filter | [optional] 
  **sortId** | **string**| ID sorting | [optional] 
  **sortStartTime** | **string**| Sorting by call start time: asc or desc | [optional] 
  **sortCreatedAt** | **string**| Sorting by call log creation time: asc or desc | [optional] 

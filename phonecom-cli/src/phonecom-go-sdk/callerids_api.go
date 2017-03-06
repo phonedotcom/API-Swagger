@@ -73,26 +73,19 @@ func (a CalleridsApi) GetCallerIds(accountId int32, extensionId int32, filtersNu
 	for key := range a.Configuration.DefaultHeader {
 		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
 	}
-	var collectionFormat = "multi"
-	if len(filtersNumber) > 0 {
-		localVarQueryParams.Add("filters[number]", a.Configuration.APIClient.ParameterToString(filtersNumber, collectionFormat))
-	}
+	var filtersNumberCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[number]", a.Configuration.APIClient.ParameterToString(filtersNumber, filtersNumberCollectionFormat))
 
-	if len(filtersName) > 0 {
-		localVarQueryParams.Add("filters[name]", a.Configuration.APIClient.ParameterToString(filtersName, collectionFormat))
-	}
+	var filtersNameCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[name]", a.Configuration.APIClient.ParameterToString(filtersName, filtersNameCollectionFormat))
 
-	if sortNumber != "" {
-		localVarQueryParams.Add("sort[number]", a.Configuration.APIClient.ParameterToString(sortNumber, ""))
-	}
-	if sortName != "" {
-		localVarQueryParams.Add("sort[name]", a.Configuration.APIClient.ParameterToString(sortName, ""))
-	}
+	localVarQueryParams.Add("sort[number]", a.Configuration.APIClient.ParameterToString(sortNumber, ""))
+	localVarQueryParams.Add("sort[name]", a.Configuration.APIClient.ParameterToString(sortName, ""))
 	localVarQueryParams.Add("limit", a.Configuration.APIClient.ParameterToString(limit, ""))
 	localVarQueryParams.Add("offset", a.Configuration.APIClient.ParameterToString(offset, ""))
-	if fields != "" {
-		localVarQueryParams.Add("fields", a.Configuration.APIClient.ParameterToString(fields, ""))
-	}
+	localVarQueryParams.Add("fields", a.Configuration.APIClient.ParameterToString(fields, ""))
+
+	clearEmptyParams(localVarQueryParams)
 
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{ "application/json",  }

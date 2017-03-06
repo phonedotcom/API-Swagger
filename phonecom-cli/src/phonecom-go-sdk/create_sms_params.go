@@ -13,11 +13,14 @@ package swagger
 type CreateSmsParams struct {
 
 	// Phone number of sender
-	From string `json:"from,omitempty"`
+	From string `json:"from"`
 
 	// Outgoing destination numbers
-	To string `json:"to,omitempty"`
+	To string `json:"to"`
 
 	// Text body of the outgoing SMS message. Maximum 160 characters per message.
-	Text string `json:"text,omitempty"`
+	Text string `json:"text"`
+
+	// ID of Extension where the sms is saved
+	ExtensionId int32 `json:"extension_id,omitempty"`
 }

@@ -12,9 +12,9 @@ package swagger
 
 type FilterIdGroupIdUpdatedAtArray struct {
 
-	Id []string `json:"id,omitempty"`
+	Id string `json:"id,omitempty"`
 
-	GroupId []string `json:"group_id,omitempty"`
+	GroupId string `json:"group_id,omitempty"`
 
-	UpdatedAt []string `json:"updated_at,omitempty"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 }

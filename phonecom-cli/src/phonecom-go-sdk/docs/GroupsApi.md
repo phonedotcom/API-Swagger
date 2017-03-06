@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ReplaceAccountExtensionContactGroup**
-> GroupFull ReplaceAccountExtensionContactGroup($accountId, $extensionId, $groupId)
+> GroupFull ReplaceAccountExtensionContactGroup($accountId, $extensionId, $groupId, $data)
 
 
 
@@ -156,6 +156,7 @@ Name | Type | Description  | Notes
  **accountId** | **int32**| Account ID | 
  **extensionId** | **int32**| Extension ID | 
  **groupId** | **int32**| Group ID | 
+ **data** | [**CreateGroupParams**](CreateGroupParams.md)| Group name | 
 
 ### Return type
 

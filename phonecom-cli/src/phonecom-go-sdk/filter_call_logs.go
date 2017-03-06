@@ -12,9 +12,9 @@ package swagger
 
 type FilterCallLogs struct {
 
-	Id []string `json:"id,omitempty"`
+	Id string `json:"id,omitempty"`
 
-	StartTime []string `json:"start_time,omitempty"`
+	StartTime string `json:"start_time,omitempty"`
 
 	CreatedAt string `json:"created_at,omitempty"`
 

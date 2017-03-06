@@ -79,65 +79,41 @@ func (a NumberregionsApi) ListAvailablePhoneNumberRegions(filtersCountryCode []s
 	for key := range a.Configuration.DefaultHeader {
 		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
 	}
-	var collectionFormat = "multi"
-	if len(filtersCountryCode) > 0 {
-		localVarQueryParams.Add("filters[country_code]", a.Configuration.APIClient.ParameterToString(filtersCountryCode, collectionFormat))
-	}
+	var filtersCountryCodeCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[country_code]", a.Configuration.APIClient.ParameterToString(filtersCountryCode, filtersCountryCodeCollectionFormat))
 
-	if len(filtersNpa) > 0 {
-		localVarQueryParams.Add("filters[npa]", a.Configuration.APIClient.ParameterToString(filtersNpa, collectionFormat))
-	}
+	var filtersNpaCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[npa]", a.Configuration.APIClient.ParameterToString(filtersNpa, filtersNpaCollectionFormat))
 
-	if len(filtersNxx) > 0 {
-		localVarQueryParams.Add("filters[nxx]", a.Configuration.APIClient.ParameterToString(filtersNxx, collectionFormat))
-	}
+	var filtersNxxCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[nxx]", a.Configuration.APIClient.ParameterToString(filtersNxx, filtersNxxCollectionFormat))
 
-	if len(filtersIsTollFree) > 0 {
-		localVarQueryParams.Add("filters[is_toll_free]", a.Configuration.APIClient.ParameterToString(filtersIsTollFree, collectionFormat))
-	}
+	var filtersIsTollFreeCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[is_toll_free]", a.Configuration.APIClient.ParameterToString(filtersIsTollFree, filtersIsTollFreeCollectionFormat))
 
-	if len(filtersCity) > 0 {
-		localVarQueryParams.Add("filters[city]", a.Configuration.APIClient.ParameterToString(filtersCity, collectionFormat))
-	}
+	var filtersCityCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[city]", a.Configuration.APIClient.ParameterToString(filtersCity, filtersCityCollectionFormat))
 
-	if len(filtersProvincePostalCode) > 0 {
-		localVarQueryParams.Add("filters[province_postal_code]", a.Configuration.APIClient.ParameterToString(filtersProvincePostalCode, collectionFormat))
-	}
+	var filtersProvincePostalCodeCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[province_postal_code]", a.Configuration.APIClient.ParameterToString(filtersProvincePostalCode, filtersProvincePostalCodeCollectionFormat))
 
-	if len(filtersCountryPostalCode) > 0 {
-		localVarQueryParams.Add("filters[country_postal_code]", a.Configuration.APIClient.ParameterToString(filtersCountryPostalCode, collectionFormat))
-	}
+	var filtersCountryPostalCodeCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[country_postal_code]", a.Configuration.APIClient.ParameterToString(filtersCountryPostalCode, filtersCountryPostalCodeCollectionFormat))
 
-	if sortCountryCode != "" {
-		localVarQueryParams.Add("sort[country_code]", a.Configuration.APIClient.ParameterToString(sortCountryCode, ""))
-	}
-	if sortNpa != "" {
-		localVarQueryParams.Add("sort[npa]", a.Configuration.APIClient.ParameterToString(sortNpa, ""))
-	}
-	if sortNxx != "" {
-		localVarQueryParams.Add("sort[nxx]", a.Configuration.APIClient.ParameterToString(sortNxx, ""))
-	}
-	if sortIsTollFree != "" {
-		localVarQueryParams.Add("sort[is_toll_free]", a.Configuration.APIClient.ParameterToString(sortIsTollFree, ""))
-	}
-	if sortCity != "" {
-		localVarQueryParams.Add("sort[city]", a.Configuration.APIClient.ParameterToString(sortCity, ""))
-	}
-	if sortProvincePostalCode != "" {
-		localVarQueryParams.Add("sort[province_postal_code]", a.Configuration.APIClient.ParameterToString(sortProvincePostalCode, ""))
-	}
-	if sortCountryPostalCode != "" {
-		localVarQueryParams.Add("sort[country_postal_code]", a.Configuration.APIClient.ParameterToString(sortCountryPostalCode, ""))
-	}
+	localVarQueryParams.Add("sort[country_code]", a.Configuration.APIClient.ParameterToString(sortCountryCode, ""))
+	localVarQueryParams.Add("sort[npa]", a.Configuration.APIClient.ParameterToString(sortNpa, ""))
+	localVarQueryParams.Add("sort[nxx]", a.Configuration.APIClient.ParameterToString(sortNxx, ""))
+	localVarQueryParams.Add("sort[is_toll_free]", a.Configuration.APIClient.ParameterToString(sortIsTollFree, ""))
+	localVarQueryParams.Add("sort[city]", a.Configuration.APIClient.ParameterToString(sortCity, ""))
+	localVarQueryParams.Add("sort[province_postal_code]", a.Configuration.APIClient.ParameterToString(sortProvincePostalCode, ""))
+	localVarQueryParams.Add("sort[country_postal_code]", a.Configuration.APIClient.ParameterToString(sortCountryPostalCode, ""))
 	localVarQueryParams.Add("limit", a.Configuration.APIClient.ParameterToString(limit, ""))
 	localVarQueryParams.Add("offset", a.Configuration.APIClient.ParameterToString(offset, ""))
-	if fields != "" {
-		localVarQueryParams.Add("fields", a.Configuration.APIClient.ParameterToString(fields, ""))
-	}
-	if len(groupBy) > 0 {
-		localVarQueryParams.Add("group_by", a.Configuration.APIClient.ParameterToString(groupBy, collectionFormat))
-	}
+	localVarQueryParams.Add("fields", a.Configuration.APIClient.ParameterToString(fields, ""))
+	var groupByCollectionFormat = "multi"
+	localVarQueryParams.Add("group_by", a.Configuration.APIClient.ParameterToString(groupBy, groupByCollectionFormat))
 
+	clearEmptyParams(localVarQueryParams)
 
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{ "application/json",  }

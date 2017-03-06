@@ -12,23 +12,23 @@ package swagger
 
 type FilterListAvailableNumbers struct {
 
-	PhoneNumber []string `json:"phone_number,omitempty"`
+	PhoneNumber string `json:"phone_number,omitempty"`
 
-	CountryCode []string `json:"country_code,omitempty"`
+	CountryCode string `json:"country_code,omitempty"`
 
-	Npa []int32 `json:"npa,omitempty"`
+	Npa int32 `json:"npa,omitempty"`
 
-	Nxx []string `json:"nxx,omitempty"`
+	Nxx string `json:"nxx,omitempty"`
 
-	Xxxx []string `json:"xxxx,omitempty"`
+	Xxxx string `json:"xxxx,omitempty"`
 
-	City []string `json:"city,omitempty"`
+	City string `json:"city,omitempty"`
 
-	Province []string `json:"province,omitempty"`
+	Province string `json:"province,omitempty"`
 
-	Country []string `json:"country,omitempty"`
+	Country string `json:"country,omitempty"`
 
-	Price []string `json:"price,omitempty"`
+	Price string `json:"price,omitempty"`
 
-	Category []string `json:"category,omitempty"`
+	Category string `json:"category,omitempty"`
 }

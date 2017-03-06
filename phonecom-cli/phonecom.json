@@ -420,6 +420,9 @@
             "$ref": "#/parameters/filterType"
           },
           {
+            "$ref": "#/parameters/filterExtension"
+          },
+          {
             "$ref": "#/parameters/sortIdParam"
           },
           {
@@ -1166,59 +1169,6 @@
             "$ref": "#/responses/response422"
           }
         }
-      },
-      "put": {
-        "security": [
-          {
-            "apiKey": []
-          }
-        ],
-        "tags": [
-          "contacts"
-        ],
-        "summary": "",
-        "description": "For more on the input fields, see Account Contacts.",
-        "operationId": "replace-account-extension-contact",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/accountIdParam"
-          },
-          {
-            "$ref": "#/parameters/extensionIdParam"
-          },
-          {
-            "name": "data",
-            "in": "body",
-            "description": "Contact data",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/CreateContactParams"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ContactFull"
-            }
-          },
-          "401": {
-            "$ref": "#/responses/response401"
-          },
-          "403": {
-            "$ref": "#/responses/response403"
-          },
-          "422": {
-            "$ref": "#/responses/response422"
-          }
-        }
       }
     },
     "/accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id}": {
@@ -1266,6 +1216,62 @@
           },
           "404": {
             "$ref": "#/responses/response404"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "contacts"
+        ],
+        "summary": "",
+        "description": "For more on the input fields, see Account Contacts.",
+        "operationId": "replace-account-extension-contact",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/extensionIdParam"
+          },
+          {
+            "$ref": "#/parameters/contactIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Contact data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateContactParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContactFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
           }
         }
       },
@@ -1506,6 +1512,15 @@
           },
           {
             "$ref": "#/parameters/groupIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Group name",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateGroupParams"
+            }
           }
         ],
         "responses": {
@@ -4607,6 +4622,10 @@
         "text": {
           "type": "string",
           "description": "Text body of the outgoing SMS message. Maximum 160 characters per message."
+        },
+        "extension_id" : {
+          "type": "integer",
+          "description": "ID of Extension where the sms is saved"
         }
       }
     },

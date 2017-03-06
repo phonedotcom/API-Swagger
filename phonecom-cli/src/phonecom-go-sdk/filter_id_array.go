@@ -12,5 +12,5 @@ package swagger
 
 type FilterIdArray struct {
 
-	Id []string `json:"id,omitempty"`
+	Id string `json:"id,omitempty"`
 }

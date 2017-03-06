@@ -279,30 +279,22 @@ func (a ContactsApi) ListAccountExtensionContacts(accountId int32, extensionId i
 	for key := range a.Configuration.DefaultHeader {
 		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
 	}
-	var collectionFormat = "multi"
-	if len(filtersId) > 0 {
-		localVarQueryParams.Add("filters[id]", a.Configuration.APIClient.ParameterToString(filtersId, collectionFormat))
-	}
+	var filtersIdCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[id]", a.Configuration.APIClient.ParameterToString(filtersId, filtersIdCollectionFormat))
 
-	if len(filtersGroupId) > 0 {
-		localVarQueryParams.Add("filters[group_id]", a.Configuration.APIClient.ParameterToString(filtersGroupId, collectionFormat))
-	}
+	var filtersGroupIdCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[group_id]", a.Configuration.APIClient.ParameterToString(filtersGroupId, filtersGroupIdCollectionFormat))
 
-	if len(filtersUpdatedAt) > 0 {
-		localVarQueryParams.Add("filters[updated_at]", a.Configuration.APIClient.ParameterToString(filtersUpdatedAt, collectionFormat))
-	}
+	var filtersUpdatedAtCollectionFormat = "multi"
+	localVarQueryParams.Add("filters[updated_at]", a.Configuration.APIClient.ParameterToString(filtersUpdatedAt, filtersUpdatedAtCollectionFormat))
 
-	if sortId != "" {
-		localVarQueryParams.Add("sort[id]", a.Configuration.APIClient.ParameterToString(sortId, ""))
-	}
-	if sortUpdatedAt != "" {
-		localVarQueryParams.Add("sort[updated_at]", a.Configuration.APIClient.ParameterToString(sortUpdatedAt, ""))
-	}
+	localVarQueryParams.Add("sort[id]", a.Configuration.APIClient.ParameterToString(sortId, ""))
+	localVarQueryParams.Add("sort[updated_at]", a.Configuration.APIClient.ParameterToString(sortUpdatedAt, ""))
 	localVarQueryParams.Add("limit", a.Configuration.APIClient.ParameterToString(limit, ""))
 	localVarQueryParams.Add("offset", a.Configuration.APIClient.ParameterToString(offset, ""))
-	if fields != "" {
-		localVarQueryParams.Add("fields", a.Configuration.APIClient.ParameterToString(fields, ""))
-	}
+	localVarQueryParams.Add("fields", a.Configuration.APIClient.ParameterToString(fields, ""))
+
+	clearEmptyParams(localVarQueryParams)
 
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{ "application/json",  }
@@ -346,16 +338,18 @@ func (a ContactsApi) ListAccountExtensionContacts(accountId int32, extensionId i
  *
  * @param accountId Account ID
  * @param extensionId Extension ID
+ * @param contactId Contact ID
  * @param data Contact data
  * @return *ContactFull
  */
-func (a ContactsApi) ReplaceAccountExtensionContact(accountId int32, extensionId int32, data CreateContactParams) (*ContactFull, *APIResponse, error) {
+func (a ContactsApi) ReplaceAccountExtensionContact(accountId int32, extensionId int32, contactId int32, data CreateContactParams) (*ContactFull, *APIResponse, error) {
 
 	var localVarHttpMethod = strings.ToUpper("Put")
 	// create path and map variables
-	localVarPath := a.Configuration.BasePath + "/accounts/{account_id}/extensions/{extension_id}/contacts"
+	localVarPath := a.Configuration.BasePath + "/accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"account_id"+"}", fmt.Sprintf("%v", accountId), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"extension_id"+"}", fmt.Sprintf("%v", extensionId), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"contact_id"+"}", fmt.Sprintf("%v", contactId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

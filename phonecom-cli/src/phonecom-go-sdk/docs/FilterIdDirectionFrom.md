@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **[]string** |  | [optional] [default to null]
+**Id** | **string** |  | [optional] [default to null]
 **Direction** | **string** |  | [optional] [default to null]
 **From** | **string** |  | [optional] [default to null]
 

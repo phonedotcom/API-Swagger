@@ -14,10 +14,10 @@ package swagger
 type QueueFull struct {
 
 	// Integer ID. Read-only.
-	Id int32 `json:"id,omitempty"`
+	Id int32 `json:"id"`
 
 	// Name. Required.
-	Name string `json:"name,omitempty"`
+	Name string `json:"name"`
 
 	// Greeting to be played when caller first connects. Output is a Media Summary Object. Input must be a Media Lookup Object. Must refer to a media recording that has is_hold_music set to FALSE. Can be set to NULL to disable the greeting.
 	Greeting MediaSummary `json:"greeting,omitempty"`

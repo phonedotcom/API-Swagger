@@ -12,7 +12,7 @@ package swagger
 
 type FilterIdDirectionFrom struct {
 
-	Id []string `json:"id,omitempty"`
+	Id string `json:"id,omitempty"`
 
 	Direction string `json:"direction,omitempty"`
 

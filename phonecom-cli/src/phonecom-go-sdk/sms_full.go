@@ -18,23 +18,23 @@ import (
 type SmsFull struct {
 
 	// Unique SMS ID. Read-only.
-	Id string `json:"id,omitempty"`
+	Id string `json:"id"`
 
 	// Caller ID number to display on the incoming/outgoing SMS message. For an outgoing message, it must be a phone number associated with your Phone.com account.
-	From string `json:"from,omitempty"`
+	From string `json:"from"`
 
 	// An array of SMS recipients.
-	To []Recipient `json:"to,omitempty"`
+	To []Recipient `json:"to"`
 
 	// Direction of SMS. 'in' for Incoming messages, 'out' for Outgoing messages.
-	Direction string `json:"direction,omitempty"`
+	Direction string `json:"direction"`
 
 	// Unix time stamp representing the UTC time that the object was created in the Phone.com API system.
-	CreatedEpoch int32 `json:"created_epoch,omitempty"`
+	CreatedEpoch int32 `json:"created_epoch"`
 
 	// Date string representing the UTC time that the object was created in the Phone.com API system.
-	CreatedAt time.Time `json:"created_at,omitempty"`
+	CreatedAt time.Time `json:"created_at"`
 
 	// Body of the SMS text
-	Text string `json:"text,omitempty"`
+	Text string `json:"text"`
 }

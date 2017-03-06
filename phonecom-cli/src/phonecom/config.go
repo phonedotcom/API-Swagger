@@ -5,25 +5,31 @@ import (
 	"fmt"
 	"io/ioutil"
 	"encoding/xml"
+	"phonecom-go-sdk"
+	"errors"
+	"path/filepath"
+	"log"
 )
 
 type Query struct {
-	ConfigList []Config `xml:"Config"`
+	ConfigList []CliConfig `xml:"Config"`
 }
 
-type Config struct {
+type CliConfig struct {
 	BaseApiPath string
 	ApiKeyPrefix string
 	ApiKey string
 	Type string
 	AccountId int32
+	Path string
 }
 
-func getConfig() Config {
+func (c *CliConfig) getConfig() CliConfig {
 
+	configPath := c.getConfigPath()
 	xmlFile, err := os.Open(configPath)
 
-	var noConfig Config;
+	var noConfig CliConfig;
 
 	if err != nil {
 		fmt.Println("Could not read config.xml", err)
@@ -44,4 +50,68 @@ func getConfig() Config {
 	}
 
 	return noConfig
+}
+
+func (c *CliConfig) createSwaggerConfig(xmlConfig CliConfig) *swagger.Configuration {
+
+	var baseApiPath string = xmlConfig.BaseApiPath
+	var apiKeyPrefix string = xmlConfig.ApiKeyPrefix
+	var apiKey string = xmlConfig.ApiKey
+
+	var swaggerConfig = swagger.NewConfiguration()
+
+	if (len(baseApiPath) > 0) {
+		swaggerConfig.BasePath = baseApiPath
+	}
+
+	swaggerConfig.APIKeyPrefix["Authorization"] = apiKeyPrefix
+	swaggerConfig.APIKey["Authorization"] = apiKey
+
+	return swaggerConfig
+}
+
+func (c *CliConfig) createOrReadCliConfig(param CliParams) (CliConfig, error) {
+
+	var cliConfig CliConfig = c.getConfig()
+
+	if (cliConfig.ApiKey == "") {
+		if (param.apiKey == "") {
+			return cliConfig, errors.New("No API key provided. Please provide Phone.com API key via -ak CLI flag of via config.xml")
+		} else {
+			cliConfig.ApiKey = param.apiKey
+		}
+	}
+
+	if (cliConfig.ApiKeyPrefix == "") {
+		if (param.apiKeyPrefix == "") {
+			cliConfig.ApiKeyPrefix = "Bearer"
+		} else {
+			cliConfig.ApiKey = param.apiKeyPrefix
+		}
+	}
+
+	if (cliConfig.AccountId == 0) {
+		if (param.accountId == 0) {
+			return cliConfig, errors.New("No account id provided. Please provide account id via -a CLI flag or via config.xml")
+		} else {
+			cliConfig.AccountId = param.accountId
+		}
+	}
+
+	return cliConfig, nil
+}
+
+func (c *CliConfig) getConfigPath() string {
+
+	if (c.Path != "") {
+		return c.Path
+	}
+
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(0)
+	}
+
+	return dir + "/config.xml"
 }
