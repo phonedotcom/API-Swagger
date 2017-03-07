@@ -5546,22 +5546,6 @@
     "ExtensionFull": {
       "description": "The Full Extension Object has the same properties as the Extension Summary Object, along with the following:",
       "type": "object",
-      "required": [
-        "id",
-        "usage_type",
-        "extension",
-        "name",
-        "full_name",
-        "timezone",
-        "name_greeting",
-        "include_in_directory",
-        "caller_id",
-        "local_area_code",
-        "enable_call_waiting",
-        "enable_outbound_calls",
-        "voicemail",
-        "call_notifications"
-      ],
       "properties": {
         "id": {
           "type": "integer",

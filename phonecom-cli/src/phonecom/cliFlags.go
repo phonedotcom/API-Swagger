@@ -2,7 +2,6 @@ package main
 
 import "github.com/urfave/cli"
 
-var defaultCommand = listAccounts
 var defaultId = ""
 var defaultIdSecondary = ""
 var defaultInput = ""
@@ -11,6 +10,8 @@ var defaultTo = ""
 var defaultText = ""
 var defaultLimit = 25
 var defaultOffset = 0
+
+const defaultCommand = "https://api.phone.com/v4/ping"
 const defaultAccountId = 1315091
 
 const commandLong = "command"
@@ -50,7 +51,72 @@ func getCliFlags() []cli.Flag {
     cli.StringFlag{
       Name: commandLong + ", c",
       Value: defaultCommand,
-      Usage: "Phone.com API command that you want to execute",
+      Usage: "Phone.com API command that you want to execute. List of API endpoints: " +
+				listAccounts + ", " +
+			  listMedia + ", " +
+			  listMenus + ", " +
+			  listQueues + ", " +
+			  listRoutes + ", " +
+			  listSchedules + ", " +
+			  listSms + ", " +
+			  listSubaccounts + ", " +
+			  listApplications + ", " +
+			  listCallLogs + ", " +
+			  listDevices + ", " +
+			  listExpressServiceCodes + ", " +
+			  listExtensions + ", " +
+			  listContacts + ", " +
+			  listGroups + ", " +
+			  listPhoneNumbers + ", " +
+			  listTrunks + ", " +
+			  listAvailablePhoneNumbers + ", " +
+			  listAvailablePhoneNumberRegions + ", " +
+			  createQueue + ", " +
+			  deleteQueue + ", " +
+			  replaceQueue + ", " +
+			  getQueue + ", " +
+			  createTrunk + ", " +
+			  getTrunk + ", " +
+			  replaceTrunk + ", " +
+			  deleteTrunk + ", " +
+			  createRoute + ", " +
+			  createSubaccount + ", " +
+			  deleteRoute + ", " +
+			  replaceRoute + ", " +
+			  createSms + ", " +
+			  createMenu + ", " +
+			  getMenu + ", " +
+			  getRecording + ", " +
+			  getRoute + ", " +
+			  getSchedule + ", " +
+			  getSms + ", " +
+			  getAccount + ", " +
+			  getApplication + ", " +
+			  getCallLog + ", " +
+			  getDevice + ", " +
+			  getExtension + ", " +
+			  getExpressServiceCode + ", " +
+			  getCallerId + ", " +
+			  getContact + ", " +
+			  getGroup + ", " +
+			  getPhoneNumber + ", " +
+			  replaceMenu + ", " +
+			  deleteMenu + ", " +
+			  createPhoneNumber + ", " +
+			  createCall + ", " +
+			  createDevice + ", " +
+			  createExtension + ", " +
+			  createContact + ", " +
+			  createGroup + ", " +
+
+			  replaceDevice + ", " +
+			  replaceExtension + ", " +
+			  replaceContact + ", " +
+			  replaceGroup + ", " +
+			  replacePhoneNumber + ", " +
+
+			  deleteContact + ", " +
+			  deleteGroup,
     },
     cli.StringFlag{
       Name: idLong,
@@ -137,15 +203,15 @@ func getCliFlags() []cli.Flag {
     },
     cli.StringFlag{
       Name: filtersValueLong + ", fv",
-      Usage: "Type of filter",
+      Usage: "The filter value",
     },
     cli.StringFlag{
       Name: sortTypeLong + ", st",
-      Usage: "Type of filter",
+      Usage: "Type of sort",
     },
     cli.StringFlag{
       Name: sortValueLong + ", sv",
-      Usage: "Type of filter",
+      Usage: "The sort value",
     },
     cli.StringFlag{
       Name: sampleInLong + ", si",

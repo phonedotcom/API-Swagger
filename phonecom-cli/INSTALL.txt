@@ -3,22 +3,25 @@ Installation
 1. Download and install go programming language
 https://golang.org/doc/install
 
-2. Change to the root directory of the CLI tool
-cd /path to the phonecom cli root directory
+2. Download the latest source code from:
+https://github.com/waiyuen/Phone.com-API-Swagger/releases
 
-3. Set the GOPATH to the current directory
+3. Extract the archive and navigate to the phonecom-cli directory from a terminal
+cd /path to the phonecom-cli/
+
+4. Set the GOPATH to the current directory
 GOPATH=/path to the phonecom cli root directory
 
-4. Install the required libraries
+5. Install the required libraries
 go get github.com/urfave/cli
 go get -u github.com/go-resty/resty
 go get github.com/yukithm/json2csv/cmd/json2csv
 
 Note: You might need to delete the src/github.com folder if you encounter build errors
 
-5. Build the CLI tool
+6. Build the CLI tool
 go build -o phonecom phonecom
 
-6. Run the binary which is built under the current directory
+7. Run the binary which is built under the current directory
 
 Please note that the config.xml needs to be under the same directory with the binary.
