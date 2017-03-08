@@ -33,6 +33,7 @@ Class | Method | HTTP request | Description
 *ContactsApi* | [**GetAccountExtensionContact**](docs/ContactsApi.md#getaccountextensioncontact) | **Get** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | Retrieve the details of an address book contact
 *ContactsApi* | [**ListAccountExtensionContacts**](docs/ContactsApi.md#listaccountextensioncontacts) | **Get** /accounts/{account_id}/extensions/{extension_id}/contacts | Show a list of address book contacts
 *ContactsApi* | [**ReplaceAccountExtensionContact**](docs/ContactsApi.md#replaceaccountextensioncontact) | **Put** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | 
+*DefaultApi* | [**Ping**](docs/DefaultApi.md#ping) | **Get** /ping | The default API command
 *DevicesApi* | [**CreateAccountDevice**](docs/DevicesApi.md#createaccountdevice) | **Post** /accounts/{account_id}/devices | Register a generic VoIP device
 *DevicesApi* | [**GetAccountDevice**](docs/DevicesApi.md#getaccountdevice) | **Get** /accounts/{account_id}/devices/{device_id} | Show details of an individual VoIP device
 *DevicesApi* | [**ListAccountDevices**](docs/DevicesApi.md#listaccountdevices) | **Get** /accounts/{account_id}/devices | Get a list of VoIP devices associated with your account
@@ -171,6 +172,7 @@ Class | Method | HTTP request | Description
  - [PhoneNumberContact](docs/PhoneNumberContact.md)
  - [PhoneNumberFull](docs/PhoneNumberFull.md)
  - [PhoneNumbersRegionFull](docs/PhoneNumbersRegionFull.md)
+ - [PingResponse](docs/PingResponse.md)
  - [QueueFull](docs/QueueFull.md)
  - [QueueSummary](docs/QueueSummary.md)
  - [Recipient](docs/Recipient.md)

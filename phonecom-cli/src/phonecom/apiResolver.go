@@ -2,7 +2,6 @@ package main
 
 import (
   "phonecom-go-sdk"
-  "fmt"
 )
 
 type ApiResolver struct {
@@ -97,7 +96,6 @@ func (r *ApiResolver) resolve() interface{} {
     api = swagger.TrunksApi{Configuration:r.config}
 
   default:
-    fmt.Printf("Invalid command: %v\n", r.command)
     return nil
   }
 

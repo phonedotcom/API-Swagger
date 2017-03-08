@@ -48,13 +48,13 @@ func readAndUnmarshal(inputFile string) (error, map[string]interface {}) {
 	file, e := ioutil.ReadFile(inputFile)
 
 	if (e != nil) {
-		return errors.New("Could not read input file: " + inputFile), nil
+		return errors.New(fmt.Sprintf(couldNotReadFile, inputFile)), nil
 	}
 
 	var dat map[string]interface{}
 
 	if err := json.Unmarshal(file, &dat); err != nil {
-		return errors.New("Could not unmarshal input file: " + inputFile), nil
+		return errors.New(fmt.Sprintf(couldNotUnmarshal, inputFile)), nil
 	}
 
 	return nil, dat;

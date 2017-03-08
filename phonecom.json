@@ -183,6 +183,38 @@
     "https"
   ],
   "paths": {
+    "/ping": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "The default API command",
+        "description": "The default API command",
+        "operationId": "ping",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PingResponse"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/accounts": {
       "get": {
         "tags": [
@@ -4065,6 +4097,24 @@
     }
   },
   "definitions": {
+    "PingResponse": {
+      "description": "The ping response object.",
+      "type": "object",
+      "properties": {
+        "datetime": {
+          "type": "string"
+        },
+        "remote_ip": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "integer"
+        },
+        "user_agent": {
+          "type": "string"
+        }
+      }
+    },
     "CreateDeviceParams": {
       "type": "object",
       "properties": {
@@ -6863,7 +6913,7 @@
           "type": "string"
         },
         "npa": {
-          "type": "integer"
+          "type": "string"
         },
         "nxx": {
           "type": "string"
@@ -6895,7 +6945,7 @@
           "type": "string"
         },
         "npa": {
-          "type": "integer"
+          "type": "string"
         },
         "nxx": {
           "type": "string"

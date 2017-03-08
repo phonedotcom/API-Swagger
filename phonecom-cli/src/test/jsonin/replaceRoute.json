@@ -1,7 +1,5 @@
 {
-	"account_id": 1315091,
-	"route_id": 4701638,
-	"name": "API V3 Tests",
+	"name": "API V3 Tests1",
 	"rules": [
 		{
 			"actions": [

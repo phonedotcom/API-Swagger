@@ -19,6 +19,11 @@ func main() {
   app.Action = func(c *cli.Context) error {
     var err error
     err, _ = execute(c, cliConfig)
+
+		if (err != nil) {
+			fmt.Printf(err.Error());
+		}
+
     return err
   }
 
@@ -63,14 +68,21 @@ func execute(
 
   param.accountId = cliConfig.AccountId
 
+	responseHandler := ResponseHandler{param}
+
   if (api == nil) {
-    return errors.New(msgCouldNotGetResponse), nil
+		if (param.command == defaultCommand) {
+			defaultApi := swagger.DefaultApi{Configuration:swaggerConfig}
+			return responseHandler.handle(defaultApi.Ping())
+		} else {
+			return errors.New(fmt.Sprintf(invalidCommand, param.command, getAllCommands())), nil
+		}
   }
 
-  return invokeCommand(param, api)
+  return invokeCommand(responseHandler, param, api)
 }
 
-func invokeCommand(param CliParams, api interface{}) (error, map[string]interface{}) {
+func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error, map[string]interface{}) {
 
   var command = param.command
   var accountId = param.accountId
@@ -85,7 +97,7 @@ func invokeCommand(param CliParams, api interface{}) (error, map[string]interfac
   var idSecondary = param.idSecondary
   var idString = param.idString
 
-  rh := ResponseHandler{param}
+
 
   switch api := api.(type) {
 

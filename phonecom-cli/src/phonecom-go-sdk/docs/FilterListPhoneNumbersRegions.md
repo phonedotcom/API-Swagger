@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CountryCode** | **string** |  | [optional] [default to null]
-**Npa** | **int32** |  | [optional] [default to null]
+**Npa** | **string** |  | [optional] [default to null]
 **Nxx** | **string** |  | [optional] [default to null]
 **IsTollFree** | **string** |  | [optional] [default to null]
 **City** | **string** |  | [optional] [default to null]

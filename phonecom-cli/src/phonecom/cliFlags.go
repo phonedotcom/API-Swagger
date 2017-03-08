@@ -22,7 +22,7 @@ const offsetLong = "offset"
 const accountIdLong = "account"
 const dryrunLong = "dryrun"
 const inputLong = "input"
-const verboseLong = "verbose"
+const verboseLong = "verbose-mode"
 const contactLong = "contact"
 const billingContactLong = "billing-contact"
 const fromLong = "from"
@@ -51,72 +51,8 @@ func getCliFlags() []cli.Flag {
     cli.StringFlag{
       Name: commandLong + ", c",
       Value: defaultCommand,
-      Usage: "Phone.com API command that you want to execute. List of API endpoints: " +
-				listAccounts + ", " +
-			  listMedia + ", " +
-			  listMenus + ", " +
-			  listQueues + ", " +
-			  listRoutes + ", " +
-			  listSchedules + ", " +
-			  listSms + ", " +
-			  listSubaccounts + ", " +
-			  listApplications + ", " +
-			  listCallLogs + ", " +
-			  listDevices + ", " +
-			  listExpressServiceCodes + ", " +
-			  listExtensions + ", " +
-			  listContacts + ", " +
-			  listGroups + ", " +
-			  listPhoneNumbers + ", " +
-			  listTrunks + ", " +
-			  listAvailablePhoneNumbers + ", " +
-			  listAvailablePhoneNumberRegions + ", " +
-			  createQueue + ", " +
-			  deleteQueue + ", " +
-			  replaceQueue + ", " +
-			  getQueue + ", " +
-			  createTrunk + ", " +
-			  getTrunk + ", " +
-			  replaceTrunk + ", " +
-			  deleteTrunk + ", " +
-			  createRoute + ", " +
-			  createSubaccount + ", " +
-			  deleteRoute + ", " +
-			  replaceRoute + ", " +
-			  createSms + ", " +
-			  createMenu + ", " +
-			  getMenu + ", " +
-			  getRecording + ", " +
-			  getRoute + ", " +
-			  getSchedule + ", " +
-			  getSms + ", " +
-			  getAccount + ", " +
-			  getApplication + ", " +
-			  getCallLog + ", " +
-			  getDevice + ", " +
-			  getExtension + ", " +
-			  getExpressServiceCode + ", " +
-			  getCallerId + ", " +
-			  getContact + ", " +
-			  getGroup + ", " +
-			  getPhoneNumber + ", " +
-			  replaceMenu + ", " +
-			  deleteMenu + ", " +
-			  createPhoneNumber + ", " +
-			  createCall + ", " +
-			  createDevice + ", " +
-			  createExtension + ", " +
-			  createContact + ", " +
-			  createGroup + ", " +
+      Usage: "Phone.com API command that you want to execute. List of API endpoints: " + getAllCommands(),
 
-			  replaceDevice + ", " +
-			  replaceExtension + ", " +
-			  replaceContact + ", " +
-			  replaceGroup + ", " +
-			  replacePhoneNumber + ", " +
-
-			  deleteContact + ", " +
-			  deleteGroup,
     },
     cli.StringFlag{
       Name: idLong,
@@ -153,7 +89,7 @@ func getCliFlags() []cli.Flag {
       Usage: "Specify the path to the JSON file for making the API call",
     },
     cli.BoolFlag{
-      Name: verboseLong + ", vr",
+      Name: verboseLong + ", vrm",
       Usage: "Activate verbose mode",
     },
     cli.StringFlag{
@@ -242,4 +178,73 @@ func getCliFlags() []cli.Flag {
 			Usage: "The API key prefix for Phone.com",
 		},
   }
+}
+
+func getAllCommands() string {
+
+	return listAccounts + ", " +
+		listMedia + ", " +
+		listMenus + ", " +
+		listQueues + ", " +
+		listRoutes + ", " +
+		listSchedules + ", " +
+		listSms + ", " +
+		listSubaccounts + ", " +
+		listApplications + ", " +
+		listCallLogs + ", " +
+		listDevices + ", " +
+		listExpressServiceCodes + ", " +
+		listExtensions + ", " +
+		listContacts + ", " +
+		listGroups + ", " +
+		listPhoneNumbers + ", " +
+		listTrunks + ", " +
+		listAvailablePhoneNumbers + ", " +
+		listAvailablePhoneNumberRegions + ", " +
+		createQueue + ", " +
+		deleteQueue + ", " +
+		replaceQueue + ", " +
+		getQueue + ", " +
+		createTrunk + ", " +
+		getTrunk + ", " +
+		replaceTrunk + ", " +
+		deleteTrunk + ", " +
+		createRoute + ", " +
+		createSubaccount + ", " +
+		deleteRoute + ", " +
+		replaceRoute + ", " +
+		createSms + ", " +
+		createMenu + ", " +
+		getMenu + ", " +
+		getRecording + ", " +
+		getRoute + ", " +
+		getSchedule + ", " +
+		getSms + ", " +
+		getAccount + ", " +
+		getApplication + ", " +
+		getCallLog + ", " +
+		getDevice + ", " +
+		getExtension + ", " +
+		getExpressServiceCode + ", " +
+		getCallerId + ", " +
+		getContact + ", " +
+		getGroup + ", " +
+		getPhoneNumber + ", " +
+		replaceMenu + ", " +
+		deleteMenu + ", " +
+		createPhoneNumber + ", " +
+		createCall + ", " +
+		createDevice + ", " +
+		createExtension + ", " +
+		createContact + ", " +
+		createGroup + ", " +
+
+		replaceDevice + ", " +
+		replaceExtension + ", " +
+		replaceContact + ", " +
+		replaceGroup + ", " +
+		replacePhoneNumber + ", " +
+
+		deleteContact + ", " +
+		deleteGroup
 }

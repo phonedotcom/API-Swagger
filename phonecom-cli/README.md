@@ -40,10 +40,14 @@ The **phonecom-go-sdk** package contains all the generated swagger code along wi
 The **phonecom** package contains the code that adapts the generated Swagger code for the CLI.
 
 # Libraries
-There were 3 Go libraries that were used while developing the code. This libraries can be installed with go in the following way:
-* go get github.com/urfave/cli
-* go get -u github.com/go-resty/resty
-* go get github.com/yukithm/json2csv/cmd/json2csv
+There were 4 Go libraries that were used while developing the code. This libraries can be installed with go in the following way:
+```bash
+go get github.com/urfave/cli
+go get -u github.com/go-resty/resty
+go get github.com/yukithm/json2csv/cmd/json2csv
+go get github.com/stretchr/testify
+``` 
+
 
 # XML Configuration
 In order the Phone.com API to be invoked, an XML configuration file should be provided. The configuration file is used to provide the OAuth2 Authentication information. It is defined with the following format:  
@@ -54,6 +58,7 @@ In order the Phone.com API to be invoked, an XML configuration file should be pr
         <Type>main</Type>
         <ApiKeyPrefix>Bearer</ApiKeyPrefix>
         <ApiKey>The API Key for Phone.com</ApiKey>
+        <AccountId>The account id</AccountId>
     </Config>
 </Data>
 ```
@@ -102,7 +107,7 @@ cli.StringFlag{
   Usage: "Specify the path to the JSON file for making the API call",
 },
 cli.BoolFlag{
-  Name: "verbose, vr",
+  Name: "verbose-mode, vrm",
   Usage: "Activate verbose mode",
 },
 cli.StringFlag{
@@ -152,15 +157,15 @@ cli.StringFlag{
 },
 cli.StringFlag{
   Name: "filtersValue, fv",
-  Usage: "Type of filter",
+  Usage: "The filter value",
 },
 cli.StringFlag{
   Name: "sortType, st",
-  Usage: "Type of filter",
+  Usage: "Type of sort",
 },
 cli.StringFlag{
   Name: "sortValue, sv",
-  Usage: "Type of filter",
+  Usage: "The sort value",
 },
 cli.StringFlag{
   Name: "samplein, si",
@@ -225,7 +230,7 @@ These files are only used for testing, and they are not necessary for the operat
 The tests are standard go tests and can be run with the go test command.
 
 # Error handling & display
-The CLI handles and displays usage errors and http/network errors. The network errors messages are taken from the go-resty library. The usage messages are taken from the urfave-cli library. The HTTP errors are taken from the Phone.com API response. Additionally, with the -vr flag additional information about the error might be provided.
+The CLI handles and displays usage errors and http/network errors. The network errors messages are taken from the go-resty library. The usage messages are taken from the urfave-cli library. The HTTP errors are taken from the Phone.com API response. Additionally, with the -vrm flag additional information about the error might be provided.
 
 # Deliverables
 The code for the CLI along with the tests and the sample input JSONs will be pushed to Phone.com code repository. Additionally, all the changes made during the process of finding workarounds for overcoming the swagger bugs will be provided.

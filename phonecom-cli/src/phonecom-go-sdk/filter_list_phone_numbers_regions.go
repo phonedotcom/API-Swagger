@@ -14,7 +14,7 @@ type FilterListPhoneNumbersRegions struct {
 
 	CountryCode string `json:"country_code,omitempty"`
 
-	Npa int32 `json:"npa,omitempty"`
+	Npa string `json:"npa,omitempty"`
 
 	Nxx string `json:"nxx,omitempty"`
 

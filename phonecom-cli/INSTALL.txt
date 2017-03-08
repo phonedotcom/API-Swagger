@@ -16,6 +16,7 @@ GOPATH=/path to the phonecom-cli/ directory
 go get github.com/urfave/cli
 go get -u github.com/go-resty/resty
 go get github.com/yukithm/json2csv/cmd/json2csv
+go get github.com/stretchr/testify
 
 Note: You might need to delete the src/github.com and src/golang.org/ folders and try again if you encounter build errors
 

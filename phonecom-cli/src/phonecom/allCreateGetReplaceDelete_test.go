@@ -6,6 +6,7 @@ import (
   "io/ioutil"
   "os"
   "phonecom-go-sdk"
+  "github.com/stretchr/testify/assert"
 )
 
 func TestCreateDevice(t *testing.T) {
@@ -20,7 +21,7 @@ func TestCreateDevice(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createCliWithJsonIn(createDevice, fileName)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   id := getId(result)
 
@@ -37,11 +38,11 @@ func TestListReplaceDevice(t *testing.T) {
   var err error
 
   err, result = createCli(listDevices)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   firstId := getFirstId(result)
 
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   randomName := randomString(12)
   DeviceParamsJson := ReplaceDeviceJson{int32(firstId), randomName}
@@ -51,7 +52,7 @@ func TestListReplaceDevice(t *testing.T) {
 
   t.Log(firstId)
   err, result = createReplaceCliWithJsonIn(replaceDevice, fileName, firstId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
   os.Remove(fileName)
 }
 
@@ -68,7 +69,7 @@ func TestCreateExtension(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createCliWithJsonIn(createExtension, fileName)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   id := getId(result)
   if (id == 0) {
@@ -83,7 +84,7 @@ func TestListReplaceExtension(t *testing.T) {
   var err error
 
   err, result = createCli(listExtensions)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   firstId := getFirstId(result)
 
@@ -94,7 +95,7 @@ func TestListReplaceExtension(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createReplaceCliWithJsonIn(replaceExtension, fileName, firstId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
   os.Remove(fileName)
 }
 
@@ -104,7 +105,7 @@ func TestCreateDeleteContact(t *testing.T) {
   var err error
 
   err, result = createCli(listExtensions)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   extensionId := getFirstId(result)
 
@@ -115,7 +116,7 @@ func TestCreateDeleteContact(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createCliWithJsonIn(createContact, fileName)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   id := getId(result)
   if (id == 0) {
@@ -132,12 +133,12 @@ func TestListReplaceContact(t *testing.T) {
   var err error
 
   err, result = createCli(listExtensions)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   extensionId := getFirstId(result)
 
   err, result = createCliWithId(listContacts, extensionId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   contactId := getFirstId(result)
 
@@ -148,7 +149,7 @@ func TestListReplaceContact(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createReplaceContactCliWithJsonIn(replaceContact, fileName, extensionId, contactId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
   os.Remove(fileName)
 }
 
@@ -158,7 +159,7 @@ func TestCreateDeleteGroup(t *testing.T) {
   var err error
 
   err, result = createCli(listExtensions)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   extensionId := getFirstId(result)
 
@@ -169,7 +170,7 @@ func TestCreateDeleteGroup(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createCliWithJsonIn(createGroup, fileName)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   id := getId(result)
   if (id == 0) {
@@ -186,12 +187,12 @@ func TestListReplaceGroup(t *testing.T) {
   var err error
 
   err, result = createCli(listExtensions)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   extensionId := getFirstId(result)
 
   err, result = createCliWithId(listGroups, extensionId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   groupId := getFirstId(result)
 
@@ -202,7 +203,7 @@ func TestListReplaceGroup(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createReplaceContactCliWithJsonIn(replaceGroup, fileName, extensionId, groupId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
   os.Remove(fileName)
 }
 
@@ -220,7 +221,7 @@ func TestCreateDeleteMenu(t *testing.T) {
 
 
   err, result = createCliWithJsonIn(createMenu, fileName)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   id := getId(result)
 
@@ -238,7 +239,7 @@ func TestListReplaceMenu(t *testing.T) {
   var err error
 
   err, result = createCli(listMenus)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   firstId := getFirstId(result)
 
@@ -249,7 +250,7 @@ func TestListReplaceMenu(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createReplaceCliWithJsonIn(replaceMenu, fileName, firstId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
   os.Remove(fileName)
 }
 
@@ -259,7 +260,7 @@ func TestCreatePhoneNumber(t *testing.T) {
   var err error
 
   err, result = createCli(listAvailablePhoneNumbers)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   firstId := getFirstAvailablePhoneNumber(result)
 
@@ -270,7 +271,7 @@ func TestCreatePhoneNumber(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createCliWithJsonIn(createPhoneNumber, fileName)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   id := getId(result)
   if (id == 0) {
@@ -285,7 +286,7 @@ func TestListReplacePhoneNumber(t *testing.T) {
   var err error
 
   err, result = createCli(listPhoneNumbers)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   firstId := getFirstId(result)
 
@@ -296,7 +297,7 @@ func TestListReplacePhoneNumber(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createReplaceCliWithJsonIn(replacePhoneNumber, fileName, firstId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
   os.Remove(fileName)
 }
 
@@ -312,7 +313,7 @@ func TestCreateDeleteQueue(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createCliWithJsonIn(createQueue, fileName)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   id := getId(result)
   if (id == 0) {
@@ -329,7 +330,7 @@ func TestListReplaceQueue(t *testing.T) {
   var err error
 
   err, result = createCli(listQueues)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   firstId := getFirstId(result)
 
@@ -340,7 +341,7 @@ func TestListReplaceQueue(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createReplaceCliWithJsonIn(replaceQueue, fileName, firstId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
   os.Remove(fileName)
 }
 
@@ -356,7 +357,7 @@ func TestCreateDeleteRoute(t *testing.T) {
   err = ioutil.WriteFile(fileNameQ, bQ, 0644)
 
   errQ, result = createCliWithJsonIn(createQueue, fileNameQ)
-  assertErrorNotNull(t, errQ)
+  assert.NoError(t, errQ)
 
   idQ := getId(result)
   nameQ := getName(result)
@@ -375,7 +376,7 @@ func TestCreateDeleteRoute(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createCliWithJsonIn(createRoute, fileName)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   id := getId(result)
   if (id == 0) {
@@ -395,7 +396,7 @@ func TestListReplaceRoute(t *testing.T) {
   var err error
 
   err, result = createCli(listRoutes)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   firstId := getFirstId(result)
 
@@ -406,7 +407,7 @@ func TestListReplaceRoute(t *testing.T) {
   err = ioutil.WriteFile(fileNameQ, bQ, 0644)
 
   errQ, result = createCliWithJsonIn(createQueue, fileNameQ)
-  assertErrorNotNull(t, errQ)
+  assert.NoError(t, errQ)
 
   idQ := getId(result)
   nameQ := getName(result)
@@ -425,7 +426,7 @@ func TestListReplaceRoute(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createReplaceCliWithJsonIn(replaceRoute, fileName, firstId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   os.Remove(fileNameQ)
   os.Remove(fileName)
@@ -449,7 +450,7 @@ func TestCreateSms(t *testing.T) {
     t.Log("Create message response is nil")
   }
 
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
   os.Remove(fileName)
 }
 
@@ -470,7 +471,7 @@ func TestCreateSubaccount(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createCliWithJsonIn(createSubaccount, fileName)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   id := getId(result)
   if (id == 0) {
@@ -495,7 +496,7 @@ func TestCreateDeleteTrunk(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createCreateTrunkCliWithJsonIn(createTrunk, fileName, trunkName, trunkUri, trunkConcurrentCalls, trunkMaxMinutes)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   id := getId(result)
   if (id == 0) {
@@ -512,7 +513,7 @@ func TestListReplaceTrunk(t *testing.T) {
   var err error
 
   err, result = createCli(listTrunks)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
 
   firstId := getFirstId(result)
 
@@ -527,6 +528,6 @@ func TestListReplaceTrunk(t *testing.T) {
   err = ioutil.WriteFile(fileName, b, 0644)
 
   err, result = createReplaceTrunkCliWithJsonIn(replaceTrunk, fileName, trunkName, trunkUri, trunkConcurrentCalls, trunkMaxMinutes, firstId)
-  assertErrorNotNull(t, err)
+  assert.NoError(t, err)
   os.Remove(fileName)
 }

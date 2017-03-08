@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PhoneNumber** | **string** |  | [optional] [default to null]
 **CountryCode** | **string** |  | [optional] [default to null]
-**Npa** | **int32** |  | [optional] [default to null]
+**Npa** | **string** |  | [optional] [default to null]
 **Nxx** | **string** |  | [optional] [default to null]
 **Xxxx** | **string** |  | [optional] [default to null]
 **City** | **string** |  | [optional] [default to null]
