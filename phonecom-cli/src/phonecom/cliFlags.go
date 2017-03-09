@@ -159,7 +159,7 @@ func getCliFlags() []cli.Flag {
     },
     cli.BoolFlag{
       Name: fullListLong + ", fl",
-      Usage: "Generate sample output json",
+      Usage: "Full list flag. If set, aditional information about the list is given",
     },
     cli.StringFlag{
       Name: inputFormatLong + ", if",

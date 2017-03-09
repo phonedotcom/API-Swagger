@@ -5,6 +5,7 @@ import (
   "strconv"
   "strings"
   "math"
+  "fmt"
 )
 
 const multiValueDelimiter = "#"
@@ -187,7 +188,12 @@ func createCliParams(context *cli.Context) (CliParams, error) {
 
     sortTypes := strings.Split(par.sortType, ";")
     sortValues := strings.Split(par.sortValue, ";")
+    sortTypesLength := float64(len(sortTypes))
+    sortValuesLength := float64(len(sortValues))
     min := int(math.Min(float64(len(sortTypes)), float64(len(sortValues))))
+    if (sortTypesLength != sortValuesLength) {
+      fmt.Println("Warning: The number of sort types is not the same with the number of sort values!")
+    }
 
     for counter := 0; counter < min; counter++ {
       switch sortTypes[counter] {
@@ -223,6 +229,8 @@ func createCliParams(context *cli.Context) (CliParams, error) {
         par.sortParams.sortProvincePostalCode = sortValues[counter]
       case "country_postal_code":
         par.sortParams.sortCountryPostalCode = sortValues[counter]
+      case "country_code":
+        par.sortParams.sortCountryCode = sortValues[counter]
       }
     }
   }
@@ -234,7 +242,12 @@ func createCliParams(context *cli.Context) (CliParams, error) {
 
     filtersTypes := strings.Split(par.filterType, ";")
     filtersValues := strings.Split(par.filterValue, ";")
-    min := int(math.Min(float64(len(filtersTypes)), float64(len(filtersValues))))
+    filtersTypesLength := float64(len(filtersTypes))
+    filtersValuesLength := float64(len(filtersValues))
+    min := int(math.Min(filtersTypesLength, filtersValuesLength))
+    if (filtersTypesLength != filtersValuesLength) {
+      fmt.Println("Warning: The number of filters types is not the same with the number of filters values!")
+    }
 
     for counter := 0; counter < min; counter++ {
       switch filtersTypes[counter] {

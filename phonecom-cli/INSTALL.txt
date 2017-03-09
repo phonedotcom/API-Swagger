@@ -13,10 +13,10 @@ cd /path to the phonecom-cli/
 GOPATH=/path to the phonecom-cli/ directory
 
 5. Install the required libraries
-go get github.com/urfave/cli
+go get -u github.com/urfave/cli
 go get -u github.com/go-resty/resty
-go get github.com/yukithm/json2csv/cmd/json2csv
-go get github.com/stretchr/testify
+go get -u github.com/yukithm/json2csv/cmd/json2csv
+go get -u github.com/stretchr/testify
 
 Note: You might need to delete the src/github.com and src/golang.org/ folders and try again if you encounter build errors
 

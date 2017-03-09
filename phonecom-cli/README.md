@@ -1,9 +1,9 @@
-# Scope
+## Scope
 This document describes the CLI for the Phone.com API.  
 Programming language: Golang (tested with versions 1.7.5 and 1.8)  
 Tool for describing the API: Swagger
 
-# Swagger definition & CLI
+## Swagger definition & CLI
 The swagger definition that describes the Phone.com API was developed in an earlier stage.  
 
 The Swagger definition describes the API endpoints defined at [https://apidocs.phone.com](https://apidocs.phone.com) from 01.01.2017.  
@@ -31,7 +31,7 @@ if len(filtersId) > 0 {
      a.Configuration.APIClient.ParameterToString(filtersId, collectionFormat))
 }
 ```
-# Code organization
+## Code organization
 The there are 2 main Go packages that are used for the CLI operation:
 * phonecom-go-sdk
 * phonecom
@@ -39,17 +39,17 @@ The there are 2 main Go packages that are used for the CLI operation:
 The **phonecom-go-sdk** package contains all the generated swagger code along with the documentation in a form of README file and \*.md files.  
 The **phonecom** package contains the code that adapts the generated Swagger code for the CLI.
 
-# Libraries
+## Libraries
 There were 4 Go libraries that were used while developing the code. This libraries can be installed with go in the following way:
 ```bash
-go get github.com/urfave/cli
+go get -u github.com/urfave/cli
 go get -u github.com/go-resty/resty
-go get github.com/yukithm/json2csv/cmd/json2csv
-go get github.com/stretchr/testify
+go get -u github.com/yukithm/json2csv/cmd/json2csv
+go get -u github.com/stretchr/testify
 ``` 
 
 
-# XML Configuration
+## XML Configuration
 In order the Phone.com API to be invoked, an XML configuration file should be provided. The configuration file is used to provide the OAuth2 Authentication information. It is defined with the following format:  
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -64,7 +64,9 @@ In order the Phone.com API to be invoked, an XML configuration file should be pr
 ```
 In the current version the configuration file contains information about the authentication. This can be extended in future versions if needed.
 
-# Flags
+You can also define the API key token as a CLI parameter by specifying it with the -ak flag.
+
+## Flags
 This section describes the flags that are used in the CLI. For each flag there is a short version and a long version for the flags. They can be used interchangeably. An excerpt from the code is given below which provides the definition of the flags.
 ```golang
 cli.StringFlag{
@@ -177,7 +179,7 @@ cli.StringFlag{
 },
 cli.BoolFlag{
   Name: "fullList, fl",
-  Usage: "Generate sample output json",
+  Usage: "Full list flag. If set, aditional information about the list is given",
 },
 cli.StringFlag{
   Name: "inputFormat, if",
@@ -197,7 +199,7 @@ cli.StringFlag{
 },
 ```
 
-# Usage
+## Usage
 The CLI command to list all accounts is defined in the following way:
 ```
 phonecom -c list-accounts -i ./src/test/jsonin/listAccounts.json
@@ -210,17 +212,131 @@ phonecom -c list-accounts -dr
 
 The **Get** command can be invoked in two ways:
 ```
-phonecom -c get-accounts -i ./src/test/jsonin/getAccounts.json
+phonecom -c get-account -i ./src/test/jsonin/getAccounts.json
 ```
 where the account id to be get is defined in the input json and:
 ```
-phonecom -c get-accounts -id 1234
+phonecom -c get-account -id 1234
 ```
 where the account id is provided directly through the console.  
 
 For the List, Get and Delete calls the input JSONs are optional. For the Create and Replace calls the input JSON files are required.
 
-# Integration tests
+## Filters and sorts
+
+The fitlers and sorts are specific types of parameters.
+There are 2 flags that describe each filter and sort.
+
+For filters: 
+* -ft (filter type) and -fv (filter value)
+
+For sorts:
+* -st (sort type) and -sv (sort value)
+
+For example if you want to filter accounts by id grater than 20:
+```
+phonecom -c list-accounts -ft id -fv gt:20
+```
+Similarly, if you want to sort accounts by id in descending order:
+```
+phonecom -c list-accounts -st id -sv desc
+```
+
+## The full list flag
+
+The default response for all ListGet API calls is a JSON response containing a list of all items of that list.
+
+If you want to display the filters, sorts, limit, offset and total number of items in a wrapper object you need to add the -fl flag.
+```
+phonecom -c list-accounts -fl
+```
+
+## The send sms flags
+
+There are 4 arguments that can be used with the create SMS command:
+* from (flag: -from)
+* to (flag: -to)
+* text (flag: -text)
+* extension id (flag: -id)
+
+The command to send sms is of the following form:
+```
+phonecom -c create-account-sms -from {number1} -to {number2} -text {text} -id {extension id} 
+```
+
+## List of commands
+
+The following commands can be invoked from the API:
+
+```
+list-accounts
+list-account-media
+list-account-menus
+list-account-queues
+list-account-routes
+list-account-schedules
+list-account-sms
+list-account-subaccounts
+list-account-applications
+list-account-call-logs
+list-account-devices
+list-account-express-srv-codes
+list-account-extensions
+list-account-extension-contacts
+list-account-extension-contact-groups
+list-account-phone-numbers
+list-account-trunks
+list-available-phone-numbers
+list-available-phone-number-regions
+create-account-queue
+delete-account-queue
+replace-account-queue
+get-account-queue
+create-account-trunk
+get-account-trunk
+replace-account-trunk
+delete-account-trunk
+create-route
+create-account-subaccount
+delete-account-route
+replace-account-route
+create-account-sms
+create-account-menu
+get-account-menu
+get-account-media
+get-account-route
+get-account-schedule
+get-account-sms
+get-account
+get-account-application
+get-account-call-log
+get-account-device
+get-account-extension
+get-account-express-srv-code
+list-account-extension-caller-ids
+get-account-extension-contact
+get-account-extension-contact-group
+get-account-phone-number
+replace-account-menu
+delete-account-menu
+create-account-phone-number
+create-account-calls
+create-account-device
+create-account-extension
+create-account-extension-contact
+create-account-extension-contact-group
+replace-account-device
+replace-account-extension
+replace-account-extension-contact
+replace-account-extension-contact-group
+replace-account-phone-number
+delete-account-extension-contact
+delete-account-extension-contact-group 
+
+(default: "https://api.phone.com/v4/ping")
+```
+
+## Integration tests
 The code contains integration tests located in the ÒphonecomÓ package, along with sample json files that are located in the src/test/jsonin directory.  
 These files are only used for testing, and they are not necessary for the operation of the CLI:
 * allCreateGetReplaceDelete_test.go
@@ -229,8 +345,8 @@ These files are only used for testing, and they are not necessary for the operat
 
 The tests are standard go tests and can be run with the go test command.
 
-# Error handling & display
+## Error handling & display
 The CLI handles and displays usage errors and http/network errors. The network errors messages are taken from the go-resty library. The usage messages are taken from the urfave-cli library. The HTTP errors are taken from the Phone.com API response. Additionally, with the -vrm flag additional information about the error might be provided.
 
-# Deliverables
+## Deliverables
 The code for the CLI along with the tests and the sample input JSONs will be pushed to Phone.com code repository. Additionally, all the changes made during the process of finding workarounds for overcoming the swagger bugs will be provided.

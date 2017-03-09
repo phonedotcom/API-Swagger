@@ -230,7 +230,7 @@ func createReplaceTrunkCliWithJsonIn(endpoint string, path string, trunkName str
 
 func createCliListAvailablePhoneNumbers(endpoint string, filtersPhoneNumber []string, filtersCountryCode []string, filtersNpa []string, filtersNxx []string, filtersXxxx []string, filtersCity []string, filtersProvince []string, filtersCountry []string, filtersPrice []string, filtersCategory []string, sortInternal string, sortPrice string, sortPhoneNumber string) (error, map[string] interface{}) {
 
-  filterValues := filtersPhoneNumber[0] + ";" + filtersCountryCode[0] + ";" + filtersNpa[0] + ";" + filtersNxx[0] + ";" + filtersXxxx[0] + ";" + filtersCity[0] + ";" + filtersProvince[0] + ";" + filtersCountry[0] + ";" + filtersPrice[0]/* + ";" + filtersCategory[0]*/
+  filterValues := filtersPhoneNumber[0] + ";" + filtersCountryCode[0] + ";" + filtersNpa[0] + ";" + filtersNxx[0] + ";" + filtersXxxx[0] + ";" + filtersCity[0] + ";" + filtersProvince[0] + ";" + filtersCountry[0] + ";" + filtersPrice[0]// + ";" + filtersCategory[0]
   sortValues:= sortInternal + ";" + sortPrice + ";" + sortPhoneNumber
   flags := []cli.Flag{
     cli.StringFlag{
@@ -246,7 +246,7 @@ func createCliListAvailablePhoneNumbers(endpoint string, filtersPhoneNumber []st
     },
     cli.StringFlag{
       Name: filtersTypeLong,
-      Value: "phone_number;country_code;npa;nxx;xxxx;city;province;country;price",
+      Value: "phone_number;country_code;npa;nxx;xxxx;city;province;country;price",//;category",
     },
     cli.StringFlag{
       Name: filtersValueLong,

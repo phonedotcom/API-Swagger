@@ -189,10 +189,9 @@ func TestFilterSortExpressServiceCodes(t *testing.T) {
 
   err, response := createFilterSortExpressServiceCodesCli(listExpressServiceCodes, idSlice)
   assert.NoError(t, err)
-
-  getFilters(response)
-  //id := filters["id"].(string)
-  //assert.Equal(t, expectedId, id)
+  filters := getFilters(response)
+  id := filters["id"].(string)
+  assert.Equal(t, expectedId, id)
 }
 
 func TestListExtensions(t *testing.T) {
@@ -626,7 +625,7 @@ func TestFilterSortListSchedules(t *testing.T) {
   sortId := "asc"
   //sortName := "asc"
 
-  err, response := createFilterSortApplicationsDevicesMediaMenusQueusRoutesSchedulesTrunksCli3(listSchedules, idSlice, nameSlice, sortId)
+  err, response := createFilterSortApplicationsDevicesMediaMenusQueusRoutesSchedulesTrunksCli3(listSchedules, idSlice, nameSlice, sortId/*, sortName*/)
   assert.NoError(t, err)
 
   filters := getFilters(response)
@@ -795,7 +794,6 @@ func TestFilterSortListAvailablePhoneNumbers(t *testing.T) {
   expectedCategory := "10"
   categorySlice = append(categorySlice, expectedCategory)
 
-  //sortParams.sortInternal, sortParams.sortPrice, sortParams.sortPhoneNumber
   sortInternal := "asc"
   sortPrice := "asc"
   sortPhoneNumber := "desc"
@@ -883,7 +881,7 @@ func TestFilterSortListAvailablePhoneNumberRegions(t *testing.T) {
   assert.Equal(t, expectedCountryPostalCode, countryPostalCode)
 
   sorts := getSorts(response)
-  //assert.Equal(t, sortCountryCode, sorts["country_code"])
+  assert.Equal(t, sortCountryCode, sorts["country_code"])
   assert.Equal(t, sortNpa, sorts["npa"])
   assert.Equal(t, sortNxx, sorts["nxx"])
   assert.Equal(t, sortIsTollFree, sorts["is_toll_free"])
@@ -906,7 +904,7 @@ func TestSortListAvailablePhoneNumberRegions(t *testing.T) {
   assert.NoError(t, err)
 
   sorts := getSorts(response)
-  //assert.Equal(t, sortCountryCode, sorts["country_code"])
+  assert.Equal(t, sortCountryCode, sorts["country_code"])
   assert.Equal(t, sortNpa, sorts["npa"])
   assert.Equal(t, sortNxx, sorts["nxx"])
   assert.Equal(t, sortIsTollFree, sorts["is_toll_free"])
