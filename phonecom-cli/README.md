@@ -202,7 +202,7 @@ The CLI command to list all accounts is defined in the following way:
 phonecom -c list-accounts -i ./src/test/jsonin/listAccounts.json
 ```
 
-In addition to this, you can use the flags defined in the previous section. In order jus to test the invoked command you can use the ÒdryRunÓ option:
+In addition to this, you can use the flags defined in the previous section. In order jus to test the invoked command you can use the "dryRun" option:
 ```
 phonecom -c list-accounts -dr
 ```
@@ -334,7 +334,7 @@ delete-account-extension-contact-group
 ```
 
 ## Integration tests
-The code contains integration tests located in the ÒphonecomÓ package, along with sample json files that are located in the src/test/jsonin directory.  
+The code contains integration tests located in the "phonecom" package, along with sample json files that are located in the src/test/jsonin directory.  
 These files are only used for testing, and they are not necessary for the operation of the CLI:
 * allCreateGetReplaceDelete_test.go
 * allListGetEndpoints_test.go
