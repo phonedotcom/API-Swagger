@@ -10,27 +10,24 @@ The Swagger definition describes the API endpoints defined at [https://apidocs.p
 
 The CLI tool uses the generated Swagger client for the Go programming language.  
 
-There were 2 known bugs encountered for the generated Go client while developing the CLI. One is the duplication of the collectionFormat variable:
-```golang
-var collectionFormat = "multi"
-```
+## Swagger Go Generated Code Workarounds
+A bug was encountered for the generated Go client while developing the CLI.
+The Phone.com expects non-empty parameters, but Swagger Go generator adds parameters to the request even if the value is empty.
 
-To fix this bug the generated code had to be modified so that the duplicated definitions were removed.  
+#####Workaround:
+This function was added:
+```go
+func clearEmptyParams(paramMap map[string][]string) {
 
-Other manual intervention that was needed to be done was to check if the filter (and similar parameters are empty, so that the generated lines of type:
-```golang
-localVarQueryParams.Add(
-    "filters[id]",
-     a.Configuration.APIClient.ParameterToString(filtersId, collectionFormat))
-```
-were modified with the included check:
-```golang
-if len(filtersId) > 0 {
- localVarQueryParams.Add(
-    "filters[id]", 
-     a.Configuration.APIClient.ParameterToString(filtersId, collectionFormat))
+    for key, value := range paramMap {
+        if (len(value) == 1 && value[0] == "") {
+            delete(paramMap, key)
+        }
+    }
 }
 ```
+Which is called in each generated API endpoint after the list of parameters is created.
+
 ## Code organization
 The there are 2 main Go packages that are used for the CLI operation:
 * phonecom-go-sdk
