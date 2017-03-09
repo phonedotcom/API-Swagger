@@ -1,10 +1,10 @@
 package main
 
 import (
-	"testing"
-	"github.com/urfave/cli"
-	"github.com/stretchr/testify/assert"
 	"fmt"
+	"github.com/stretchr/testify/assert"
+	"github.com/urfave/cli"
+	"testing"
 )
 
 func TestNoArguments(t *testing.T) {
@@ -17,16 +17,16 @@ func TestNoArguments(t *testing.T) {
 	assert.NotEmpty(t, datetime)
 }
 
-func createCliNoArguments() (error, map[string] interface{}) {
+func createCliNoArguments() (error, map[string]interface{}) {
 
 	app := cli.NewApp()
 
 	app.Flags = []cli.Flag{cli.StringFlag{
-		Name: commandLong,
+		Name:  commandLong,
 		Value: defaultCommand,
-	},}
+	}}
 
-	var response (map[string] interface{})
+	var response (map[string]interface{})
 	var err error
 
 	app.Action = func(c *cli.Context) error {

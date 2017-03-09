@@ -1,27 +1,27 @@
 package main
 
 import (
-  "fmt"
-  "os"
-  "github.com/yukithm/json2csv"
+	"fmt"
+	"github.com/yukithm/json2csv"
+	"os"
 )
 
 func exportToCsv(outputJson interface{}) {
 
-  results, err := json2csv.JSON2CSV(outputJson)
+	results, err := json2csv.JSON2CSV(outputJson)
 
-  if err != nil {
-    fmt.Println("Error while converting JSON to CSV")
-  }
-  if len(results) == 0 {
-    return
-  }
+	if err != nil {
+		fmt.Println("Error while converting JSON to CSV")
+	}
+	if len(results) == 0 {
+		return
+	}
 
-  csv := json2csv.NewCSVWriter(os.Stdout)
-  csv.HeaderStyle = json2csv.DotNotationStyle
-  csv.Transpose = false
+	csv := json2csv.NewCSVWriter(os.Stdout)
+	csv.HeaderStyle = json2csv.DotNotationStyle
+	csv.Transpose = false
 
-  if err := csv.WriteCSV(results); err != nil {
-    fmt.Println("Error while writing result to CSV")
-  }
+	if err := csv.WriteCSV(results); err != nil {
+		fmt.Println("Error while writing result to CSV")
+	}
 }

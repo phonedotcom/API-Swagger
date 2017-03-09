@@ -66,7 +66,6 @@ const replacePhoneNumber = "replace-account-phone-number"
 const deleteContact = "delete-account-extension-contact"
 const deleteGroup = "delete-account-extension-contact-group"
 
-
 const responseError = "@error"
 const responseHttpStatusCode = "@httpStatusCode"
 const responseMessage = "@message"

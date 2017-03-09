@@ -1,17 +1,17 @@
 package main
 
 import (
-  "fmt"
+	"fmt"
 )
 
 func showDryRunVerbose(cli CliParams) {
 
-  if (cli.dryRun || cli.verbose) {
+	if cli.dryRun || cli.verbose {
 
-    fmt.Printf(
-      msgCallingApi,
-      cli.command,
-      cli)
-  }
+		fmt.Printf(
+			msgCallingApi,
+			cli.command,
+			cli)
+	}
 
 }

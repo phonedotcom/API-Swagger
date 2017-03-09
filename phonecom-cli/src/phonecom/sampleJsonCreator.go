@@ -1,26 +1,26 @@
 package main
 
 import (
+	"encoding/json"
+	"encoding/xml"
+	"fmt"
+	"io/ioutil"
 	"phonecom-go-sdk"
-	"time"
 	"strings"
-  "encoding/json"
-  "encoding/xml"
-  "io/ioutil"
-  "fmt"
+	"time"
 )
 
-type SampleJsonCreator struct {}
+type SampleJsonCreator struct{}
 
 func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 
 	inputType := "json"
 
-	if (strings.EqualFold(param.inputFormat, "xml")) {
+	if strings.EqualFold(param.inputFormat, "xml") {
 		inputType = "xml"
 	}
 
-	if (strings.EqualFold(param.inputFormat, "csv")) {
+	if strings.EqualFold(param.inputFormat, "csv") {
 		inputType = "csv"
 	}
 
@@ -103,13 +103,13 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 			createTrunkParamsSample := swagger.CreateTrunkParams{randomString(12), "SIP/1234@phone.com:5060", int32(60), int32(800), swagger.MediaSummary{123, randomString(12)}, swagger.MediaSummary{123, randomString(12)}, nil}
 			s.marshalInput(createTrunkParamsSample, "replaceTrunk", inputType)
 
-    default:
-      fmt.Printf("Could not create sample input file for command: %s\n", param.samplein)
+		default:
+			fmt.Printf("Could not create sample input file for command: %s\n", param.samplein)
 		}
 
 	}
 
-	if (param.sampleout != "") {
+	if param.sampleout != "" {
 		stringEmailSlice := make([]string, 0)
 		stringEmailSlice = append(stringEmailSlice, "asd@asd.com")
 
@@ -123,7 +123,7 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 			s.marshalInput(applicationFullSample, "getApplication", inputType)
 
 		case getDevice:
-			deviceFullSample := swagger.DeviceFull{int32(randomNumber(10, 9999)), randomString(12), swagger.SipAuthentication{randomString(12), int32(randomNumber(10, 9999)), randomString(12), randomString(12)}, nil/*[]swagger.Line{int32(randomNumber(1,9999)), swagger.ExtensionSummary{int32(randomNumber(1,9999)), randomString(12), int32(randomNumber(1,9999))}}*/ }
+			deviceFullSample := swagger.DeviceFull{int32(randomNumber(10, 9999)), randomString(12), swagger.SipAuthentication{randomString(12), int32(randomNumber(10, 9999)), randomString(12), randomString(12)}, nil /*[]swagger.Line{int32(randomNumber(1,9999)), swagger.ExtensionSummary{int32(randomNumber(1,9999)), randomString(12), int32(randomNumber(1,9999))}}*/}
 			s.marshalInput(deviceFullSample, "getDevice", inputType)
 
 		case getExpressServiceCode:
@@ -154,7 +154,7 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 
 		case getMenu:
 			optionSlice := make([]swagger.Option, 0)
-			optionSlice = append(optionSlice, swagger.Option{randomNumericString(1), swagger.RouteSummary{int32(randomNumber(1,9999)), randomString(12)}})
+			optionSlice = append(optionSlice, swagger.Option{randomNumericString(1), swagger.RouteSummary{int32(randomNumber(1, 9999)), randomString(12)}})
 			menuFullSample := swagger.MenuFull{int32(randomNumber(1, 9999)), randomString(12), true, int32(randomNumber(1, 9999)), swagger.MediaSummary{int32(randomNumber(1, 9999)), randomString(12)}, swagger.MediaSummary{int32(randomNumber(1, 9999)), randomString(12)}, swagger.RouteSummary{int32(randomNumber(1, 9999)), randomString(12)}, optionSlice}
 			s.marshalInput(menuFullSample, "getMenu", inputType)
 
@@ -164,17 +164,17 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 
 		case getQueue:
 			memberSlice := make([]swagger.Member, 0)
-			memberSlice = append(memberSlice, swagger.Member{swagger.ExtensionSummary{int32(randomNumber(1,9999)), randomString(12), int32(randomNumber(1,9999))}, randomString(12)})
+			memberSlice = append(memberSlice, swagger.Member{swagger.ExtensionSummary{int32(randomNumber(1, 9999)), randomString(12), int32(randomNumber(1, 9999))}, randomString(12)})
 			queueFullSample := swagger.QueueFull{int32(randomNumber(1, 9999)), randomString(12), swagger.MediaSummary{int32(randomNumber(1, 9999)), randomString(12)}, swagger.HoldMusic{int32(randomNumber(1, 9999)), randomString(12)}, 300, randomString(12), 20, memberSlice}
 			s.marshalInput(queueFullSample, "getQueue", inputType)
 
 		case getRoute:
 			ruleSetForwardItemSlice := make([]swagger.RuleSetForwardItem, 0)
-			ruleSetForwardItemSlice = append(ruleSetForwardItemSlice, swagger.RuleSetForwardItem{"+154514214546", swagger.ExtensionSummary{int32(randomNumber(1,9999)), randomString(12), int32(randomNumber(1,9999))}, "+453484845122", true, "calling_number", randomString(12), "DEFAULT"})
+			ruleSetForwardItemSlice = append(ruleSetForwardItemSlice, swagger.RuleSetForwardItem{"+154514214546", swagger.ExtensionSummary{int32(randomNumber(1, 9999)), randomString(12), int32(randomNumber(1, 9999))}, "+453484845122", true, "calling_number", randomString(12), "DEFAULT"})
 			ruleSetActionSlice := make([]swagger.RuleSetAction, 0)
-			ruleSetActionSlice = append(ruleSetActionSlice, swagger.RuleSetAction{randomString(12), swagger.ExtensionSummary{int32(randomNumber(1,9999)), randomString(12), int32(randomNumber(1,9999))}, ruleSetForwardItemSlice, int32(randomNumber(5,90)), swagger.MediaSummary{int32(randomNumber(1,9999)), randomString(12)}, swagger.MediaSummary{int32(randomNumber(1,9999)), randomString(12)}, int32(randomNumber(1, 60)), swagger.MenuSummary{int32(randomNumber(1,9999)), randomString(12)}, swagger.QueueSummary{int32(randomNumber(1,9999)), randomString(12)}, swagger.TrunkSummary{int32(randomNumber(1,9999)), randomString(12)}})
+			ruleSetActionSlice = append(ruleSetActionSlice, swagger.RuleSetAction{randomString(12), swagger.ExtensionSummary{int32(randomNumber(1, 9999)), randomString(12), int32(randomNumber(1, 9999))}, ruleSetForwardItemSlice, int32(randomNumber(5, 90)), swagger.MediaSummary{int32(randomNumber(1, 9999)), randomString(12)}, swagger.MediaSummary{int32(randomNumber(1, 9999)), randomString(12)}, int32(randomNumber(1, 60)), swagger.MenuSummary{int32(randomNumber(1, 9999)), randomString(12)}, swagger.QueueSummary{int32(randomNumber(1, 9999)), randomString(12)}, swagger.TrunkSummary{int32(randomNumber(1, 9999)), randomString(12)}})
 			rulesetSlice := make([]swagger.RuleSet, 0)
-			rulesetSlice = append(rulesetSlice, swagger.RuleSet{swagger.RuleSetFilter{"schedule", swagger.ScheduleSummary{int32(randomNumber(1,9999)), randomString(12)}, swagger.ContactSummary{int32(randomNumber(1,9999)), "Mr", randomString(12), randomString(12), randomString(12), "Jr", randomString(12), randomString(12)}, swagger.GroupSummary{int32(randomNumber(1,9999)), randomString(12)}}, ruleSetActionSlice})
+			rulesetSlice = append(rulesetSlice, swagger.RuleSet{swagger.RuleSetFilter{"schedule", swagger.ScheduleSummary{int32(randomNumber(1, 9999)), randomString(12)}, swagger.ContactSummary{int32(randomNumber(1, 9999)), "Mr", randomString(12), randomString(12), randomString(12), "Jr", randomString(12), randomString(12)}, swagger.GroupSummary{int32(randomNumber(1, 9999)), randomString(12)}}, ruleSetActionSlice})
 			routeFullSample := swagger.RouteFull{int32(randomNumber(1, 9999)), randomString(12), swagger.ExtensionSummary{int32(randomNumber(1, 9999)), randomString(12), int32(randomNumber(1, 9999))}, rulesetSlice}
 			s.marshalInput(routeFullSample, "getRoute", inputType)
 
@@ -194,32 +194,32 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 			trunkFullSample := swagger.TrunkFull{int32(randomNumber(1, 9999)), randomString(12), "SIP/01%e@243.1.45.52:5060", int32(randomNumber(1, 100)), int32(randomNumber(500, 2000)), swagger.MediaSummary{int32(randomNumber(1, 9999)), randomString(12)}, swagger.MediaSummary{int32(randomNumber(1, 9999)), randomString(12)}, stringCodeSlice}
 			s.marshalInput(trunkFullSample, "getTrunk", inputType)
 
-    default:
-      fmt.Printf("Could not create sample output file for command: %s\n", param.samplein)
+		default:
+			fmt.Printf("Could not create sample output file for command: %s\n", param.samplein)
 		}
 	}
 }
 
 func (s *SampleJsonCreator) marshalInput(param interface{}, fileName string, outputType string) {
 
-  var marshalled []byte
-  var err error
+	var marshalled []byte
+	var err error
 
-  if (outputType == "json") {
-    marshalled, err = json.MarshalIndent(param, "", "  ")
-  } else if (outputType == "xml") {
-    marshalled, err = xml.MarshalIndent(param, "", "  ")
-  }
+	if outputType == "json" {
+		marshalled, err = json.MarshalIndent(param, "", "  ")
+	} else if outputType == "xml" {
+		marshalled, err = xml.MarshalIndent(param, "", "  ")
+	}
 
-  if (err == nil) {
-    err = ioutil.WriteFile(fileName + "." + outputType, marshalled, 0644)
-  }
+	if err == nil {
+		err = ioutil.WriteFile(fileName+"."+outputType, marshalled, 0644)
+	}
 
-  if (err != nil) {
+	if err != nil {
 
-    fmt.Printf("Could not create sample %s\n", outputType)
-  } else {
-    fmt.Println("Sample " + outputType + " created successfully")
-  }
+		fmt.Printf("Could not create sample %s\n", outputType)
+	} else {
+		fmt.Println("Sample " + outputType + " created successfully")
+	}
 
 }

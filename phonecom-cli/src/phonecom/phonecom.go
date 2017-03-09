@@ -1,531 +1,529 @@
 package main
 
 import (
-  "fmt"
-  "os"
+	"fmt"
+	"os"
 
-  "github.com/urfave/cli"
-  "phonecom-go-sdk"
-  "errors"
+	"errors"
+	"github.com/urfave/cli"
+	"phonecom-go-sdk"
 )
 
 func main() {
 
-  app := cli.NewApp()
+	app := cli.NewApp()
 
-  app.Flags = getCliFlags()
-  var cliConfig CliConfig
+	app.Flags = getCliFlags()
+	var cliConfig CliConfig
 
-  app.Action = func(c *cli.Context) error {
-    var err error
-    err, _ = execute(c, cliConfig)
+	app.Action = func(c *cli.Context) error {
+		var err error
+		err, _ = execute(c, cliConfig)
 
-		if (err != nil) {
-			fmt.Printf(err.Error());
+		if err != nil {
+			fmt.Printf(err.Error())
 		}
 
-    return err
-  }
+		return err
+	}
 
-  app.Run(os.Args)
+	app.Run(os.Args)
 }
 
 func execute(
-    context *cli.Context,
-    cliConfig CliConfig) (error, map[string]interface{}) {
+	context *cli.Context,
+	cliConfig CliConfig) (error, map[string]interface{}) {
 
-  param, err := createCliParams(context);
+	param, err := createCliParams(context)
 
-  if (err != nil) {
-    return err, nil
-  }
+	if err != nil {
+		return err, nil
+	}
 
-  showDryRunVerbose(param)
-  if (param.dryRun) {
-    return nil, nil
-  }
+	showDryRunVerbose(param)
+	if param.dryRun {
+		return nil, nil
+	}
 
-  cliConfig, err = cliConfig.createOrReadCliConfig(param)
+	cliConfig, err = cliConfig.createOrReadCliConfig(param)
 
-  if (err != nil) {
-    return err, nil
-  }
+	if err != nil {
+		return err, nil
+	}
 
-  if (param.verbose) {
-    fmt.Printf("CLI configuration: %+v\n\n", cliConfig)
-  }
+	if param.verbose {
+		fmt.Printf("CLI configuration: %+v\n\n", cliConfig)
+	}
 
-  var sampleJsonCreator SampleJsonCreator
-  sampleJsonCreator.createSampleInOutIfNeeded(param)
+	var sampleJsonCreator SampleJsonCreator
+	sampleJsonCreator.createSampleInOutIfNeeded(param)
 
-  if param.samplein != "" || param.sampleout != "" {
-    return nil, nil
-  }
+	if param.samplein != "" || param.sampleout != "" {
+		return nil, nil
+	}
 
-  swaggerConfig := cliConfig.createSwaggerConfig(cliConfig)
-  apiResolver := ApiResolver{swaggerConfig, param.command}
-  api := apiResolver.resolve()
+	swaggerConfig := cliConfig.createSwaggerConfig(cliConfig)
+	apiResolver := ApiResolver{swaggerConfig, param.command}
+	api := apiResolver.resolve()
 
-  param.accountId = cliConfig.AccountId
+	param.accountId = cliConfig.AccountId
 
 	responseHandler := ResponseHandler{param}
 
-  if (api == nil) {
-		if (param.command == defaultCommand) {
-			defaultApi := swagger.DefaultApi{Configuration:swaggerConfig}
+	if api == nil {
+		if param.command == defaultCommand {
+			defaultApi := swagger.DefaultApi{Configuration: swaggerConfig}
 			return responseHandler.handle(defaultApi.Ping())
 		} else {
 			return errors.New(fmt.Sprintf(invalidCommand, param.command, getAllCommands())), nil
 		}
-  }
+	}
 
-  return invokeCommand(responseHandler, param, api)
+	return invokeCommand(responseHandler, param, api)
 }
 
 func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error, map[string]interface{}) {
 
-  var command = param.command
-  var accountId = param.accountId
-  var id = param.id
-  var filtersId = param.filtersId
-  var filterParams = param.filterParams
-  var sortParams = param.sortParams
-  var limit = param.limit
-  var offset = param.offset
-  var fields = param.fields
-  var input = param.input
-  var idSecondary = param.idSecondary
-  var idString = param.idString
+	var command = param.command
+	var accountId = param.accountId
+	var id = param.id
+	var filtersId = param.filtersId
+	var filterParams = param.filterParams
+	var sortParams = param.sortParams
+	var limit = param.limit
+	var offset = param.offset
+	var fields = param.fields
+	var input = param.input
+	var idSecondary = param.idSecondary
+	var idString = param.idString
 
+	switch api := api.(type) {
 
+	case swagger.MediaApi:
 
-  switch api := api.(type) {
+		if param.otherParams.recordingId > 0 {
+			id = param.otherParams.recordingId
+		}
 
-  case swagger.MediaApi:
+		switch command {
 
-    if (param.otherParams.recordingId > 0) {
-      id = param.otherParams.recordingId
-    }
+		case listMedia:
 
-    switch (command) {
+			return rh.handle(api.ListAccountMedia(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
-    case listMedia:
+		case getRecording:
 
-      return rh.handle(api.ListAccountMedia(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
+			return rh.handle(api.GetAccountMedia(accountId, id))
+		}
 
-    case getRecording:
+	case swagger.MenusApi:
 
-      return rh.handle(api.GetAccountMedia(accountId, id))
-    }
+		if param.otherParams.menuId > 0 {
+			id = param.otherParams.menuId
+		}
 
-  case swagger.MenusApi:
+		switch command {
 
-    if (param.otherParams.menuId > 0) {
-      id = param.otherParams.menuId
-    }
+		case listMenus:
 
-    switch (command) {
+			return rh.handle(api.ListAccountMenus(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
-    case listMenus:
+		case getMenu:
 
-      return rh.handle(api.ListAccountMenus(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
+			return rh.handle(api.GetAccountMenu(accountId, id))
 
-    case getMenu:
+		case createMenu:
 
-      return rh.handle(api.GetAccountMenu(accountId, id))
+			params := createMenuParams(input)
+			return rh.handle(api.CreateAccountMenu(accountId, params))
 
-    case createMenu:
+		case replaceMenu:
 
-      params := createMenuParams(input)
-      return rh.handle(api.CreateAccountMenu(accountId, params))
+			params := replaceMenuParams(input)
+			return rh.handle(api.ReplaceAccountMenu(accountId, id, params))
 
-    case replaceMenu:
+		case deleteMenu:
 
-      params := replaceMenuParams(input)
-      return rh.handle(api.ReplaceAccountMenu(accountId, id, params))
+			return rh.handle(api.DeleteAccountMenu(accountId, id))
+		}
 
-    case deleteMenu:
+	case swagger.QueuesApi:
 
-      return rh.handle(api.DeleteAccountMenu(accountId, id))
-    }
+		if param.otherParams.queueId > 0 {
+			id = param.otherParams.queueId
+		}
 
-  case swagger.QueuesApi:
+		switch command {
 
-    if (param.otherParams.queueId > 0) {
-      id = param.otherParams.queueId
-    }
+		case listQueues:
 
-    switch (command) {
+			return rh.handle(api.ListAccountQueues(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
-    case listQueues:
+		case getQueue:
 
-      return rh.handle(api.ListAccountQueues(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
+			return rh.handle(api.GetAccountQueue(accountId, id))
 
-    case getQueue:
+		case createQueue:
 
-      return rh.handle(api.GetAccountQueue(accountId, id))
+			params := createQueueParams(input)
+			return rh.handle(api.CreateAccountQueue(accountId, params))
 
-    case createQueue:
+		case replaceQueue:
 
-      params := createQueueParams(input)
-      return rh.handle(api.CreateAccountQueue(accountId, params))
+			params := createQueueParams(input)
+			return rh.handle(api.ReplaceAccountQueue(accountId, id, params))
 
-    case replaceQueue:
+		case deleteQueue:
 
-      params := createQueueParams(input)
-      return rh.handle(api.ReplaceAccountQueue(accountId, id, params))
+			return rh.handle(api.DeleteAccountQueue(accountId, id))
+		}
 
-    case deleteQueue:
+	case swagger.RoutesApi:
 
-      return rh.handle(api.DeleteAccountQueue(accountId, id))
-    }
+		if param.otherParams.routeId > 0 {
+			id = param.otherParams.routeId
+		}
 
-  case swagger.RoutesApi:
+		switch command {
 
-    if (param.otherParams.routeId > 0) {
-      id = param.otherParams.routeId
-    }
+		case listRoutes:
 
-    switch (command) {
+			return rh.handle(api.ListAccountRoutes(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
-    case listRoutes:
+		case getRoute:
 
-      return rh.handle(api.ListAccountRoutes(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
+			return rh.handle(api.GetAccountRoute(accountId, id))
 
-    case getRoute:
+		case createRoute:
 
-      return rh.handle(api.GetAccountRoute(accountId, id))
+			params := createRouteParams(input)
+			return rh.handle(api.CreateRoute(accountId, params))
 
-    case createRoute:
+		case replaceRoute:
 
-      params := createRouteParams(input)
-      return rh.handle(api.CreateRoute(accountId, params))
+			params := createRouteParams(input)
+			return rh.handle(api.ReplaceAccountRoute(accountId, id, params))
 
-    case replaceRoute:
+		case deleteRoute:
 
-      params := createRouteParams(input)
-      return rh.handle(api.ReplaceAccountRoute(accountId, id, params))
+			return rh.handle(api.DeleteAccountRoute(accountId, id))
+		}
 
-    case deleteRoute:
+	case swagger.SchedulesApi:
 
-      return rh.handle(api.DeleteAccountRoute(accountId, id))
-    }
+		if param.otherParams.scheduleId > 0 {
+			id = param.otherParams.scheduleId
+		}
 
-  case swagger.SchedulesApi:
+		switch command {
 
-    if (param.otherParams.scheduleId > 0) {
-      id = param.otherParams.scheduleId
-    }
+		case listSchedules:
 
-    switch (command) {
+			return rh.handle(api.ListAccountSchedules(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
-    case listSchedules:
+		case getSchedule:
 
-      return rh.handle(api.ListAccountSchedules(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
+			return rh.handle(api.GetAccountSchedule(accountId, id))
+		}
 
-    case getSchedule:
+	case swagger.SmsApi:
 
-      return rh.handle(api.GetAccountSchedule(accountId, id))
-    }
+		if param.otherParams.smsId != "" {
+			idString = param.otherParams.smsId
+		}
 
-  case swagger.SmsApi:
+		switch command {
 
-    if (param.otherParams.smsId != "") {
-      idString = param.otherParams.smsId
-    }
+		case listSms:
 
-    switch (command) {
+			return rh.handle(api.ListAccountSms(accountId, filtersId, filterParams.filtersDirection, filterParams.filtersFrom, sortParams.sortId, sortParams.sortCreatedAt, limit, offset, fields))
 
-    case listSms:
+		case getSms:
 
-      return rh.handle(api.ListAccountSms(accountId, filtersId, filterParams.filtersDirection, filterParams.filtersFrom, sortParams.sortId, sortParams.sortCreatedAt, limit, offset, fields))
+			return rh.handle(api.GetAccountSms(accountId, idString))
 
-    case getSms:
+		case createSms:
 
-      return rh.handle(api.GetAccountSms(accountId, idString))
-
-    case createSms:
-
-			if (param.otherParams.extensionId > 0) {
+			if param.otherParams.extensionId > 0 {
 				id = param.otherParams.extensionId
 			}
 
-      params := createSmsParams(param.from, param.to, param.text, id)
-      return rh.handle(api.CreateAccountSms(accountId, params))
-    }
+			params := createSmsParams(param.from, param.to, param.text, id)
+			return rh.handle(api.CreateAccountSms(accountId, params))
+		}
 
-  case swagger.AvailablenumbersApi:
+	case swagger.AvailablenumbersApi:
 
-    switch (command) {
+		switch command {
 
-    case listAvailablePhoneNumbers:
+		case listAvailablePhoneNumbers:
 
-      return rh.handle(api.ListAvailablePhoneNumbers(filterParams.filtersPhoneNumber, filterParams.filtersCountryCode, filterParams.filtersNpa, filterParams.filtersNxx, filterParams.filtersXxxx, filterParams.filtersCity, filterParams.filtersProvince, filterParams.filtersCountry, filterParams.filtersPrice, filterParams.filtersCategory, sortParams.sortInternal, sortParams.sortPrice, sortParams.sortPhoneNumber, limit, offset, fields))
-    }
+			return rh.handle(api.ListAvailablePhoneNumbers(filterParams.filtersPhoneNumber, filterParams.filtersCountryCode, filterParams.filtersNpa, filterParams.filtersNxx, filterParams.filtersXxxx, filterParams.filtersCity, filterParams.filtersProvince, filterParams.filtersCountry, filterParams.filtersPrice, filterParams.filtersCategory, sortParams.sortInternal, sortParams.sortPrice, sortParams.sortPhoneNumber, limit, offset, fields))
+		}
 
-  case swagger.SubaccountsApi:
+	case swagger.SubaccountsApi:
 
-    switch (command) {
+		switch command {
 
-    case listSubaccounts:
+		case listSubaccounts:
 
-      return rh.handle(api.ListAccountSubaccounts(accountId, filtersId, sortParams.sortId, limit, offset, fields))
+			return rh.handle(api.ListAccountSubaccounts(accountId, filtersId, sortParams.sortId, limit, offset, fields))
 
-    case createSubaccount:
+		case createSubaccount:
 
-      params := createSubaccountParams(input, param.contact, param.billingContact)
-      return rh.handle(api.CreateAccountSubaccount(accountId, params))
-    }
+			params := createSubaccountParams(input, param.contact, param.billingContact)
+			return rh.handle(api.CreateAccountSubaccount(accountId, params))
+		}
 
-  case swagger.AccountsApi:
+	case swagger.AccountsApi:
 
-    switch (command) {
+		switch command {
 
-    case listAccounts:
+		case listAccounts:
 
-      return rh.handle(api.ListAccounts(filtersId, sortParams.sortId, limit, offset, fields))
+			return rh.handle(api.ListAccounts(filtersId, sortParams.sortId, limit, offset, fields))
 
-    case getAccount:
+		case getAccount:
 
-      return rh.handle(api.GetAccount(id))
-    }
+			return rh.handle(api.GetAccount(id))
+		}
 
-  case swagger.NumberregionsApi:
+	case swagger.NumberregionsApi:
 
-    switch (command) {
+		switch command {
 
-    case listAvailablePhoneNumberRegions:
+		case listAvailablePhoneNumberRegions:
 
-      return rh.handle(api.ListAvailablePhoneNumberRegions(filterParams.filtersCountryCode, filterParams.filtersNpa, filterParams.filtersNxx, filterParams.filtersIsTollFree, filterParams.filtersCity, filterParams.filtersProvincePostalCode, filterParams.filtersCountryPostalCode, sortParams.sortCountryCode, sortParams.sortNpa, sortParams.sortNxx, sortParams.sortIsTollFree, sortParams.sortCity, sortParams.sortProvincePostalCode, sortParams.sortCountryPostalCode, limit, offset, fields, param.otherParams.groupBy))
-    }
+			return rh.handle(api.ListAvailablePhoneNumberRegions(filterParams.filtersCountryCode, filterParams.filtersNpa, filterParams.filtersNxx, filterParams.filtersIsTollFree, filterParams.filtersCity, filterParams.filtersProvincePostalCode, filterParams.filtersCountryPostalCode, sortParams.sortCountryCode, sortParams.sortNpa, sortParams.sortNxx, sortParams.sortIsTollFree, sortParams.sortCity, sortParams.sortProvincePostalCode, sortParams.sortCountryPostalCode, limit, offset, fields, param.otherParams.groupBy))
+		}
 
-  case swagger.ApplicationsApi:
+	case swagger.ApplicationsApi:
 
-    switch (command) {
+		switch command {
 
-    case listApplications:
+		case listApplications:
 
-      return rh.handle(api.ListAccountApplications(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
+			return rh.handle(api.ListAccountApplications(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
-    case getApplication:
+		case getApplication:
 
-      return rh.handle(api.GetAccountApplication(accountId, id))
-    }
+			return rh.handle(api.GetAccountApplication(accountId, id))
+		}
 
-  case swagger.CalllogsApi:
+	case swagger.CalllogsApi:
 
-    switch (command) {
+		switch command {
 
-    case listCallLogs:
+		case listCallLogs:
 
-      return rh.handle(api.ListAccountCallLogs(accountId, filtersId, filterParams.filtersStartTime, filterParams.filtersCreatedAt, filterParams.filtersDirection, filterParams.filtersCalledNumber, filterParams.filtersType, filterParams.filtersExtension, sortParams.sortId, sortParams.sortStartTime, sortParams.sortCreatedAt, limit, offset, fields))
-    }
+			return rh.handle(api.ListAccountCallLogs(accountId, filtersId, filterParams.filtersStartTime, filterParams.filtersCreatedAt, filterParams.filtersDirection, filterParams.filtersCalledNumber, filterParams.filtersType, filterParams.filtersExtension, sortParams.sortId, sortParams.sortStartTime, sortParams.sortCreatedAt, limit, offset, fields))
+		}
 
-  case swagger.DevicesApi:
+	case swagger.DevicesApi:
 
-    if (param.otherParams.deviceId > 0) {
-      id = param.otherParams.deviceId
-    }
+		if param.otherParams.deviceId > 0 {
+			id = param.otherParams.deviceId
+		}
 
-    switch (command) {
+		switch command {
 
-    case listDevices:
+		case listDevices:
 
-      return rh.handle(api.ListAccountDevices(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
+			return rh.handle(api.ListAccountDevices(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
-    case getDevice:
+		case getDevice:
 
-      return rh.handle(api.GetAccountDevice(accountId, id))
+			return rh.handle(api.GetAccountDevice(accountId, id))
 
-    case createDevice:
+		case createDevice:
 
-      params := createDeviceParams(input)
-      return rh.handle(api.CreateAccountDevice(accountId, params))
+			params := createDeviceParams(input)
+			return rh.handle(api.CreateAccountDevice(accountId, params))
 
-    case replaceDevice:
+		case replaceDevice:
 
-      params := createDeviceParams(input)
-      return rh.handle(api.ReplaceAccountDevice(accountId, id, params))
-    }
+			params := createDeviceParams(input)
+			return rh.handle(api.ReplaceAccountDevice(accountId, id, params))
+		}
 
-  case swagger.ExpressservicecodesApi:
+	case swagger.ExpressservicecodesApi:
 
-    if (param.otherParams.codeId > 0) {
-      id = param.otherParams.codeId
-    }
+		if param.otherParams.codeId > 0 {
+			id = param.otherParams.codeId
+		}
 
-    switch (command) {
+		switch command {
 
-    case listExpressServiceCodes:
+		case listExpressServiceCodes:
 
-      return rh.handle(api.ListAccountExpressSrvCodes(accountId, filtersId))
+			return rh.handle(api.ListAccountExpressSrvCodes(accountId, filtersId))
 
-    case getExpressServiceCode:
+		case getExpressServiceCode:
 
-      return rh.handle(api.GetAccountExpressSrvCode(accountId, id))
-    }
+			return rh.handle(api.GetAccountExpressSrvCode(accountId, id))
+		}
 
-  case swagger.ExtensionsApi:
+	case swagger.ExtensionsApi:
 
-    switch (command) {
+		switch command {
 
-    case listExtensions:
+		case listExtensions:
 
-      return rh.handle(api.ListAccountExtensions(accountId, filtersId, filterParams.filtersExtension, filterParams.filtersName, sortParams.sortId, sortParams.sortExtension, sortParams.sortName, limit, offset, fields))
+			return rh.handle(api.ListAccountExtensions(accountId, filtersId, filterParams.filtersExtension, filterParams.filtersName, sortParams.sortId, sortParams.sortExtension, sortParams.sortName, limit, offset, fields))
 
-    case getExtension:
+		case getExtension:
 
-      return rh.handle(api.GetAccountExtension(accountId, id))
+			return rh.handle(api.GetAccountExtension(accountId, id))
 
-    case createExtension:
+		case createExtension:
 
-      params := createExtensionsParams(input)
-      return rh.handle(api.CreateAccountExtension(accountId, params))
+			params := createExtensionsParams(input)
+			return rh.handle(api.CreateAccountExtension(accountId, params))
 
-    case replaceExtension:
+		case replaceExtension:
 
-      params := replaceExtensionParams(input)
-      return rh.handle(api.ReplaceAccountExtension(accountId, id, params))
+			params := replaceExtensionParams(input)
+			return rh.handle(api.ReplaceAccountExtension(accountId, id, params))
 
-    }
+		}
 
-  case swagger.CalleridsApi:
+	case swagger.CalleridsApi:
 
-    switch (command) {
+		switch command {
 
-    case getCallerId:
-      return rh.handle(api.GetCallerIds(accountId, id, filterParams.filtersNumber, filterParams.filtersName, sortParams.sortNumber, sortParams.sortName, limit, offset, fields))
-    }
+		case getCallerId:
+			return rh.handle(api.GetCallerIds(accountId, id, filterParams.filtersNumber, filterParams.filtersName, sortParams.sortNumber, sortParams.sortName, limit, offset, fields))
+		}
 
-  case swagger.ContactsApi:
+	case swagger.ContactsApi:
 
-    if (param.otherParams.extensionId > 0) {
-      id = param.otherParams.extensionId
-    }
+		if param.otherParams.extensionId > 0 {
+			id = param.otherParams.extensionId
+		}
 
-    if (param.otherParams.contactId > 0) {
-      idSecondary = param.otherParams.contactId
-    }
+		if param.otherParams.contactId > 0 {
+			idSecondary = param.otherParams.contactId
+		}
 
-    switch (command) {
+		switch command {
 
-    case listContacts:
+		case listContacts:
 
-      return rh.handle(api.ListAccountExtensionContacts(accountId, id, filtersId, filterParams.filtersGroupId, filterParams.filtersUpdatedAt, sortParams.sortId, sortParams.sortUpdatedAt, limit, offset, fields))
+			return rh.handle(api.ListAccountExtensionContacts(accountId, id, filtersId, filterParams.filtersGroupId, filterParams.filtersUpdatedAt, sortParams.sortId, sortParams.sortUpdatedAt, limit, offset, fields))
 
-    case getContact:
+		case getContact:
 
-      return rh.handle(api.GetAccountExtensionContact(accountId, id, idSecondary))
+			return rh.handle(api.GetAccountExtensionContact(accountId, id, idSecondary))
 
-    case createContact:
+		case createContact:
 
-      params := createContactParams(input)
-      return rh.handle(api.CreateAccountExtensionContact(accountId, id, params))
+			params := createContactParams(input)
+			return rh.handle(api.CreateAccountExtensionContact(accountId, id, params))
 
-    case replaceContact:
+		case replaceContact:
 
-      params := createContactParams(input)
-      return rh.handle(api.ReplaceAccountExtensionContact(accountId, id, idSecondary, params))
+			params := createContactParams(input)
+			return rh.handle(api.ReplaceAccountExtensionContact(accountId, id, idSecondary, params))
 
-    case deleteContact:
+		case deleteContact:
 
-      return rh.handle(api.DeleteAccountExtensionContact(accountId, id, idSecondary))
-    }
+			return rh.handle(api.DeleteAccountExtensionContact(accountId, id, idSecondary))
+		}
 
-  case swagger.GroupsApi:
+	case swagger.GroupsApi:
 
-    if (param.otherParams.extensionId > 0) {
-      id = param.otherParams.extensionId
-    }
+		if param.otherParams.extensionId > 0 {
+			id = param.otherParams.extensionId
+		}
 
-    if (param.otherParams.groupId > 0) {
-      idSecondary = param.otherParams.groupId
-    }
+		if param.otherParams.groupId > 0 {
+			idSecondary = param.otherParams.groupId
+		}
 
-    switch (command) {
+		switch command {
 
-    case listGroups:
+		case listGroups:
 
-      return rh.handle(api.ListAccountExtensionContactGroups(accountId, id, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
+			return rh.handle(api.ListAccountExtensionContactGroups(accountId, id, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
-    case getGroup:
+		case getGroup:
 
-      return rh.handle(api.GetAccountExtensionContactGroup(accountId, id, idSecondary))
+			return rh.handle(api.GetAccountExtensionContactGroup(accountId, id, idSecondary))
 
-    case createGroup:
+		case createGroup:
 
-      params := createGroupParams(input)
-      return rh.handle(api.CreateAccountExtensionContactGroup(accountId, id, params))
+			params := createGroupParams(input)
+			return rh.handle(api.CreateAccountExtensionContactGroup(accountId, id, params))
 
-    case replaceGroup:
+		case replaceGroup:
 
-      params := createGroupParams(input)
-      return rh.handle(api.ReplaceAccountExtensionContactGroup(accountId, id, idSecondary, params))
-    case deleteGroup:
+			params := createGroupParams(input)
+			return rh.handle(api.ReplaceAccountExtensionContactGroup(accountId, id, idSecondary, params))
+		case deleteGroup:
 
-      return rh.handle(api.DeleteAccountExtensionContactGroup(accountId, id, idSecondary))
-    }
+			return rh.handle(api.DeleteAccountExtensionContactGroup(accountId, id, idSecondary))
+		}
 
-  case swagger.PhonenumbersApi:
+	case swagger.PhonenumbersApi:
 
-    if (param.otherParams.numberId > 0) {
-      id = param.otherParams.numberId
-    }
+		if param.otherParams.numberId > 0 {
+			id = param.otherParams.numberId
+		}
 
-    switch (command) {
+		switch command {
 
-    case listPhoneNumbers:
+		case listPhoneNumbers:
 
-      return rh.handle(api.ListAccountPhoneNumbers(accountId, filtersId, filterParams.filtersName, filterParams.filtersPhoneNumber, sortParams.sortId, sortParams.sortName, sortParams.sortPhoneNumber, limit, offset, fields))
+			return rh.handle(api.ListAccountPhoneNumbers(accountId, filtersId, filterParams.filtersName, filterParams.filtersPhoneNumber, sortParams.sortId, sortParams.sortName, sortParams.sortPhoneNumber, limit, offset, fields))
 
-    case getPhoneNumber:
+		case getPhoneNumber:
 
-      return rh.handle(api.GetAccountPhoneNumber(accountId, id))
+			return rh.handle(api.GetAccountPhoneNumber(accountId, id))
 
-    case createPhoneNumber:
+		case createPhoneNumber:
 
-      params := createPhoneNumberParams(input)
-      return rh.handle(api.CreateAccountPhoneNumber(accountId, params))
+			params := createPhoneNumberParams(input)
+			return rh.handle(api.CreateAccountPhoneNumber(accountId, params))
 
-    case replacePhoneNumber:
+		case replacePhoneNumber:
 
-      params := replacePhoneNumberParams(input)
-      return rh.handle(api.ReplaceAccountPhoneNumber(accountId, id, params))
-    }
+			params := replacePhoneNumberParams(input)
+			return rh.handle(api.ReplaceAccountPhoneNumber(accountId, id, params))
+		}
 
-  case swagger.TrunksApi:
+	case swagger.TrunksApi:
 
-    if (param.otherParams.trunkId > 0) {
-      id = param.otherParams.trunkId
-    }
+		if param.otherParams.trunkId > 0 {
+			id = param.otherParams.trunkId
+		}
 
-    switch (command) {
+		switch command {
 
-    case listTrunks:
+		case listTrunks:
 
-      return rh.handle(api.ListAccountTrunks(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
+			return rh.handle(api.ListAccountTrunks(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
-    case getTrunk:
+		case getTrunk:
 
-      return rh.handle(api.GetAccountTrunk(accountId, id))
+			return rh.handle(api.GetAccountTrunk(accountId, id))
 
-    case createTrunk:
-      params := createTrunkParams(param.trunkName, param.trunkUri, param.trunkConcurrentCalls, param.trunkMaxMinutes)
-      return rh.handle(api.CreateAccountTrunk(accountId, params))
+		case createTrunk:
+			params := createTrunkParams(param.trunkName, param.trunkUri, param.trunkConcurrentCalls, param.trunkMaxMinutes)
+			return rh.handle(api.CreateAccountTrunk(accountId, params))
 
-    case replaceTrunk:
+		case replaceTrunk:
 
-      params := createTrunkParams(param.trunkName, param.trunkUri, param.trunkConcurrentCalls, param.trunkMaxMinutes)
-      return rh.handle(api.ReplaceAccountTrunk(accountId, id, params))
+			params := createTrunkParams(param.trunkName, param.trunkUri, param.trunkConcurrentCalls, param.trunkMaxMinutes)
+			return rh.handle(api.ReplaceAccountTrunk(accountId, id, params))
 
-    case deleteTrunk:
+		case deleteTrunk:
 
-      return rh.handle(api.DeleteAccountTrunk(accountId, id))
-    }
+			return rh.handle(api.DeleteAccountTrunk(accountId, id))
+		}
 
-  default:
-    return nil, nil
-  }
+	default:
+		return nil, nil
+	}
 
-  return nil, nil
+	return nil, nil
 }

@@ -1,14 +1,14 @@
 package main
 
 import (
-	"os"
+	"encoding/xml"
+	"errors"
 	"fmt"
 	"io/ioutil"
-	"encoding/xml"
-	"phonecom-go-sdk"
-	"errors"
-	"path/filepath"
 	"log"
+	"os"
+	"path/filepath"
+	"phonecom-go-sdk"
 )
 
 type Query struct {
@@ -16,12 +16,12 @@ type Query struct {
 }
 
 type CliConfig struct {
-	BaseApiPath string
+	BaseApiPath  string
 	ApiKeyPrefix string
-	ApiKey string
-	Type string
-	AccountId int32
-	Path string
+	ApiKey       string
+	Type         string
+	AccountId    int32
+	Path         string
 }
 
 func (c *CliConfig) getConfig() CliConfig {
@@ -29,7 +29,7 @@ func (c *CliConfig) getConfig() CliConfig {
 	configPath := c.getConfigPath()
 	xmlFile, err := os.Open(configPath)
 
-	var noConfig CliConfig;
+	var noConfig CliConfig
 
 	if err != nil {
 		fmt.Println("Could not read config.xml", err)
@@ -44,7 +44,7 @@ func (c *CliConfig) getConfig() CliConfig {
 	xml.Unmarshal(content, &q)
 
 	for _, config := range q.ConfigList {
-		if (config.Type == "main") {
+		if config.Type == "main" {
 			return config
 		}
 	}
@@ -60,7 +60,7 @@ func (c *CliConfig) createSwaggerConfig(xmlConfig CliConfig) *swagger.Configurat
 
 	var swaggerConfig = swagger.NewConfiguration()
 
-	if (len(baseApiPath) > 0) {
+	if len(baseApiPath) > 0 {
 		swaggerConfig.BasePath = baseApiPath
 	}
 
@@ -74,24 +74,24 @@ func (c *CliConfig) createOrReadCliConfig(param CliParams) (CliConfig, error) {
 
 	var cliConfig CliConfig = c.getConfig()
 
-	if (cliConfig.ApiKey == "") {
-		if (param.apiKey == "") {
+	if cliConfig.ApiKey == "" {
+		if param.apiKey == "" {
 			return cliConfig, errors.New("No API key provided. Please provide Phone.com API key via -ak CLI flag of via config.xml")
 		} else {
 			cliConfig.ApiKey = param.apiKey
 		}
 	}
 
-	if (cliConfig.ApiKeyPrefix == "") {
-		if (param.apiKeyPrefix == "") {
+	if cliConfig.ApiKeyPrefix == "" {
+		if param.apiKeyPrefix == "" {
 			cliConfig.ApiKeyPrefix = "Bearer"
 		} else {
 			cliConfig.ApiKey = param.apiKeyPrefix
 		}
 	}
 
-	if (cliConfig.AccountId == 0) {
-		if (param.accountId == 0) {
+	if cliConfig.AccountId == 0 {
+		if param.accountId == 0 {
 			return cliConfig, errors.New("No account id provided. Please provide account id via -a CLI flag or via config.xml")
 		} else {
 			cliConfig.AccountId = param.accountId
@@ -103,7 +103,7 @@ func (c *CliConfig) createOrReadCliConfig(param CliParams) (CliConfig, error) {
 
 func (c *CliConfig) getConfigPath() string {
 
-	if (c.Path != "") {
+	if c.Path != "" {
 		return c.Path
 	}
 
