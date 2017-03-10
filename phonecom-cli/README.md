@@ -64,10 +64,10 @@ In the current version the configuration file contains information about the aut
 
 Configuration fields:
 
-* BaseApiPath - `string` The base api path. The default is [https://api.phone.com/v4](https://api.phone.com/v4)
+* BaseApiPath - `string` The base API path. The default is [https://api.phone.com/v4](https://api.phone.com/v4)
 * type - `string` The type of configuration. Planned for future extensions for defining multiple configurations. The value should be set to "main".
-* apiKeyPrefix - `string` The prefix for tha api key. Default: _Bearer_
-* apiKey - `string` The api key
+* apiKeyPrefix - `string` The prefix for the API key. Default: _Bearer_
+* apiKey - `string` The API key
 * accountId - `integer` The user account id
 
 You can also define the API key token as a CLI parameter by specifying it with the -ak flag.
