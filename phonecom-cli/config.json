@@ -1,0 +1,10 @@
+{
+  "config": [
+    {
+      "type" : "main",
+      "apiKeyPrefix" : "Bearer",
+      "apiKey" : "Place your API key here",
+      "accountId" : 1315091
+    }
+  ]
+}

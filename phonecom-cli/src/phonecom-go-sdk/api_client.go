@@ -93,7 +93,7 @@ func (c *APIClient) ParameterToString(obj interface{}, collectionFormat string) 
 	switch collectionFormat {
 	case "pipes":
 		delimiter = "|"
-	case "ssv":
+	case "ssv", "multi":
 		delimiter = " "
 	case "tsv":
 		delimiter = "\t"

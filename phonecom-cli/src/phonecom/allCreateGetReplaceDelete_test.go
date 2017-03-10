@@ -9,6 +9,37 @@ import (
 	"testing"
 )
 
+func TestCreateCall(t *testing.T) {
+
+	var result map[string]interface{}
+	var err error
+
+	randomName := randomString(12)
+	callerPhoneNumber := "+18189640647"
+	callerExtension := 1767963
+	callerCallerId := "+19109485024"
+	callerPrivate := true
+	calleePhoneNumber := "+19109485024"
+	calleeExtension := 1750618
+	calleeCallerId := "+18189640647"
+	calleePrivate := true
+	CallParamsJson := swagger.CreateCallParams{callerPhoneNumber, int32(callerExtension), callerCallerId, callerPrivate, calleePhoneNumber, int32(calleeExtension), calleeCallerId, calleePrivate}
+	fileName := "../test/jsonin/createDevice" + randomName + ".json"
+	b, err := json.Marshal(CallParamsJson)
+	err = ioutil.WriteFile(fileName, b, 0644)
+
+	err, result = createCliWithJsonIn(createCall, fileName)
+	assert.NoError(t, err)
+
+	id := getCallId(result)
+
+	if id == "" {
+		t.FailNow()
+	}
+
+	defer os.Remove(fileName)
+}
+
 func TestCreateDevice(t *testing.T) {
 
 	var result map[string]interface{}

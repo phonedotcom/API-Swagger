@@ -181,69 +181,72 @@ func getCliFlags() []cli.Flag {
 
 func getAllCommands() string {
 
-	return listAccounts + ", " +
-		listMedia + ", " +
-		listMenus + ", " +
-		listQueues + ", " +
-		listRoutes + ", " +
-		listSchedules + ", " +
-		listSms + ", " +
-		listSubaccounts + ", " +
+	return "\n\n" +
+		createCall + ", " +
+		createDevice + ", " +
+		createExtension + ", " +
+		createMenu + ", " +
+		createPhoneNumber + ", " +
+		createQueue + ", " +
+		createRoute + ", " +
+		createSms + ", " +
+		createSubaccount + ", " +
+		createTrunk + ", " +
+		createContact + ", " +
+		createGroup + "\n\n" +
+
+		deleteMenu + ", " +
+		deleteQueue + ", " +
+		deleteRoute + ", " +
+		deleteTrunk + ", " +
+		deleteContact + ", " +
+		deleteGroup + "\n\n" +
+
+		getAccount + ", " +
+		getApplication + ", " +
+		getCallLog + ", " +
+		getDevice + ", " +
+		getExpressServiceCode + ", " +
+		getExtension + ", " +
+		getRecording + ", " +
+		getMenu + ", " +
+		getPhoneNumber + ", " +
+		getQueue + ", " +
+		getRoute + ", " +
+		getSchedule + ", " +
+		getSms + ", " +
+		getTrunk + ", " +
+		getContact + ", " +
+		getGroup + "\n\n" +
+
+		listAccounts + ", " +
 		listApplications + ", " +
 		listCallLogs + ", " +
 		listDevices + ", " +
 		listExpressServiceCodes + ", " +
 		listExtensions + ", " +
+		listMedia + ", " +
+		listMenus + ", " +
+		listPhoneNumbers + ", " +
+		listQueues + ", " +
+		listRoutes + ", " +
+		listSchedules + ", " +
+		listSms + ", " +
+		listSubaccounts + ", " +
+		listTrunks + ", " +
+		listCallerIds + ", " +
 		listContacts + ", " +
 		listGroups + ", " +
-		listPhoneNumbers + ", " +
-		listTrunks + ", " +
 		listAvailablePhoneNumbers + ", " +
-		listAvailablePhoneNumberRegions + ", " +
-		createQueue + ", " +
-		deleteQueue + ", " +
-		replaceQueue + ", " +
-		getQueue + ", " +
-		createTrunk + ", " +
-		getTrunk + ", " +
-		replaceTrunk + ", " +
-		deleteTrunk + ", " +
-		createRoute + ", " +
-		createSubaccount + ", " +
-		deleteRoute + ", " +
-		replaceRoute + ", " +
-		createSms + ", " +
-		createMenu + ", " +
-		getMenu + ", " +
-		getRecording + ", " +
-		getRoute + ", " +
-		getSchedule + ", " +
-		getSms + ", " +
-		getAccount + ", " +
-		getApplication + ", " +
-		getCallLog + ", " +
-		getDevice + ", " +
-		getExtension + ", " +
-		getExpressServiceCode + ", " +
-		getCallerId + ", " +
-		getContact + ", " +
-		getGroup + ", " +
-		getPhoneNumber + ", " +
-		replaceMenu + ", " +
-		deleteMenu + ", " +
-		createPhoneNumber + ", " +
-		createCall + ", " +
-		createDevice + ", " +
-		createExtension + ", " +
-		createContact + ", " +
-		createGroup + ", " +
+		listAvailablePhoneNumberRegions + "\n\n" +
 
 		replaceDevice + ", " +
 		replaceExtension + ", " +
-		replaceContact + ", " +
-		replaceGroup + ", " +
+		replaceMenu + ", " +
 		replacePhoneNumber + ", " +
-
-		deleteContact + ", " +
-		deleteGroup
+		replaceQueue + ", " +
+		replaceRoute + ", " +
+		replaceTrunk + ", " +
+		replaceContact + ", " +
+		replaceGroup + "\n\n"
 }

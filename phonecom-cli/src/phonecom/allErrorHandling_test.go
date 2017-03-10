@@ -70,3 +70,42 @@ func TestFlagNonExistingFile(t *testing.T) {
 
 	assert.EqualError(t, err, fmt.Sprintf(couldNotReadFile, path))
 }
+
+func TestFilterInvalidFilterType(t *testing.T) {
+
+	filter := "invalid filter"
+	err, _ := createCliInvalidFilterType(filter)
+	assert.EqualError(t, err, fmt.Sprintf(msgFilterTypeNotRecognized, filter))
+}
+
+func createCliInvalidFilterType(filterType string) (error, map[string]interface{}) {
+
+	app := cli.NewApp()
+
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:  commandLong,
+			Value: listAccounts,
+		},
+		cli.StringFlag{
+			Name:  filtersTypeLong,
+			Value: filterType,
+		},
+		cli.StringFlag{
+			Name:  filtersValueLong,
+			Value: "test",
+		},
+	}
+
+	var response (map[string]interface{})
+	var err error
+
+	app.Action = func(c *cli.Context) error {
+		err, response = execute(c, createCliConfig())
+		return err
+	}
+
+	app.Run([]string{""})
+
+	return err, response
+}

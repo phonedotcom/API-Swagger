@@ -1,14 +1,13 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"github.com/urfave/cli"
 	"math"
 	"strconv"
 	"strings"
 )
-
-const multiValueDelimiter = "#"
 
 type CliParams struct {
 	slice          []string
@@ -247,105 +246,89 @@ func createCliParams(context *cli.Context) (CliParams, error) {
 		}
 
 		for counter := 0; counter < min; counter++ {
+			filter := []string{filtersValues[counter]}
+
 			switch filtersTypes[counter] {
 			case "id":
-				filterIdValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filtersId = filterIdValues
+				par.filtersId = filter
 
 			case "name":
-				filterNameValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersName = filterNameValues
+				par.filterParams.filtersName = filter
 
 			case "start_time":
-				filterStartTimeValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersStartTime = filterStartTimeValues
+				par.filterParams.filtersStartTime = filter
 
 			case "created_at":
-				par.filterParams.filtersCreatedAt = filtersValues[counter]
+				par.filterParams.filtersCreatedAt = filter[0]
 
 			case "direction":
-				par.filterParams.filtersDirection = filtersValues[counter]
+				par.filterParams.filtersDirection = filter[0]
 
 			case "called_number":
-				par.filterParams.filtersCalledNumber = filtersValues[counter]
+				par.filterParams.filtersCalledNumber = filter[0]
 
 			case "type":
-				par.filterParams.filtersType = filtersValues[counter]
+				par.filterParams.filtersType = filter[0]
 
 			case "extension":
-				filterExtensionValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersExtension = filterExtensionValues
+				par.filterParams.filtersExtension = filter
 
 			case "number":
-				filterNumberValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersNumber = filterNumberValues
+				par.filterParams.filtersNumber = filter
 
 			case "group_id":
-				filterGroupIdValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersGroupId = filterGroupIdValues
+				par.filterParams.filtersGroupId = filter
 
 			case "updated_at":
-				filterUpdatedAtValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersUpdatedAt = filterUpdatedAtValues
+				par.filterParams.filtersUpdatedAt = filter
 
 			case "phone_number":
-				filterPhoneNumberValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersPhoneNumber = filterPhoneNumberValues
+				par.filterParams.filtersPhoneNumber = filter
 
 			case "from":
-				par.filterParams.filtersFrom = filtersValues[counter]
+				par.filterParams.filtersFrom = filter[0]
 
 			case "to":
-				filterToValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersTo = filterToValues
+				par.filterParams.filtersTo = filter
 
 			case "country_code":
-				filterCountryCodeValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersCountryCode = filterCountryCodeValues
+				par.filterParams.filtersCountryCode = filter
 
 			case "npa":
-				filterNpaValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersNpa = filterNpaValues
+				par.filterParams.filtersNpa = filter
 
 			case "nxx":
-				filterNxxValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersNxx = filterNxxValues
+				par.filterParams.filtersNxx = filter
 
 			case "xxxx":
-				filterXxxxValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersXxxx = filterXxxxValues
+				par.filterParams.filtersXxxx = filter
 
 			case "city":
-				filterCityValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersCity = filterCityValues
+				par.filterParams.filtersCity = filter
 
 			case "province":
-				filterProvinceValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersProvince = filterProvinceValues
+				par.filterParams.filtersProvince = filter
 
 			case "country":
-				filterCountryValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersCountry = filterCountryValues
+				par.filterParams.filtersCountry = filter
 
 			case "price":
-				filterPriceValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersPrice = filterPriceValues
+				par.filterParams.filtersPrice = filter
 
 			case "category":
-				filterCategoryValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersCategory = filterCategoryValues
+				par.filterParams.filtersCategory = filter
 
 			case "is_toll_free":
-				filterIsTollFreeValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersIsTollFree = filterIsTollFreeValues
+				par.filterParams.filtersIsTollFree = filter
 
 			case "province_postal_code":
-				filterProvincePostalCodeValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersProvincePostalCode = filterProvincePostalCodeValues
+				par.filterParams.filtersProvincePostalCode = filter
 
 			case "country_postal_code":
-				filterCountryPostalCodeValues := strings.Split(filtersValues[counter], multiValueDelimiter)
-				par.filterParams.filtersCountryPostalCode = filterCountryPostalCodeValues
+				par.filterParams.filtersCountryPostalCode = filter
+
+			default:
+				return par, errors.New(fmt.Sprintf(msgFilterTypeNotRecognized, par.filterType))
 			}
 		}
 

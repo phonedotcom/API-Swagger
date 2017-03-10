@@ -29,7 +29,7 @@ func clearEmptyParams(paramMap map[string][]string) {
 Which is called in each generated API endpoint after the list of parameters is created.
 
 ## Code organization
-The there are 2 main Go packages that are used for the CLI operation:
+There are 2 main Go packages that are used for the CLI operation:
 * phonecom-go-sdk
 * phonecom
 
@@ -46,26 +46,35 @@ go get -u github.com/stretchr/testify
 ``` 
 
 
-## XML Configuration
-In order the Phone.com API to be invoked, an XML configuration file should be provided. The configuration file is used to provide the OAuth2 Authentication information. It is defined with the following format:  
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Data>
-    <Config>
-        <Type>main</Type>
-        <ApiKeyPrefix>Bearer</ApiKeyPrefix>
-        <ApiKey>The API Key for Phone.com</ApiKey>
-        <AccountId>The account id</AccountId>
-    </Config>
-</Data>
+## JSON Configuration
+In order the Phone.com API to be invoked, a JSON configuration file should be provided. The configuration file is used to provide the OAuth2 Authentication information. It is defined with the following format:  
+```json
+{
+  "config": [
+    {
+      "type" : "main",
+      "apiKeyPrefix" : "Bearer",
+      "apiKey" : "Place your API key here",
+      "accountId" : 1315091
+    }
+  ]
+}
 ```
-In the current version the configuration file contains information about the authentication. This can be extended in future versions if needed.
+In the current version the configuration file contains information about the authentication.
+
+Configuration fields:
+
+* BaseApiPath - `string` The base api path. The default is [https://api.phone.com/v4](https://api.phone.com/v4)
+* type - `string` The type of configuration. Planned for future extensions for defining multiple configurations. The value should be set to "main".
+* apiKeyPrefix - `string` The prefix for tha api key. Default: _Bearer_
+* apiKey - `string` The api key
+* accountId - `integer` The user account id
 
 You can also define the API key token as a CLI parameter by specifying it with the -ak flag.
 
 ## Flags
 This section describes the flags that are used in the CLI. For each flag there is a short version and a long version for the flags. They can be used interchangeably. An excerpt from the code is given below which provides the definition of the flags.
-```golang
+```go
 cli.StringFlag{
   Name: "command, c",
   Value: defaultCommand,
@@ -266,71 +275,75 @@ phonecom -c create-account-sms -from {number1} -to {number2} -text {text} -id {e
 The following commands can be invoked from the API:
 
 ```
+create-account-calls
+create-account-device
+create-account-extension
+create-account-menu
+create-account-phone-number
+create-account-queue
+create-account-route
+create-account-sms
+create-account-subaccount
+create-account-trunk
+create-account-extension-contact
+create-account-extension-contact-group
+
+delete-account-menu
+delete-account-queue
+delete-account-route
+delete-account-trunk
+delete-account-extension-contact
+delete-account-extension-contact-group
+
+get-account
+get-account-application
+get-account-call-log
+get-account-device
+get-account-express-service-code
+get-account-extension
+get-account-media
+get-account-menu
+get-account-phone-number
+get-account-queue
+get-account-route
+get-account-schedule
+get-account-sms
+get-account-trunk
+get-account-extension-contact
+get-account-extension-contact-group
+
 list-accounts
+list-account-applications
+list-account-call-logs
+list-account-devices
+list-account-express-service-codes
+list-account-extensions
 list-account-media
 list-account-menus
+list-account-phone-numbers
 list-account-queues
 list-account-routes
 list-account-schedules
 list-account-sms
 list-account-subaccounts
-list-account-applications
-list-account-call-logs
-list-account-devices
-list-account-express-srv-codes
-list-account-extensions
+list-account-trunks
+list-account-extension-caller-ids
 list-account-extension-contacts
 list-account-extension-contact-groups
-list-account-phone-numbers
-list-account-trunks
 list-available-phone-numbers
 list-available-phone-number-regions
-create-account-queue
-delete-account-queue
-replace-account-queue
-get-account-queue
-create-account-trunk
-get-account-trunk
-replace-account-trunk
-delete-account-trunk
-create-route
-create-account-subaccount
-delete-account-route
-replace-account-route
-create-account-sms
-create-account-menu
-get-account-menu
-get-account-media
-get-account-route
-get-account-schedule
-get-account-sms
-get-account
-get-account-application
-get-account-call-log
-get-account-device
-get-account-extension
-get-account-express-srv-code
-list-account-extension-caller-ids
-get-account-extension-contact
-get-account-extension-contact-group
-get-account-phone-number
-replace-account-menu
-delete-account-menu
-create-account-phone-number
-create-account-calls
-create-account-device
-create-account-extension
-create-account-extension-contact
-create-account-extension-contact-group
+
 replace-account-device
 replace-account-extension
+replace-account-menu
+replace-account-phone-number
+replace-account-queue
+replace-account-route
+replace-account-trunk
 replace-account-extension-contact
 replace-account-extension-contact-group
-replace-account-phone-number
-delete-account-extension-contact
-delete-account-extension-contact-group 
 
-(default: "https://api.phone.com/v4/ping")
+ (default: "https://api.phone.com/v4/ping")
 ```
 
 ## Integration tests

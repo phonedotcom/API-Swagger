@@ -1,7 +1,7 @@
 package main
 
 import (
-	"encoding/xml"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -12,36 +12,36 @@ import (
 )
 
 type Query struct {
-	ConfigList []CliConfig `xml:"Config"`
+	ConfigList []CliConfig `json:"config"`
 }
 
 type CliConfig struct {
-	BaseApiPath  string
-	ApiKeyPrefix string
-	ApiKey       string
-	Type         string
-	AccountId    int32
-	Path         string
+	BaseApiPath  string `json:"baseApiPath"`
+	ApiKeyPrefix string `json:"apiKeyPrefix"`
+	ApiKey       string `json:"apiKey"`
+	Type         string `json:"type"`
+	AccountId    int32  `json:"accountId"`
+	Path         string `json:"path"`
 }
 
 func (c *CliConfig) getConfig() CliConfig {
 
 	configPath := c.getConfigPath()
-	xmlFile, err := os.Open(configPath)
+	jsonConfigFile, err := os.Open(configPath)
 
 	var noConfig CliConfig
 
 	if err != nil {
-		fmt.Println("Could not read config.xml", err)
+		fmt.Println("Could not read config.json", err)
 		return noConfig
 	}
 
-	defer xmlFile.Close()
+	defer jsonConfigFile.Close()
 
-	content, _ := ioutil.ReadAll(xmlFile)
+	content, _ := ioutil.ReadAll(jsonConfigFile)
 
 	var q Query
-	xml.Unmarshal(content, &q)
+	json.Unmarshal(content, &q)
 
 	for _, config := range q.ConfigList {
 		if config.Type == "main" {
@@ -52,11 +52,11 @@ func (c *CliConfig) getConfig() CliConfig {
 	return noConfig
 }
 
-func (c *CliConfig) createSwaggerConfig(xmlConfig CliConfig) *swagger.Configuration {
+func (c *CliConfig) createSwaggerConfig(jsonConfig CliConfig) *swagger.Configuration {
 
-	var baseApiPath string = xmlConfig.BaseApiPath
-	var apiKeyPrefix string = xmlConfig.ApiKeyPrefix
-	var apiKey string = xmlConfig.ApiKey
+	var baseApiPath string = jsonConfig.BaseApiPath
+	var apiKeyPrefix string = jsonConfig.ApiKeyPrefix
+	var apiKey string = jsonConfig.ApiKey
 
 	var swaggerConfig = swagger.NewConfiguration()
 
@@ -76,7 +76,7 @@ func (c *CliConfig) createOrReadCliConfig(param CliParams) (CliConfig, error) {
 
 	if cliConfig.ApiKey == "" {
 		if param.apiKey == "" {
-			return cliConfig, errors.New("No API key provided. Please provide Phone.com API key via -ak CLI flag of via config.xml")
+			return cliConfig, errors.New("No API key provided. Please provide Phone.com API key via -ak CLI flag of via config.json")
 		} else {
 			cliConfig.ApiKey = param.apiKey
 		}
@@ -90,9 +90,9 @@ func (c *CliConfig) createOrReadCliConfig(param CliParams) (CliConfig, error) {
 		}
 	}
 
-	if cliConfig.AccountId == 0 {
-		if param.accountId == 0 {
-			return cliConfig, errors.New("No account id provided. Please provide account id via -a CLI flag or via config.xml")
+	if cliConfig.AccountId <= 0 {
+		if param.accountId <= 0 {
+			return cliConfig, errors.New("No account id provided. Please provide account id via -a CLI flag or via config.json")
 		} else {
 			cliConfig.AccountId = param.accountId
 		}
@@ -113,5 +113,5 @@ func (c *CliConfig) getConfigPath() string {
 		os.Exit(0)
 	}
 
-	return dir + "/config.xml"
+	return dir + "/config.json"
 }

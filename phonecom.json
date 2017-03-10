@@ -12,6 +12,14 @@
   "basePath": "/v4",
   "tags": [
     {
+      "name": "calls",
+      "description": "This API places a call to the caller phone number (or caller extension ID). If that number (or extension) answers within the timeout period, then the callee DID (or extension) will be connected to the call.      SUPPORTED SERVICES      Create Calls      We currently support three calling scenarios:    Place a call from a DID to my extension, required parameters are:    a. Caller Phone Number      b. Callee Extension ID      Place a call from a DID to another DID, required parameters are:    a. Caller Phone Number      b. Callee Phone Number      c. Caller Extension ID      Place a call from my Extension to a DID, required parameters are:    a. Caller Extension ID      b. Callee Phone Number      The Calls API supports caller ID, an user may specify the caller caller ID or the callee caller ID. The following rules are applied when a caller ID is provided.      The caller caller ID must be the same as the callee phone number, or a phone number owned by the user account      The callee caller ID must be the same as the caller phone number, or a phone number owned by the user account      User may also set the caller caller ID or callee caller ID to 'private' by setting flag caller_private and callee_private to true respectively.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apidocs.phone.com/docs/account-calls"
+      }
+    },
+    {
       "name": "accounts",
       "description": "This page gives an overview of how to interact with your accounts.",
       "externalDocs": {
@@ -411,6 +419,60 @@
           },
           "404": {
             "$ref": "#/responses/response404"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/calls": {
+      "post": {
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "tags": [
+          "calls"
+        ],
+        "summary": "Make a phone call",
+        "description": "",
+        "operationId": "create-account-calls",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Call data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateCallParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CallFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
           }
         }
       }
@@ -4097,6 +4159,43 @@
     }
   },
   "definitions": {
+    "CreateCallParams": {
+      "type": "object",
+      "properties": {
+        "caller_phone_number": {
+          "type": "string",
+          "description": "Caller phone number in E.164 format"
+        },
+        "caller_extension": {
+          "type": "integer",
+          "description": "Caller Extension ID"
+        },
+        "caller_caller_id": {
+          "type": "string",
+          "description": "Caller caller ID in E.164 format"
+        },
+        "caller_private": {
+          "type": "boolean",
+          "description": "Flag to set caller ID to private"
+        },
+        "callee_phone_number": {
+          "type": "string",
+          "description": "Callee phone number in E.164 format"
+        },
+        "callee_extension": {
+          "type": "integer",
+          "description": "Callee Extension ID"
+        },
+        "callee_caller_id": {
+          "type": "string",
+          "description": "Callee caller ID in E.164 format"
+        },
+        "callee_private": {
+          "type": "boolean",
+          "description": "Flag to set callee ID to private"
+        }
+      }
+    },
     "PingResponse": {
       "description": "The ping response object.",
       "type": "object",
@@ -5400,6 +5499,16 @@
         "name": {
           "type": "string",
           "description": "Application name"
+        }
+      }
+    },
+    "CallFull": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": ""
         }
       }
     },

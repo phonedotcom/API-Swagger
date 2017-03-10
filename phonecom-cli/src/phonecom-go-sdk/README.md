@@ -28,6 +28,7 @@ Class | Method | HTTP request | Description
 *AvailablenumbersApi* | [**ListAvailablePhoneNumbers**](docs/AvailablenumbersApi.md#listavailablephonenumbers) | **Get** /phone-numbers/available | 
 *CalleridsApi* | [**GetCallerIds**](docs/CalleridsApi.md#getcallerids) | **Get** /accounts/{account_id}/extensions/{extension_id}/caller-ids | Show the Caller ID options a given extension can use
 *CalllogsApi* | [**ListAccountCallLogs**](docs/CalllogsApi.md#listaccountcalllogs) | **Get** /accounts/{account_id}/call-logs | Get a list of call details associated with your account
+*CallsApi* | [**CreateAccountCalls**](docs/CallsApi.md#createaccountcalls) | **Post** /accounts/{account_id}/calls | Make a phone call
 *ContactsApi* | [**CreateAccountExtensionContact**](docs/ContactsApi.md#createaccountextensioncontact) | **Post** /accounts/{account_id}/extensions/{extension_id}/contacts | Add a new address book contact for an extension
 *ContactsApi* | [**DeleteAccountExtensionContact**](docs/ContactsApi.md#deleteaccountextensioncontact) | **Delete** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | 
 *ContactsApi* | [**GetAccountExtensionContact**](docs/ContactsApi.md#getaccountextensioncontact) | **Get** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | Retrieve the details of an address book contact
@@ -95,6 +96,7 @@ Class | Method | HTTP request | Description
  - [ApplicationSummary](docs/ApplicationSummary.md)
  - [AvailableNumbersFull](docs/AvailableNumbersFull.md)
  - [CallDetails](docs/CallDetails.md)
+ - [CallFull](docs/CallFull.md)
  - [CallLogFull](docs/CallLogFull.md)
  - [CallNotifications](docs/CallNotifications.md)
  - [CallerIdFull](docs/CallerIdFull.md)
@@ -103,6 +105,7 @@ Class | Method | HTTP request | Description
  - [ContactFull](docs/ContactFull.md)
  - [ContactSubaccount](docs/ContactSubaccount.md)
  - [ContactSummary](docs/ContactSummary.md)
+ - [CreateCallParams](docs/CreateCallParams.md)
  - [CreateContactParams](docs/CreateContactParams.md)
  - [CreateDeviceParams](docs/CreateDeviceParams.md)
  - [CreateExtensionParams](docs/CreateExtensionParams.md)

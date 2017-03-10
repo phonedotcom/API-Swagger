@@ -7,12 +7,11 @@ import (
 )
 
 var commandFlag = "-command"
-var errorNotNullMessage = "expected no error from Run, got %s"
 
 func createCliConfig() CliConfig {
 
 	var cliConfig CliConfig
-	cliConfig.Path = "../../config.xml"
+	cliConfig.Path = "../../config.json"
 
 	return cliConfig
 }
@@ -956,6 +955,12 @@ func getId(jsonObject map[string]interface{}) int {
 	id := jsonObject["id"].(json.Number)
 	idToReturn, _ := json.Number.Int64(id)
 	return int(idToReturn)
+}
+
+func getCallId(jsonObject map[string]interface{}) string {
+
+	id := jsonObject["id"].(string)
+	return id
 }
 
 func getName(json map[string]interface{}) string {

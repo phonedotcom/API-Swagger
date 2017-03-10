@@ -25,4 +25,4 @@ go build -o phonecom phonecom
 
 7. Run the binary which is built under the current directory
 
-Please note that if you use config.xml it needs to be under the same directory with the binary.
+Please note that if you use config.json it needs to be under the same directory with the binary.

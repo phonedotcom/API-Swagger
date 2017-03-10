@@ -75,7 +75,7 @@ func (r *ApiResolver) resolve() interface{} {
 
 		api = swagger.ExtensionsApi{Configuration: r.config}
 
-	case getCallerId:
+	case listCallerIds:
 
 		api = swagger.CalleridsApi{Configuration: r.config}
 
@@ -94,6 +94,10 @@ func (r *ApiResolver) resolve() interface{} {
 	case listTrunks, getTrunk, createTrunk, deleteTrunk, replaceTrunk:
 
 		api = swagger.TrunksApi{Configuration: r.config}
+
+	case createCall:
+
+		api = swagger.CallsApi{Configuration: r.config}
 
 	default:
 		return nil

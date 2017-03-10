@@ -38,6 +38,34 @@ func TestFilterSortListAccounts(t *testing.T) {
 	assert.Equal(t, sortId, sorts["id"])
 }
 
+func TestFilterWithSpaceInParamValue(t *testing.T) {
+
+	idSlice := make([]string, 0)
+	expectedId := "str1 str2"
+	idSlice = append(idSlice, expectedId)
+
+	err, response := createFilterSortExpressServiceCodesCli(listAccounts, idSlice)
+	assert.NoError(t, err)
+
+	filters := getFilters(response)
+	id := filters["id"].(string)
+	assert.Equal(t, expectedId, id)
+}
+
+func TestFilterWithHashInParamValue(t *testing.T) {
+
+	idSlice := make([]string, 0)
+	expectedId := "str1#str2"
+	idSlice = append(idSlice, expectedId)
+
+	err, response := createFilterSortExpressServiceCodesCli(listAccounts, idSlice)
+	assert.NoError(t, err)
+
+	filters := getFilters(response)
+	id := filters["id"].(string)
+	assert.Equal(t, expectedId, id)
+}
+
 func TestListApplications(t *testing.T) {
 
 	var json map[string]interface{}
@@ -250,7 +278,7 @@ func TestListCallerIds(t *testing.T) {
 	assert.NoError(t, err)
 	extensionId := getFirstId(json)
 
-	err, _ = createCliWithId(getCallerId, extensionId)
+	err, _ = createCliWithId(listCallerIds, extensionId)
 	assert.NoError(t, err)
 }
 
@@ -273,7 +301,7 @@ func TestFilterSortListCallerIds(t *testing.T) {
 	assert.NoError(t, err)
 	extensionId := getFirstId(json)
 
-	err, response := createFilterSortCallerIdsCliWithId(getCallerId, extensionId, numberSlice, nameSlice, sortNumber, sortName)
+	err, response := createFilterSortCallerIdsCliWithId(listCallerIds, extensionId, numberSlice, nameSlice, sortNumber, sortName)
 	assert.NoError(t, err)
 
 	filters := getFilters(response)

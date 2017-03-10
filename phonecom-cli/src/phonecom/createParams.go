@@ -264,6 +264,14 @@ func createDeviceParams(inputFile string) swagger.CreateDeviceParams {
 	return params
 }
 
+func createCallParams(inputFile string) swagger.CreateCallParams {
+
+	var params swagger.CreateCallParams
+	readAndUnmarshalFile(inputFile, &params)
+
+	return params
+}
+
 func readAndUnmarshalFile(inputFile string, params interface{}) error {
 
 	file, e := ioutil.ReadFile(inputFile)
