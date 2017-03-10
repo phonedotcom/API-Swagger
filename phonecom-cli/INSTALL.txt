@@ -26,3 +26,8 @@ go build -o phonecom phonecom
 7. Run the binary which is built under the current directory
 
 Please note that if you use config.json it needs to be under the same directory with the binary.
+
+Build for specific os:
+GOARCH=amd64 GOOS=darwin go build -o phonecom-mac phonecom
+GOARCH=amd64 GOOS=windows go build -o phonecom-windows phonecom
+GOARCH=amd64 GOOS=linux go build -o phonecom-linux phonecom
