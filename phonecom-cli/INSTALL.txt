@@ -17,6 +17,7 @@ go get -u github.com/urfave/cli
 go get -u github.com/go-resty/resty
 go get -u github.com/yukithm/json2csv/cmd/json2csv
 go get -u github.com/stretchr/testify
+go get -u github.com/igorsimevski/phonecom-goclient
 
 Note: You might need to delete the src/github.com and src/golang.org/ folders and try again if you encounter build errors
 

@@ -3595,8 +3595,10 @@
             "description": "Fields to group by (supports the same set of fields as the filters and sorting)",
             "required": false,
             "type": "array",
+            "collectionFormat": "multi",
             "items": {
-              "type": "string"
+              "type": "string",
+              "pattern": "^eq:.*|^ne:.*|^lt:.*|^gt:.*|^lte:.*|^gte:.*|^starts-with:.*|^ends-with:.*|^contains:.*|^not-starts-with:.*|^not-ends-with:.*|^not-contains:.*|^between:.*,.*|^not-between:.*,.*"
             }
           }
         ],
@@ -3899,8 +3901,10 @@
       "description": "Country filter",
       "required": false,
       "type": "array",
+      "collectionFormat": "multi",
       "items": {
-        "type": "string"
+        "type": "string",
+        "pattern": "^eq:.*|^ne:.*|^lt:.*|^gt:.*|^lte:.*|^gte:.*|^starts-with:.*|^ends-with:.*|^contains:.*|^not-starts-with:.*|^not-ends-with:.*|^not-contains:.*|^between:.*,.*|^not-between:.*,.*"
       }
     },
     "sortIdParam": {

@@ -45,6 +45,11 @@ go get -u github.com/yukithm/json2csv/cmd/json2csv
 go get -u github.com/stretchr/testify
 ``` 
 
+Also, the Phone.com go client need sto be installed
+```bash
+go get -u github.com/igorsimevski/phonecom-goclient
+```
+
 
 ## JSON Configuration
 In order the Phone.com API to be invoked, a JSON configuration file should be provided. The configuration file is used to provide the OAuth2 Authentication information. It is defined with the following format:  

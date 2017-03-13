@@ -2,10 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/igorsimevski/phonecom-goclient"
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"os"
-	"phonecom-go-sdk"
 	"testing"
 )
 

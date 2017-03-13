@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/igorsimevski/phonecom-goclient"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
-	"phonecom-go-sdk"
 )
 
 type Query struct {

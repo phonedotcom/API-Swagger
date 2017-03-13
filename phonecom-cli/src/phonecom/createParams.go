@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/igorsimevski/phonecom-goclient"
 	"io/ioutil"
-	"phonecom-go-sdk"
 )
 
 type ListParams struct {

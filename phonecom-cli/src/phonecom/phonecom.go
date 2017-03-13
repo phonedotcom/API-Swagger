@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"errors"
+	"github.com/igorsimevski/phonecom-goclient"
 	"github.com/urfave/cli"
-	"phonecom-go-sdk"
 )
 
 func main() {
@@ -376,6 +376,10 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 		}
 
 	case swagger.ExtensionsApi:
+
+		if param.otherParams.extensionId > 0 {
+			id = param.otherParams.extensionId
+		}
 
 		switch command {
 

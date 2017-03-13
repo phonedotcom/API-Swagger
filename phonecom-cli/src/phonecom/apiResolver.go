@@ -1,7 +1,7 @@
 package main
 
 import (
-	"phonecom-go-sdk"
+	"github.com/igorsimevski/phonecom-goclient"
 )
 
 type ApiResolver struct {
