@@ -175,7 +175,7 @@ class NumberregionsApi(object):
             collection_formats['filters[province_postal_code]'] = 'multi'
         if 'filters_country_postal_code' in params:
             query_params['filters[country_postal_code]'] = params['filters_country_postal_code']
-            collection_formats['filters[country_postal_code]'] = 'multi'
+            collection_formats['filters[country_postal_code]'] = 'csv'
         if 'sort_country_code' in params:
             query_params['sort[country_code]'] = params['sort_country_code']
         if 'sort_npa' in params:
@@ -198,7 +198,7 @@ class NumberregionsApi(object):
             query_params['fields'] = params['fields']
         if 'group_by' in params:
             query_params['group_by'] = params['group_by']
-            collection_formats['group_by'] = 'multi'
+            collection_formats['group_by'] = 'csv'
 
         header_params = {}
 

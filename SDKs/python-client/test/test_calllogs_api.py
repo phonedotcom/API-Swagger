@@ -31,6 +31,14 @@ class TestCalllogsApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def test_get_account_call_logs(self):
+        """
+        Test case for get_account_call_logs
+
+        Show details of an individual Call Log entry
+        """
+        pass
+
     def test_list_account_call_logs(self):
         """
         Test case for list_account_call_logs

@@ -107,7 +107,7 @@ module SwaggerClient
       query_params[:'filters[is_toll_free]'] = @api_client.build_collection_param(opts[:'filters_is_toll_free'], :multi) if !opts[:'filters_is_toll_free'].nil?
       query_params[:'filters[city]'] = @api_client.build_collection_param(opts[:'filters_city'], :multi) if !opts[:'filters_city'].nil?
       query_params[:'filters[province_postal_code]'] = @api_client.build_collection_param(opts[:'filters_province_postal_code'], :multi) if !opts[:'filters_province_postal_code'].nil?
-      query_params[:'filters[country_postal_code]'] = @api_client.build_collection_param(opts[:'filters_country_postal_code'], :multi) if !opts[:'filters_country_postal_code'].nil?
+      query_params[:'filters[country_postal_code]'] = @api_client.build_collection_param(opts[:'filters_country_postal_code'], :csv) if !opts[:'filters_country_postal_code'].nil?
       query_params[:'sort[country_code]'] = opts[:'sort_country_code'] if !opts[:'sort_country_code'].nil?
       query_params[:'sort[npa]'] = opts[:'sort_npa'] if !opts[:'sort_npa'].nil?
       query_params[:'sort[nxx]'] = opts[:'sort_nxx'] if !opts[:'sort_nxx'].nil?
@@ -118,7 +118,7 @@ module SwaggerClient
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
       query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
-      query_params[:'group_by'] = @api_client.build_collection_param(opts[:'group_by'], :multi) if !opts[:'group_by'].nil?
+      query_params[:'group_by'] = @api_client.build_collection_param(opts[:'group_by'], :csv) if !opts[:'group_by'].nil?
 
       # header parameters
       header_params = {}

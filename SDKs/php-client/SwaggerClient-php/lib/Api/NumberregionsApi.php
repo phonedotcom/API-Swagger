@@ -227,7 +227,7 @@ class NumberregionsApi
         }
         // query params
         if (is_array($filters_country_postal_code)) {
-            $filters_country_postal_code = $this->apiClient->getSerializer()->serializeCollection($filters_country_postal_code, 'multi', true);
+            $filters_country_postal_code = $this->apiClient->getSerializer()->serializeCollection($filters_country_postal_code, 'csv', true);
         }
         if ($filters_country_postal_code !== null) {
             $queryParams['filters[country_postal_code]'] = $this->apiClient->getSerializer()->toQueryValue($filters_country_postal_code);
@@ -274,7 +274,7 @@ class NumberregionsApi
         }
         // query params
         if (is_array($group_by)) {
-            $group_by = $this->apiClient->getSerializer()->serializeCollection($group_by, 'multi', true);
+            $group_by = $this->apiClient->getSerializer()->serializeCollection($group_by, 'csv', true);
         }
         if ($group_by !== null) {
             $queryParams['group_by'] = $this->apiClient->getSerializer()->toQueryValue($group_by);

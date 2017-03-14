@@ -31,9 +31,9 @@ class TestCallsApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_create_account_calls(self):
+    def test_create_account_call(self):
         """
-        Test case for create_account_calls
+        Test case for create_account_call
 
         Make a phone call
         """

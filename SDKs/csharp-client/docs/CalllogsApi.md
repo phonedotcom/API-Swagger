@@ -4,8 +4,78 @@ All URIs are relative to *https://api.phone.com/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**GetAccountCallLogs**](CalllogsApi.md#getaccountcalllogs) | **GET** /accounts/{account_id}/call-logs/{call_id} | Show details of an individual Call Log entry
 [**ListAccountCallLogs**](CalllogsApi.md#listaccountcalllogs) | **GET** /accounts/{account_id}/call-logs | Get a list of call details associated with your account
 
+
+<a name="getaccountcalllogs"></a>
+# **GetAccountCallLogs**
+> CallLogFull GetAccountCallLogs (int? accountId, string callId)
+
+Show details of an individual Call Log entry
+
+See Call Logs for more detail.
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class GetAccountCallLogsExample
+    {
+        public void main()
+        {
+            
+            // Configure API key authorization: apiKey
+            Configuration.Default.ApiKey.Add("Authorization", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // Configuration.Default.ApiKeyPrefix.Add("Authorization", "Bearer");
+
+            var apiInstance = new CalllogsApi();
+            var accountId = 56;  // int? | Account ID
+            var callId = callId_example;  // string | Call ID
+
+            try
+            {
+                // Show details of an individual Call Log entry
+                CallLogFull result = apiInstance.GetAccountCallLogs(accountId, callId);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling CalllogsApi.GetAccountCallLogs: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **accountId** | **int?**| Account ID | 
+ **callId** | **string**| Call ID | 
+
+### Return type
+
+[**CallLogFull**](CallLogFull.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a name="listaccountcalllogs"></a>
 # **ListAccountCallLogs**

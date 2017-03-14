@@ -65,15 +65,15 @@ namespace IO.Swagger.Test
 
         
         /// <summary>
-        /// Test CreateAccountCalls
+        /// Test CreateAccountCall
         /// </summary>
         [Test]
-        public void CreateAccountCallsTest()
+        public void CreateAccountCallTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
             //int? accountId = null;
             //CreateCallParams data = null;
-            //var response = instance.CreateAccountCalls(accountId, data);
+            //var response = instance.CreateAccountCall(accountId, data);
             //Assert.IsInstanceOf<CallFull> (response, "response is CallFull");
         }
         

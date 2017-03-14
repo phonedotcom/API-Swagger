@@ -19,6 +19,61 @@ module SwaggerClient
       @api_client = api_client
     end
 
+    # Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
+    # See Account Media for more info on the properties.
+    # @param account_id Account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [CreateMediaParams] :data Media data
+    # @return [MediaFull]
+    def create_account_media(account_id, opts = {})
+      data, _status_code, _headers = create_account_media_with_http_info(account_id, opts)
+      return data
+    end
+
+    # Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
+    # See Account Media for more info on the properties.
+    # @param account_id Account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [CreateMediaParams] :data Media data
+    # @return [Array<(MediaFull, Fixnum, Hash)>] MediaFull data, response status code and response headers
+    def create_account_media_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: MediaApi.create_account_media ..."
+      end
+      # verify the required parameter 'account_id' is set
+      fail ArgumentError, "Missing the required parameter 'account_id' when calling MediaApi.create_account_media" if account_id.nil?
+      # resource path
+      local_var_path = "/accounts/{account_id}/media".sub('{format}','json').sub('{' + 'account_id' + '}', account_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(opts[:'data'])
+      auth_names = ['apiKey']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'MediaFull')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MediaApi#create_account_media\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Show details of an individual media recording (Greeting or Hold Music)
     # Get individual media recording
     # @param account_id Account ID

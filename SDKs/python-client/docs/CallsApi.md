@@ -4,11 +4,11 @@ All URIs are relative to *https://api.phone.com/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_account_calls**](CallsApi.md#create_account_calls) | **POST** /accounts/{account_id}/calls | Make a phone call
+[**create_account_call**](CallsApi.md#create_account_call) | **POST** /accounts/{account_id}/calls | Make a phone call
 
 
-# **create_account_calls**
-> CallFull create_account_calls(account_id, data=data)
+# **create_account_call**
+> CallFull create_account_call(account_id, data=data)
 
 Make a phone call
 
@@ -34,10 +34,10 @@ data = swagger_client.CreateCallParams() # CreateCallParams | Call data (optiona
 
 try: 
     # Make a phone call
-    api_response = api_instance.create_account_calls(account_id, data=data)
+    api_response = api_instance.create_account_call(account_id, data=data)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CallsApi->create_account_calls: %s\n" % e)
+    print("Exception when calling CallsApi->create_account_call: %s\n" % e)
 ```
 
 ### Parameters

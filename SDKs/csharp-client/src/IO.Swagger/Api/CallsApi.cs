@@ -34,7 +34,7 @@ namespace IO.Swagger.Api
         /// <param name="accountId">Account ID</param>
         /// <param name="data">Call data (optional)</param>
         /// <returns>CallFull</returns>
-        CallFull CreateAccountCalls (int? accountId, CreateCallParams data = null);
+        CallFull CreateAccountCall (int? accountId, CreateCallParams data = null);
 
         /// <summary>
         /// Make a phone call
@@ -46,7 +46,7 @@ namespace IO.Swagger.Api
         /// <param name="accountId">Account ID</param>
         /// <param name="data">Call data (optional)</param>
         /// <returns>ApiResponse of CallFull</returns>
-        ApiResponse<CallFull> CreateAccountCallsWithHttpInfo (int? accountId, CreateCallParams data = null);
+        ApiResponse<CallFull> CreateAccountCallWithHttpInfo (int? accountId, CreateCallParams data = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -59,7 +59,7 @@ namespace IO.Swagger.Api
         /// <param name="accountId">Account ID</param>
         /// <param name="data">Call data (optional)</param>
         /// <returns>Task of CallFull</returns>
-        System.Threading.Tasks.Task<CallFull> CreateAccountCallsAsync (int? accountId, CreateCallParams data = null);
+        System.Threading.Tasks.Task<CallFull> CreateAccountCallAsync (int? accountId, CreateCallParams data = null);
 
         /// <summary>
         /// Make a phone call
@@ -71,7 +71,7 @@ namespace IO.Swagger.Api
         /// <param name="accountId">Account ID</param>
         /// <param name="data">Call data (optional)</param>
         /// <returns>Task of ApiResponse (CallFull)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CallFull>> CreateAccountCallsAsyncWithHttpInfo (int? accountId, CreateCallParams data = null);
+        System.Threading.Tasks.Task<ApiResponse<CallFull>> CreateAccountCallAsyncWithHttpInfo (int? accountId, CreateCallParams data = null);
         #endregion Asynchronous Operations
     }
 
@@ -191,9 +191,9 @@ namespace IO.Swagger.Api
         /// <param name="accountId">Account ID</param>
         /// <param name="data">Call data (optional)</param>
         /// <returns>CallFull</returns>
-        public CallFull CreateAccountCalls (int? accountId, CreateCallParams data = null)
+        public CallFull CreateAccountCall (int? accountId, CreateCallParams data = null)
         {
-             ApiResponse<CallFull> localVarResponse = CreateAccountCallsWithHttpInfo(accountId, data);
+             ApiResponse<CallFull> localVarResponse = CreateAccountCallWithHttpInfo(accountId, data);
              return localVarResponse.Data;
         }
 
@@ -204,11 +204,11 @@ namespace IO.Swagger.Api
         /// <param name="accountId">Account ID</param>
         /// <param name="data">Call data (optional)</param>
         /// <returns>ApiResponse of CallFull</returns>
-        public ApiResponse< CallFull > CreateAccountCallsWithHttpInfo (int? accountId, CreateCallParams data = null)
+        public ApiResponse< CallFull > CreateAccountCallWithHttpInfo (int? accountId, CreateCallParams data = null)
         {
             // verify the required parameter 'accountId' is set
             if (accountId == null)
-                throw new ApiException(400, "Missing required parameter 'accountId' when calling CallsApi->CreateAccountCalls");
+                throw new ApiException(400, "Missing required parameter 'accountId' when calling CallsApi->CreateAccountCall");
 
             var localVarPath = "/accounts/{account_id}/calls";
             var localVarPathParams = new Dictionary<String, String>();
@@ -261,7 +261,7 @@ namespace IO.Swagger.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("CreateAccountCalls", localVarResponse);
+                Exception exception = ExceptionFactory("CreateAccountCall", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -278,9 +278,9 @@ namespace IO.Swagger.Api
         /// <param name="accountId">Account ID</param>
         /// <param name="data">Call data (optional)</param>
         /// <returns>Task of CallFull</returns>
-        public async System.Threading.Tasks.Task<CallFull> CreateAccountCallsAsync (int? accountId, CreateCallParams data = null)
+        public async System.Threading.Tasks.Task<CallFull> CreateAccountCallAsync (int? accountId, CreateCallParams data = null)
         {
-             ApiResponse<CallFull> localVarResponse = await CreateAccountCallsAsyncWithHttpInfo(accountId, data);
+             ApiResponse<CallFull> localVarResponse = await CreateAccountCallAsyncWithHttpInfo(accountId, data);
              return localVarResponse.Data;
 
         }
@@ -292,11 +292,11 @@ namespace IO.Swagger.Api
         /// <param name="accountId">Account ID</param>
         /// <param name="data">Call data (optional)</param>
         /// <returns>Task of ApiResponse (CallFull)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<CallFull>> CreateAccountCallsAsyncWithHttpInfo (int? accountId, CreateCallParams data = null)
+        public async System.Threading.Tasks.Task<ApiResponse<CallFull>> CreateAccountCallAsyncWithHttpInfo (int? accountId, CreateCallParams data = null)
         {
             // verify the required parameter 'accountId' is set
             if (accountId == null)
-                throw new ApiException(400, "Missing required parameter 'accountId' when calling CallsApi->CreateAccountCalls");
+                throw new ApiException(400, "Missing required parameter 'accountId' when calling CallsApi->CreateAccountCall");
 
             var localVarPath = "/accounts/{account_id}/calls";
             var localVarPathParams = new Dictionary<String, String>();
@@ -348,7 +348,7 @@ namespace IO.Swagger.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("CreateAccountCalls", localVarResponse);
+                Exception exception = ExceptionFactory("CreateAccountCall", localVarResponse);
                 if (exception != null) throw exception;
             }
 

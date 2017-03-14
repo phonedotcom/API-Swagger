@@ -4,7 +4,65 @@ All URIs are relative to *https://api.phone.com/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_account_call_logs**](CalllogsApi.md#get_account_call_logs) | **GET** /accounts/{account_id}/call-logs/{call_id} | Show details of an individual Call Log entry
 [**list_account_call_logs**](CalllogsApi.md#list_account_call_logs) | **GET** /accounts/{account_id}/call-logs | Get a list of call details associated with your account
+
+
+# **get_account_call_logs**
+> CallLogFull get_account_call_logs(account_id, call_id)
+
+Show details of an individual Call Log entry
+
+See Call Logs for more detail.
+
+### Example
+```ruby
+# load the gem
+require 'swagger_client'
+# setup authorization
+SwaggerClient.configure do |config|
+  # Configure API key authorization: apiKey
+  config.api_key['Authorization'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Authorization'] = 'Bearer'
+end
+
+api_instance = SwaggerClient::CalllogsApi.new
+
+account_id = 56 # Integer | Account ID
+
+call_id = "call_id_example" # String | Call ID
+
+
+begin
+  #Show details of an individual Call Log entry
+  result = api_instance.get_account_call_logs(account_id, call_id)
+  p result
+rescue SwaggerClient::ApiError => e
+  puts "Exception when calling CalllogsApi->get_account_call_logs: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **account_id** | **Integer**| Account ID | 
+ **call_id** | **String**| Call ID | 
+
+### Return type
+
+[**CallLogFull**](CallLogFull.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 
 
 # **list_account_call_logs**

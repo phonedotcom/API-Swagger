@@ -77,6 +77,17 @@ class CalllogsApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for getAccountCallLogs
+     *
+     * Show details of an individual Call Log entry.
+     *
+     */
+    public function testGetAccountCallLogs()
+    {
+
+    }
+
+    /**
      * Test case for listAccountCallLogs
      *
      * Get a list of call details associated with your account.

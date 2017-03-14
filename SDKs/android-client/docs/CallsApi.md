@@ -4,12 +4,12 @@ All URIs are relative to *https://api.phone.com/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createAccountCalls**](CallsApi.md#createAccountCalls) | **POST** /accounts/{account_id}/calls | Make a phone call
+[**createAccountCall**](CallsApi.md#createAccountCall) | **POST** /accounts/{account_id}/calls | Make a phone call
 
 
-<a name="createAccountCalls"></a>
-# **createAccountCalls**
-> CallFull createAccountCalls(accountId, data)
+<a name="createAccountCall"></a>
+# **createAccountCall**
+> CallFull createAccountCall(accountId, data)
 
 Make a phone call
 
@@ -24,10 +24,10 @@ CallsApi apiInstance = new CallsApi();
 Integer accountId = 56; // Integer | Account ID
 CreateCallParams data = new CreateCallParams(); // CreateCallParams | Call data
 try {
-    CallFull result = apiInstance.createAccountCalls(accountId, data);
+    CallFull result = apiInstance.createAccountCall(accountId, data);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling CallsApi#createAccountCalls");
+    System.err.println("Exception when calling CallsApi#createAccountCall");
     e.printStackTrace();
 }
 ```

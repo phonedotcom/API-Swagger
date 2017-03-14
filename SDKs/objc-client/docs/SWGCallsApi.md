@@ -4,12 +4,12 @@ All URIs are relative to *https://api.phone.com/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createAccountCalls**](SWGCallsApi.md#createaccountcalls) | **POST** /accounts/{account_id}/calls | Make a phone call
+[**createAccountCall**](SWGCallsApi.md#createaccountcall) | **POST** /accounts/{account_id}/calls | Make a phone call
 
 
-# **createAccountCalls**
+# **createAccountCall**
 ```objc
--(NSURLSessionTask*) createAccountCallsWithAccountId: (NSNumber*) accountId
+-(NSURLSessionTask*) createAccountCallWithAccountId: (NSNumber*) accountId
     data: (SWGCreateCallParams*) data
         completionHandler: (void (^)(SWGCallFull* output, NSError* error)) handler;
 ```
@@ -34,14 +34,14 @@ SWGCreateCallParams* data = [[SWGCreateCallParams alloc] init]; // Call data (op
 SWGCallsApi*apiInstance = [[SWGCallsApi alloc] init];
 
 // Make a phone call
-[apiInstance createAccountCallsWithAccountId:accountId
+[apiInstance createAccountCallWithAccountId:accountId
               data:data
           completionHandler: ^(SWGCallFull* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling SWGCallsApi->createAccountCalls: %@", error);
+                            NSLog(@"Error calling SWGCallsApi->createAccountCall: %@", error);
                         }
                     }];
 ```

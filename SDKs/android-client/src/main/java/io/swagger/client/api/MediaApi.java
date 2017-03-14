@@ -23,6 +23,7 @@ import java.util.*;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import io.swagger.client.model.CreateMediaParams;
 import io.swagger.client.model.ListMedia;
 import io.swagger.client.model.MediaFull;
 
@@ -56,6 +57,137 @@ public class MediaApi {
     return basePath;
   }
 
+  /**
+  * Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
+  * See Account Media for more info on the properties.
+   * @param accountId Account ID
+   * @param data Media data
+   * @return MediaFull
+  */
+  public MediaFull createAccountMedia (Integer accountId, CreateMediaParams data) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
+    Object postBody = data;
+    // verify the required parameter 'accountId' is set
+    if (accountId == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'accountId' when calling createAccountMedia",
+        new ApiException(400, "Missing the required parameter 'accountId' when calling createAccountMedia"));
+    }
+
+    // create path and map variables
+    String path = "/accounts/{account_id}/media".replaceAll("\\{format\\}","json").replaceAll("\\{" + "account_id" + "\\}", apiInvoker.escapeString(accountId.toString()));
+
+    // query params
+    List<Pair> queryParams = new ArrayList<Pair>();
+    // header params
+    Map<String, String> headerParams = new HashMap<String, String>();
+    // form params
+    Map<String, String> formParams = new HashMap<String, String>();
+    String[] contentTypes = {
+      "application/json"
+    };
+    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
+
+    if (contentType.startsWith("multipart/form-data")) {
+      // file uploading
+      MultipartEntityBuilder localVarBuilder = MultipartEntityBuilder.create();
+      HttpEntity httpEntity = localVarBuilder.build();
+      postBody = httpEntity;
+    } else {
+      // normal form params
+    }
+
+    String[] authNames = new String[] { "apiKey" };
+
+    try {
+      String localVarResponse = apiInvoker.invokeAPI (basePath, path, "POST", queryParams, postBody, headerParams, formParams, contentType, authNames);
+      if (localVarResponse != null) {
+         return (MediaFull) ApiInvoker.deserialize(localVarResponse, "", MediaFull.class);
+      } else {
+         return null;
+      }
+    } catch (ApiException ex) {
+       throw ex;
+    } catch (InterruptedException ex) {
+       throw ex;
+    } catch (ExecutionException ex) {
+       if (ex.getCause() instanceof VolleyError) {
+         VolleyError volleyError = (VolleyError)ex.getCause();
+         if (volleyError.networkResponse != null) {
+           throw new ApiException(volleyError.networkResponse.statusCode, volleyError.getMessage());
+         }
+       }
+       throw ex;
+    } catch (TimeoutException ex) {
+       throw ex;
+    }
+  }
+
+      /**
+   * Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
+   * See Account Media for more info on the properties.
+   * @param accountId Account ID   * @param data Media data
+  */
+  public void createAccountMedia (Integer accountId, CreateMediaParams data, final Response.Listener<MediaFull> responseListener, final Response.ErrorListener errorListener) {
+    Object postBody = data;
+
+  
+    // verify the required parameter 'accountId' is set
+    if (accountId == null) {
+       VolleyError error = new VolleyError("Missing the required parameter 'accountId' when calling createAccountMedia",
+         new ApiException(400, "Missing the required parameter 'accountId' when calling createAccountMedia"));
+    }
+    
+
+    // create path and map variables
+    String path = "/accounts/{account_id}/media".replaceAll("\\{format\\}","json").replaceAll("\\{" + "account_id" + "\\}", apiInvoker.escapeString(accountId.toString()));
+
+    // query params
+    List<Pair> queryParams = new ArrayList<Pair>();
+    // header params
+    Map<String, String> headerParams = new HashMap<String, String>();
+    // form params
+    Map<String, String> formParams = new HashMap<String, String>();
+
+
+
+    String[] contentTypes = {
+      "application/json"
+    };
+    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
+
+    if (contentType.startsWith("multipart/form-data")) {
+      // file uploading
+      MultipartEntityBuilder localVarBuilder = MultipartEntityBuilder.create();
+      
+
+      HttpEntity httpEntity = localVarBuilder.build();
+      postBody = httpEntity;
+    } else {
+      // normal form params
+          }
+
+      String[] authNames = new String[] { "apiKey" };
+
+    try {
+      apiInvoker.invokeAPI(basePath, path, "POST", queryParams, postBody, headerParams, formParams, contentType, authNames,
+        new Response.Listener<String>() {
+          @Override
+          public void onResponse(String localVarResponse) {
+            try {
+              responseListener.onResponse((MediaFull) ApiInvoker.deserialize(localVarResponse,  "", MediaFull.class));
+            } catch (ApiException exception) {
+               errorListener.onErrorResponse(new VolleyError(exception));
+            }
+          }
+      }, new Response.ErrorListener() {
+          @Override
+          public void onErrorResponse(VolleyError error) {
+            errorListener.onErrorResponse(error);
+          }
+      });
+    } catch (ApiException ex) {
+      errorListener.onErrorResponse(new VolleyError(ex));
+    }
+  }
   /**
   * Show details of an individual media recording (Greeting or Hold Music)
   * Get individual media recording

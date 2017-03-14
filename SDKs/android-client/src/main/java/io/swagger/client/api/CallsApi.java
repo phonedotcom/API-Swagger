@@ -63,12 +63,12 @@ public class CallsApi {
    * @param data Call data
    * @return CallFull
   */
-  public CallFull createAccountCalls (Integer accountId, CreateCallParams data) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
+  public CallFull createAccountCall (Integer accountId, CreateCallParams data) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
     Object postBody = data;
     // verify the required parameter 'accountId' is set
     if (accountId == null) {
-      VolleyError error = new VolleyError("Missing the required parameter 'accountId' when calling createAccountCalls",
-        new ApiException(400, "Missing the required parameter 'accountId' when calling createAccountCalls"));
+      VolleyError error = new VolleyError("Missing the required parameter 'accountId' when calling createAccountCall",
+        new ApiException(400, "Missing the required parameter 'accountId' when calling createAccountCall"));
     }
 
     // create path and map variables
@@ -125,14 +125,14 @@ public class CallsApi {
    * 
    * @param accountId Account ID   * @param data Call data
   */
-  public void createAccountCalls (Integer accountId, CreateCallParams data, final Response.Listener<CallFull> responseListener, final Response.ErrorListener errorListener) {
+  public void createAccountCall (Integer accountId, CreateCallParams data, final Response.Listener<CallFull> responseListener, final Response.ErrorListener errorListener) {
     Object postBody = data;
 
   
     // verify the required parameter 'accountId' is set
     if (accountId == null) {
-       VolleyError error = new VolleyError("Missing the required parameter 'accountId' when calling createAccountCalls",
-         new ApiException(400, "Missing the required parameter 'accountId' when calling createAccountCalls"));
+       VolleyError error = new VolleyError("Missing the required parameter 'accountId' when calling createAccountCall",
+         new ApiException(400, "Missing the required parameter 'accountId' when calling createAccountCall"));
     }
     
 

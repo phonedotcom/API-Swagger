@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "SWGCreateMediaParams.h"
 #import "SWGListMedia.h"
 #import "SWGMediaFull.h"
 #import "SWGApi.h"
@@ -23,6 +24,23 @@ extern NSString* kSWGMediaApiErrorDomain;
 extern NSInteger kSWGMediaApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(SWGApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
+
+/// Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
+/// See Account Media for more info on the properties.
+///
+/// @param accountId Account ID
+/// @param data Media data (optional)
+/// 
+///  code:201 message:"Created",
+///  code:401 message:"Unauthorized access",
+///  code:403 message:"Forbidden",
+///  code:422 message:"Invalid Data"
+///
+/// @return SWGMediaFull*
+-(NSURLSessionTask*) createAccountMediaWithAccountId: (NSNumber*) accountId
+    data: (SWGCreateMediaParams*) data
+    completionHandler: (void (^)(SWGMediaFull* output, NSError* error)) handler;
+
 
 /// Show details of an individual media recording (Greeting or Hold Music)
 /// Get individual media recording

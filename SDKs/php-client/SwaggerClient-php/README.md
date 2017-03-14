@@ -86,8 +86,9 @@ Class | Method | HTTP request | Description
 *ApplicationsApi* | [**listAccountApplications**](docs/Api/ApplicationsApi.md#listaccountapplications) | **GET** /accounts/{account_id}/applications | Get a list of applications you have defined
 *AvailablenumbersApi* | [**listAvailablePhoneNumbers**](docs/Api/AvailablenumbersApi.md#listavailablephonenumbers) | **GET** /phone-numbers/available | 
 *CalleridsApi* | [**getCallerIds**](docs/Api/CalleridsApi.md#getcallerids) | **GET** /accounts/{account_id}/extensions/{extension_id}/caller-ids | Show the Caller ID options a given extension can use
+*CalllogsApi* | [**getAccountCallLogs**](docs/Api/CalllogsApi.md#getaccountcalllogs) | **GET** /accounts/{account_id}/call-logs/{call_id} | Show details of an individual Call Log entry
 *CalllogsApi* | [**listAccountCallLogs**](docs/Api/CalllogsApi.md#listaccountcalllogs) | **GET** /accounts/{account_id}/call-logs | Get a list of call details associated with your account
-*CallsApi* | [**createAccountCalls**](docs/Api/CallsApi.md#createaccountcalls) | **POST** /accounts/{account_id}/calls | Make a phone call
+*CallsApi* | [**createAccountCall**](docs/Api/CallsApi.md#createaccountcall) | **POST** /accounts/{account_id}/calls | Make a phone call
 *ContactsApi* | [**createAccountExtensionContact**](docs/Api/ContactsApi.md#createaccountextensioncontact) | **POST** /accounts/{account_id}/extensions/{extension_id}/contacts | Add a new address book contact for an extension
 *ContactsApi* | [**deleteAccountExtensionContact**](docs/Api/ContactsApi.md#deleteaccountextensioncontact) | **DELETE** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | 
 *ContactsApi* | [**getAccountExtensionContact**](docs/Api/ContactsApi.md#getaccountextensioncontact) | **GET** /accounts/{account_id}/extensions/{extension_id}/contacts/{contact_id} | Retrieve the details of an address book contact
@@ -109,6 +110,7 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**getAccountExtensionContactGroup**](docs/Api/GroupsApi.md#getaccountextensioncontactgroup) | **GET** /accounts/{account_id}/extensions/{extension_id}/contact-groups/{group_id} | 
 *GroupsApi* | [**listAccountExtensionContactGroups**](docs/Api/GroupsApi.md#listaccountextensioncontactgroups) | **GET** /accounts/{account_id}/extensions/{extension_id}/contact-groups | Show a list of contact groups belonging to an extension
 *GroupsApi* | [**replaceAccountExtensionContactGroup**](docs/Api/GroupsApi.md#replaceaccountextensioncontactgroup) | **PUT** /accounts/{account_id}/extensions/{extension_id}/contact-groups/{group_id} | 
+*MediaApi* | [**createAccountMedia**](docs/Api/MediaApi.md#createaccountmedia) | **POST** /accounts/{account_id}/media | Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
 *MediaApi* | [**getAccountMedia**](docs/Api/MediaApi.md#getaccountmedia) | **GET** /accounts/{account_id}/media/{recording_id} | Show details of an individual media recording (Greeting or Hold Music)
 *MediaApi* | [**listAccountMedia**](docs/Api/MediaApi.md#listaccountmedia) | **GET** /accounts/{account_id}/media | Get a list of media recordings for an account
 *MenusApi* | [**createAccountMenu**](docs/Api/MenusApi.md#createaccountmenu) | **POST** /accounts/{account_id}/menus | Create an individual menu
@@ -169,6 +171,7 @@ Class | Method | HTTP request | Description
  - [CreateDeviceParams](docs/Model/CreateDeviceParams.md)
  - [CreateExtensionParams](docs/Model/CreateExtensionParams.md)
  - [CreateGroupParams](docs/Model/CreateGroupParams.md)
+ - [CreateMediaParams](docs/Model/CreateMediaParams.md)
  - [CreateMenuParams](docs/Model/CreateMenuParams.md)
  - [CreatePhoneNumberParams](docs/Model/CreatePhoneNumberParams.md)
  - [CreateQueueParams](docs/Model/CreateQueueParams.md)

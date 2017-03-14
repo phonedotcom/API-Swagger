@@ -11,6 +11,52 @@ import Alamofire
 
 open class MediaAPI: APIBase {
     /**
+     Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
+     
+     - parameter accountId: (path) Account ID 
+     - parameter data: (body) Media data (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func createAccountMedia(accountId: Int32, data: CreateMediaParams? = nil, completion: @escaping ((_ data: MediaFull?,_ error: Error?) -> Void)) {
+        createAccountMediaWithRequestBuilder(accountId: accountId, data: data).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
+     - POST /accounts/{accountId}/media
+     - See Account Media for more info on the properties.
+     - API Key:
+       - type: apiKey Authorization 
+       - name: apiKey
+     - examples: [{contentType=application/json, example={
+  "name" : "aeiou",
+  "id" : 123,
+  "type" : "aeiou"
+}}]
+     
+     - parameter accountId: (path) Account ID 
+     - parameter data: (body) Media data (optional)
+
+     - returns: RequestBuilder<MediaFull> 
+     */
+    open class func createAccountMediaWithRequestBuilder(accountId: Int32, data: CreateMediaParams? = nil) -> RequestBuilder<MediaFull> {
+        var path = "/accounts/{accountId}/media"
+        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters = data?.encodeToJSON() as? [String:AnyObject]
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<MediaFull>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
      Show details of an individual media recording (Greeting or Hold Music)
      
      - parameter accountId: (path) Account ID 

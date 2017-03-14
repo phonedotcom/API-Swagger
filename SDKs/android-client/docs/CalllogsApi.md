@@ -4,8 +4,54 @@ All URIs are relative to *https://api.phone.com/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getAccountCallLogs**](CalllogsApi.md#getAccountCallLogs) | **GET** /accounts/{account_id}/call-logs/{call_id} | Show details of an individual Call Log entry
 [**listAccountCallLogs**](CalllogsApi.md#listAccountCallLogs) | **GET** /accounts/{account_id}/call-logs | Get a list of call details associated with your account
 
+
+<a name="getAccountCallLogs"></a>
+# **getAccountCallLogs**
+> CallLogFull getAccountCallLogs(accountId, callId)
+
+Show details of an individual Call Log entry
+
+See Call Logs for more detail.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.api.CalllogsApi;
+
+CalllogsApi apiInstance = new CalllogsApi();
+Integer accountId = 56; // Integer | Account ID
+String callId = "callId_example"; // String | Call ID
+try {
+    CallLogFull result = apiInstance.getAccountCallLogs(accountId, callId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling CalllogsApi#getAccountCallLogs");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **accountId** | **Integer**| Account ID |
+ **callId** | **String**| Call ID |
+
+### Return type
+
+[**CallLogFull**](CallLogFull.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 <a name="listAccountCallLogs"></a>
 # **listAccountCallLogs**

@@ -40,7 +40,7 @@ class CallsApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def create_account_calls(self, account_id, **kwargs):
+    def create_account_call(self, account_id, **kwargs):
         """
         Make a phone call
         
@@ -50,7 +50,7 @@ class CallsApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_account_calls(account_id, callback=callback_function)
+        >>> thread = api.create_account_call(account_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -62,12 +62,12 @@ class CallsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.create_account_calls_with_http_info(account_id, **kwargs)
+            return self.create_account_call_with_http_info(account_id, **kwargs)
         else:
-            (data) = self.create_account_calls_with_http_info(account_id, **kwargs)
+            (data) = self.create_account_call_with_http_info(account_id, **kwargs)
             return data
 
-    def create_account_calls_with_http_info(self, account_id, **kwargs):
+    def create_account_call_with_http_info(self, account_id, **kwargs):
         """
         Make a phone call
         
@@ -77,7 +77,7 @@ class CallsApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_account_calls_with_http_info(account_id, callback=callback_function)
+        >>> thread = api.create_account_call_with_http_info(account_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
@@ -99,13 +99,13 @@ class CallsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method create_account_calls" % key
+                    " to method create_account_call" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'account_id' is set
         if ('account_id' not in params) or (params['account_id'] is None):
-            raise ValueError("Missing the required parameter `account_id` when calling `create_account_calls`")
+            raise ValueError("Missing the required parameter `account_id` when calling `create_account_call`")
 
 
         collection_formats = {}

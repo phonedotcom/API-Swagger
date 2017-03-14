@@ -4,8 +4,70 @@ All URIs are relative to *https://api.phone.com/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getAccountCallLogs**](SWGCalllogsApi.md#getaccountcalllogs) | **GET** /accounts/{account_id}/call-logs/{call_id} | Show details of an individual Call Log entry
 [**listAccountCallLogs**](SWGCalllogsApi.md#listaccountcalllogs) | **GET** /accounts/{account_id}/call-logs | Get a list of call details associated with your account
 
+
+# **getAccountCallLogs**
+```objc
+-(NSURLSessionTask*) getAccountCallLogsWithAccountId: (NSNumber*) accountId
+    callId: (NSString*) callId
+        completionHandler: (void (^)(SWGCallLogFull* output, NSError* error)) handler;
+```
+
+Show details of an individual Call Log entry
+
+See Call Logs for more detail.
+
+### Example 
+```objc
+SWGDefaultConfiguration *apiConfig = [SWGDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: apiKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSNumber* accountId = @56; // Account ID
+NSString* callId = @"callId_example"; // Call ID
+
+SWGCalllogsApi*apiInstance = [[SWGCalllogsApi alloc] init];
+
+// Show details of an individual Call Log entry
+[apiInstance getAccountCallLogsWithAccountId:accountId
+              callId:callId
+          completionHandler: ^(SWGCallLogFull* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling SWGCalllogsApi->getAccountCallLogs: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **accountId** | **NSNumber***| Account ID | 
+ **callId** | **NSString***| Call ID | 
+
+### Return type
+
+[**SWGCallLogFull***](SWGCallLogFull.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listAccountCallLogs**
 ```objc

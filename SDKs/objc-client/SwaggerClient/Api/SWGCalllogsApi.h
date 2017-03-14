@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "SWGCallLogFull.h"
 #import "SWGListCallLogs.h"
 #import "SWGApi.h"
 
@@ -22,6 +23,23 @@ extern NSString* kSWGCalllogsApiErrorDomain;
 extern NSInteger kSWGCalllogsApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(SWGApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
+
+/// Show details of an individual Call Log entry
+/// See Call Logs for more detail.
+///
+/// @param accountId Account ID
+/// @param callId Call ID
+/// 
+///  code:200 message:"OK",
+///  code:401 message:"Unauthorized access",
+///  code:403 message:"Forbidden",
+///  code:404 message:"Not Found"
+///
+/// @return SWGCallLogFull*
+-(NSURLSessionTask*) getAccountCallLogsWithAccountId: (NSNumber*) accountId
+    callId: (NSString*) callId
+    completionHandler: (void (^)(SWGCallLogFull* output, NSError* error)) handler;
+
 
 /// Get a list of call details associated with your account
 /// See Call Logs for more detail.

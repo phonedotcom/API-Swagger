@@ -11,6 +11,76 @@ import Alamofire
 
 open class CalllogsAPI: APIBase {
     /**
+     Show details of an individual Call Log entry
+     
+     - parameter accountId: (path) Account ID 
+     - parameter callId: (path) Call ID 
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getAccountCallLogs(accountId: Int32, callId: String, completion: @escaping ((_ data: CallLogFull?,_ error: Error?) -> Void)) {
+        getAccountCallLogsWithRequestBuilder(accountId: accountId, callId: callId).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+
+    /**
+     Show details of an individual Call Log entry
+     - GET /accounts/{accountId}/call-logs/{callId}
+     - See Call Logs for more detail.
+     - API Key:
+       - type: apiKey Authorization 
+       - name: apiKey
+     - examples: [{contentType=application/json, example={
+  "call_number" : "aeiou",
+  "call_recording" : "aeiou",
+  "extension" : {
+    "extension" : 123,
+    "name" : "aeiou",
+    "id" : 123
+  },
+  "caller_cnam" : "aeiou",
+  "created_at" : "aeiou",
+  "type" : "aeiou",
+  "uuid" : "aeiou",
+  "call_duration" : 123,
+  "final_action" : "aeiou",
+  "start_time" : "aeiou",
+  "is_monitored" : "aeiou",
+  "caller_id" : "aeiou",
+  "details" : [ {
+    "start_time" : 123,
+    "voip_phone_id" : 123,
+    "type" : "aeiou",
+    "id_value" : 123,
+    "voip_id" : 123
+  } ],
+  "id" : "aeiou",
+  "called_number" : "aeiou",
+  "direction" : "aeiou"
+}}]
+     
+     - parameter accountId: (path) Account ID 
+     - parameter callId: (path) Call ID 
+
+     - returns: RequestBuilder<CallLogFull> 
+     */
+    open class func getAccountCallLogsWithRequestBuilder(accountId: Int32, callId: String) -> RequestBuilder<CallLogFull> {
+        var path = "/accounts/{accountId}/call-logs/{callId}"
+        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{callId}", with: "\(callId)", options: .literal, range: nil)
+        let URLString = SwaggerClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<CallLogFull>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Get a list of call details associated with your account
      
      - parameter accountId: (path) Account ID 

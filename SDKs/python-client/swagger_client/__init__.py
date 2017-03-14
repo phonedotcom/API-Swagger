@@ -36,6 +36,7 @@ from .models.create_contact_params import CreateContactParams
 from .models.create_device_params import CreateDeviceParams
 from .models.create_extension_params import CreateExtensionParams
 from .models.create_group_params import CreateGroupParams
+from .models.create_media_params import CreateMediaParams
 from .models.create_menu_params import CreateMenuParams
 from .models.create_phone_number_params import CreatePhoneNumberParams
 from .models.create_queue_params import CreateQueueParams

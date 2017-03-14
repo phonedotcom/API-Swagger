@@ -65,6 +65,19 @@ namespace IO.Swagger.Test
 
         
         /// <summary>
+        /// Test GetAccountCallLogs
+        /// </summary>
+        [Test]
+        public void GetAccountCallLogsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //int? accountId = null;
+            //string callId = null;
+            //var response = instance.GetAccountCallLogs(accountId, callId);
+            //Assert.IsInstanceOf<CallLogFull> (response, "response is CallLogFull");
+        }
+        
+        /// <summary>
         /// Test ListAccountCallLogs
         /// </summary>
         [Test]

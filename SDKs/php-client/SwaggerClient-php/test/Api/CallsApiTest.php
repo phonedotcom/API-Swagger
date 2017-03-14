@@ -77,12 +77,12 @@ class CallsApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test case for createAccountCalls
+     * Test case for createAccountCall
      *
      * Make a phone call.
      *
      */
-    public function testCreateAccountCalls()
+    public function testCreateAccountCall()
     {
 
     }

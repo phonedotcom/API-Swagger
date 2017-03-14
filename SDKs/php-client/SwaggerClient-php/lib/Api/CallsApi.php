@@ -88,7 +88,7 @@ class CallsApi
     }
 
     /**
-     * Operation createAccountCalls
+     * Operation createAccountCall
      *
      * Make a phone call
      *
@@ -97,14 +97,14 @@ class CallsApi
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return \Swagger\Client\Model\CallFull
      */
-    public function createAccountCalls($account_id, $data = null)
+    public function createAccountCall($account_id, $data = null)
     {
-        list($response) = $this->createAccountCallsWithHttpInfo($account_id, $data);
+        list($response) = $this->createAccountCallWithHttpInfo($account_id, $data);
         return $response;
     }
 
     /**
-     * Operation createAccountCallsWithHttpInfo
+     * Operation createAccountCallWithHttpInfo
      *
      * Make a phone call
      *
@@ -113,11 +113,11 @@ class CallsApi
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @return array of \Swagger\Client\Model\CallFull, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createAccountCallsWithHttpInfo($account_id, $data = null)
+    public function createAccountCallWithHttpInfo($account_id, $data = null)
     {
         // verify the required parameter 'account_id' is set
         if ($account_id === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $account_id when calling createAccountCalls');
+            throw new \InvalidArgumentException('Missing the required parameter $account_id when calling createAccountCall');
         }
         // parse inputs
         $resourcePath = "/accounts/{account_id}/calls";

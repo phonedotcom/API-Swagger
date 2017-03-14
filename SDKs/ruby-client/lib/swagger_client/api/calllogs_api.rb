@@ -19,6 +19,63 @@ module SwaggerClient
       @api_client = api_client
     end
 
+    # Show details of an individual Call Log entry
+    # See Call Logs for more detail.
+    # @param account_id Account ID
+    # @param call_id Call ID
+    # @param [Hash] opts the optional parameters
+    # @return [CallLogFull]
+    def get_account_call_logs(account_id, call_id, opts = {})
+      data, _status_code, _headers = get_account_call_logs_with_http_info(account_id, call_id, opts)
+      return data
+    end
+
+    # Show details of an individual Call Log entry
+    # See Call Logs for more detail.
+    # @param account_id Account ID
+    # @param call_id Call ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CallLogFull, Fixnum, Hash)>] CallLogFull data, response status code and response headers
+    def get_account_call_logs_with_http_info(account_id, call_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: CalllogsApi.get_account_call_logs ..."
+      end
+      # verify the required parameter 'account_id' is set
+      fail ArgumentError, "Missing the required parameter 'account_id' when calling CalllogsApi.get_account_call_logs" if account_id.nil?
+      # verify the required parameter 'call_id' is set
+      fail ArgumentError, "Missing the required parameter 'call_id' when calling CalllogsApi.get_account_call_logs" if call_id.nil?
+      # resource path
+      local_var_path = "/accounts/{account_id}/call-logs/{call_id}".sub('{format}','json').sub('{' + 'account_id' + '}', account_id.to_s).sub('{' + 'call_id' + '}', call_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['apiKey']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'CallLogFull')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CalllogsApi#get_account_call_logs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get a list of call details associated with your account
     # See Call Logs for more detail.
     # @param account_id Account ID

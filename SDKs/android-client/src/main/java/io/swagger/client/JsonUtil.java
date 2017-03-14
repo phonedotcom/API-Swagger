@@ -145,6 +145,10 @@ public class JsonUtil {
       return new TypeToken<List<CreateGroupParams>>(){}.getType();
     }
     
+    if ("CreateMediaParams".equalsIgnoreCase(className)) {
+      return new TypeToken<List<CreateMediaParams>>(){}.getType();
+    }
+    
     if ("CreateMenuParams".equalsIgnoreCase(className)) {
       return new TypeToken<List<CreateMenuParams>>(){}.getType();
     }
@@ -621,6 +625,10 @@ public class JsonUtil {
     
     if ("CreateGroupParams".equalsIgnoreCase(className)) {
       return new TypeToken<CreateGroupParams>(){}.getType();
+    }
+    
+    if ("CreateMediaParams".equalsIgnoreCase(className)) {
+      return new TypeToken<CreateMediaParams>(){}.getType();
     }
     
     if ("CreateMenuParams".equalsIgnoreCase(className)) {

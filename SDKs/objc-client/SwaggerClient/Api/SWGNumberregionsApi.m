@@ -142,7 +142,7 @@ NSInteger kSWGNumberregionsApiMissingParamErrorCode = 234513;
         
     }
     if (filtersCountryPostalCode != nil) {
-        queryParams[@"filters[country_postal_code]"] = [[SWGQueryParamCollection alloc] initWithValuesAndFormat: filtersCountryPostalCode format: @"multi"];
+        queryParams[@"filters[country_postal_code]"] = [[SWGQueryParamCollection alloc] initWithValuesAndFormat: filtersCountryPostalCode format: @"csv"];
         
     }
     if (sortCountryCode != nil) {
@@ -176,7 +176,7 @@ NSInteger kSWGNumberregionsApiMissingParamErrorCode = 234513;
         queryParams[@"fields"] = fields;
     }
     if (groupBy != nil) {
-        queryParams[@"group_by"] = [[SWGQueryParamCollection alloc] initWithValuesAndFormat: groupBy format: @"multi"];
+        queryParams[@"group_by"] = [[SWGQueryParamCollection alloc] initWithValuesAndFormat: groupBy format: @"csv"];
         
     }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];

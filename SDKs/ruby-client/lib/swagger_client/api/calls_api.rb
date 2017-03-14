@@ -25,8 +25,8 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [CreateCallParams] :data Call data
     # @return [CallFull]
-    def create_account_calls(account_id, opts = {})
-      data, _status_code, _headers = create_account_calls_with_http_info(account_id, opts)
+    def create_account_call(account_id, opts = {})
+      data, _status_code, _headers = create_account_call_with_http_info(account_id, opts)
       return data
     end
 
@@ -36,12 +36,12 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [CreateCallParams] :data Call data
     # @return [Array<(CallFull, Fixnum, Hash)>] CallFull data, response status code and response headers
-    def create_account_calls_with_http_info(account_id, opts = {})
+    def create_account_call_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: CallsApi.create_account_calls ..."
+        @api_client.config.logger.debug "Calling API: CallsApi.create_account_call ..."
       end
       # verify the required parameter 'account_id' is set
-      fail ArgumentError, "Missing the required parameter 'account_id' when calling CallsApi.create_account_calls" if account_id.nil?
+      fail ArgumentError, "Missing the required parameter 'account_id' when calling CallsApi.create_account_call" if account_id.nil?
       # resource path
       local_var_path = "/accounts/{account_id}/calls".sub('{format}','json').sub('{' + 'account_id' + '}', account_id.to_s)
 
@@ -69,7 +69,7 @@ module SwaggerClient
         :auth_names => auth_names,
         :return_type => 'CallFull')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CallsApi#create_account_calls\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CallsApi#create_account_call\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

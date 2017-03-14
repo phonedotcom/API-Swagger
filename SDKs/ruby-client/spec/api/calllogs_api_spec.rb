@@ -31,6 +31,19 @@ describe 'CalllogsApi' do
     end
   end
 
+  # unit tests for get_account_call_logs
+  # Show details of an individual Call Log entry
+  # See Call Logs for more detail.
+  # @param account_id Account ID
+  # @param call_id Call ID
+  # @param [Hash] opts the optional parameters
+  # @return [CallLogFull]
+  describe 'get_account_call_logs test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for list_account_call_logs
   # Get a list of call details associated with your account
   # See Call Logs for more detail.

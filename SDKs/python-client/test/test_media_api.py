@@ -31,6 +31,14 @@ class TestMediaApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def test_create_account_media(self):
+        """
+        Test case for create_account_media
+
+        Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
+        """
+        pass
+
     def test_get_account_media(self):
         """
         Test case for get_account_media

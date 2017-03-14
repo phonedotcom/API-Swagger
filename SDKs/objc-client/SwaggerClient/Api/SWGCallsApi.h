@@ -36,7 +36,7 @@ extern NSInteger kSWGCallsApiMissingParamErrorCode;
 ///  code:422 message:"Invalid Data"
 ///
 /// @return SWGCallFull*
--(NSURLSessionTask*) createAccountCallsWithAccountId: (NSNumber*) accountId
+-(NSURLSessionTask*) createAccountCallWithAccountId: (NSNumber*) accountId
     data: (SWGCreateCallParams*) data
     completionHandler: (void (^)(SWGCallFull* output, NSError* error)) handler;
 

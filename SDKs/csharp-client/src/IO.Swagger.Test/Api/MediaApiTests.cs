@@ -65,6 +65,19 @@ namespace IO.Swagger.Test
 
         
         /// <summary>
+        /// Test CreateAccountMedia
+        /// </summary>
+        [Test]
+        public void CreateAccountMediaTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //int? accountId = null;
+            //CreateMediaParams data = null;
+            //var response = instance.CreateAccountMedia(accountId, data);
+            //Assert.IsInstanceOf<MediaFull> (response, "response is MediaFull");
+        }
+        
+        /// <summary>
         /// Test GetAccountMedia
         /// </summary>
         [Test]

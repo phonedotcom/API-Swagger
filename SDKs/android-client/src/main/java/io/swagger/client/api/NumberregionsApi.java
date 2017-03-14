@@ -96,7 +96,7 @@ public class NumberregionsApi {
     queryParams.addAll(ApiInvoker.parameterToPairs("multi", "filters[is_toll_free]", filtersIsTollFree));
     queryParams.addAll(ApiInvoker.parameterToPairs("multi", "filters[city]", filtersCity));
     queryParams.addAll(ApiInvoker.parameterToPairs("multi", "filters[province_postal_code]", filtersProvincePostalCode));
-    queryParams.addAll(ApiInvoker.parameterToPairs("multi", "filters[country_postal_code]", filtersCountryPostalCode));
+    queryParams.addAll(ApiInvoker.parameterToPairs("csv", "filters[country_postal_code]", filtersCountryPostalCode));
     queryParams.addAll(ApiInvoker.parameterToPairs("", "sort[country_code]", sortCountryCode));
     queryParams.addAll(ApiInvoker.parameterToPairs("", "sort[npa]", sortNpa));
     queryParams.addAll(ApiInvoker.parameterToPairs("", "sort[nxx]", sortNxx));
@@ -107,7 +107,7 @@ public class NumberregionsApi {
     queryParams.addAll(ApiInvoker.parameterToPairs("", "limit", limit));
     queryParams.addAll(ApiInvoker.parameterToPairs("", "offset", offset));
     queryParams.addAll(ApiInvoker.parameterToPairs("", "fields", fields));
-    queryParams.addAll(ApiInvoker.parameterToPairs("multi", "group_by", groupBy));
+    queryParams.addAll(ApiInvoker.parameterToPairs("csv", "group_by", groupBy));
     String[] contentTypes = {
       "application/json"
     };
@@ -174,7 +174,7 @@ public class NumberregionsApi {
     queryParams.addAll(ApiInvoker.parameterToPairs("multi", "filters[is_toll_free]", filtersIsTollFree));
     queryParams.addAll(ApiInvoker.parameterToPairs("multi", "filters[city]", filtersCity));
     queryParams.addAll(ApiInvoker.parameterToPairs("multi", "filters[province_postal_code]", filtersProvincePostalCode));
-    queryParams.addAll(ApiInvoker.parameterToPairs("multi", "filters[country_postal_code]", filtersCountryPostalCode));
+    queryParams.addAll(ApiInvoker.parameterToPairs("csv", "filters[country_postal_code]", filtersCountryPostalCode));
     queryParams.addAll(ApiInvoker.parameterToPairs("", "sort[country_code]", sortCountryCode));
     queryParams.addAll(ApiInvoker.parameterToPairs("", "sort[npa]", sortNpa));
     queryParams.addAll(ApiInvoker.parameterToPairs("", "sort[nxx]", sortNxx));
@@ -185,7 +185,7 @@ public class NumberregionsApi {
     queryParams.addAll(ApiInvoker.parameterToPairs("", "limit", limit));
     queryParams.addAll(ApiInvoker.parameterToPairs("", "offset", offset));
     queryParams.addAll(ApiInvoker.parameterToPairs("", "fields", fields));
-    queryParams.addAll(ApiInvoker.parameterToPairs("multi", "group_by", groupBy));
+    queryParams.addAll(ApiInvoker.parameterToPairs("csv", "group_by", groupBy));
 
 
     String[] contentTypes = {

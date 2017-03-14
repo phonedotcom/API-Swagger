@@ -59,7 +59,7 @@ NSInteger kSWGCallsApiMissingParamErrorCode = 234513;
 ///
 ///  @returns SWGCallFull*
 ///
--(NSURLSessionTask*) createAccountCallsWithAccountId: (NSNumber*) accountId
+-(NSURLSessionTask*) createAccountCallWithAccountId: (NSNumber*) accountId
     data: (SWGCreateCallParams*) data
     completionHandler: (void (^)(SWGCallFull* output, NSError* error)) handler {
     // verify the required parameter 'accountId' is set

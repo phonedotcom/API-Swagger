@@ -17,8 +17,8 @@ open class CallsAPI: APIBase {
      - parameter data: (body) Call data (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func createAccountCalls(accountId: Int32, data: CreateCallParams? = nil, completion: @escaping ((_ data: CallFull?,_ error: Error?) -> Void)) {
-        createAccountCallsWithRequestBuilder(accountId: accountId, data: data).execute { (response, error) -> Void in
+    open class func createAccountCall(accountId: Int32, data: CreateCallParams? = nil, completion: @escaping ((_ data: CallFull?,_ error: Error?) -> Void)) {
+        createAccountCallWithRequestBuilder(accountId: accountId, data: data).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -40,7 +40,7 @@ open class CallsAPI: APIBase {
 
      - returns: RequestBuilder<CallFull> 
      */
-    open class func createAccountCallsWithRequestBuilder(accountId: Int32, data: CreateCallParams? = nil) -> RequestBuilder<CallFull> {
+    open class func createAccountCallWithRequestBuilder(accountId: Int32, data: CreateCallParams? = nil) -> RequestBuilder<CallFull> {
         var path = "/accounts/{accountId}/calls"
         path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
         let URLString = SwaggerClientAPI.basePath + path

@@ -591,6 +591,29 @@ class Decoders {
         }
 
 
+        // Decoder for [CreateMediaParams]
+        Decoders.addDecoder(clazz: [CreateMediaParams].self) { (source: AnyObject) -> [CreateMediaParams] in
+            return Decoders.decode(clazz: [CreateMediaParams].self, source: source)
+        }
+        // Decoder for CreateMediaParams
+        Decoders.addDecoder(clazz: CreateMediaParams.self) { (source: AnyObject) -> CreateMediaParams in
+            let sourceDictionary = source as! [AnyHashable: Any]
+
+            let instance = CreateMediaParams()
+            instance.name = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["name"] as AnyObject?)
+            instance.origin = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["origin"] as AnyObject?)
+            instance.type = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["type"] as AnyObject?)
+            instance.ttsVoice = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["tts_voice"] as AnyObject?)
+            instance.ttsText = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["tts_text"] as AnyObject?)
+            instance.isTemparary = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["is_temparary"] as AnyObject?)
+            instance.expirationDate = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["expiration_date"] as AnyObject?)
+            instance.duration = Decoders.decodeOptional(clazz: Int32.self, source: sourceDictionary["duration"] as AnyObject?)
+            instance.notes = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["notes"] as AnyObject?)
+            instance.randomized = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["randomized"] as AnyObject?)
+            return instance
+        }
+
+
         // Decoder for [CreateMenuParams]
         Decoders.addDecoder(clazz: [CreateMenuParams].self) { (source: AnyObject) -> [CreateMenuParams] in
             return Decoders.decode(clazz: [CreateMenuParams].self, source: source)

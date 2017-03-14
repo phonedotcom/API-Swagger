@@ -31,14 +31,14 @@ describe 'CallsApi' do
     end
   end
 
-  # unit tests for create_account_calls
+  # unit tests for create_account_call
   # Make a phone call
   # 
   # @param account_id Account ID
   # @param [Hash] opts the optional parameters
   # @option opts [CreateCallParams] :data Call data
   # @return [CallFull]
-  describe 'create_account_calls test' do
+  describe 'create_account_call test' do
     it "should work" do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

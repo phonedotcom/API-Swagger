@@ -1,3 +1,30 @@
 [submodule "SDKs/go-client"]
 	path = SDKs/go-client
 	url = https://github.com/waiyuen/Phone.com-API-SDK-go
+[submodule "SDKS/typescript-node"]
+	path = SDKS/typescript-node
+	url = https://github.com/waiyuen/Phone.com-API-SDK-typescript-node
+[submodule "SDKS/swift3"]
+	path = SDKS/swift3
+	url = https://github.com/waiyuen/Phone.com-API-SDK-swift3
+[submodule "SDKS/ruby"]
+	path = SDKS/ruby
+	url = https://github.com/waiyuen/Phone.com-API-SDK-ruby
+[submodule "SDKS/python"]
+	path = SDKS/python
+	url = https://github.com/waiyuen/Phone.com-API-SDK-python
+[submodule "SDKS/php"]
+	path = SDKS/php
+	url = https://github.com/waiyuen/Phone.com-API-SDK-php
+[submodule "SDKS/objc"]
+	path = SDKS/objc
+	url = https://github.com/waiyuen/Phone.com-API-SDK-objc
+[submodule "SDKS/java"]
+	path = SDKS/java
+	url = https://github.com/waiyuen/Phone.com-API-SDK-java
+[submodule "SDKS/csharp"]
+	path = SDKS/csharp
+	url = https://github.com/waiyuen/Phone.com-API-SDK-csharp
+[submodule "SDKS/android"]
+	path = SDKS/android
+	url = https://github.com/waiyuen/Phone.com-API-SDK-android

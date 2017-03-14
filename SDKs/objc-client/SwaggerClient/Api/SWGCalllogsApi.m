@@ -1,6 +1,7 @@
 #import "SWGCalllogsApi.h"
 #import "SWGQueryParamCollection.h"
 #import "SWGApiClient.h"
+#import "SWGCallLogFull.h"
 #import "SWGListCallLogs.h"
 
 
@@ -48,6 +49,94 @@ NSInteger kSWGCalllogsApiMissingParamErrorCode = 234513;
 }
 
 #pragma mark - Api Methods
+
+///
+/// Show details of an individual Call Log entry
+/// See Call Logs for more detail.
+///  @param accountId Account ID 
+///
+///  @param callId Call ID 
+///
+///  @returns SWGCallLogFull*
+///
+-(NSURLSessionTask*) getAccountCallLogsWithAccountId: (NSNumber*) accountId
+    callId: (NSString*) callId
+    completionHandler: (void (^)(SWGCallLogFull* output, NSError* error)) handler {
+    // verify the required parameter 'accountId' is set
+    if (accountId == nil) {
+        NSParameterAssert(accountId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"accountId"] };
+            NSError* error = [NSError errorWithDomain:kSWGCalllogsApiErrorDomain code:kSWGCalllogsApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'callId' is set
+    if (callId == nil) {
+        NSParameterAssert(callId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"callId"] };
+            NSError* error = [NSError errorWithDomain:kSWGCalllogsApiErrorDomain code:kSWGCalllogsApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/accounts/{account_id}/call-logs/{call_id}"];
+
+    // remove format in URL if needed
+    [resourcePath replaceOccurrencesOfString:@".{format}" withString:@".json" options:0 range:NSMakeRange(0,resourcePath.length)];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (accountId != nil) {
+        pathParams[@"account_id"] = accountId;
+    }
+    if (callId != nil) {
+        pathParams[@"call_id"] = callId;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"apiKey"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"SWGCallLogFull*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((SWGCallLogFull*)data, error);
+                                }
+                            }];
+}
 
 ///
 /// Get a list of call details associated with your account

@@ -4,11 +4,11 @@ All URIs are relative to *https://api.phone.com/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createAccountCalls**](CallsApi.md#createAccountCalls) | **POST** /accounts/{account_id}/calls | Make a phone call
+[**createAccountCall**](CallsApi.md#createAccountCall) | **POST** /accounts/{account_id}/calls | Make a phone call
 
 
-# **createAccountCalls**
-> \Swagger\Client\Model\CallFull createAccountCalls($account_id, $data)
+# **createAccountCall**
+> \Swagger\Client\Model\CallFull createAccountCall($account_id, $data)
 
 Make a phone call
 
@@ -29,10 +29,10 @@ $account_id = 56; // int | Account ID
 $data = new \Swagger\Client\Model\CreateCallParams(); // \Swagger\Client\Model\CreateCallParams | Call data
 
 try {
-    $result = $api_instance->createAccountCalls($account_id, $data);
+    $result = $api_instance->createAccountCall($account_id, $data);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling CallsApi->createAccountCalls: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling CallsApi->createAccountCall: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```

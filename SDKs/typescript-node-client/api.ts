@@ -745,6 +745,49 @@ export class CreateGroupParams {
     'name': string;
 }
 
+export class CreateMediaParams {
+    /**
+    * Name of media
+    */
+    'name': string;
+    /**
+    * 'tts', 'file'
+    */
+    'origin': string;
+    /**
+    * 'hold_music', 'greeting'
+    */
+    'type': string;
+    /**
+    * 'allison', 'amy', 'belle', 'callie', 'callieq', 'dallas', 'damien', 'david', 'designerdave', 'diane', 'diesel', 'dog', 'duchess', 'duncan', 'emily', 'evilgenius', 'frank', 'french-fry', 'gregory', 'isabelle', 'jean-pierre', 'jerkface', 'katrin', 'kayla', 'kidaroo', 'lawrence', 'layo', 'linda', 'marta', 'matthias', 'miguel', 'millie', 'princess', 'ransomnote', 'robin', 'shouty', 'shygirl', 'tamika', 'tophat', 'vittoria', 'vixen', 'vlad', 'walter', 'whispery', 'william', 'wiseguy', 'zach'
+    */
+    'ttsVoice': string;
+    /**
+    * Text used for text-to-speech conversion, maximum 800 characters
+    */
+    'ttsText': string;
+    /**
+    * 'Y', 'N'. Media file is temporary, will be deleted after a specified period.
+    */
+    'isTemparary': string;
+    /**
+    * If is_temporary is 'Y', media will be deleted after the specified time in seconds
+    */
+    'expirationDate': number;
+    /**
+    * Length of media in seconds
+    */
+    'duration': number;
+    /**
+    * Notes about the media object
+    */
+    'notes': string;
+    /**
+    * 'Y', 'N'. Start playing the media file in random location, instead of from the beginning
+    */
+    'randomized': string;
+}
+
 export class CreateMenuParams {
     'name': string;
     'mainMessage': any;
@@ -2982,6 +3025,67 @@ export class CalllogsApi {
         this.authentications[CalllogsApiApiKeys[key]].apiKey = value;
     }
     /**
+     * Show details of an individual Call Log entry
+     * See Call Logs for more detail.
+     * @param accountId Account ID
+     * @param callId Call ID
+     */
+    public getAccountCallLogs (accountId: number, callId: string) : Promise<{ response: http.ClientResponse; body: CallLogFull;  }> {
+        const localVarPath = this.basePath + '/accounts/{account_id}/call-logs/{call_id}'
+            .replace('{' + 'account_id' + '}', String(accountId))
+            .replace('{' + 'call_id' + '}', String(callId));
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'accountId' is not null or undefined
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling getAccountCallLogs.');
+        }
+
+        // verify required parameter 'callId' is not null or undefined
+        if (callId === null || callId === undefined) {
+            throw new Error('Required parameter callId was null or undefined when calling getAccountCallLogs.');
+        }
+
+        let useFormData = false;
+
+        let requestOptions: request.Options = {
+            method: 'GET',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        this.authentications.apiKey.applyToRequest(requestOptions);
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+        return new Promise<{ response: http.ClientResponse; body: CallLogFull;  }>((resolve, reject) => {
+            request(requestOptions, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    if (response.statusCode >= 200 && response.statusCode <= 299) {
+                        resolve({ response: response, body: body });
+                    } else {
+                        reject({ response: response, body: body });
+                    }
+                }
+            });
+        });
+    }
+    /**
      * Get a list of call details associated with your account
      * See Call Logs for more detail.
      * @param accountId Account ID
@@ -3141,7 +3245,7 @@ export class CallsApi {
      * @param accountId Account ID
      * @param data Call data
      */
-    public createAccountCalls (accountId: number, data?: CreateCallParams) : Promise<{ response: http.ClientResponse; body: CallFull;  }> {
+    public createAccountCall (accountId: number, data?: CreateCallParams) : Promise<{ response: http.ClientResponse; body: CallFull;  }> {
         const localVarPath = this.basePath + '/accounts/{account_id}/calls'
             .replace('{' + 'account_id' + '}', String(accountId));
         let queryParameters: any = {};
@@ -3151,7 +3255,7 @@ export class CallsApi {
 
         // verify required parameter 'accountId' is not null or undefined
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling createAccountCalls.');
+            throw new Error('Required parameter accountId was null or undefined when calling createAccountCall.');
         }
 
         let useFormData = false;
@@ -4895,6 +4999,62 @@ export class MediaApi {
 
     public setApiKey(key: MediaApiApiKeys, value: string) {
         this.authentications[MediaApiApiKeys[key]].apiKey = value;
+    }
+    /**
+     * Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)
+     * See Account Media for more info on the properties.
+     * @param accountId Account ID
+     * @param data Media data
+     */
+    public createAccountMedia (accountId: number, data?: CreateMediaParams) : Promise<{ response: http.ClientResponse; body: MediaFull;  }> {
+        const localVarPath = this.basePath + '/accounts/{account_id}/media'
+            .replace('{' + 'account_id' + '}', String(accountId));
+        let queryParameters: any = {};
+        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let formParams: any = {};
+
+
+        // verify required parameter 'accountId' is not null or undefined
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling createAccountMedia.');
+        }
+
+        let useFormData = false;
+
+        let requestOptions: request.Options = {
+            method: 'POST',
+            qs: queryParameters,
+            headers: headerParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: data,
+        };
+
+        this.authentications.apiKey.applyToRequest(requestOptions);
+
+        this.authentications.default.applyToRequest(requestOptions);
+
+        if (Object.keys(formParams).length) {
+            if (useFormData) {
+                (<any>requestOptions).formData = formParams;
+            } else {
+                requestOptions.form = formParams;
+            }
+        }
+        return new Promise<{ response: http.ClientResponse; body: MediaFull;  }>((resolve, reject) => {
+            request(requestOptions, (error, response, body) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    if (response.statusCode >= 200 && response.statusCode <= 299) {
+                        resolve({ response: response, body: body });
+                    } else {
+                        reject({ response: response, body: body });
+                    }
+                }
+            });
+        });
     }
     /**
      * Show details of an individual media recording (Greeting or Hold Music)

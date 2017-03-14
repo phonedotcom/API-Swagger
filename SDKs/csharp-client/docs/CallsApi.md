@@ -4,12 +4,12 @@ All URIs are relative to *https://api.phone.com/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAccountCalls**](CallsApi.md#createaccountcalls) | **POST** /accounts/{account_id}/calls | Make a phone call
+[**CreateAccountCall**](CallsApi.md#createaccountcall) | **POST** /accounts/{account_id}/calls | Make a phone call
 
 
-<a name="createaccountcalls"></a>
-# **CreateAccountCalls**
-> CallFull CreateAccountCalls (int? accountId, CreateCallParams data = null)
+<a name="createaccountcall"></a>
+# **CreateAccountCall**
+> CallFull CreateAccountCall (int? accountId, CreateCallParams data = null)
 
 Make a phone call
 
@@ -25,7 +25,7 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class CreateAccountCallsExample
+    public class CreateAccountCallExample
     {
         public void main()
         {
@@ -42,12 +42,12 @@ namespace Example
             try
             {
                 // Make a phone call
-                CallFull result = apiInstance.CreateAccountCalls(accountId, data);
+                CallFull result = apiInstance.CreateAccountCall(accountId, data);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling CallsApi.CreateAccountCalls: " + e.Message );
+                Debug.Print("Exception when calling CallsApi.CreateAccountCall: " + e.Message );
             }
         }
     }
