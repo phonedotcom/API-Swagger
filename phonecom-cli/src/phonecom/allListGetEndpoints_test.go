@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -108,9 +109,16 @@ func TestFilterSortListApplications(t *testing.T) {
 
 func TestListCallLogs(t *testing.T) {
 
+	var json map[string]interface{}
 	var err error
 
-	err, _ = createCli(listCallLogs)
+	err, json = createCli(listCallLogs)
+	assert.NoError(t, err)
+
+	firstId := getFirstIdString(json)
+	fmt.Println(firstId)
+	err, json = createGetCliStringId(getCallLog, firstId)
+
 	assert.NoError(t, err)
 }
 
@@ -429,7 +437,7 @@ func TestListMedia(t *testing.T) {
 	assert.NoError(t, err)
 
 	firstId := getFirstId(json)
-	err, json = createCliWithId(getRecording, int(firstId))
+	err, json = createCliWithId(getMedia, int(firstId))
 
 	assert.NoError(t, err)
 }

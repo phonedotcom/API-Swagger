@@ -1,8 +1,6 @@
 package main
 
-import (
-	"github.com/igorsimevski/phonecom-goclient"
-)
+import "github.com/waiyuen/Phone.com-API-SDK-go"
 
 type ApiResolver struct {
 	config  *swagger.Configuration
@@ -15,7 +13,7 @@ func (r *ApiResolver) resolve() interface{} {
 
 	switch r.command {
 
-	case listMedia, getRecording:
+	case listMedia, getMedia, createMedia:
 
 		api = swagger.MediaApi{Configuration: r.config}
 
@@ -59,7 +57,7 @@ func (r *ApiResolver) resolve() interface{} {
 
 		api = swagger.ApplicationsApi{Configuration: r.config}
 
-	case listCallLogs:
+	case listCallLogs, getCallLog:
 
 		api = swagger.CalllogsApi{Configuration: r.config}
 

@@ -869,6 +869,9 @@ func createGetCliStringId(endpoint string, id string) (error, map[string]interfa
 			Name:  idLong,
 			Value: id,
 		},
+		cli.BoolTFlag{
+			Name: verboseLong,
+		},
 	}
 
 	return doCreateCli(endpoint, flags)

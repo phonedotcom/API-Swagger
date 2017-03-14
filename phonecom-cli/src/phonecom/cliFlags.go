@@ -185,6 +185,7 @@ func getAllCommands() string {
 		createCall + ", " +
 		createDevice + ", " +
 		createExtension + ", " +
+		createMedia + ", " +
 		createMenu + ", " +
 		createPhoneNumber + ", " +
 		createQueue + ", " +
@@ -208,7 +209,7 @@ func getAllCommands() string {
 		getDevice + ", " +
 		getExpressServiceCode + ", " +
 		getExtension + ", " +
-		getRecording + ", " +
+		getMedia + ", " +
 		getMenu + ", " +
 		getPhoneNumber + ", " +
 		getQueue + ", " +

@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"errors"
-	"github.com/igorsimevski/phonecom-goclient"
 	"github.com/urfave/cli"
+	"github.com/waiyuen/Phone.com-API-SDK-go"
 )
 
 func main() {
@@ -112,9 +112,14 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 
 			return rh.handle(api.ListAccountMedia(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
-		case getRecording:
+		case getMedia:
 
 			return rh.handle(api.GetAccountMedia(accountId, id))
+
+		case createMedia:
+
+			params := createMediaParams(input)
+			return rh.handle(api.CreateAccountMedia(accountId, params))
 		}
 
 	case swagger.MenusApi:
@@ -300,6 +305,10 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 
 	case swagger.ApplicationsApi:
 
+		if param.otherParams.applicationId > 0 {
+			id = param.otherParams.applicationId
+		}
+
 		switch command {
 
 		case listApplications:
@@ -313,11 +322,19 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 
 	case swagger.CalllogsApi:
 
+		if param.otherParams.callId != "" {
+			idString = param.otherParams.callId
+		}
+
 		switch command {
 
 		case listCallLogs:
 
 			return rh.handle(api.ListAccountCallLogs(accountId, filtersId, filterParams.filtersStartTime, filterParams.filtersCreatedAt, filterParams.filtersDirection, filterParams.filtersCalledNumber, filterParams.filtersType, filterParams.filtersExtension, sortParams.sortId, sortParams.sortStartTime, sortParams.sortCreatedAt, limit, offset, fields))
+
+		case getCallLog:
+
+			return rh.handle(api.GetAccountCallLogs(accountId, idString))
 		}
 
 	case swagger.CallsApi:
@@ -327,7 +344,7 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 		case createCall:
 
 			params := createCallParams(input)
-			return rh.handle(api.CreateAccountCalls(accountId, params))
+			return rh.handle(api.CreateAccountCall(accountId, params))
 
 		}
 
@@ -404,6 +421,10 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 		}
 
 	case swagger.CalleridsApi:
+
+		if param.otherParams.extensionId > 0 {
+			id = param.otherParams.extensionId
+		}
 
 		switch command {
 

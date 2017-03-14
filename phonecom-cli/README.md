@@ -47,7 +47,7 @@ go get -u github.com/stretchr/testify
 
 Also, the Phone.com go client need sto be installed
 ```bash
-go get -u github.com/igorsimevski/phonecom-goclient
+go get -u github.com/waiyuen/Phone.com-API-SDK-go
 ```
 
 
@@ -280,9 +280,10 @@ phonecom -c create-account-sms -from {number1} -to {number2} -text {text} -id {e
 The following commands can be invoked from the API:
 
 ```
-create-account-calls
+create-account-call
 create-account-device
 create-account-extension
+create-account-media
 create-account-menu
 create-account-phone-number
 create-account-queue

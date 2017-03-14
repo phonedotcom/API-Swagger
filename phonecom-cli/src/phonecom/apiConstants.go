@@ -2,9 +2,10 @@ package main
 
 /******************* Phone.com API endpoints *********************/
 
-const createCall = "create-account-calls"
+const createCall = "create-account-call"
 const createDevice = "create-account-device"
 const createExtension = "create-account-extension"
+const createMedia = "create-account-media"
 const createMenu = "create-account-menu"
 const createPhoneNumber = "create-account-phone-number"
 const createQueue = "create-account-queue"
@@ -28,7 +29,7 @@ const getCallLog = "get-account-call-log"
 const getDevice = "get-account-device"
 const getExpressServiceCode = "get-account-express-service-code"
 const getExtension = "get-account-extension"
-const getRecording = "get-account-media"
+const getMedia = "get-account-media"
 const getMenu = "get-account-menu"
 const getPhoneNumber = "get-account-phone-number"
 const getQueue = "get-account-queue"
