@@ -3,7 +3,7 @@
 
 scriptDir=`pwd`
 sdkDir=$1
-swaggerFilePath=$scriptDir/phonecom.json
+swaggerFilePath=$scriptDir/phonecom-apiv4.swagger.json
 
 if [[ $# -lt 2 ]] ; then
   echo 'Usage: First argument: path to SDK, Second Argument: Path to Java SDK'
@@ -27,12 +27,12 @@ declare -a sdks=(
   "typescript-node"
 )
 
-find $sdkDir/*-client/* ! -iregex '(.git)' | xargs rm -r
+find $sdkDir/API-SDK-*/* ! -iregex '(.git)' | xargs rm -r
 cd $sdkDir
 
 for sdk in "${sdks[@]}"
 do
-  dir=$sdkDir/$sdk-client
+  dir=$sdkDir/API-SDK-$sdk
 
   if [ $sdk != "java" ]
   then
@@ -47,6 +47,11 @@ do
 
     sed -i '/\/\/ to determine the Content-Type header/c\\tclearEmptyParams(localVarQueryParams)\n\n\t\/\/ to determine the Content-Type header' $dir/*_api.go
     sed -i '/case "ssv":/c\\tcase "ssv", "multi":' $dir/api_client.go
+
+    # Patch media api
+    sed -i 's/json string/jsonParam string/' $dir/media_api.go
+    sed -i 's/(json, "")/(jsonParam, "")/' $dir/media_api.go
+    sed -i 's/@param json/@param jsonParam/' $dir/media_api.go
 
     echo 'package swagger
 

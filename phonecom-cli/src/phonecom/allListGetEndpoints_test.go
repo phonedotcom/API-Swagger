@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -116,7 +115,6 @@ func TestListCallLogs(t *testing.T) {
 	assert.NoError(t, err)
 
 	firstId := getFirstIdString(json)
-	fmt.Println(firstId)
 	err, json = createGetCliStringId(getCallLog, firstId)
 
 	assert.NoError(t, err)

@@ -1,36 +1,33 @@
 [submodule "SDKs/go-client"]
 	path = SDKs/go-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-go
-[submodule "SDKS/typescript-node-client"]
-	path = SDKS/typescript-node-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-typescript-node
+	url = https://github.com/phonedotcom/API-SDK-go
 [submodule "SDKs/typescript-node-client"]
 	path = SDKs/typescript-node-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-typescript-node
+	url = https://github.com/phonedotcom/API-SDK-typescript-node
 [submodule "SDKs/swift3-client"]
 	path = SDKs/swift3-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-swift3
+	url = https://github.com/phonedotcom/API-SDK-swift3
 [submodule "SDKs/ruby-client"]
 	path = SDKs/ruby-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-ruby
+	url = https://github.com/phonedotcom/API-SDK-ruby
 [submodule "SDKs/prython-client"]
 	path = SDKs/prython-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-python
+	url = https://github.com/phonedotcom/API-SDK-python
 [submodule "SDKs/python-client"]
 	path = SDKs/python-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-python
+	url = https://github.com/phonedotcom/API-SDK-python
 [submodule "SDKs/php-client"]
 	path = SDKs/php-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-php
+	url = https://github.com/phonedotcom/API-SDK-php
 [submodule "SDKs/objc-client"]
 	path = SDKs/objc-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-objc
+	url = https://github.com/phonedotcom/API-SDK-objc
 [submodule "SDKs/java-client"]
 	path = SDKs/java-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-java
+	url = https://github.com/phonedotcom/API-SDK-java
 [submodule "SDKs/csharp-client"]
 	path = SDKs/csharp-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-csharp
+	url = https://github.com/phonedotcom/API-SDK-csharp
 [submodule "SDKs/android-client"]
 	path = SDKs/android-client
-	url = https://github.com/waiyuen/Phone.com-API-SDK-android
+	url = https://github.com/phonedotcom/API-SDK-android

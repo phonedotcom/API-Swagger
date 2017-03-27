@@ -45,6 +45,8 @@ type CliParams struct {
 	to   string
 	text string
 
+	mediaFilePath string
+
 	trunkName            string
 	trunkUri             string
 	trunkConcurrentCalls int32
@@ -92,12 +94,11 @@ func createCliParams(context *cli.Context) (CliParams, error) {
 
 	var filtersId []string
 
-	var from string
-	var to string
-	var text string
-	from = context.String(fromLong)
-	to = context.String(toLong)
-	text = context.String(textLong)
+	from := context.String(fromLong)
+	to := context.String(toLong)
+	text := context.String(textLong)
+
+	mediaFilePath := context.String(mediaFileLong)
 
 	trunkName := context.String(trunkNameLong)
 	trunkUri := context.String(trunkUriLong)
@@ -177,6 +178,8 @@ func createCliParams(context *cli.Context) (CliParams, error) {
 	par.from = from
 	par.to = to
 	par.text = text
+
+	par.mediaFilePath = mediaFilePath
 
 	par.trunkName = trunkName
 	par.trunkUri = trunkUri

@@ -4,7 +4,7 @@ Installation
 https://golang.org/doc/install
 
 2. Download the latest source code from:
-https://github.com/waiyuen/Phone.com-API-Swagger/releases
+https://github.com/phonedotcom/API-Swagger/releases
 
 3. Extract the archive and navigate to the phonecom-cli directory from a terminal
 cd /path to the phonecom-cli/
@@ -16,8 +16,7 @@ GOPATH=/path to the phonecom-cli/ directory
 go get -u github.com/urfave/cli
 go get -u github.com/go-resty/resty
 go get -u github.com/yukithm/json2csv/cmd/json2csv
-go get -u github.com/waiyuen/Phone.com-API-SDK-go
-go get -u github.com/stretchr/testify
+go get -u github.com/phonedotcom/API-SDK-go
 
 Note: You might need to delete the src/github.com and src/golang.org/ folders and try again if you encounter build errors
 

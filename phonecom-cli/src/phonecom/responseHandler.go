@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/waiyuen/Phone.com-API-SDK-go"
+	"github.com/phonedotcom/API-SDK-go"
 	"strings"
 )
 
@@ -15,7 +15,7 @@ type ResponseHandler struct {
 func (h *ResponseHandler) handle(
 	x interface{},
 	response *swagger.APIResponse,
-	error error) (error, map[string]interface{}) {
+	error error) (error, map[string]interface{}, int) {
 
 	if error != nil {
 
@@ -23,7 +23,7 @@ func (h *ResponseHandler) handle(
 			fmt.Println("Error while getting response")
 		}
 
-		return error, nil
+		return error, nil, 0
 	}
 
 	payload := response.Payload
@@ -34,7 +34,7 @@ func (h *ResponseHandler) handle(
 			fmt.Println("Null response payload")
 		}
 
-		return errors.New(msgCouldNotGetResponse), nil
+		return errors.New(msgCouldNotGetResponse), nil, 0
 	}
 
 	validatedJson := validateJson(string(payload))
@@ -45,18 +45,18 @@ func (h *ResponseHandler) handle(
 			fmt.Println("Could not unmarshal API json response")
 		}
 
-		return errors.New(msgInvalidJson), nil
+		return errors.New(msgInvalidJson), nil, 0
 	}
 
 	message := validateResponse(validatedJson)
-
+	var totalListItems = 0
 	if message != "" {
 
 		if h.param.verbose {
 			fmt.Printf("%+v\n%s\n", x, response)
 		}
 
-		return errors.New(message), nil
+		return errors.New(message), nil, 0
 	} else {
 
 		var jsonObject interface{}
@@ -79,12 +79,26 @@ func (h *ResponseHandler) handle(
 			outputType = "csv"
 		}
 
+		totalFromJson := validatedJson["total"]
+
+		if totalFromJson != nil {
+
+			totalAsNumber := totalFromJson.(json.Number)
+			totalGood, err := json.Number.Int64(totalAsNumber)
+
+			if err != nil {
+				fmt.Println("Could not get total number of list items from respose")
+			} else {
+				totalListItems = int(totalGood)
+			}
+		}
+
 		if outputType == "csv" {
 			exportToCsv(jsonObject)
 		} else if outputType == "json" {
 			jsonOutput, err := json.MarshalIndent(jsonObject, "", "  ")
 			if err != nil {
-				return err, nil
+				return err, nil, 0
 			}
 			fmt.Printf("%s\n", jsonOutput)
 		} else {
@@ -93,5 +107,5 @@ func (h *ResponseHandler) handle(
 
 	}
 
-	return nil, validatedJson
+	return nil, validatedJson, totalListItems
 }

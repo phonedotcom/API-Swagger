@@ -28,6 +28,9 @@ func createCliWithJsonIn(endpoint string, path string) (error, map[string]interf
 			Name:  inputLong,
 			Value: path,
 		},
+		cli.BoolTFlag{
+			Name: verboseLong,
+		},
 	}
 
 	return doCreateCli(endpoint, flags)
@@ -896,6 +899,34 @@ func createCliWithId(endpoint string, id int) (error, map[string]interface{}) {
 		cli.IntFlag{
 			Name:  limitLong,
 			Value: 5,
+		},
+	}
+
+	return doCreateCli(endpoint, flags)
+}
+
+func createCliWithFile(endpoint string, filePath string) (error, map[string]interface{}) {
+
+	if filePath == "" {
+		return nil, nil
+	}
+
+	flags := []cli.Flag{
+
+		cli.StringFlag{
+			Name:  commandLong,
+			Value: endpoint,
+		},
+		cli.StringFlag{
+			Name:  inputLong,
+			Value: filePath,
+		},
+		cli.IntFlag{
+			Name:  limitLong,
+			Value: 5,
+		},
+		cli.BoolTFlag{
+			Name: verboseLong,
 		},
 	}
 

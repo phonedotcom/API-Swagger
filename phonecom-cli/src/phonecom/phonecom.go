@@ -5,8 +5,9 @@ import (
 	"os"
 
 	"errors"
+	"github.com/phonedotcom/API-SDK-go"
 	"github.com/urfave/cli"
-	"github.com/waiyuen/Phone.com-API-SDK-go"
+	"io/ioutil"
 )
 
 func main() {
@@ -74,16 +75,41 @@ func execute(
 	if api == nil {
 		if param.command == defaultCommand {
 			defaultApi := swagger.DefaultApi{Configuration: swaggerConfig}
-			return responseHandler.handle(defaultApi.Ping())
+
+			err, response, _ := responseHandler.handle(defaultApi.Ping())
+			return err, response
 		} else {
 			return errors.New(fmt.Sprintf(invalidCommand, param.command, getAllCommands())), nil
 		}
 	}
 
-	return invokeCommand(responseHandler, param, api)
+	err, response, total := invokeCommand(responseHandler, param, api)
+
+	if total == 0 {
+		return err, response
+
+	} else {
+
+		var items = response["items"].([]interface{})
+		var currentNum = len(items)
+		var firstItems = currentNum
+		if param.limit > int32(currentNum) {
+			for total > currentNum {
+
+				param.offset = param.offset + int32(firstItems)
+				invokeCommand(responseHandler, param, api)
+
+				//join validatedJson with respPage and that is it
+				currentNum = currentNum + currentNum
+			}
+		}
+
+	}
+
+	return err, response
 }
 
-func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error, map[string]interface{}) {
+func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error, map[string]interface{}, int) {
 
 	var command = param.command
 	var accountId = param.accountId
@@ -102,24 +128,67 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 
 	case swagger.MediaApi:
 
-		if param.otherParams.recordingId > 0 {
-			id = param.otherParams.recordingId
+		if param.otherParams.mediaId > 0 {
+			id = param.otherParams.mediaId
 		}
 
 		switch command {
 
 		case listMedia:
-
 			return rh.handle(api.ListAccountMedia(accountId, filtersId, filterParams.filtersName, sortParams.sortId, sortParams.sortName, limit, offset, fields))
 
 		case getMedia:
 
 			return rh.handle(api.GetAccountMedia(accountId, id))
 
-		case createMedia:
+		case createMediaFiles:
+
+			mediaInfo, err := ioutil.ReadFile(param.input)
+
+			if err != nil {
+				return err, nil, 0
+			}
+
+			mediaInfoString := string(mediaInfo)
+			file, err := os.Open(param.mediaFilePath)
+
+			if err != nil {
+				return err, nil, 0
+			}
+
+			return rh.handle(api.CreateAccountMediaFiles(accountId, mediaInfoString, file))
+
+		case createMediaTts:
 
 			params := createMediaParams(input)
-			return rh.handle(api.CreateAccountMedia(accountId, params))
+			return rh.handle(api.CreateAccountMediaTts(accountId, params))
+
+		// Note: non-existing endpoint
+		//case replaceMediaFiles:
+		//
+		//	mediaInfo, err := ioutil.ReadFile(param.input)
+		//
+		//	if (err != nil) {
+		//		return err, nil, 0
+		//	}
+		//
+		//	mediaInfoString := string(mediaInfo)
+		//	file, err := os.Open(param.mediaFilePath)
+		//
+		//	if (err != nil) {
+		//		return err, nil, 0
+		//	}
+		//
+		//	return rh.handle(api.ReplaceAccountMediaFiles(accountId, mediaInfoString, file))
+
+		case replaceMediaTts:
+
+			params := createMediaParams(input)
+			return rh.handle(api.ReplaceAccountMediaTts(accountId, id, params))
+
+		case deleteMedia:
+
+			return rh.handle(api.DeleteAccountMedia(accountId, id))
 		}
 
 	case swagger.MenusApi:
@@ -282,6 +351,10 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 		}
 
 	case swagger.AccountsApi:
+
+		if param.otherParams.accountId > 0 {
+			id = param.otherParams.accountId
+		}
 
 		switch command {
 
@@ -559,8 +632,8 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 		}
 
 	default:
-		return nil, nil
+		return nil, nil, 0
 	}
 
-	return nil, nil
+	return nil, nil, 0
 }

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/waiyuen/Phone.com-API-SDK-go"
+	"github.com/phonedotcom/API-SDK-go"
 	"io/ioutil"
 )
 
@@ -158,13 +158,14 @@ func createStringArray(filter interface{}) []string {
 type OtherParams struct {
 	groupBy       []string
 	applicationId int32
+	accountId     int32
 	extensionId   int32
 	callId        string
 	deviceId      int32
 	codeId        int32
 	contactId     int32
 	groupId       int32
-	recordingId   int32
+	mediaId       int32
 	menuId        int32
 	numberId      int32
 	queueId       int32
@@ -193,7 +194,7 @@ func getOtherParams(inputFile string) (
 	params.codeId = getField(data["code_id"])
 	params.contactId = getField(data["contact_id"])
 	params.groupId = getField(data["group_id"])
-	params.recordingId = getField(data["recording_id"])
+	params.mediaId = getField(data["media_id"])
 	params.menuId = getField(data["menu_id"])
 	params.numberId = getField(data["number_id"])
 	params.queueId = getField(data["queue_id"])
@@ -202,6 +203,7 @@ func getOtherParams(inputFile string) (
 	params.smsId = getFieldString(data["sms_id"])
 	params.trunkId = getField(data["trunk_id"])
 	params.applicationId = getField(data["application_id"])
+	params.accountId = getField(data["account_id"])
 
 	return err, params
 }

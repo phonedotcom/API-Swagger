@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/waiyuen/Phone.com-API-SDK-go"
+	"github.com/phonedotcom/API-SDK-go"
 	"io/ioutil"
 	"log"
 	"os"

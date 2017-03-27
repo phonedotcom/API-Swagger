@@ -427,9 +427,7 @@
       "post": {
         "security": [
           {
-            "apiKey": [
-
-            ]
+            "apiKey": []
           }
         ],
         "tags": [
@@ -585,15 +583,15 @@
               "$ref": "#/definitions/CallLogFull"
             }
           },
-					"401": {
-						"$ref": "#/responses/response401"
-					},
-					"403": {
-						"$ref": "#/responses/response403"
-					},
-					"404": {
-						"$ref": "#/responses/response404"
-					}
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          }
         },
         "security": [
           {
@@ -1785,59 +1783,118 @@
             "$ref": "#/responses/response403"
           }
         }
-      },
-			"post": {
-				"security": [
-					{
-						"apiKey": []
-					}
-				],
-				"tags": [
-					"media"
-				],
-				"summary": "Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)",
-				"description": "See Account Media for more info on the properties.",
-				"operationId": "create-account-media",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
-					{
-						"$ref": "#/parameters/accountIdParam"
-					},
-					{
-						"name": "data",
-						"in": "body",
-						"description": "Media data",
-						"required": false,
-						"schema": {
-							"$ref": "#/definitions/CreateMediaParams"
-						}
-					}
-				],
-				"responses": {
-					"201": {
-						"description": "Created",
-						"schema": {
-							"$ref": "#/definitions/MediaFull"
-						}
-					},
-					"401": {
-						"$ref": "#/responses/response401"
-					},
-					"403": {
-						"$ref": "#/responses/response403"
-					},
-					"422": {
-						"$ref": "#/responses/response422"
-					}
-				}
-			}
+      }
     },
-    "/accounts/{account_id}/media/{recording_id}": {
+    "/accounts/{account_id}/media/files": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "media"
+        ],
+        "summary": "Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)",
+        "description": "See Account Media for more info on the properties.",
+        "operationId": "create-account-media-files",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "name": "json",
+            "in": "formData",
+            "description": "Media extra parameters",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Media file",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MediaFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/media/tts": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "media"
+        ],
+        "summary": "Add a media object to your account that can be used as a greeting or hold music. Users may create a media by using the built-in Text-to-speech (TTS) facility or upload a file of their choice. (Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB)",
+        "description": "See Account Media for more info on the properties.",
+        "operationId": "create-account-media-tts",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Media data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateMediaParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MediaFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/media/{media_id}": {
       "get": {
         "security": [
           {
@@ -1861,11 +1918,7 @@
             "$ref": "#/parameters/accountIdParam"
           },
           {
-            "name": "recording_id",
-            "in": "path",
-            "description": "Recording ID",
-            "required": true,
-            "type": "integer"
+            "$ref": "#/parameters/mediaIdParam"
           }
         ],
         "responses": {
@@ -1883,6 +1936,109 @@
           },
           "404": {
             "$ref": "#/responses/response404"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "media"
+        ],
+        "summary": "Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB.",
+        "description": "See Account Media for more info on the properties.",
+        "operationId": "replace-account-media-tts",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/mediaIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Media data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateMediaParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Replaced",
+            "schema": {
+              "$ref": "#/definitions/MediaFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "media"
+        ],
+        "summary": "Delete an individual media record",
+        "description": "See Account Media for more info on the properties.",
+        "operationId": "delete-account-media",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/mediaIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeleteMedia"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          },
+          "409": {
+            "$ref": "#/responses/response409"
           }
         }
       }
@@ -2053,7 +2209,7 @@
           "menus"
         ],
         "summary": "Replace an individual menu",
-        "description": "This service replaces the details of an individual Menu.",
+        "description": "See Account Menus for more info on the properties.",
         "operationId": "replace-account-menu",
         "consumes": [
           "application/json"
@@ -2109,7 +2265,7 @@
           "menus"
         ],
         "summary": "Delete an individual menu",
-        "description": "This service shows the details of an individual menu.",
+        "description": "See Account Menus for more info on the properties.",
         "operationId": "delete-account-menu",
         "consumes": [
           "application/json"
@@ -4205,6 +4361,13 @@
       "required": true,
       "type": "integer"
     },
+    "mediaIdParam": {
+      "name": "media_id",
+      "in": "path",
+      "description": "Media ID",
+      "required": true,
+      "type": "integer"
+    },
     "menuIdParam": {
       "name": "menu_id",
       "in": "path",
@@ -4629,51 +4792,51 @@
         }
       }
     },
-		"CreateMediaParams": {
-			"type": "object",
-			"properties": {
-				"name": {
-					"type": "string",
-					"description": "Name of media"
-				},
-				"origin": {
-					"type": "string",
-					"description": "'tts', 'file'"
-				},
-				"type": {
-					"type": "string",
-					"description": "'hold_music', 'greeting'"
-				},
-				"tts_voice": {
-					"type": "string",
-					"description": "'allison', 'amy', 'belle', 'callie', 'callieq', 'dallas', 'damien', 'david', 'designerdave', 'diane', 'diesel', 'dog', 'duchess', 'duncan', 'emily', 'evilgenius', 'frank', 'french-fry', 'gregory', 'isabelle', 'jean-pierre', 'jerkface', 'katrin', 'kayla', 'kidaroo', 'lawrence', 'layo', 'linda', 'marta', 'matthias', 'miguel', 'millie', 'princess', 'ransomnote', 'robin', 'shouty', 'shygirl', 'tamika', 'tophat', 'vittoria', 'vixen', 'vlad', 'walter', 'whispery', 'william', 'wiseguy', 'zach'"
-				},
-				"tts_text": {
-					"type": "string",
-					"description": "Text used for text-to-speech conversion, maximum 800 characters"
-				},
-				"is_temparary": {
-					"type": "string",
-					"description": "'Y', 'N'. Media file is temporary, will be deleted after a specified period."
-				},
-				"expiration_date": {
-					"type": "integer",
-					"description": "If is_temporary is 'Y', media will be deleted after the specified time in seconds"
-				},
-				"duration": {
-					"type": "integer",
-					"description": "Length of media in seconds"
-				},
-				"notes": {
-					"type": "string",
-					"description": "Notes about the media object"
-				},
-				"randomized": {
-					"type": "string",
-					"description": "'Y', 'N'. Start playing the media file in random location, instead of from the beginning"
-				}
-			}
-		},
+    "CreateMediaParams": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of media"
+        },
+        "origin": {
+          "type": "string",
+          "description": "'tts', 'file'"
+        },
+        "type": {
+          "type": "string",
+          "description": "'hold_music', 'greeting'"
+        },
+        "tts_voice": {
+          "type": "string",
+          "description": "'allison', 'amy', 'belle', 'callie', 'callieq', 'dallas', 'damien', 'david', 'designerdave', 'diane', 'diesel', 'dog', 'duchess', 'duncan', 'emily', 'evilgenius', 'frank', 'french-fry', 'gregory', 'isabelle', 'jean-pierre', 'jerkface', 'katrin', 'kayla', 'kidaroo', 'lawrence', 'layo', 'linda', 'marta', 'matthias', 'miguel', 'millie', 'princess', 'ransomnote', 'robin', 'shouty', 'shygirl', 'tamika', 'tophat', 'vittoria', 'vixen', 'vlad', 'walter', 'whispery', 'william', 'wiseguy', 'zach'"
+        },
+        "tts_text": {
+          "type": "string",
+          "description": "Text used for text-to-speech conversion, maximum 800 characters"
+        },
+        "is_temparary": {
+          "type": "string",
+          "description": "'Y', 'N'. Media file is temporary, will be deleted after a specified period."
+        },
+        "expiration_date": {
+          "type": "integer",
+          "description": "If is_temporary is 'Y', media will be deleted after the specified time in seconds"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Length of media in seconds"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes about the media object"
+        },
+        "randomized": {
+          "type": "string",
+          "description": "'Y', 'N'. Start playing the media file in random location, instead of from the beginning"
+        }
+      }
+    },
     "CreateMenuParams": {
       "type": "object",
       "properties": {
@@ -4920,7 +5083,7 @@
           "type": "string",
           "description": "Text body of the outgoing SMS message. Maximum 160 characters per message."
         },
-        "extension_id" : {
+        "extension_id": {
           "type": "integer",
           "description": "ID of Extension where the sms is saved"
         }
@@ -5297,7 +5460,7 @@
           "description": "Array of Contact Phone Number Objects. See below for details.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PhoneNumberContact"
+            "$ref": "#/definitions/PhoneNumberFull"
           }
         }
       }
@@ -6987,6 +7150,14 @@
       }
     },
     "DeleteGroup": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "DeleteMedia": {
       "type": "object",
       "properties": {
         "success": {

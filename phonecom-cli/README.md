@@ -47,7 +47,7 @@ go get -u github.com/stretchr/testify
 
 Also, the Phone.com go client need sto be installed
 ```bash
-go get -u github.com/waiyuen/Phone.com-API-SDK-go
+go get -u github.com/phonedotcom/API-SDK-go
 ```
 
 
@@ -283,7 +283,8 @@ The following commands can be invoked from the API:
 create-account-call
 create-account-device
 create-account-extension
-create-account-media
+create-account-media-files
+create-account-media-tts
 create-account-menu
 create-account-phone-number
 create-account-queue
@@ -294,6 +295,7 @@ create-account-trunk
 create-account-extension-contact
 create-account-extension-contact-group
 
+delete-account-media
 delete-account-menu
 delete-account-queue
 delete-account-route
@@ -341,6 +343,7 @@ list-available-phone-number-regions
 
 replace-account-device
 replace-account-extension
+replace-account-media-tts
 replace-account-menu
 replace-account-phone-number
 replace-account-queue

@@ -1,6 +1,6 @@
 package main
 
-import "github.com/waiyuen/Phone.com-API-SDK-go"
+import "github.com/phonedotcom/API-SDK-go"
 
 type ApiResolver struct {
 	config  *swagger.Configuration
@@ -13,7 +13,7 @@ func (r *ApiResolver) resolve() interface{} {
 
 	switch r.command {
 
-	case listMedia, getMedia, createMedia:
+	case listMedia, getMedia, createMediaFiles, createMediaTts, replaceMediaTts, deleteMedia:
 
 		api = swagger.MediaApi{Configuration: r.config}
 

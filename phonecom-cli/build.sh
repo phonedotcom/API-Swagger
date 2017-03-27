@@ -3,11 +3,14 @@
 echo "Updating libraries..."
 export GOPATH=`pwd`
 
+rm -rf src/github.com/
+rm -rf src/golang.org/
+
 go get -u github.com/urfave/cli
 go get -u github.com/go-resty/resty
 go get -u github.com/yukithm/json2csv/cmd/json2csv
 go get -u github.com/stretchr/testify
-go get -u github.com/waiyuen/Phone.com-API-SDK-go
+go get -u github.com/phonedotcom/API-SDK-go
 
 ## Directories
 #cliSwaggerDir=src/phonecom-go-sdk

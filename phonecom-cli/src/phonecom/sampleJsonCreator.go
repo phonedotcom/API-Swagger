@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
-	"github.com/waiyuen/Phone.com-API-SDK-go"
+	"github.com/phonedotcom/API-SDK-go"
 	"io/ioutil"
 	"strings"
 	"time"
@@ -51,9 +51,13 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 			createGroupParamsSample := swagger.CreateGroupParams{"Ferengi Traders"}
 			s.marshalInput(createGroupParamsSample, "createGroup", inputType)
 
-		case createMedia:
-			createMediaParamsSample := swagger.CreateMediaParams{randomString(12), "tts", "hold_music", "allison", randomString(100), "Y", 900, 100, "Notes aboute the media", "N"}
-			s.marshalInput(createMediaParamsSample, "createMedia", inputType)
+		case createMediaFiles:
+			createMediaParamsSample := swagger.CreateMediaParams{randomString(12), "file", "hold_music", "", "", "Y", 900, 100, "Notes about the media file", "N"}
+			s.marshalInput(createMediaParamsSample, "createMediaFiles", inputType)
+
+		case createMediaTts:
+			createMediaParamsSample := swagger.CreateMediaParams{randomString(12), "tts", "hold_music", "allison", randomString(100), "Y", 900, 100, "Notes about the media TTS", "N"}
+			s.marshalInput(createMediaParamsSample, "createMediaTts", inputType)
 
 		case createMenu:
 			createMenuParamsSample := swagger.CreateMenuParams{randomString(12), nil, nil, true, 3, nil, nil}
@@ -90,6 +94,10 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 		case replaceExtension:
 			replaceExtensionParamsSample := swagger.ReplaceExtensionParams{nil, nil, randomString(12), "America/Los_Angeles", true, 111, true, "unlimited", 12344, "bobby McFerrin", true, nil, "standard", "private", 619, true, true, "automated", nil, "+18587741111", nil, "+18587748888", nil}
 			s.marshalInput(replaceExtensionParamsSample, "replaceExtension", inputType)
+
+		case replaceMediaTts:
+			replaceMediaParamsSample := swagger.CreateMediaParams{randomString(12), "tts", "hold_music", "allison", randomString(100), "Y", 900, 100, "Notes aboute the media", "N"}
+			s.marshalInput(replaceMediaParamsSample, "replaceMedia", inputType)
 
 		case replaceMenu:
 			replaceMenuParamsSample := swagger.ReplaceMenuParams{randomString(12), nil, nil, false, 5, nil, nil}
@@ -162,7 +170,7 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 
 		case getMedia:
 			mediaFullSample := swagger.MediaFull{int32(randomNumber(1, 9999)), randomString(12), "hold_music"}
-			s.marshalInput(mediaFullSample, "getRecording", inputType)
+			s.marshalInput(mediaFullSample, "getMedia", inputType)
 
 		case getMenu:
 			optionSlice := make([]swagger.Option, 0)
