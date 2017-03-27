@@ -146,14 +146,14 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 			mediaInfo, err := ioutil.ReadFile(param.input)
 
 			if err != nil {
-				return err, nil, 0
+				return errors.New("Could not read Create Media json file."), nil, 0
 			}
 
 			mediaInfoString := string(mediaInfo)
 			file, err := os.Open(param.mediaFilePath)
 
 			if err != nil {
-				return err, nil, 0
+				return errors.New("Could not read media file. Please check path."), nil, 0
 			}
 
 			return rh.handle(api.CreateAccountMediaFiles(accountId, mediaInfoString, file))
