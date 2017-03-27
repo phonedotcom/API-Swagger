@@ -250,6 +250,7 @@ func getAllCommands() string {
 
 		replaceDevice + ", " +
 		replaceExtension + ", " +
+		replaceMediaFiles + ", " +
 		replaceMediaTts + ", " +
 		replaceMenu + ", " +
 		replacePhoneNumber + ", " +

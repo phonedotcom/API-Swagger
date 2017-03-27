@@ -343,6 +343,7 @@ list-available-phone-number-regions
 
 replace-account-device
 replace-account-extension
+replace-account-media-files
 replace-account-media-tts
 replace-account-menu
 replace-account-phone-number

@@ -1894,8 +1894,8 @@
         }
       }
     },
-    "/accounts/{account_id}/media/{media_id}": {
-      "get": {
+    "/accounts/{account_id}/media/files/{media_id}": {
+      "put": {
         "security": [
           {
             "apiKey": []
@@ -1904,9 +1904,9 @@
         "tags": [
           "media"
         ],
-        "summary": "Show details of an individual media recording (Greeting or Hold Music)",
-        "description": "Get individual media recording",
-        "operationId": "get-account-media",
+        "summary": "Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB.",
+        "description": "See Account Media for more info on the properties.",
+        "operationId": "replace-account-media-files",
         "consumes": [
           "application/json"
         ],
@@ -1919,11 +1919,25 @@
           },
           {
             "$ref": "#/parameters/mediaIdParam"
+          },
+          {
+            "name": "json",
+            "in": "formData",
+            "description": "Media extra parameters",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Media file",
+            "required": false,
+            "type": "file"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Replaced",
             "schema": {
               "$ref": "#/definitions/MediaFull"
             }
@@ -1936,9 +1950,14 @@
           },
           "404": {
             "$ref": "#/responses/response404"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
           }
         }
-      },
+      }
+    },
+    "/accounts/{account_id}/media/tts/{media_id}": {
       "put": {
         "security": [
           {
@@ -1992,6 +2011,52 @@
           },
           "422": {
             "$ref": "#/responses/response422"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/media/{media_id}": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "media"
+        ],
+        "summary": "Show details of an individual media recording (Greeting or Hold Music)",
+        "description": "Get individual media recording",
+        "operationId": "get-account-media",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/mediaIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MediaFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
           }
         }
       },

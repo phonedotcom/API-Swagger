@@ -163,23 +163,22 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 			params := createMediaParams(input)
 			return rh.handle(api.CreateAccountMediaTts(accountId, params))
 
-		// Note: non-existing endpoint
-		//case replaceMediaFiles:
-		//
-		//	mediaInfo, err := ioutil.ReadFile(param.input)
-		//
-		//	if (err != nil) {
-		//		return err, nil, 0
-		//	}
-		//
-		//	mediaInfoString := string(mediaInfo)
-		//	file, err := os.Open(param.mediaFilePath)
-		//
-		//	if (err != nil) {
-		//		return err, nil, 0
-		//	}
-		//
-		//	return rh.handle(api.ReplaceAccountMediaFiles(accountId, mediaInfoString, file))
+		case replaceMediaFiles:
+
+			mediaInfo, err := ioutil.ReadFile(param.input)
+
+			if err != nil {
+				return errors.New("Could not read Create Media json file."), nil, 0
+			}
+
+			mediaInfoString := string(mediaInfo)
+			file, err := os.Open(param.mediaFilePath)
+
+			if err != nil {
+				return errors.New("Could not read media file. Please check path."), nil, 0
+			}
+
+			return rh.handle(api.ReplaceAccountMediaFiles(accountId, id, mediaInfoString, file))
 
 		case replaceMediaTts:
 
