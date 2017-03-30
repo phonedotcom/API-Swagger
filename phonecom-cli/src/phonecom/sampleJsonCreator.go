@@ -92,7 +92,7 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 			s.marshalInput(createDeviceParams, "replaceDevice", inputType)
 
 		case replaceExtension:
-			replaceExtensionParamsSample := swagger.ReplaceExtensionParams{nil, nil, randomString(12), "America/Los_Angeles", true, 111, true, "unlimited", 12344, "bobby McFerrin", true, nil, "standard", "private", 619, true, true, "automated", nil, "+18587741111", nil, "+18587748888", nil}
+			replaceExtensionParamsSample := swagger.ReplaceExtensionParams{nil, nil, randomString(12), "America/Los_Angeles", true, 111, true, "unlimited", 12344, "bobby McFerrin", true, nil, "standard", "private", 619, true, true, "automated", nil, "+18587741111", nil, "+18587748888", ""}
 			s.marshalInput(replaceExtensionParamsSample, "replaceExtension", inputType)
 
 		case replaceMediaFiles:

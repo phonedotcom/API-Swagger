@@ -49,6 +49,7 @@ type ReplaceExtensionJson struct {
 	VoicemailTranscription                    string `json:"voicemail[transcription]"`
 	VoicemailNotificationsSms                 string `json:"voicemail[notifications][sms]"`
 	CallNotificationsSms                      string `json:"call_notifications[sms]"`
+	Route                                     string `json:"route"`
 }
 
 type CreateContactJson struct {

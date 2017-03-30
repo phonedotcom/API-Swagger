@@ -4762,10 +4762,7 @@
           "description": "SMS notifications for calls"
         },
         "route": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "type": "string",
           "description": "Route object lookup (must belong to this extension)"
         }
       }
