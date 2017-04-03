@@ -67,8 +67,7 @@ func clearEmptyParams(paramMap map[string][]string) {
   elif [ $sdk == "java" ]
   then
     echo "Copying Java SDK..."
-    cp -r $2/* $dir
+#    cp -r $2/* $dir
   fi
 
-  #zip -r $dir.zip $dir
 done

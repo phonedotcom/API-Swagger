@@ -120,7 +120,7 @@ func TestListReplaceExtension(t *testing.T) {
 	firstId := getFirstId(result)
 
 	randomName := randomString(12)
-	ExtensionParamsJson := ReplaceExtensionJson{int32(firstId), randomName, "America/Los_Angeles", true, 111, true, "unlimited", 12344, "bobby McFerrin", true, "standard", "private", 619, true, true, "automated", "+18587741111", "+18587748888", "yr4l8fw6zs88"}
+	ExtensionParamsJson := ReplaceExtensionJson{int32(firstId), randomName, "America/Los_Angeles", true, 111, true, "unlimited", "bobby McFerrin", true, 619}
 	fileName := "../test/jsonin/replaceExtension" + randomName + ".json"
 	b, err := json.Marshal(ExtensionParamsJson)
 	err = ioutil.WriteFile(fileName, b, 0644)

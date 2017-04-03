@@ -38,18 +38,9 @@ type ReplaceExtensionJson struct {
 	Extension                                 int32  `json:"extension"`
 	EnableOutboundCalls                       bool   `json:"enable_outbound_calls"`
 	UsageType                                 string `json:"usage_type"`
-	VoicemailPassword                         int32  `json:"voicemail[password]"`
 	FullName                                  string `json:"full_name"`
 	EnableCallWaiting                         bool   `json:"enable_call_waiting"`
-	VoicemailGreetingType                     string `json:"voicemail[greeting][type]"`
-	CallerId                                  string `json:"caller_id"`
 	LocalAreaCode                             int32  `json:"local_area_code"`
-	VoicemailEnabled                          bool   `json:"voicemail[enabled]"`
-	VoicemailGreetingEnableLeaveMessagePrompt bool   `json:"voicemail[greeting][enable_leave_message_prompt]"`
-	VoicemailTranscription                    string `json:"voicemail[transcription]"`
-	VoicemailNotificationsSms                 string `json:"voicemail[notifications][sms]"`
-	CallNotificationsSms                      string `json:"call_notifications[sms]"`
-	Route                                     string `json:"route"`
 }
 
 type CreateContactJson struct {

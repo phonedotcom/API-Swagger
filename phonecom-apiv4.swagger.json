@@ -4564,6 +4564,14 @@
     "CreateExtensionParams": {
       "type": "object",
       "properties": {
+        "voicemail": {
+          "$ref": "#/definitions/Voicemail",
+          "description": "Voicemail object"
+        },
+        "call_notifications": {
+          "$ref": "#/definitions/CallNotifications",
+          "description": "Call Notifications object"
+        },
         "caller_id": {
           "type": "string",
           "description": "Caller ID"
@@ -4600,21 +4608,9 @@
           "type": "object",
           "description": "Recording lookup object"
         },
-        "voicemail[greeting][alternate]": {
-          "type": "object",
-          "description": "Recording lookup object"
-        },
         "local_area_code": {
           "type": "integer",
           "description": "Local area code"
-        },
-        "voicemail[greeting][enable_leave_message_prompt]": {
-          "type": "boolean",
-          "description": "Enable the \"leave a message\" prompt for voicemail"
-        },
-        "voicemail[enabled]": {
-          "type": "boolean",
-          "description": "Voicemail enabled"
         },
         "enable_outbound_calls": {
           "type": "boolean",
@@ -4623,53 +4619,19 @@
         "enable_call_waiting": {
           "type": "boolean",
           "description": "Enable Call Waiting"
-        },
-        "voicemail[password]": {
-          "type": "integer",
-          "description": "Voicemail password"
-        },
-        "voicemail[greeting][type]": {
-          "type": "string",
-          "description": "Voicemail greeting type"
-        },
-        "voicemail[greeting][standard]": {
-          "type": "object",
-          "description": "Recording lookup object"
-        },
-        "voicemail[transcription]": {
-          "type": "string",
-          "description": "Voicemail transcription type"
-        },
-        "voicemail[notifications][emails]": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Email notifications for voicemails. Can be a single email or an array of emails"
-        },
-        "voicemail[notifications][sms]": {
-          "type": "string",
-          "description": "SMS notifications for voicemails"
-        },
-        "call_notifications[emails]": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Email notifications for calls. Can be a single email or an array of emails"
-        },
-        "call_notifications[sms]": {
-          "type": "string",
-          "description": "SMS notifications for calls"
         }
       }
     },
     "ReplaceExtensionParams": {
       "type": "object",
       "properties": {
-        "voicemail[greeting][alternate]": {
-          "type": "object",
-          "description": "Recording lookup object"
+        "voicemail": {
+          "$ref": "#/definitions/Voicemail",
+          "description": "Voicemail object"
+        },
+        "call_notifications": {
+          "$ref": "#/definitions/CallNotifications",
+          "description": "Call Notifications object"
         },
         "name_greeting": {
           "type": "object",
@@ -4699,10 +4661,6 @@
           "type": "string",
           "description": "Extension type"
         },
-        "voicemail[password]": {
-          "type": "integer",
-          "description": "Voicemail password"
-        },
         "full_name": {
           "type": "string",
           "description": "Contact name"
@@ -4711,14 +4669,6 @@
           "type": "boolean",
           "description": "Enable Call Waiting"
         },
-        "voicemail[greeting][standard]": {
-          "type": "object",
-          "description": "Recording lookup object"
-        },
-        "voicemail[greeting][type]": {
-          "type": "string",
-          "description": "Voicemail greeting type"
-        },
         "caller_id": {
           "type": "string",
           "description": "Caller ID"
@@ -4726,40 +4676,6 @@
         "local_area_code": {
           "type": "integer",
           "description": "Local area code"
-        },
-        "voicemail[enabled]": {
-          "type": "boolean",
-          "description": "Voicemail enabled"
-        },
-        "voicemail[greeting][enable_leave_message_prompt]": {
-          "type": "boolean",
-          "description": "Use leave message prompt after voicemail"
-        },
-        "voicemail[transcription]": {
-          "type": "string",
-          "description": "Voicemail transcription type"
-        },
-        "voicemail[notifications][emails]": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Email notifications for voicemails. Can be a single email or an array of emails"
-        },
-        "voicemail[notifications][sms]": {
-          "type": "string",
-          "description": "SMS notifications for voicemails"
-        },
-        "call_notifications[emails]": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Email notifications for calls. Can be a single email or an array of emails"
-        },
-        "call_notifications[sms]": {
-          "type": "string",
-          "description": "SMS notifications for calls"
         },
         "route": {
           "type": "string",
@@ -4980,36 +4896,36 @@
           "type": "boolean",
           "description": "Block anonymous calls"
         },
-        "caller_id[name]": {
+        "caller_id": {
+          "$ref": "#/definitions/CallerIdPhoneNumber",
+          "description": "Caller ID object"
+        },
+        "sms_forwarding": {
+          "$ref": "#/definitions/SmsForwardingParams",
+          "description": "SMS Forwarding Object, or NULL"
+        },
+        "call_notifications": {
+          "$ref": "#/definitions/CallNotifications",
+          "description": "Call Notifications object"
+        }
+      }
+    },
+    "SmsForwardingParams": {
+      "description": "SMS Forwarding Object, or NULL",
+      "type": "object",
+      "properties": {
+        "type": {
           "type": "string",
-          "description": "Caller ID name"
+          "description": "Can be \"extension\" or \"application\"",
+          "pattern": "extension|application"
         },
-        "caller_id[type]": {
-          "type": "string",
-          "description": "Caller ID type"
+        "extension": {
+          "type": "integer",
+          "description": "Required if type = \"extension\". Extension that messages should be directed to. Output is an Extension Summary Object. Input must be an Extension Lookup Object."
         },
-        "sms_forwarding[type]": {
-          "type": "string",
-          "description": "'application' or 'extension'"
-        },
-        "sms_forwarding[application]": {
-          "type": "object",
-          "description": "Application lookup object"
-        },
-        "sms_forwarding[extension]": {
-          "type": "object",
-          "description": "Extension lookup object"
-        },
-        "call_notifications[emails]": {
-          "type": "array",
-          "description": "Call notifications for emails. Can be a single email or an array of emails",
-          "items": {
-            "type": "string"
-          }
-        },
-        "call_notifications[sms]": {
-          "type": "string",
-          "description": "Call notification for SMS"
+        "application": {
+          "type": "integer",
+          "description": "Required if type = \"application\". Application that messages should be directed to. Output is an Application Summary Object. Input must be an Application Lookup Object."
         }
       }
     },
@@ -5032,40 +4948,21 @@
           "type": "boolean",
           "description": "Block anonymous calls"
         },
-        "caller_id[name]": {
-          "type": "string",
-          "description": "Caller ID name"
+        "caller_id": {
+          "$ref": "#/definitions/CallerIdPhoneNumber",
+          "description": "Caller ID object"
         },
-        "caller_id[type]": {
-          "type": "string",
-          "description": "Caller ID type"
-        },
-        "sms_forwarding[type]": {
-          "type": "string",
-          "description": "'application' or 'extension'"
-        },
-        "sms_forwarding[application]": {
-          "type": "object",
-          "description": "Application lookup object"
-        },
-        "sms_forwarding[extension]": {
-          "type": "object",
-          "description": "Extension lookup object"
+        "sms_forwarding": {
+          "$ref": "#/definitions/SmsForwardingParams",
+          "description": "SMS Forwarding Object, or NULL"
         },
         "pool_item": {
           "type": "object",
           "description": "Pool lookup object"
         },
-        "call_notifications[emails]": {
-          "type": "array",
-          "description": "Call notifications for emails. Can be a single email or an array of emails",
-          "items": {
-            "type": "string"
-          }
-        },
-        "call_notifications[sms]": {
-          "type": "string",
-          "description": "Call notification for SMS"
+        "call_notifications": {
+          "$ref": "#/definitions/CallNotifications",
+          "description": "Call Notifications object"
         }
       }
     },
@@ -6625,7 +6522,7 @@
         "type": {
           "type": "string",
           "description": "Can be \"business\" or \"personal\"",
-          "pattern": "extension|application"
+          "pattern": "business|personal"
         }
       }
     },

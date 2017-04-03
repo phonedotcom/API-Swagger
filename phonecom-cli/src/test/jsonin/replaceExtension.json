@@ -1,21 +1,32 @@
 {
-	"account_id": 1315091,
-	"extension_id": 1767963,
-	"name": "new bobby",
-	"timezone": "America/Los_Angeles",
-	"include_in_directory": true,
-	"extension": 514,
-	"enable_outbound_calls": true,
-	"usage_type": "unlimited",
-	"voicemail[password]": "000000",
-	"full_name": "bobby McFerrin",
-	"enable_call_waiting": true,
-	"voicemail[greeting][type]": "standard",
-	"caller_id": "private",
-	"local_area_code": 619,
-	"voicemail[enabled]": true,
-	"voicemail[greeting][enable_leave_message_prompt]": true,
-	"voicemail[transcription]": "automated",
-	"voicemail[notifications][sms]": "+18587741111",
-	"call_notifications[sms]": "+18587748888"
+  "name": "Updated extension to 222",
+  "account_id": 1315091,
+  "extension_id": 1767963,
+  "extension": 222,
+  "route":"API Cell Phone Route",
+
+  "voicemail" : {
+    "enabled" : true,
+    "password" : "12345",
+    "greeting" : {
+      "type" : "standard",
+      "enable_leave_message_prompt" : true
+    },
+    "attachments" : "mp3",
+    "notifications" : {
+      "emails" : [
+        "bobby@example.com"
+      ],
+      "sms" : "+17329910138"
+    },
+    "transcription" : "automated"
+  },
+
+  "call_notifications" : {
+    "emails" : [
+      "bobbo42@example.com"
+    ],
+    "sms" : "+17329910138"
+  }
+
 }
