@@ -40,8 +40,8 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 			s.marshalInput(createDeviceParamsSample, "createDevice", inputType)
 
 		case createExtension:
-			//createExtensionParamsSample := swagger.CreateExtensionParams{"+12019570328", "unlimited", true, int32(randomNumber(10, 9999999)), true, "The name", "The full name", "America/Los_Angeles", swagger.MediaSummary{int32(randomNumber(10, 99999)), randomString(12)}, swagger.MediaSummary{int32(randomNumber(10, 99999)), randomString(12)}, 619, true, false, true, false, 12345, "standard", swagger.MediaSummary{int32(randomNumber(10, 99999)), randomString(12)}, "automated", stringEmailSlice, "+18587741111", stringEmailSlice, "+18587748888"}
-			//s.marshalInput(createExtensionParamsSample, "createExtension", inputType)
+			createExtensionParamsSample := swagger.CreateExtensionParams{swagger.Voicemail{true, "12345", swagger.Greeting{"name", swagger.MediaSummary{123, "name"}, swagger.MediaSummary{123, "name"}, true}, "wav", swagger.Notification{stringEmailSlice, "+18189640644"}, "human"}, swagger.CallNotifications{stringEmailSlice, "+12546551378"}, "private", "limited", true, 1234, true, "nameName", "contact name", "America/Los_Angeles", swagger.MediaSummary{1234, "name"}, 12345, true, true}
+			s.marshalInput(createExtensionParamsSample, "createExtension", inputType)
 
 		case createContact:
 			createContactParamsSample := swagger.CreateContactParams{"Geordi", "middle name", "last name", "prefix", "phoneticFirstName", "phoneticMiddleName", "phoneticLastName", "suffix", "nickname", "company", "department", "jobTitle", nil, nil, nil, nil}
@@ -64,8 +64,8 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 			s.marshalInput(createMenuParamsSample, "createMenu", inputType)
 
 		case createPhoneNumber:
-			//createPhoneNumberParamsSample := swagger.CreatePhoneNumberParams{"+12546551377", swagger.RouteSummary{123, randomString(12)}, "Phone Name Now", true, true, "Phone N", "business", "extension", swagger.ApplicationSummary{int32(randomNumber(1, 9999)), randomString(12)}, swagger.ExtensionSummary{int32(randomNumber(1, 9999)), randomString(12), int32(randomNumber(1, 9999))}, stringEmailSlice, "+18587740222"}
-			//s.marshalInput(createPhoneNumberParamsSample, "createPhoneNumber", inputType)
+			createPhoneNumberParamsSample := swagger.CreatePhoneNumberParams{"+12546551377", swagger.RouteSummary{123, randomString(12)}, "Phone Name Now", true, true, swagger.CallerIdPhoneNumber{"nameOfOwner", "business"}, swagger.SmsForwardingParams{"extension", 123, 456}, swagger.CallNotifications{stringEmailSlice, "+12546551378"}}
+			s.marshalInput(createPhoneNumberParamsSample, "createPhoneNumber", inputType)
 
 		case createQueue:
 			createQueueParamsSample := swagger.CreateQueueParams{randomString(12), swagger.MediaSummary{123, randomString(12)}, swagger.MediaSummary{123, randomString(12)}, 60, "called_number", 10, nil}
@@ -92,8 +92,8 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 			s.marshalInput(createDeviceParams, "replaceDevice", inputType)
 
 		case replaceExtension:
-			//replaceExtensionParamsSample := swagger.ReplaceExtensionParams{nil, nil, randomString(12), "America/Los_Angeles", true, 111, true, "unlimited", 12344, "bobby McFerrin", true, nil, "standard", "private", 619, true, true, "automated", nil, "+18587741111", nil, "+18587748888", ""}
-			//s.marshalInput(replaceExtensionParamsSample, "replaceExtension", inputType)
+			replaceExtensionParamsSample := swagger.ReplaceExtensionParams{swagger.Voicemail{true, "12345", swagger.Greeting{"name", swagger.MediaSummary{123, "name"}, swagger.MediaSummary{123, "name"}, true}, "wav", swagger.Notification{stringEmailSlice, "+18189640644"}, "human"}, swagger.CallNotifications{stringEmailSlice, "+12546551378"}, swagger.MediaSummary{1234, "name"}, "nameName", "America/Los_Angeles", true, 1234, true, "limited", "contact name", true, "private", 12345, "route"}
+			s.marshalInput(replaceExtensionParamsSample, "replaceExtension", inputType)
 
 		case replaceMediaFiles:
 			replaceMediaParamsSample := swagger.CreateMediaParams{randomString(12), "tts", "hold_music", "", "", "Y", 900, 100, "Notes aboute the media", "N"}
@@ -108,8 +108,8 @@ func (s *SampleJsonCreator) createSampleInOutIfNeeded(param CliParams) {
 			s.marshalInput(replaceMenuParamsSample, "replaceMenu", inputType)
 
 		case replacePhoneNumber:
-			//replacePhoneNumberParamsSample := swagger.ReplacePhoneNumberParams{swagger.RouteSummary{123, randomString(12)}, "Robert", true, true, "Phone N", "business", "extension", swagger.ApplicationSummary{int32(randomNumber(1, 9999)), randomString(12)}, swagger.ExtensionSummary{int32(randomNumber(1, 9999)), randomString(12), int32(randomNumber(1, 9999))}, nil, stringEmailSlice, "+18587740222"}
-			//s.marshalInput(replacePhoneNumberParamsSample, "replacePhoneNumber", inputType)
+			replacePhoneNumberParamsSample := swagger.ReplacePhoneNumberParams{swagger.RouteSummary{123, randomString(12)}, "Phone Name Now", true, true, swagger.CallerIdPhoneNumber{"nameOfOwner", "business"}, swagger.SmsForwardingParams{"extension", 123, 456}, nil, swagger.CallNotifications{stringEmailSlice, "+12546551378"}}
+			s.marshalInput(replacePhoneNumberParamsSample, "replacePhoneNumber", inputType)
 
 		case replaceQueue:
 			createQueueParamsSample := swagger.CreateQueueParams{randomString(12), swagger.MediaSummary{123, randomString(12)}, swagger.MediaSummary{123, randomString(12)}, 60, "called_number", 10, nil}

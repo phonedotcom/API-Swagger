@@ -1,5 +1,7 @@
 package main
 
+import "github.com/phonedotcom/API-SDK-go"
+
 type CreateDeviceJson struct {
 	Name string `json:"name"`
 }
@@ -10,37 +12,38 @@ type ReplaceDeviceJson struct {
 }
 
 type CreateExtensionJson struct {
-	CallerId                                  string `json:"caller_id"`
-	UsageType                                 string `json:"usage_type"`
-	AllowsCallWaiting                         bool   `json:"allows_call_waiting"`
-	Extension                                 int32  `json:"extension"`
-	IncludeInDirectory                        bool   `json:"include_in_directory"`
-	Name                                      string `json:"name"`
-	FullName                                  string `json:"full_name"`
-	Timezone                                  string `json:"timezone"`
-	LocalAreaCode                             int32  `json:"local_area_code"`
-	VoicemailGreetingEnableLeaveMessagePrompt bool   `json:"voicemail[greeting][enable_leave_message_prompt]"`
-	VoicemailEnabled                          bool   `json:"voicemail[enabled]"`
-	EnableOutboundCalls                       bool   `json:"enable_outbound_calls"`
-	EnableCallWaiting                         bool   `json:"enable_call_waiting"`
-	VoicemailPassword                         int32  `json:"voicemail[password]"`
-	VoicemailGreetingType                     string `json:"voicemail[greeting][type]"`
-	VoicemailTranscription                    string `json:"voicemail[transcription]"`
-	VoicemailNotificationsSms                 string `json:"voicemail[notifications][sms]"`
-	CallNotificationsSms                      string `json:"call_notifications[sms]"`
+	Voicemail           swagger.Voicemail         `json:"voicemail"`
+	CallNotifications   swagger.CallNotifications `json:"call_notifications"`
+	CallerId            string                    `json:"caller_id"`
+	UsageType           string                    `json:"usage_type"`
+	AllowsCallWaiting   bool                      `json:"allows_call_waiting"`
+	Extension           int32                     `json:"extension"`
+	IncludeInDirectory  bool                      `json:"include_in_directory"`
+	Name                string                    `json:"name"`
+	FullName            string                    `json:"full_name"`
+	Timezone            string                    `json:"timezone"`
+	NameGreeting        interface{}               `json:"name_greeting"`
+	LocalAreaCode       int32                     `json:"local_area_code"`
+	EnableOutboundCalls bool                      `json:"enable_outbound_calls"`
+	EnableCallWaiting   bool                      `json:"enable_call_waiting"`
 }
 
 type ReplaceExtensionJson struct {
-	ExtensionId                               int32  `json:"extension_id"`
-	Name                                      string `json:"name"`
-	Timezone                                  string `json:"timezone"`
-	IncludeInDirectory                        bool   `json:"include_in_directory"`
-	Extension                                 int32  `json:"extension"`
-	EnableOutboundCalls                       bool   `json:"enable_outbound_calls"`
-	UsageType                                 string `json:"usage_type"`
-	FullName                                  string `json:"full_name"`
-	EnableCallWaiting                         bool   `json:"enable_call_waiting"`
-	LocalAreaCode                             int32  `json:"local_area_code"`
+	ExtensionId         int32                     `json:"extension_id"`
+	Voicemail           swagger.Voicemail         `json:"voicemail"`
+	CallNotifications   swagger.CallNotifications `json:"call_notifications"`
+	NameGreeting        interface{}               `json:"name_greeting"`
+	Name                string                    `json:"name"`
+	Timezone            string                    `json:"timezone"`
+	IncludeInDirectory  bool                      `json:"include_in_directory"`
+	Extension           int32                     `json:"extension"`
+	EnableOutboundCalls bool                      `json:"enable_outbound_calls"`
+	UsageType           string                    `json:"usage_type"`
+	FullName            string                    `json:"full_name"`
+	EnableCallWaiting   bool                      `json:"enable_call_waiting"`
+	CallerId            string                    `json:"caller_id"`
+	LocalAreaCode       int32                     `json:"local_area_code"`
+	Route               string                    `json:"route"`
 }
 
 type CreateContactJson struct {
@@ -78,25 +81,26 @@ type ReplaceMenuJson struct {
 }
 
 type CreatePhoneNumberJson struct {
-	PhoneNumber          string `json:"phone_number"`
-	Name                 string `json:"name"`
-	BlockIncoming        bool   `json:"block_incoming"`
-	BlockAnonymous       bool   `json:"block_anonymous"`
-	CallerIdName         string `json:"caller_id[name]"`
-	CallerIdType         string `json:"caller_id[type]"`
-	SmsForwardingType    string `json:"sms_forwarding[type]"`
-	CallNotificationsSms string `json:"call_notifications[sms]"`
+	PhoneNumber       string                      `json:"phone_number"`
+	Route             interface{}                 `json:"route"`
+	Name              string                      `json:"name"`
+	BlockIncoming     bool                        `json:"block_incoming"`
+	BlockAnonymous    bool                        `json:"block_anonymous"`
+	CallerId          swagger.CallerIdPhoneNumber `json:"caller_id"`
+	SmsForwarding     swagger.SmsForwardingParams `json:"sms_forwarding"`
+	CallNotifications swagger.CallNotifications   `json:"call_notifications"`
 }
 
 type ReplacePhoneNumberJson struct {
-	NumberId             int32  `json:"number_id"`
-	Name                 string `json:"name"`
-	BlockIncoming        bool   `json:"block_incoming"`
-	BlockAnonymous       bool   `json:"block_anonymous"`
-	CallerIdName         string `json:"caller_id[name]"`
-	CallerIdType         string `json:"caller_id[type]"`
-	SmsForwardingType    string `json:"sms_forwarding[type]"`
-	CallNotificationsSms string `json:"call_notifications[sms]"`
+	NumberId          int32                       `json:"number_id"`
+	Route             interface{}                 `json:"route"`
+	Name              string                      `json:"name"`
+	BlockIncoming     bool                        `json:"block_incoming"`
+	BlockAnonymous    bool                        `json:"block_anonymous"`
+	CallerId          swagger.CallerIdPhoneNumber `json:"caller_id"`
+	SmsForwarding     swagger.SmsForwardingParams `json:"sms_forwarding"`
+	PoolItem          interface{}                 `json:"pool_item"`
+	CallNotifications swagger.CallNotifications   `json:"call_notifications"`
 }
 
 type CreateQueueJson struct {
