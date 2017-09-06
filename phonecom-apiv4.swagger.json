@@ -13,10 +13,18 @@
   "tags": [
     {
       "name": "calls",
-      "description": "This API places a call to the caller phone number (or caller extension ID). If that number (or extension) answers within the timeout period, then the callee DID (or extension) will be connected to the call.      SUPPORTED SERVICES      Create Calls      We currently support three calling scenarios:    Place a call from a DID to my extension, required parameters are:    a. Caller Phone Number      b. Callee Extension ID      Place a call from a DID to another DID, required parameters are:    a. Caller Phone Number      b. Callee Phone Number      c. Caller Extension ID      Place a call from my Extension to a DID, required parameters are:    a. Caller Extension ID      b. Callee Phone Number      The Calls API supports caller ID, an user may specify the caller caller ID or the callee caller ID. The following rules are applied when a caller ID is provided.      The caller caller ID must be the same as the callee phone number, or a phone number owned by the user account      The callee caller ID must be the same as the caller phone number, or a phone number owned by the user account      User may also set the caller caller ID or callee caller ID to 'private' by setting flag caller_private and callee_private to true respectively.",
+      "description": "This API places a call to the caller phone number (or caller extension ID). If that number (or extension) answers within the timeout period, then the callee DID (or extension) will be connected to the call. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Calls API with the following definition: https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/calls",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://apidocs.phone.com/docs/account-calls"
+      }
+    },
+    {
+      "name": "oauth",
+      "description": "The OAuth 2.0 Authorization Framework enables a third-party application to obtain limited access to HTTP API requests which require an access token. This page describes how to use the /oauth/authorization and /oauth/access-token API's to generate an access token.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apidocs.phone.com/docs/oauth"
       }
     },
     {
@@ -45,10 +53,18 @@
     },
     {
       "name": "devices",
-      "description": "Your Phone.com account may have one or more physical handsets or other VoIP devices associated with it.",
+      "description": "Your Phone.com account may have one or more physical handsets or other VoIP devices associated with it. This service only shows generic VoIP devices at this time. If you have any physical handsets or virtualized software-based devices, you will need to continue using the Control Panel to manage them.",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://apidocs.phone.com/docs/account-devices"
+      }
+    },
+    {
+      "name": "listeners",
+      "description": "Call Event Listeners. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Listeners API with the following definition: https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/listeners At the heart of every telephony system is the Events Engine. At Phone.com, our customers (and their call traffic) emit millions of events per day. These events play a key role in advanced integration opportunities such as CRM integration, security/auditing, and real-time contextual call control. The Listeners API Services aim to simplify and standardize the method in which events are extracted from our systems and processed. These services provide consistent interfaces for internal systems to log events, manage subscriptions, and provide interfaces for external systems (e.g. customer applications or integrations such as Salesforce CRM) to subscribe to account-specific events and manage the subscriptions. As of today, Phone.com supports the following events. More events will be added as we continue to upgrade our phone services. - call.new - call.update - call.complete - call.log - sms.in - sms.out The \"call\" events help customers know when a call starts, when the callee answers the call, when a call ends and when a call entry is recorded and ready for retrieval. The \"sms\" events help customers know when a sms is sent or received. This provides enough information for applications such as Incoming Call / SMS Notification and others to improve productivities. More events will be added once we understand more about customer needs. The Listeners service provides an interface for internal and external applications to subscribe to events. Listeners can be added by customers to their Phone.com account using the Phoenix API. A listener sets up an event type and a callback URL, when the event is emitted, it will be forwarded to the URL. For example, a call.new event may be setup with a callback URL http://newcall.phone.com, when an inbound call comes in, the event with all the call info (payload) will be forwarded to http://newcall.phone.com.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apidocs.phone.com/docs/account-listeners"
       }
     },
     {
@@ -69,10 +85,10 @@
     },
     {
       "name": "caller-ids",
-      "description": "Show the Caller ID options a given extension can use",
+      "description": "API users with Extension scope access token does not have access to the Phone Number API. This API helps user to retrieve available account phone numbers to be used as caller id via the /Calls API. Outgoing calls via the Post /calls API supports Caller ID settings. This page gives an overview on how to retrieve the list of available account phone number to be used as caller ID.",
       "externalDocs": {
         "description": "Find out more",
-        "url": "Outgoing calls can have a Caller ID setting. This page gives an overview."
+        "url": "https://apidocs.phone.com/docs/account-extension-caller-ids"
       }
     },
     {
@@ -93,7 +109,7 @@
     },
     {
       "name": "media",
-      "description": "Hold Music can be used in routes, queues, and anywhere the caller might be placed on hold. Your account has access to a set of standard hold music options, and optionally another set of premium hold music options. You can also upload your own hold music, subject to copyright limitations.",
+      "description": "Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Media API with the following definition: https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/media. Your Phone.com account has two kinds of media that can be used in various ways: Hold Music and Greetings. Hold Music can be used in routes, queues, and anywhere the caller might be placed on hold. Your account has access to a set of standard hold music options, and optionally another set of premium hold music options. You can also upload your own hold music, subject to copyright limitations. Greetings are verbal messages that can be played in various places to provide the caller with important information. For example, greetings are used when a caller first enters a menu or if they enter an invalid option. You also might use a greeting to alert the user to the fact that their call is being recorded.",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://apidocs.phone.com/docs/list-account-media"
@@ -105,6 +121,30 @@
       "externalDocs": {
         "description": "Find out more",
         "url": "https://apidocs.phone.com/docs/account-menus"
+      }
+    },
+    {
+      "name": "oauth-clients",
+      "description": "Phone.com API supports OAuth 2.0 Authorization Framework, which enables a third-party application (client) to obtain limited access to HTTP API requests. This page describes how to use the /oauth/clients API to list, get and delete client.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apidocs.phone.com/docs/account-oauth-clients"
+      }
+    },
+    {
+      "name": "oauth-clients-redirect-uris",
+      "description": "The Account OAuth Clients API supports redirect-uri. Since an OAuth Client is created by a Phone.com admin who does not know what redirect uris should be assigned, API users may use the OAuth Client Redirect URIs API to create, list, get and delete redirect uris.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apidocs.phone.com/docs/account-oauth-clients-redirect-uris"
+      }
+    },
+    {
+      "name": "payment-methods",
+      "description": "Phone.com accepts credit card payment, and the Account Payment Methods API allows users to add, list, get, update and delete a credit card payment method.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apidocs.phone.com/docs/account-payment-methods"
       }
     },
     {
@@ -141,7 +181,7 @@
     },
     {
       "name": "sms",
-      "description": "The Phone.com /sms service lets you send and show history of SMS messages. Phone.comâ€™s standard phone service lets you send and receive SMS messages using your Phone.com numbers. The Phone.com API extends this functionality, letting you send SMS messages from your application (through your phone number and our API server) to your users. You can also use the API to retrieve the history of sms sent from / delivered to your account.",
+      "description": "The Phone.com /sms service lets you send and show history of SMS messages. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level SMS API with the following definition: https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/sms. Phone.com’s standard phone service lets you send and receive SMS messages using your Phone.com numbers. The Phone.com API extends this functionality, letting you send SMS messages from your application (through your phone number and our API server) to your users. You can also use the API to retrieve the history of sms sent from / delivered to your account.",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://apidocs.phone.com/docs/account-sms"
@@ -156,11 +196,27 @@
       }
     },
     {
+      "name": "pricing",
+      "description": "This page gives an overview of how a Phone.com Master Account manages its pricing plan (coupon code) for its Subaccounts. API Token with Billing Scope: Your Phone.com account API token must have Billing Scope enabled in order to use any of our pricing services. Please contact Support if you need this.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apidocs.phone.com/docs/account-subaccount-pricing"
+      }
+    },
+    {
       "name": "trunks",
-      "description": "SIP Trunks are used to connect your Phone.com account to your PBX.",
+      "description": "SIP Trunks are used to connect your Phone.com account to your PBX. SIP Trunking Customers Only: Your Phone.com account must have SIP Trunking enabled in order to use any of our trunking features. Please contact Support if you need this. Otherwise, all requests to these services will result in a 403 Forbidden error.",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://apidocs.phone.com/docs/account-trunks"
+      }
+    },
+    {
+      "name": "voicemail",
+      "description": "Phone.com’s standard phone service allows callers leave voicemail if the incoming call was not answered. The /voicemail services show history of voicemail and allow users download voicemail for offline playback. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Voicemail API with the following definition: https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/voicemail",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apidocs.phone.com/docs/account-voicemail"
       }
     },
     {
@@ -223,13 +279,152 @@
         ]
       }
     },
+    "/oauth/access-token": {
+      "get": {
+        "tags": [
+          "oauth"
+        ],
+        "summary": "Retrieve details of an access token, such as scope, expiration and extension ID.",
+        "description": "Retrieve details of an access token, such as scope, expiration and extension ID. Voip ID will be returned as well if scope contains account-owner scope.",
+        "operationId": "get-oauth-access-token",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetOauthAccessToken"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "oauth"
+        ],
+        "summary": "To create an access token via the /oauth/access-token API, an API user may choose any one of the grant types it supports: Authorization Code Grant, Client Credential Grant, Password Credential Grant or Refresh Token Grant.",
+        "description": "To create an access token via the /oauth/access-token API, an API user may choose any one of the grant types it supports: Authorization Code Grant, Client Credential Grant, Password Credential Grant or Refresh Token Grant. For Authorization Code Grant, the input parameter 'code' is generated via the Create Authorization API. NOTE: The Create Access Token API now accepts requests in query string format as well as JSON body format. See OAuth for more details on how to obtain client id and client secret to create an access token at real time.",
+        "operationId": "create-oauth-access-token",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Oauth data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateOauthParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/OauthAccessToken"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
+          }
+        }
+      }
+    },
+    "/oauth/authorization": {
+      "get": {
+        "tags": [
+          "oauth"
+        ],
+        "summary": "Create Authorization Code or Access Token.",
+        "description": "Create Authorization Code or Access Token. The /oauth/authorization API supports Authorization Grant and Implicit Grant. In Authorization Grant, this API returns a code (response_type=code) for clients implemented in a browser using a scripting language such as JavaScript. Users may then use the code via the Create Access Token API to create an access token. The Implicit Grant is a simplified authorization code flow. In the implicit flow, instead of issuing the client an authorization code, the client is issued an access token (response_type=token) directly. See OAuth for more details on how to obtain client id and client secret to create authorization code access token at real time.",
+        "operationId": "create-oauth-authorization",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "Client ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "response_type",
+            "in": "query",
+            "description": "'token' for Implicit Grant; 'code' for Authorization Code Grant",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "account-owner, extension-user and/or methods:ALL, separated by space (%20)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "redirect_uri",
+            "in": "query",
+            "description": "The URL where the response data of this API is redirected to",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "http://localhost/?code=mRxUuwgl0Xgjg8fIjweikoJPb1aaMBU8bt706656~6&state="
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/accounts": {
       "get": {
         "tags": [
           "accounts"
         ],
-        "summary": "Get a list of accounts visible to the authenticated user or client",
-        "description": "This service lists the accounts accessible to the authenticated client. In most cases, there will only be one such account. See Accounts for more info on the properties.",
+        "summary": "Get a list of accounts visible to the authenticated user or client.",
+        "description": "Get a list of accounts visible to the authenticated user or client. In most cases, there will only be one such account. See Accounts for more info on the properties.",
         "operationId": "list-accounts",
         "consumes": [
           "application/json"
@@ -278,7 +473,7 @@
           "accounts"
         ],
         "summary": "Retrieve details of an individual account",
-        "description": "This service shows the details of an individual account. See Accounts for more info on the properties.",
+        "description": "Retrieve details of an individual account. See Accounts for more info on the properties.",
         "operationId": "get-account",
         "consumes": [
           "application/json"
@@ -322,8 +517,8 @@
         "tags": [
           "applications"
         ],
-        "summary": "Get a list of applications you have defined",
-        "description": "Get a list of an account available applications",
+        "summary": "This service lists the Applications on a given account",
+        "description": "Show details of an individual Application on a given account.",
         "operationId": "list-account-applications",
         "consumes": [
           "application/json"
@@ -383,8 +578,8 @@
         "tags": [
           "applications"
         ],
-        "summary": "Show details of an individual application",
-        "description": "",
+        "summary": "Show details of an individual Application on a given account.",
+        "description": "Show details of an individual Application on a given account.",
         "operationId": "get-account-application",
         "consumes": [
           "application/json"
@@ -434,7 +629,7 @@
           "calls"
         ],
         "summary": "Make a phone call",
-        "description": "",
+        "description": "Make a phone call. See Calls for more details and how to setup caller id's. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Calls API with the following definition: POST https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/calls",
         "operationId": "create-account-call",
         "consumes": [
           "application/json"
@@ -481,7 +676,7 @@
           "call-logs"
         ],
         "summary": "Get a list of call details associated with your account",
-        "description": "See Call Logs for more detail.",
+        "description": "Get a list of call details associated with your account. See Call Logs for more detail.",
         "operationId": "list-account-call-logs",
         "consumes": [
           "application/json"
@@ -500,7 +695,7 @@
             "$ref": "#/parameters/filterStartTimeParam"
           },
           {
-            "$ref": "#/parameters/filterCreatedAtParam"
+            "$ref": "#/parameters/filterCreatedAtCallLogsParam"
           },
           {
             "$ref": "#/parameters/filterDirectionCallLogs"
@@ -560,7 +755,7 @@
           "call-logs"
         ],
         "summary": "Show details of an individual Call Log entry",
-        "description": "See Call Logs for more detail.",
+        "description": "Show details of an individual Call Log entry. See Call Logs for more detail.",
         "operationId": "get-account-call-logs",
         "consumes": [
           "application/json"
@@ -610,8 +805,8 @@
         "tags": [
           "devices"
         ],
-        "summary": "Get a list of VoIP devices associated with your account",
-        "description": "",
+        "summary": "Get a list of VoIP devices associated with your account.",
+        "description": "Get a list of VoIP devices associated with your account. See Devices for more detail.",
         "operationId": "list-account-devices",
         "consumes": [
           "application/json"
@@ -669,8 +864,8 @@
         "tags": [
           "devices"
         ],
-        "summary": "Register a generic VoIP device",
-        "description": "",
+        "summary": "Register a generic VoIP device.",
+        "description": "Register a generic VoIP device. See Devices for more detail.",
         "operationId": "create-account-device",
         "consumes": [
           "application/json"
@@ -721,8 +916,8 @@
         "tags": [
           "devices"
         ],
-        "summary": "Show details of an individual VoIP device",
-        "description": "",
+        "summary": "Show details of an individual VoIP device.",
+        "description": "Show details of an individual VoIP device. See Devices for more detail.",
         "operationId": "get-account-device",
         "consumes": [
           "application/json"
@@ -765,8 +960,8 @@
         "tags": [
           "devices"
         ],
-        "summary": "Update the settings for an individual VoIP device",
-        "description": "",
+        "summary": "Update the details of an individual VoIP device.",
+        "description": "Update the details of an individual VoIP device. See Devices for more detail.",
         "operationId": "replace-account-device",
         "consumes": [
           "application/json"
@@ -811,6 +1006,295 @@
             "$ref": "#/responses/response422"
           }
         }
+      },
+      "delete": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "devices"
+        ],
+        "summary": "Delete a VoIP device.",
+        "description": "Delete a VoIP device. See Devices for more detail.",
+        "operationId": "delete-account-device",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/deviceIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeleteEntry"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/listeners": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "listeners"
+        ],
+        "summary": "Get a list of listeners for an account.",
+        "description": "Get a list of listeners for an account. See Account Listeners for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level List Listeners API with the following definition: GET https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/listeners",
+        "operationId": "list-account-listeners",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/filterIdParam"
+          },
+          {
+            "$ref": "#/parameters/sortIdParam"
+          },
+          {
+            "$ref": "#/parameters/limitParam"
+          },
+          {
+            "$ref": "#/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/parameters/fieldsParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListListeners"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "listeners"
+        ],
+        "summary": "Add a listener object to your account that can be used to subscribe an event.",
+        "description": "Add a listener object to your account that can be used to subscribe an event. See Account Listeners for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Post Listener API with the following definition: POST https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/listeners",
+        "operationId": "create-account-listener",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Account Listeners Data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateListenerParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ListenerFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/listeners/{listener_id}": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "listeners"
+        ],
+        "summary": "Show details of an individual listener.",
+        "description": "Show details of an individual event listener. See Account Listeners for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Get Listener API with the following definition: GET https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/listeners/:listener_id",
+        "operationId": "get-account-listener",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/listenerIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListenerFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "listeners"
+        ],
+        "summary": "Update the settings of an individual event listener.",
+        "description": "Update the settings of an individual event listener. See Event Listeners for more detail. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Replace Listener API with the following definition: PUT https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/listeners/:listener_id",
+        "operationId": "replace-account-listener",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/listenerIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Account Listeners Data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateListenerParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListenerFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "listeners"
+        ],
+        "summary": "Delete an individual event listener.",
+        "description": "Delete an individual event listener. See Account Listeners for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Delete Listener API with the following definition: DELETE https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/listeners/:listener_id",
+        "operationId": "delete-account-listener",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/listenerIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeleteEntry"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          }
+        }
       }
     },
     "/accounts/{account_id}/express-service-codes": {
@@ -823,8 +1307,8 @@
         "tags": [
           "express-service-codes"
         ],
-        "summary": "Get the Express Service Code associated with your account in list format",
-        "description": "See Express Service Codes for more detail.",
+        "summary": "Get the Express Service Code associated with your account in list format.",
+        "description": "Get the Express Service Code associated with your account in list format. See Express Service Codes for more detail.",
         "operationId": "list-account-express-srv-codes",
         "consumes": [
           "application/json"
@@ -916,8 +1400,8 @@
         "tags": [
           "extensions"
         ],
-        "summary": "Get a list of extensions visible to the authenticated user or client",
-        "description": "This service lists the visible extensions on a given account.",
+        "summary": "Get a list of extensions visible to the authenticated user or client.",
+        "description": "Get a list of extensions visible to the authenticated user or client. See extension for more details.",
         "operationId": "list-account-extensions",
         "consumes": [
           "application/json"
@@ -981,8 +1465,8 @@
         "tags": [
           "extensions"
         ],
-        "summary": "Create an individual extension",
-        "description": "This service shows how to create a virtual extension.",
+        "summary": "Create an individual extension.",
+        "description": "Create an individual extension. See extension for more details.",
         "operationId": "create-account-extension",
         "consumes": [
           "application/json"
@@ -1033,8 +1517,8 @@
         "tags": [
           "extensions"
         ],
-        "summary": "Show details of an individual extension",
-        "description": "This service shows the details of an individual Extension.",
+        "summary": "Show details of an individual extension.",
+        "description": "Show details of an individual extension. See extension for more details.",
         "operationId": "get-account-extension",
         "consumes": [
           "application/json"
@@ -1077,8 +1561,8 @@
         "tags": [
           "extensions"
         ],
-        "summary": "Replace an individual extension",
-        "description": "This service shows how to update an individual extension.",
+        "summary": "Replace an individual extension.",
+        "description": "Replace an individual extension. See extension for more details.",
         "operationId": "replace-account-extension",
         "consumes": [
           "application/json"
@@ -1135,8 +1619,8 @@
         "tags": [
           "caller-ids"
         ],
-        "summary": "Show the Caller ID options a given extension can use",
-        "description": "Get Caller ID",
+        "summary": "Show the Caller ID options a given extension can use.",
+        "description": "Show the Caller ID options a given extension can use. See Intro to Caller IDs for more on the properties.",
         "operationId": "get-caller-ids",
         "consumes": [
           "application/json"
@@ -1199,8 +1683,8 @@
         "tags": [
           "contacts"
         ],
-        "summary": "Show a list of address book contacts",
-        "description": "See Account Contacts for more info on the fields in each item.",
+        "summary": "Show the Caller ID options a given extension can use.",
+        "description": "Show the Caller ID options a given extension can use. See Intro to Caller IDs for more on the properties.",
         "operationId": "list-account-extension-contacts",
         "consumes": [
           "application/json"
@@ -1264,8 +1748,8 @@
         "tags": [
           "contacts"
         ],
-        "summary": "Add a new address book contact for an extension",
-        "description": "For more on the input fields, see Account Contacts.",
+        "summary": "Add a new address book contact for an extension.",
+        "description": "Add a new address book contact for an extension. See Account Contacts for more info on the fields in each item.",
         "operationId": "create-account-extension-contact",
         "consumes": [
           "application/json"
@@ -1319,8 +1803,8 @@
         "tags": [
           "contacts"
         ],
-        "summary": "Retrieve the details of an address book contact",
-        "description": "For more info on the fields shown, see Account Contacts.",
+        "summary": "Retrieve the details of an address book contact.",
+        "description": "Retrieve the details of an address book contact. See Account Contacts for more info on the fields in each item.",
         "operationId": "get-account-extension-contact",
         "consumes": [
           "application/json"
@@ -1366,8 +1850,8 @@
         "tags": [
           "contacts"
         ],
-        "summary": "",
-        "description": "For more on the input fields, see Account Contacts.",
+        "summary": "Update the info of a contact in the address book.",
+        "description": "Update the info of a contact in the address book. See Account Contacts for more info on the fields in each item.",
         "operationId": "replace-account-extension-contact",
         "consumes": [
           "application/json"
@@ -1422,8 +1906,8 @@
         "tags": [
           "contacts"
         ],
-        "summary": "",
-        "description": "",
+        "summary": "Delete a contact from the address book.",
+        "description": "Delete a contact from the address book. See Account Contacts for more info on the fields in each item.",
         "operationId": "delete-account-extension-contact",
         "consumes": [
           "application/json"
@@ -1446,7 +1930,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DeleteContact"
+              "$ref": "#/definitions/DeleteEntry"
             }
           },
           "401": {
@@ -1468,8 +1952,8 @@
         "tags": [
           "groups"
         ],
-        "summary": "Show a list of contact groups belonging to an extension",
-        "description": "See Account Contact Groups for details on the properties.",
+        "summary": "Show a list of contact groups belonging to an extension.",
+        "description": "Show a list of contact groups belonging to an extension. See Account Contact Groups for details on the properties.",
         "operationId": "list-account-extension-contact-groups",
         "consumes": [
           "application/json"
@@ -1530,8 +2014,8 @@
         "tags": [
           "groups"
         ],
-        "summary": "",
-        "description": "See Account Contact Groups for more info on the properties.",
+        "summary": "Add a new contact group to an account extension.",
+        "description": "Add a new contact group to an account extension. See Account Contact Groups for details on the properties.",
         "operationId": "create-account-extension-contact-group",
         "consumes": [
           "application/json"
@@ -1549,7 +2033,7 @@
           {
             "name": "data",
             "in": "body",
-            "description": "Group name",
+            "description": "Group data",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateGroupParams"
@@ -1585,8 +2069,8 @@
         "tags": [
           "groups"
         ],
-        "summary": "",
-        "description": "See Account Contact Groups for more info on the properties.",
+        "summary": "Retrieve the information of a contact group.",
+        "description": "Retrieve the information of a contact group. See Account Contact Groups for details on the properties.",
         "operationId": "get-account-extension-contact-group",
         "consumes": [
           "application/json"
@@ -1632,8 +2116,8 @@
         "tags": [
           "groups"
         ],
-        "summary": "",
-        "description": "See Account Contact Groups for more info on the properties.",
+        "summary": "Update the information of a contact group.",
+        "description": "Update the information of a contact group. See Account Contact Groups for details on the properties.",
         "operationId": "replace-account-extension-contact-group",
         "consumes": [
           "application/json"
@@ -1654,7 +2138,7 @@
           {
             "name": "data",
             "in": "body",
-            "description": "Group name",
+            "description": "Group data",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateGroupParams"
@@ -1688,8 +2172,8 @@
         "tags": [
           "groups"
         ],
-        "summary": "Delete an addressbook group",
-        "description": "",
+        "summary": "Delete a contact group from the address book.",
+        "description": "Delete a contact group from the address book. See Account Contact Groups for details on the properties.",
         "operationId": "delete-account-extension-contact-group",
         "consumes": [
           "application/json"
@@ -1712,7 +2196,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DeleteGroup"
+              "$ref": "#/definitions/DeleteEntry"
             }
           },
           "401": {
@@ -1734,8 +2218,8 @@
         "tags": [
           "media"
         ],
-        "summary": "Get a list of media recordings for an account",
-        "description": "See Account Menus for more info on the properties.",
+        "summary": "Get a list of media recordings for an account.",
+        "description": "Get a list of media recordings for an account. See Account Media for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level List Media API with the following definition: GET https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/media",
         "operationId": "list-account-media",
         "consumes": [
           "application/json"
@@ -1908,7 +2392,7 @@
         "description": "See Account Media for more info on the properties.",
         "operationId": "replace-account-media-files",
         "consumes": [
-          "application/json"
+          "multipart/form-data"
         ],
         "produces": [
           "application/json"
@@ -1967,8 +2451,8 @@
         "tags": [
           "media"
         ],
-        "summary": "Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB.",
-        "description": "See Account Media for more info on the properties.",
+        "summary": "Update a media object to your account.",
+        "description": "Update a media object to your account. Note: The maximum size for media files or JSON objects included with a POST or PUT request is 10 MB. See Account Media for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Replace Media API with the following definition: PUT https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/media/:media_id",
         "operationId": "replace-account-media-tts",
         "consumes": [
           "application/json"
@@ -2090,7 +2574,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DeleteMedia"
+              "$ref": "#/definitions/DeleteEntry"
             }
           },
           "401": {
@@ -2118,8 +2602,8 @@
         "tags": [
           "menus"
         ],
-        "summary": "Get a list of menus for an account",
-        "description": "See Account Menus for more info on the properties.",
+        "summary": "Get a list of menus for an account.",
+        "description": "Get a list of menus for an account. See Account Menus for more info on the properties.",
         "operationId": "list-account-menus",
         "consumes": [
           "application/json"
@@ -2177,8 +2661,8 @@
         "tags": [
           "menus"
         ],
-        "summary": "Create an individual menu",
-        "description": "This service creates an individual menu. See Account Menus for more info on the properties.",
+        "summary": "Create an individual menu.",
+        "description": "Create an individual menu. See Account Menus for more info on the properties.",
         "operationId": "create-account-menu",
         "consumes": [
           "application/json"
@@ -2229,8 +2713,8 @@
         "tags": [
           "menus"
         ],
-        "summary": "Show details of an individual menu",
-        "description": "This service shows the details of an individual Menu.",
+        "summary": "Show details of an individual menu.",
+        "description": "Show details of an individual menu. See Account Menus for more info on the properties.",
         "operationId": "get-account-menu",
         "consumes": [
           "application/json"
@@ -2273,8 +2757,8 @@
         "tags": [
           "menus"
         ],
-        "summary": "Replace an individual menu",
-        "description": "See Account Menus for more info on the properties.",
+        "summary": "Replace an individual menu.",
+        "description": "Replace an individual menu. See Account Menus for more info on the properties.",
         "operationId": "replace-account-menu",
         "consumes": [
           "application/json"
@@ -2329,8 +2813,8 @@
         "tags": [
           "menus"
         ],
-        "summary": "Delete an individual menu",
-        "description": "See Account Menus for more info on the properties.",
+        "summary": "Delete an individual menu.",
+        "description": "Delete an individual menu. See Account Menus for more info on the properties.",
         "operationId": "delete-account-menu",
         "consumes": [
           "application/json"
@@ -2350,7 +2834,616 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DeleteMenu"
+              "$ref": "#/definitions/DeleteEntry"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          },
+          "409": {
+            "$ref": "#/responses/response409"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/oauth/clients": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "oauth-clients"
+        ],
+        "summary": "Get a list of OAuth clients for an account.",
+        "description": "Get a list of OAuth clients for an account. See Account OAuth Clients for more info on the properties.",
+        "operationId": "list-account-oauth-clients",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/filterIdParam"
+          },
+          {
+            "$ref": "#/parameters/sortIdParam"
+          },
+          {
+            "$ref": "#/parameters/limitParam"
+          },
+          {
+            "$ref": "#/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/parameters/fieldsParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListOauthClients"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/oauth/clients/{client_id}": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "oauth-clients"
+        ],
+        "summary": "Show details of an individual OAuth client.",
+        "description": "Show details of an individual OAuth client. See Account OAuth Clients for more info on the properties.",
+        "operationId": "get-account-oauth-client",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/clientIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OauthClientFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "oauth-clients"
+        ],
+        "summary": "Delete an individual OAuth client.",
+        "description": "Delete an individual OAuth client. See Account OAuth Clients for more info on the properties.",
+        "operationId": "delete-account-oauth-client",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/clientIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeleteEntry"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          },
+          "409": {
+            "$ref": "#/responses/response409"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/oauth/clients/{client_id}/redirect-uris": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "oauth-clients-redirect-uris"
+        ],
+        "summary": "Get a list of OAuth Client Redirect URIs for an account.",
+        "description": "Get a list of OAuth Client Redirect URIs for an account.",
+        "operationId": "list-account-oauth-clients-redirect-uris",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/clientIdParam"
+          },
+          {
+            "$ref": "#/parameters/filterIdParam"
+          },
+          {
+            "$ref": "#/parameters/limitParam"
+          },
+          {
+            "$ref": "#/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/parameters/fieldsParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListOauthClientsRedirectUris"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "oauth-clients-redirect-uris"
+        ],
+        "summary": "Create an OAuth Client Redirect URI record.",
+        "description": "Create an OAuth Client Redirect URI record.",
+        "operationId": "create-account-oauth-clients-redirect-uri",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/clientIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Redirect Uri data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateRedirectUriParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/OauthClientRedirectUriFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/oauth/clients/{client_id}/redirect-uris/{uri_id}": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "oauth-clients-redirect-uris"
+        ],
+        "summary": "Get details of an OAuth Client Redirect URI record.",
+        "description": "Get details of an OAuth Client Redirect URI record.",
+        "operationId": "get-account-oauth-clients-redirect-uri",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/clientIdParam"
+          },
+          {
+            "$ref": "#/parameters/uriIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OauthClientRedirectUriFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "oauth-clients-redirect-uris"
+        ],
+        "summary": "Delete an OAuth Client Redirect URI record.",
+        "description": "Delete an OAuth Client Redirect URI record.",
+        "operationId": "delete-account-oauth-clients-redirect-uri",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/clientIdParam"
+          },
+          {
+            "$ref": "#/parameters/uriIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeleteEntry"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          },
+          "409": {
+            "$ref": "#/responses/response409"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/payment-methods": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "payment-methods"
+        ],
+        "summary": "Get a list of payment methods for an account.",
+        "description": "Get a list of payment methods for an account. See Account Payment Methods for more info on the properties.",
+        "operationId": "list-account-payment-methods",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/filterIdParam"
+          },
+          {
+            "$ref": "#/parameters/sortIdParam"
+          },
+          {
+            "$ref": "#/parameters/limitParam"
+          },
+          {
+            "$ref": "#/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/parameters/fieldsParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListPaymentMethods"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "payment-methods"
+        ],
+        "summary": "Create an individual payment method.",
+        "description": "Create an individual payment method. See Account Payment Methods for more info on the properties.",
+        "operationId": "create-account-payment-method",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Payment data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatePaymentParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PaymentFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/payment-methods/{pm_id}": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "payment-methods"
+        ],
+        "summary": "Show details of an individual payment method.",
+        "description": "Show details of an individual payment method. See Account Payment Methods for more info on the properties.",
+        "operationId": "get-account-payment-method",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/paymentIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaymentFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "payment-methods"
+        ],
+        "summary": "Replace the status of an individual payment method.",
+        "description": "Replace the status of an individual payment method. See Account Payment Methods for more info on the properties.",
+        "operationId": "patch-account-payment-method",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/paymentIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Payment data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PatchPaymentParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaymentFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "payment-methods"
+        ],
+        "summary": "Delete an individual payment method.",
+        "description": "Delete an individual payment method. See Account Payment Methods for more info on the properties.",
+        "operationId": "delete-account-payment-method",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/paymentIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeleteEntry"
             }
           },
           "401": {
@@ -2378,8 +3471,8 @@
         "tags": [
           "phone-numbers"
         ],
-        "summary": "Get a list of phone numbers registered to an account",
-        "description": "See Intro to Account Phone Numbers for more info on the properties.",
+        "summary": "Get a list of phone numbers registered to an account.",
+        "description": "Get a list of phone numbers registered to an account. See Account Phone Numbers for more info on the properties.",
         "operationId": "list-account-phone-numbers",
         "consumes": [
           "application/json"
@@ -2443,8 +3536,8 @@
         "tags": [
           "phone-numbers"
         ],
-        "summary": "Add a phone number to an account",
-        "description": "See Intro to Account Phone Numbers for more info on the properties to use.",
+        "summary": "Add a phone number to an account.",
+        "description": "Add a phone number to an account. See Account Phone Numbers for more info on the properties.",
         "operationId": "create-account-phone-number",
         "consumes": [
           "application/json"
@@ -2495,8 +3588,8 @@
         "tags": [
           "phone-numbers"
         ],
-        "summary": "Show details of an individual phone number",
-        "description": "See Intro to Account Phone Numbers for more info on the properties.",
+        "summary": "Show details of an individual phone number.",
+        "description": "Show details of an individual phone number. See Account Phone Numbers for more info on the properties.",
         "operationId": "get-account-phone-number",
         "consumes": [
           "application/json"
@@ -2539,8 +3632,8 @@
         "tags": [
           "phone-numbers"
         ],
-        "summary": "Update the settings for an existing phone number on your account",
-        "description": "See Intro to Account Phone Numbers for more info on the properties.",
+        "summary": "Update the settings for an existing phone number on your account.",
+        "description": "Update the settings for an existing phone number on your account. See Account Phone Numbers for more info on the properties.",
         "operationId": "replace-account-phone-number",
         "consumes": [
           "application/json"
@@ -2597,8 +3690,8 @@
         "tags": [
           "queues"
         ],
-        "summary": "Get a list of queues for an account",
-        "description": "The List Queues service lists all the queues belong to the account. See Account Queues for more info on the properties.",
+        "summary": "Get a list of queues for an account.",
+        "description": "Get a list of queues for an account. See Account Queues for more info on the properties.",
         "operationId": "list-account-queues",
         "consumes": [
           "application/json"
@@ -2656,8 +3749,8 @@
         "tags": [
           "queues"
         ],
-        "summary": "Create a queue",
-        "description": "For more on the input fields, see Account Queues.",
+        "summary": "Create a queue.",
+        "description": "Create a queue. See Account Queues for more info on the properties.",
         "operationId": "create-account-queue",
         "consumes": [
           "application/json"
@@ -2708,8 +3801,8 @@
         "tags": [
           "queues"
         ],
-        "summary": "Show details of an individual queue",
-        "description": "This service shows the details of an individual queue. For more on the input fields, see Account Queues.",
+        "summary": "Show details of an individual queue.",
+        "description": "Show details of an individual queue. See Account Queues for more info on the properties.",
         "operationId": "get-account-queue",
         "consumes": [
           "application/json"
@@ -2752,8 +3845,8 @@
         "tags": [
           "queues"
         ],
-        "summary": "Replace a queue",
-        "description": "The Replace Queue service replaces the parameters of a queue. For more on the input fields, see Account Queues.",
+        "summary": "Replace a queue.",
+        "description": "Replace a queue. See Account Queues for more info on the properties.",
         "operationId": "replace-account-queue",
         "consumes": [
           "application/json"
@@ -2808,8 +3901,8 @@
         "tags": [
           "queues"
         ],
-        "summary": "Delete a queue",
-        "description": "This service a queue from the account. For more information on queue properties, see Account Queues.",
+        "summary": "Delete a queue.",
+        "description": "Delete a queue. See Account Queues for more info on the properties.",
         "operationId": "delete-account-queue",
         "consumes": [
           "application/json"
@@ -2829,7 +3922,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DeleteQueue"
+              "$ref": "#/definitions/DeleteEntry"
             }
           },
           "401": {
@@ -2857,8 +3950,8 @@
         "tags": [
           "routes"
         ],
-        "summary": "Get a list of routes for an account",
-        "description": "See Intro to Routes for more info on the properties.",
+        "summary": "Get a list of routes for an account.",
+        "description": "Get a list of routes for an account. See Intro to Routes for more info on the properties.",
         "operationId": "list-account-routes",
         "consumes": [
           "application/json"
@@ -2916,8 +4009,8 @@
         "tags": [
           "routes"
         ],
-        "summary": "Add a new address book contact for an extension",
-        "description": "For more on the input fields, see Intro to Routes.",
+        "summary": "Add a new route to the account.",
+        "description": "Add a new route to the account. See Intro to Routes for more info on the properties.",
         "operationId": "create-route",
         "consumes": [
           "application/json"
@@ -2968,8 +4061,8 @@
         "tags": [
           "routes"
         ],
-        "summary": "Show details of an individual route",
-        "description": "This service shows the details of an individual route.",
+        "summary": "Show details of an individual route.",
+        "description": "Show details of an individual route. See Intro to Routes for more info on the properties.",
         "operationId": "get-account-route",
         "consumes": [
           "application/json"
@@ -3012,8 +4105,8 @@
         "tags": [
           "routes"
         ],
-        "summary": "",
-        "description": "For more on the input fields, see Intro to Routes.",
+        "summary": "Update the information of a route.",
+        "description": "Update the information of a route. See Intro to Routes for more info on the properties.",
         "operationId": "replace-account-route",
         "consumes": [
           "application/json"
@@ -3068,8 +4161,8 @@
         "tags": [
           "routes"
         ],
-        "summary": "",
-        "description": "",
+        "summary": "Delete a route from the account.",
+        "description": "Delete a route from the account. See Intro to Routes for more info on the properties.",
         "operationId": "delete-account-route",
         "consumes": [
           "application/json"
@@ -3089,7 +4182,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DeleteRoute"
+              "$ref": "#/definitions/DeleteEntry"
             }
           },
           "401": {
@@ -3113,7 +4206,7 @@
           "schedules"
         ],
         "summary": "Get a list of schedules for an account",
-        "description": "See Intro to Schedules for more info on the properties.",
+        "description": "Get a list of schedules for an account",
         "operationId": "list-account-schedules",
         "consumes": [
           "application/json"
@@ -3174,7 +4267,7 @@
           "schedules"
         ],
         "summary": "Show details of an individual schedule",
-        "description": "This service shows the details of an individual schedule.",
+        "description": "Show details of an individual schedule",
         "operationId": "get-account-schedule",
         "consumes": [
           "application/json"
@@ -3228,8 +4321,8 @@
         "tags": [
           "sms"
         ],
-        "summary": "Get a list of SMS messages for an account",
-        "description": "See Intro to SMS for more info on the properties.",
+        "summary": "Get a list of SMS messages for an account.",
+        "description": "Get a list of SMS messages for an account. See Intro to SMS for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level List SMS API with the following definition: GET https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/sms",
         "operationId": "list-account-sms",
         "consumes": [
           "application/json"
@@ -3245,10 +4338,19 @@
             "$ref": "#/parameters/filterIdParam"
           },
           {
+            "$ref": "#/parameters/filterFrom"
+          },
+          {
+            "$ref": "#/parameters/filterTo"
+          },
+          {
             "$ref": "#/parameters/filterDirectionSms"
           },
           {
-            "$ref": "#/parameters/filterFrom"
+            "$ref": "#/parameters/filterExtension"
+          },
+          {
+            "$ref": "#/parameters/filterCreatedAtSmsVoicemail"
           },
           {
             "$ref": "#/parameters/sortIdParam"
@@ -3290,8 +4392,8 @@
         "tags": [
           "sms"
         ],
-        "summary": "Send a SMS to one or a group of recipients",
-        "description": "For more on the input fields, see Intro to SMS.",
+        "summary": "Send a SMS to one or a group of recipients.",
+        "description": "Send a SMS to one or a group of recipients. For details on the input fields, see Intro to SMS. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Create SMS API with the following definition: POST https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/sms",
         "operationId": "create-account-sms",
         "consumes": [
           "application/json"
@@ -3345,8 +4447,8 @@
         "tags": [
           "sms"
         ],
-        "summary": "Show details of an individual SMS",
-        "description": "This service shows the details of an individual sms. See Intro to SMS for more info on the properties.",
+        "summary": "This service shows the details of an individual SMS.",
+        "description": "This service shows the details of an individual SMS. See Intro to SMS for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Get SMS API with the following definition: GET https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/sms/:sms_id",
         "operationId": "get-account-sms",
         "consumes": [
           "application/json"
@@ -3359,11 +4461,60 @@
             "$ref": "#/parameters/accountIdParam"
           },
           {
-            "in": "path",
-            "name": "sms_id",
-            "description": "SMS ID",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/smsIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SmsFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "sms"
+        ],
+        "summary": "Update the is_new parameter in a sms record.",
+        "description": "Update the is_new parameter in a sms record. See Account SMS for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Extension level Patch SMS API with the following definition: PATCH https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/sms/:sms_id",
+        "operationId": "patch-account-sms",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/smsIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Sms data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PatchSmsParams"
+            }
           }
         ],
         "responses": {
@@ -3391,7 +4542,7 @@
           "subaccounts"
         ],
         "summary": "Get a list of subaccounts for the authenticated user or client",
-        "description": "This service lists the Subaccount of the authenticated client. In most cases, there will not be any.",
+        "description": "Get a list of subaccounts for the authenticated user or client",
         "operationId": "list-account-subaccounts",
         "consumes": [
           "application/json"
@@ -3449,7 +4600,7 @@
           "subaccounts"
         ],
         "summary": "Add a subaccount for the authenticated user or client",
-        "description": "This service shows the details of an individual Subaccount.",
+        "description": "Add a subaccount for the authenticated user or client",
         "operationId": "create-account-subaccount",
         "consumes": [
           "application/json"
@@ -3464,7 +4615,7 @@
           {
             "name": "data",
             "in": "body",
-            "description": "SMS data",
+            "description": "Subaccount data",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateSubaccountParams"
@@ -3490,6 +4641,213 @@
         }
       }
     },
+    "/accounts/{account_id}/subaccounts/{subaccount_id}/pricing": {
+      "get": {
+        "tags": [
+          "subaccount-pricing"
+        ],
+        "summary": "Get a list of pricing plans for a subaccount.",
+        "description": "Get a list of pricing plans for a subaccount. See Account Subaccount Pricing for more info on the properties.",
+        "operationId": "list-account-subaccount-pricing",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/subaccountIdParam"
+          },
+          {
+            "$ref": "#/parameters/filterIdParam"
+          },
+          {
+            "$ref": "#/parameters/sortIdParam"
+          },
+          {
+            "$ref": "#/parameters/limitParam"
+          },
+          {
+            "$ref": "#/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/parameters/fieldsParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListPricings"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "subaccount-pricing"
+        ],
+        "summary": "Add a pricing plan to a subaccount.",
+        "description": "Add a pricing plan to a subaccount. See Account Subaccount Pricing for more info on the properties.",
+        "operationId": "create-account-subaccount-pricing",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/subaccountIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Subaccount pricing data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatePricingParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PricingFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/subaccounts/{subaccount_id}/pricing/{pricing_id}": {
+      "get": {
+        "tags": [
+          "subaccount-pricing"
+        ],
+        "summary": "Get the details of a pricing plan for a subaccount.",
+        "description": "Get the details of a pricing plan for a subaccount. See Account Subaccount Pricing for more info on the properties.",
+        "operationId": "get-account-subaccount-pricing",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/subaccountIdParam"
+          },
+          {
+            "$ref": "#/parameters/pricingIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PricingFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "delete": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "subaccount-pricing"
+        ],
+        "summary": "Delete a pricing plan from a subaccount.",
+        "description": "Delete a pricing plan from a subaccount. See Account Subaccount Pricing for more info on the properties.",
+        "operationId": "delete-account-subaccount-pricing",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/subaccountIdParam"
+          },
+          {
+            "$ref": "#/parameters/pricingIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeleteEntry"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          },
+          "409": {
+            "$ref": "#/responses/response409"
+          }
+        }
+      }
+    },
     "/accounts/{account_id}/trunks": {
       "get": {
         "security": [
@@ -3500,8 +4858,8 @@
         "tags": [
           "trunks"
         ],
-        "summary": "Get a list of trunks for an account",
-        "description": "See Account Trunks for more info on the properties.",
+        "summary": "Get a list of trunks for an account.",
+        "description": "Get a list of trunks for an account. See Account Trunks for more info on the properties.",
         "operationId": "list-account-trunks",
         "consumes": [
           "application/json"
@@ -3559,8 +4917,8 @@
         "tags": [
           "trunks"
         ],
-        "summary": "Add a trunk record with SIP information",
-        "description": "For more on the input fields, see Account Trunks.",
+        "summary": "Add a trunk record with SIP information.",
+        "description": "Add a trunk record with SIP information. See Account Trunks for more info on the properties.",
         "operationId": "create-account-trunk",
         "consumes": [
           "application/json"
@@ -3611,8 +4969,8 @@
         "tags": [
           "trunks"
         ],
-        "summary": "Show details of an individual trunk",
-        "description": "This service shows the details of an individual Trunk.",
+        "summary": "Show details of an individual trunk.",
+        "description": "Show details of an individual trunk. See Account Trunks for more info on the properties.",
         "operationId": "get-account-trunk",
         "consumes": [
           "application/json"
@@ -3655,8 +5013,8 @@
         "tags": [
           "trunks"
         ],
-        "summary": "Replace parameters in a trunk",
-        "description": "For more on the input fields, see Account Trunks.",
+        "summary": "Replace parameters in a trunk.",
+        "description": "Replace parameters in a trunk. See Account Trunks for more info on the properties.",
         "operationId": "replace-account-trunk",
         "consumes": [
           "application/json"
@@ -3711,8 +5069,8 @@
         "tags": [
           "trunks"
         ],
-        "summary": "Delete a trunk from account",
-        "description": "This service deletes a trunk from the account. For more on the properties of trunks, see Account Trunks.",
+        "summary": "Delete a trunk from account.",
+        "description": "Delete a trunk from account. See Account Trunks for more info on the properties.",
         "operationId": "delete-account-trunk",
         "consumes": [
           "application/json"
@@ -3732,7 +5090,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DeleteTrunk"
+              "$ref": "#/definitions/DeleteEntry"
             }
           },
           "401": {
@@ -3746,6 +5104,181 @@
           },
           "409": {
             "$ref": "#/responses/response409"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/voicemail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "voicemail"
+        ],
+        "summary": "Get a list of voicemail messages for an account.",
+        "description": "Get a list of voicemail messages for an account. See Intro to Voicemail for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the List Voicemail API with the following definition: GET https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/voicemail",
+        "operationId": "list-account-voicemail",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/filterIdParam"
+          },
+          {
+            "$ref": "#/parameters/filterFrom"
+          },
+          {
+            "$ref": "#/parameters/filterTo"
+          },
+          {
+            "$ref": "#/parameters/filterIsNew"
+          },
+          {
+            "$ref": "#/parameters/filterCreatedAtSmsVoicemail"
+          },
+          {
+            "$ref": "#/parameters/filterExtension"
+          },
+          {
+            "$ref": "#/parameters/sortIdParam"
+          },
+          {
+            "$ref": "#/parameters/sortCreatedAtVoicemail"
+          },
+          {
+            "$ref": "#/parameters/limitParam"
+          },
+          {
+            "$ref": "#/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/parameters/fieldsParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListVoicemail"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/voicemail/{voicemail_id}": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "voicemail"
+        ],
+        "summary": "This service shows the details of an individual voicemail.",
+        "description": "This service shows the details of an individual voicemail. See Intro to Voicemail for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Get Voicemail API with the following definition: GET https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/voicemail/:voicemail_id",
+        "operationId": "get-account-voicemail",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/voicemailIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VoicemailFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "voicemail"
+        ],
+        "summary": "Update the is_new parameter in a voicemail record.",
+        "description": "Update the is_new parameter in a voicemail record. See Account Voicemail for more info on the properties. Note: This API is for users with Account Owner scope access token. Users with Extension User scope token should invoke the Patch Voicemail API with the following definition: PATCH https://api.phone.com/v4/accounts/:account_id/extensions/:extension_id/voicemail/:voicemail_id",
+        "operationId": "patch-account-voicemail",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountIdParam"
+          },
+          {
+            "$ref": "#/parameters/voicemailIdParam"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Payment data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PatchVoicemailParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VoicemailFull"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/response401"
+          },
+          "403": {
+            "$ref": "#/responses/response403"
+          },
+          "404": {
+            "$ref": "#/responses/response404"
+          },
+          "422": {
+            "$ref": "#/responses/response422"
           }
         }
       }
@@ -3971,10 +5504,18 @@
         "pattern": "^eq:.*|^ne:.*|^lt:.*|^gt:.*|^lte:.*|^gte:.*|^starts-with:.*|^ends-with:.*|^contains:.*|^not-starts-with:.*|^not-ends-with:.*|^not-contains:.*|^between:.*,.*|^not-between:.*,.*"
       }
     },
-    "filterCreatedAtParam": {
+    "filterCreatedAtCallLogsParam": {
       "name": "filters[created_at]",
       "in": "query",
       "description": "Call log creation time filter",
+      "required": false,
+      "type": "string",
+      "pattern": "^eq:.*|^ne:.*|^lt:.*|^gt:.*|^lte:.*|^gte:.*|^starts-with:.*|^ends-with:.*|^contains:.*|^not-starts-with:.*|^not-ends-with:.*|^not-contains:.*|^between:.*,.*|^not-between:.*,.*"
+    },
+    "filterCreatedAtSmsVoicemail": {
+      "name": "filters[created_at]",
+      "in": "query",
+      "description": "Date string representing the UTC time that sms was created",
       "required": false,
       "type": "string",
       "pattern": "^eq:.*|^ne:.*|^lt:.*|^gt:.*|^lte:.*|^gte:.*|^starts-with:.*|^ends-with:.*|^contains:.*|^not-starts-with:.*|^not-ends-with:.*|^not-contains:.*|^between:.*,.*|^not-between:.*,.*"
@@ -4078,6 +5619,14 @@
       "type": "string",
       "pattern": "^eq:.*|^ne:.*|^lt:.*|^gt:.*|^lte:.*|^gte:.*|^starts-with:.*|^ends-with:.*|^contains:.*|^not-starts-with:.*|^not-ends-with:.*|^not-contains:.*|^between:.*,.*|^not-between:.*,.*"
     },
+    "filterTo": {
+      "name": "filters[to]",
+      "in": "query",
+      "description": "Callee ID filter, the E.164 phone number to send the SMS TO. Note you must encode the + as %2B",
+      "required": false,
+      "type": "string",
+      "pattern": "^eq:.*|^ne:.*|^lt:.*|^gt:.*|^lte:.*|^gte:.*|^starts-with:.*|^ends-with:.*|^contains:.*|^not-starts-with:.*|^not-ends-with:.*|^not-contains:.*|^between:.*,.*|^not-between:.*,.*"
+    },
     "filterCountryCode": {
       "name": "filters[country_code]",
       "in": "query",
@@ -4089,6 +5638,12 @@
         "type": "string",
         "pattern": "^eq:.*|^ne:.*|^lt:.*|^gt:.*|^lte:.*|^gte:.*|^starts-with:.*|^ends-with:.*|^contains:.*|^not-starts-with:.*|^not-ends-with:.*|^not-contains:.*|^between:.*,.*|^not-between:.*,.*"
       }
+    },
+    "filterIsNew": {
+      "name": "filters[is_new]",
+      "in": "query",
+      "required": false,
+      "type": "boolean"
     },
     "filterNpa": {
       "name": "filters[npa]",
@@ -4260,6 +5815,14 @@
       "type": "string",
       "pattern": "asc|desc"
     },
+    "sortCreatedAtVoicemail": {
+      "name": "sort[created_at]",
+      "in": "query",
+      "description": "Sort by the UTC time that voicemail was created",
+      "required": false,
+      "type": "string",
+      "pattern": "asc|desc"
+    },
     "sortExtension": {
       "name": "sort[extension]",
       "in": "query",
@@ -4391,6 +5954,20 @@
       "required": true,
       "type": "integer"
     },
+    "subaccountIdParam": {
+      "name": "subaccount_id",
+      "in": "path",
+      "description": "Subaccount ID",
+      "required": true,
+      "type": "integer"
+    },
+    "pricingIdParam": {
+      "name": "pricing_id",
+      "in": "path",
+      "description": "Pricing Object ID",
+      "required": true,
+      "type": "integer"
+    },
     "extensionIdParam": {
       "name": "extension_id",
       "in": "path",
@@ -4409,6 +5986,13 @@
       "name": "device_id",
       "in": "path",
       "description": "Device ID",
+      "required": true,
+      "type": "integer"
+    },
+    "listenerIdParam": {
+      "name": "listener_id",
+      "in": "path",
+      "description": "Listener ID",
       "required": true,
       "type": "integer"
     },
@@ -4440,6 +6024,27 @@
       "required": true,
       "type": "integer"
     },
+    "clientIdParam": {
+      "name": "client_id",
+      "in": "path",
+      "description": "Client ID",
+      "required": true,
+      "type": "integer"
+    },
+    "uriIdParam": {
+      "name": "uri_id",
+      "in": "path",
+      "description": "Redirect URI ID",
+      "required": true,
+      "type": "integer"
+    },
+    "paymentIdParam": {
+      "name": "pm_id",
+      "in": "path",
+      "description": "Payment Method ID",
+      "required": true,
+      "type": "integer"
+    },
     "numberIdParam": {
       "name": "number_id",
       "in": "path",
@@ -4461,12 +6066,26 @@
       "required": true,
       "type": "integer"
     },
+    "smsIdParam": {
+      "name": "sms_id",
+      "in": "path",
+      "description": "SMS ID",
+      "required": true,
+      "type": "string"
+    },
     "trunkIdParam": {
       "name": "trunk_id",
       "in": "path",
       "description": "Trunk ID",
       "required": true,
       "type": "integer"
+    },
+    "voicemailIdParam": {
+      "name": "voicemail_id",
+      "in": "path",
+      "description": "Voicemail ID",
+      "required": true,
+      "type": "string"
     }
   },
   "responses": {
@@ -4490,6 +6109,47 @@
     }
   },
   "definitions": {
+    "CreateOauthParams": {
+      "type": "object",
+      "properties": {
+        "grant_type": {
+          "type": "string",
+          "description": "authorization_code, client_credentials, password or refresh_token"
+        },
+        "client_id": {
+          "type": "string",
+          "description": "Client ID"
+        },
+        "client_secret": {
+          "type": "string",
+          "description": "Client Secret Key"
+        },
+        "code": {
+          "type": "string",
+          "description": "Authorization Code created via the /oauth/authorization API"
+        },
+        "redirect_uri": {
+          "type": "string",
+          "description": "The redirect URI where user enters authentication information"
+        },
+        "scope": {
+          "type": "string",
+          "description": "account-owner, extension-user and/or methods:ALL, separated by space (%20)"
+        },
+        "username": {
+          "type": "string",
+          "description": "User name"
+        },
+        "password": {
+          "type": "string",
+          "description": "Password"
+        },
+        "refresh_token": {
+          "type": "string",
+          "description": "Refresh token"
+        }
+      }
+    },
     "CreateCallParams": {
       "type": "object",
       "properties": {
@@ -4561,16 +6221,63 @@
         }
       }
     },
+    "CreateListenerParams": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of listener. Must be 'callback'"
+        },
+        "event_type": {
+          "type": "string",
+          "description": "Type of event to subscribe. 'call.new', 'call.update', 'call.complete'"
+        },
+        "callbacks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CallbackObject"
+          },
+          "description": "Array of Callback Objects."
+        }
+      }
+    },
+    "CallbackObject": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "URL of webhook, where the event is emitted to. Note: The listener supports both HTTP & HTTPS, we highly recommend that users use HTTPS on all callbacks (with user name and password) to ensure no one may send malicious events pretending to be Phone.com."
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of callback: main or backup"
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP method: get or post"
+        },
+        "username": {
+          "type": "string",
+          "description": "Optional user name needed to logon to the webhook URL"
+        },
+        "password": {
+          "type": "string",
+          "description": "Optional password needed to logon to the webhook URL"
+        },
+        "timeout": {
+          "type": "integer",
+          "description": "Optional : Duration of HTTP response will time out while sending the event to the callback URL. (1 - 10 seconds)"
+        }
+      }
+    },
     "CreateExtensionParams": {
       "type": "object",
       "properties": {
         "voicemail": {
-          "$ref": "#/definitions/Voicemail",
-          "description": "Voicemail object"
+          "$ref": "#/definitions/Voicemail"
         },
         "call_notifications": {
-          "$ref": "#/definitions/CallNotifications",
-          "description": "Call Notifications object"
+          "$ref": "#/definitions/CallNotifications"
         },
         "caller_id": {
           "type": "string",
@@ -4626,12 +6333,10 @@
       "type": "object",
       "properties": {
         "voicemail": {
-          "$ref": "#/definitions/Voicemail",
-          "description": "Voicemail object"
+          "$ref": "#/definitions/Voicemail"
         },
         "call_notifications": {
-          "$ref": "#/definitions/CallNotifications",
-          "description": "Call Notifications object"
+          "$ref": "#/definitions/CallNotifications"
         },
         "name_greeting": {
           "type": "object",
@@ -4821,10 +6526,10 @@
         "name": {
           "type": "string"
         },
-        "main_message": {
+        "greeting": {
           "type": "object"
         },
-        "invalid_keypress_message": {
+        "keypress_error": {
           "type": "object"
         },
         "allow_extension_dial": {
@@ -4853,7 +6558,7 @@
         "greeting": {
           "type": "object"
         },
-        "invalid_keypress": {
+        "keypress_error": {
           "type": "object"
         },
         "allow_extension_dial": {
@@ -4870,6 +6575,45 @@
           "items": {
             "type": "object"
           }
+        }
+      }
+    },
+    "CreatePaymentParams": {
+      "type": "object",
+      "properties": {
+        "nickname": {
+          "type": "string",
+          "description": "Name of payment method"
+        },
+        "status": {
+          "type": "string",
+          "description": "primary, onfile or hidden"
+        },
+        "type": {
+          "type": "string",
+          "description": "Credit Card Type"
+        },
+        "cc_token": {
+          "type": "string",
+          "description": "Credit Card Token. Token is obtained by entering credit card info via the Credit Card Entry Form"
+        }
+      }
+    },
+    "CreateRedirectUriParams": {
+      "type": "object",
+      "properties": {
+        "redirect_uri": {
+          "type": "string",
+          "description": "Redirect URI string for use in redirect-based flows such as the authorization code and implicit flows"
+        }
+      }
+    },
+    "PatchPaymentParams": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "primary, onfile or hidden"
         }
       }
     },
@@ -4897,16 +6641,13 @@
           "description": "Block anonymous calls"
         },
         "caller_id": {
-          "$ref": "#/definitions/CallerIdPhoneNumber",
-          "description": "Caller ID object"
+          "$ref": "#/definitions/CallerIdPhoneNumber"
         },
         "sms_forwarding": {
-          "$ref": "#/definitions/SmsForwardingParams",
-          "description": "SMS Forwarding Object, or NULL"
+          "$ref": "#/definitions/SmsForwardingParams"
         },
         "call_notifications": {
-          "$ref": "#/definitions/CallNotifications",
-          "description": "Call Notifications object"
+          "$ref": "#/definitions/CallNotifications"
         }
       }
     },
@@ -4949,20 +6690,17 @@
           "description": "Block anonymous calls"
         },
         "caller_id": {
-          "$ref": "#/definitions/CallerIdPhoneNumber",
-          "description": "Caller ID object"
+          "$ref": "#/definitions/CallerIdPhoneNumber"
         },
         "sms_forwarding": {
-          "$ref": "#/definitions/SmsForwardingParams",
-          "description": "SMS Forwarding Object, or NULL"
+          "$ref": "#/definitions/SmsForwardingParams"
         },
         "pool_item": {
           "type": "object",
           "description": "Pool lookup object"
         },
         "call_notifications": {
-          "$ref": "#/definitions/CallNotifications",
-          "description": "Call Notifications object"
+          "$ref": "#/definitions/CallNotifications"
         }
       }
     },
@@ -5048,6 +6786,15 @@
         }
       }
     },
+    "PatchSmsParams": {
+      "type": "object",
+      "properties": {
+        "is_new": {
+          "type": "boolean",
+          "description": "Status of SMS"
+        }
+      }
+    },
     "CreateSubaccountParams": {
       "type": "object",
       "required": [
@@ -5064,12 +6811,29 @@
           "description": "Sub account password"
         },
         "contact": {
-          "$ref": "#/definitions/ContactSubaccount",
+          "$ref": "#/definitions/ContactResponse",
           "description": "Contact Object. See below for details."
         },
         "billing_contact": {
-          "$ref": "#/definitions/ContactSubaccount",
+          "$ref": "#/definitions/ContactResponse",
           "description": "Contact Object for billing purposes. See below for details."
+        }
+      }
+    },
+    "CreatePricingParams": {
+      "type": "object",
+      "properties": {
+        "pricing_id": {
+          "type": "integer",
+          "description": "Pricing plan code"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason this pricing plan is added to the subaccount"
+        },
+        "expire_date": {
+          "type": "integer",
+          "description": "Pricing plan expiration time in UNIX format. Disregard or set it to null for plan which never expires"
         }
       }
     },
@@ -5109,6 +6873,32 @@
         }
       }
     },
+    "PatchVoicemailParams": {
+      "type": "object",
+      "properties": {
+        "is_new": {
+          "type": "boolean",
+          "description": "Status of voicemail"
+        }
+      }
+    },
+    "GetOauthAccessToken": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string"
+        },
+        "expires_at": {
+          "type": "integer"
+        },
+        "scope_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeDetails"
+          }
+        }
+      }
+    },
     "ListAccounts": {
       "type": "object",
       "properties": {
@@ -5131,6 +6921,32 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccountFull"
+          }
+        }
+      }
+    },
+    "ListPricings": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortId"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PricingFull"
           }
         }
       }
@@ -5209,6 +7025,32 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeviceFull"
+          }
+        }
+      }
+    },
+    "ListListeners": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortId"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListenerFull"
           }
         }
       }
@@ -5397,6 +7239,81 @@
         }
       }
     },
+    "ListOauthClients": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortId"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OauthClientFull"
+          }
+        }
+      }
+    },
+    "ListOauthClientsRedirectUris": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdArray"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OauthClientRedirectUriFull"
+          }
+        }
+      }
+    },
+    "ListPaymentMethods": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterIdArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortId"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentFull"
+          }
+        }
+      }
+    },
     "ListPhoneNumbers": {
       "type": "object",
       "properties": {
@@ -5571,6 +7488,32 @@
         }
       }
     },
+    "ListVoicemail": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/definitions/FilterVoicemailArray"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortIdCreatedAt"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VoicemailFull"
+          }
+        }
+      }
+    },
     "ListAvailableNumbers": {
       "type": "object",
       "properties": {
@@ -5629,6 +7572,34 @@
         }
       }
     },
+    "ScopeDetails": {
+      "type": "object",
+      "properties": {
+        "voip_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "OauthAccessToken": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "token_type": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        },
+        "expires_in": {
+          "type": "integer"
+        }
+      }
+    },
     "AccountFull": {
       "description": "The Full Account Object includes all of the properties in the Account Summary Object, along with the following:",
       "type": "object",
@@ -5674,6 +7645,49 @@
         "name": {
           "type": "string",
           "description": "Name on the account. Read-only."
+        }
+      }
+    },
+    "PricingFull": {
+      "description": "The Full Pricing Object is identical to the Pricing Summary Object. The Pricing Summary Object is used to briefly represent a pricing plan. Here are the properties:",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Integer ID of this object."
+        },
+        "pricing": {
+          "$ref": "#/definitions/PricingObject",
+          "description": "Pricing Object"
+        },
+        "voip_id": {
+          "type": "integer",
+          "description": "Phone.com API Account (VoIP) ID"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason this pricing plan is applied"
+        },
+        "who": {
+          "type": "string",
+          "description": "Name of the person / process who added this pricing plan to the subaccount"
+        },
+        "expire_date": {
+          "type": "string",
+          "description": "Pricing plan expiration timestamp in unix format. If pricing plan never expires, this item will not be returned"
+        }
+      }
+    },
+    "PricingObject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Pricing code / ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of pricing plan"
         }
       }
     },
@@ -5838,9 +7852,25 @@
           "type": "string",
           "description": "Last action of call flow"
         },
-        "call_recording": {
+        "voicemail_url": {
           "type": "string",
-          "description": "URL of call recording if available. Empty string if call recording does not exist"
+          "description": "URL of voicemail if available. User may download the audio via this URL. Empty string if voicemail does not exist"
+        },
+        "voicemail_cp_url": {
+          "type": "string",
+          "description": "URL of voicemail if available. User may listen to the audio online via this URL. Empty string if voicemail does not exist"
+        },
+        "voicemail_transcript": {
+          "type": "string",
+          "description": "Transcript of voicemail if enabled and available"
+        },
+        "call_recording_url": {
+          "type": "string",
+          "description": "URL of call recording if available. User may download the audio via this URL. Empty string if call recording does not exist"
+        },
+        "call_recording_cp_url": {
+          "type": "string",
+          "description": "URL of call recording if available. User may listen to the audio online via this URL. Empty string if call recording does not exist"
         },
         "details": {
           "type": "array",
@@ -5954,6 +7984,40 @@
         }
       }
     },
+    "ListenerFull": {
+      "description": "The Listener Object is used to represent a listener. Here are the properties:",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Integer ID. Read-only."
+        },
+        "voip_id": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of listener: callback"
+        },
+        "event_type": {
+          "type": "string",
+          "description": "Type of event subscribed by the listener: call.new, call.update, call.complete, call.log, sms.in, sms.out"
+        },
+        "callbacks": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Array of Callback Object"
+        },
+        "updated_at": {
+          "type": "integer"
+        },
+        "created_at": {
+          "type": "integer"
+        }
+      }
+    },
     "ExpressServiceCodeFull": {
       "description": "The Full Express Service Code Object includes the properties in the Express Service Code Summary Object, along with the following:",
       "type": "object",
@@ -5967,7 +8031,10 @@
           "description": "An 8-digit number in string format"
         },
         "expire_date": {
-          "type": "integer",
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
           "description": "UNIX time stamp representing the UTC time that the Express Service Code expires. Please note that every time this service is executed, the expire_date is set to now + 24 hours."
         }
       }
@@ -5987,6 +8054,10 @@
         "extension": {
           "type": "integer",
           "description": "Extension number that callers may dial. On POST, leaving this empty will result in an auto-generated value. On PUT, this field is required."
+        },
+        "voip_id": {
+          "type": "integer",
+          "description": "API Account ID. Optional, object may return the voip_id."
         },
         "full_name": {
           "type": "string",
@@ -6031,8 +8102,7 @@
           "$ref": "#/definitions/Voicemail"
         },
         "call_notifications": {
-          "$ref": "#/definitions/Notification",
-          "description": "Call Notifications Object. See below for details."
+          "$ref": "#/definitions/Notification"
         },
         "route": {
           "$ref": "#/definitions/RouteSummary",
@@ -6106,6 +8176,7 @@
       }
     },
     "Notification": {
+      "description": "The Call Notifications object configures the recipient(s) of notifications when calls are received to this extension.",
       "type": "object",
       "properties": {
         "emails": {
@@ -6370,7 +8441,7 @@
       }
     },
     "MediaFull": {
-      "description": "The Full Recording Object includes all of the properties from the Recording Summary Object, along with the following:",
+      "description": "The Full Recording Object and the Summary Recording Object are the same.",
       "type": "object",
       "properties": {
         "id": {
@@ -6420,7 +8491,7 @@
         },
         "keypress_wait_time": {
           "type": "integer",
-          "description": "Boolean. Determines whether a caller can enter an extension number to bypass the menu."
+          "description": "Number of seconds to wait for the caller to choose a menu option. Must be between 1 and 5 seconds."
         },
         "greeting": {
           "$ref": "#/definitions/MediaSummary",
@@ -6470,6 +8541,143 @@
         }
       }
     },
+    "OauthClientFull": {
+      "description": "An OAuth Client Full Object is identical as a Summary Object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Client ID"
+        },
+        "client_name": {
+          "type": "string",
+          "description": "Name of Client"
+        }
+      }
+    },
+    "RedirectUriFull": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Redirect URI ID"
+        },
+        "uri": {
+          "type": "string",
+          "description": "The Uniform Resource Identifier is a string used to identify the path to be redirected"
+        },
+        "type": {
+          "type": "string",
+          "description": "redirect"
+        }
+      }
+    },
+    "OauthClientRedirectUriFull": {
+      "description": "An OAuth Client Full Object is identical as a Summary Object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "OAuth Client Redirect URI ID"
+        },
+        "client": {
+          "$ref": "#/definitions/OauthClientFull",
+          "description": "Client details"
+        },
+        "redirect_uri": {
+          "$ref": "#/definitions/RedirectUriFull",
+          "description": "Redirect URI details"
+        }
+      }
+    },
+    "PaymentSummary": {
+      "description": "The Payment Method Summary Object is used to briefly represent a Credit Card. It consists of parameters in the table below:",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Payment Method ID"
+        },
+        "voip_id": {
+          "type": "integer",
+          "description": "API Account ID"
+        },
+        "status": {
+          "type": "string",
+          "description": "'primary' = primary card used for billing; 'onfile' = card on file; 'hidden' = deleted card;"
+        },
+        "nickname": {
+          "type": "string",
+          "description": "Name of Card"
+        },
+        "type": {
+          "type": "string",
+          "description": "'cc' for credit card"
+        },
+        "created_at": {
+          "type": "integer",
+          "description": "Time payment record is created"
+        }
+      }
+    },
+    "PaymentFull": {
+      "description": "The Payment Method Full Object contains the same properties as the Payment Method Summary Object, along with the following:",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Payment Method ID"
+        },
+        "voip_id": {
+          "type": "string",
+          "description": "API Account ID"
+        },
+        "status": {
+          "type": "string",
+          "description": "'primary' = primary card used for billing; 'onfile' = card on file; 'hidden' = deleted card;"
+        },
+        "nickname": {
+          "type": "string",
+          "description": "Name of Card"
+        },
+        "type": {
+          "type": "string",
+          "description": "'cc' for credit card"
+        },
+        "created_at": {
+          "type": "integer",
+          "description": "Time payment record is created"
+        },
+        "contact": {
+          "$ref": "#/definitions/ContactResponse",
+          "description": "Detail of contact person"
+        },
+        "decline_count": {
+          "type": "integer",
+          "description": "Number of times the payment method was declined"
+        },
+        "next_charge_date": {
+          "type": "integer",
+          "description": "Next billing date"
+        },
+        "updated_at": {
+          "type": "integer",
+          "description": "Last time the payment method was updated"
+        },
+        "cc_token": {
+          "type": "string",
+          "description": "Encrypted credit card token to be used for billing"
+        },
+        "cc_number": {
+          "type": "string",
+          "description": "Credit card number partially masked with xxxxxxxx"
+        },
+        "cc_exp": {
+          "type": "string",
+          "description": "Credit card expiration date"
+        }
+      }
+    },
     "PhoneNumberFull": {
       "description": "The Full Phone Number Object has all of the properties of the Phone Number Summary Object, along with several more, as shown below:",
       "type": "object",
@@ -6499,12 +8707,10 @@
           "description": "The Route assigned to handle incoming calls for this number, if any. Output is a Route Summary Object, or NULL if not set. Input can be a Route Lookup Object or NULL to unset."
         },
         "caller_id": {
-          "$ref": "#/definitions/CallerIdPhoneNumber",
-          "description": "Caller ID Object, or NULL"
+          "$ref": "#/definitions/CallerIdPhoneNumber"
         },
         "sms_forwarding": {
-          "$ref": "#/definitions/SmsForwarding",
-          "description": "SMS Forwarding Object, or NULL"
+          "$ref": "#/definitions/SmsForwarding"
         },
         "call_notifications": {
           "$ref": "#/definitions/CallNotifications"
@@ -6847,17 +9053,8 @@
       }
     },
     "SmsFull": {
-      "description": "The Full SMS Object is identical to the SMS Summary Object. See above for details.",
+      "description": "The Full SMS Object includes all of the properties in the SMS Summary Object.",
       "type": "object",
-      "required": [
-        "id",
-        "from",
-        "to",
-        "direction",
-        "created_epoch",
-        "created_at",
-        "text"
-      ],
       "properties": {
         "id": {
           "type": "string",
@@ -6890,6 +9087,10 @@
         "text": {
           "type": "string",
           "description": "Body of the SMS text"
+        },
+        "is_new": {
+          "type": "boolean",
+          "description": "True when SMS is new; False when SMS has been read."
         }
       }
     },
@@ -6906,13 +9107,8 @@
         }
       }
     },
-    "ContactSubaccount": {
+    "ContactResponse": {
       "type": "object",
-      "required": [
-        "name",
-        "primary_email",
-        "phone"
-      ],
       "properties": {
         "name": {
           "type": "string",
@@ -7012,6 +9208,70 @@
         }
       }
     },
+    "VoicemailFull": {
+      "description": "The Full Voicemail Object includes all of the properties in the Voicemail Summary Object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Voicemail ID. Read-only."
+        },
+        "download_url": {
+          "type": "string",
+          "description": "Name. Required."
+        },
+        "extension": {
+          "$ref": "#/definitions/ExtensionSummary",
+          "description": "Extension where the voicemail is saved into."
+        },
+        "from": {
+          "$ref": "#/definitions/FromObject",
+          "description": "The caller's information"
+        },
+        "to": {
+          "type": "string",
+          "description": "The phone number where the caller is calling"
+        },
+        "is_new": {
+          "type": "boolean",
+          "description": "True when Voicemail is new; False when Voicemail has been listened"
+        },
+        "created_at": {
+          "type": "integer",
+          "description": "Date string representing the UTC time that the object was created in the Phone.com API system."
+        },
+        "folder": {
+          "type": "string",
+          "description": "Folder name where voicemail is saved"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Length of voicemail in seconds"
+        }
+      }
+    },
+    "FromObject": {
+      "description": "Each entry in a Voicemail's from list is an object with the following properties:",
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "The caller phone number"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name / caller ID of the caller"
+        },
+        "city": {
+          "type": "string",
+          "description": "The city where the caller is from"
+        },
+        "state": {
+          "type": "string",
+          "description": "The state where the caller is from"
+        }
+      }
+    },
     "AvailableNumbersFull": {
       "description": "The Full Available Phone Number Object includes the properties in the Summary Object, along with the following:",
       "type": "object",
@@ -7100,55 +9360,7 @@
         }
       }
     },
-    "DeleteContact": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        }
-      }
-    },
-    "DeleteGroup": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        }
-      }
-    },
-    "DeleteMedia": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        }
-      }
-    },
-    "DeleteMenu": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        }
-      }
-    },
-    "DeleteQueue": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        }
-      }
-    },
-    "DeleteRoute": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        }
-      }
-    },
-    "DeleteTrunk": {
+    "DeleteEntry": {
       "type": "object",
       "properties": {
         "success": {
@@ -7456,6 +9668,29 @@
       "type": "object",
       "properties": {
         "id": {
+          "type": "string"
+        }
+      }
+    },
+    "FilterVoicemailArray": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "is_new": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "integer"
+        },
+        "extension": {
           "type": "string"
         }
       }
