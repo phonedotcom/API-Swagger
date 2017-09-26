@@ -3030,6 +3030,9 @@
             "$ref": "#/parameters/filterIdParam"
           },
           {
+            "$ref": "#/parameters/sortIdParam"
+          },
+          {
             "$ref": "#/parameters/limitParam"
           },
           {
@@ -6166,7 +6169,7 @@
           "description": "Caller caller ID in E.164 format"
         },
         "caller_private": {
-          "type": "boolean",
+          "type": "string",
           "description": "Flag to set caller ID to private"
         },
         "callee_phone_number": {
@@ -6182,7 +6185,7 @@
           "description": "Callee caller ID in E.164 format"
         },
         "callee_private": {
-          "type": "boolean",
+          "type": "string",
           "description": "Flag to set callee ID to private"
         }
       }
@@ -6274,7 +6277,7 @@
       "type": "object",
       "properties": {
         "voicemail": {
-          "$ref": "#/definitions/Voicemail"
+          "$ref": "#/definitions/VoicemailInput"
         },
         "call_notifications": {
           "$ref": "#/definitions/CallNotifications"
@@ -6287,16 +6290,12 @@
           "type": "string",
           "description": "Extension type"
         },
-        "allows_call_waiting": {
-          "type": "boolean",
-          "description": "Allows call waiting"
-        },
         "extension": {
           "type": "integer",
           "description": "Extension number (auto-generated if empty)"
         },
         "include_in_directory": {
-          "type": "boolean",
+          "type": "string",
           "description": "Include in dial-by-name directory"
         },
         "name": {
@@ -6316,15 +6315,15 @@
           "description": "Recording lookup object"
         },
         "local_area_code": {
-          "type": "integer",
+          "type": "string",
           "description": "Local area code"
         },
         "enable_outbound_calls": {
-          "type": "boolean",
+          "type": "string",
           "description": "Enable outgoing calls"
         },
         "enable_call_waiting": {
-          "type": "boolean",
+          "type": "string",
           "description": "Enable Call Waiting"
         }
       }
@@ -6333,7 +6332,7 @@
       "type": "object",
       "properties": {
         "voicemail": {
-          "$ref": "#/definitions/Voicemail"
+          "$ref": "#/definitions/VoicemailInput"
         },
         "call_notifications": {
           "$ref": "#/definitions/CallNotifications"
@@ -6351,7 +6350,7 @@
           "description": "Timezone"
         },
         "include_in_directory": {
-          "type": "boolean",
+          "type": "string",
           "description": "Include in dial-by-name directory"
         },
         "extension": {
@@ -6359,7 +6358,7 @@
           "description": "Extension number (required)"
         },
         "enable_outbound_calls": {
-          "type": "boolean",
+          "type": "string",
           "description": "Enable outgoing calls"
         },
         "usage_type": {
@@ -6371,7 +6370,7 @@
           "description": "Contact name"
         },
         "enable_call_waiting": {
-          "type": "boolean",
+          "type": "string",
           "description": "Enable Call Waiting"
         },
         "caller_id": {
@@ -6379,7 +6378,7 @@
           "description": "Caller ID"
         },
         "local_area_code": {
-          "type": "integer",
+          "type": "string",
           "description": "Local area code"
         },
         "route": {
@@ -6442,21 +6441,21 @@
         "emails": {
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/Email"
           },
           "description": "Email Addresses"
         },
         "phone_numbers": {
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/PhoneNumberContact"
           },
           "description": "Phone Numbers"
         },
         "addresses": {
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/AddressListContacts"
           },
           "description": "Addresses"
         },
@@ -6533,7 +6532,7 @@
           "type": "object"
         },
         "allow_extension_dial": {
-          "type": "boolean"
+          "type": "string"
         },
         "keypress_wait_time": {
           "type": "integer"
@@ -6562,7 +6561,7 @@
           "type": "object"
         },
         "allow_extension_dial": {
-          "type": "boolean"
+          "type": "string"
         },
         "keypress_wait_time": {
           "type": "integer"
@@ -6633,11 +6632,11 @@
           "description": "Phone Name"
         },
         "block_incoming": {
-          "type": "boolean",
+          "type": "string",
           "description": "Block incoming calls"
         },
         "block_anonymous": {
-          "type": "boolean",
+          "type": "string",
           "description": "Block anonymous calls"
         },
         "caller_id": {
@@ -6682,11 +6681,11 @@
           "description": "Phone Name"
         },
         "block_incoming": {
-          "type": "boolean",
+          "type": "string",
           "description": "Block incoming calls"
         },
         "block_anonymous": {
-          "type": "boolean",
+          "type": "string",
           "description": "Block anonymous calls"
         },
         "caller_id": {
@@ -6790,7 +6789,7 @@
       "type": "object",
       "properties": {
         "is_new": {
-          "type": "boolean",
+          "type": "string",
           "description": "Status of SMS"
         }
       }
@@ -6877,7 +6876,7 @@
       "type": "object",
       "properties": {
         "is_new": {
-          "type": "boolean",
+          "type": "string",
           "description": "Status of voicemail"
         }
       }
@@ -8153,6 +8152,35 @@
         }
       }
     },
+    "VoicemailInput": {
+      "description": "Voicemail Object. See below for details.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "string",
+          "description": "Whether voicemail is enabled. Boolean."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password for accessing voicemail box. Must be digits only."
+        },
+        "greeting": {
+          "$ref": "#/definitions/GreetingInput"
+        },
+        "attachments": {
+          "type": "string",
+          "description": "If notification emails are being used, this defines the format of the audio attachments. Can be \"wav\" for WAV format, \"mp3\" for MP3 format, or NULL to disable attachments."
+        },
+        "notifications": {
+          "$ref": "#/definitions/Notification",
+          "description": "Voicemail Notifications Object. See below for details. Can be set to NULL to disable notifications."
+        },
+        "transcription": {
+          "type": "string",
+          "description": "Type of voicemail transcription to use. Can be \"human\" for high-quality manual transcriptions by human operators, \"automated\" for machine-generated transcriptions, or NULL to omit trancriptions. Changing this option will affect your monthly bill. Please see our Control Panel or contact Customer Service for details."
+        }
+      }
+    },
     "Greeting": {
       "description": "Voicemail Greeting Object. See below for details. Can be set to NULL to reset greeting options.",
       "type": "object",
@@ -8171,6 +8199,28 @@
         },
         "enable_leave_message_prompt": {
           "type": "boolean",
+          "description": "Whether to prompt the caller with the following words after the voicemail greeting has been played: \"Please leave your message after the tone. When finished, hang up or press the pound key.\" Boolean."
+        }
+      }
+    },
+    "GreetingInput": {
+      "description": "Voicemail Greeting Object. See below for details. Can be set to NULL to reset greeting options.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The greeting to play. Can be \"name\" for the name_greeting as described above, \"standard\" for the standard greeting, or \"alternate\" for an alternate greeting. See below for details."
+        },
+        "alternate": {
+          "$ref": "#/definitions/MediaSummary",
+          "description": "Greeting to be played when type=\"alternate\". Output is a Greeting Summary Object. Input must be a Greeting Lookup Object."
+        },
+        "standard": {
+          "$ref": "#/definitions/MediaSummary",
+          "description": "Greeting to be played when type=\"standard\". Output is a Greeting Summary Object. Input must be a Greeting Lookup Object."
+        },
+        "enable_leave_message_prompt": {
+          "type": "string",
           "description": "Whether to prompt the caller with the following words after the voicemail greeting has been played: \"Please leave your message after the tone. When finished, hang up or press the pound key.\" Boolean."
         }
       }
@@ -8629,7 +8679,7 @@
           "description": "Payment Method ID"
         },
         "voip_id": {
-          "type": "string",
+          "type": "integer",
           "description": "API Account ID"
         },
         "status": {

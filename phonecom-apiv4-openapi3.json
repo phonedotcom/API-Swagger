@@ -47,7 +47,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -141,7 +141,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -1036,7 +1036,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -1432,7 +1432,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -2010,7 +2010,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -2544,7 +2544,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -3020,7 +3020,7 @@
           "required": true
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -3482,7 +3482,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -3552,7 +3552,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -3642,7 +3642,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Replaced",
             "content": {
               "application/json": {
@@ -3727,7 +3727,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Replaced",
             "content": {
               "application/json": {
@@ -4072,7 +4072,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -4629,6 +4629,16 @@
             }
           },
           {
+            "name": "sort[id]",
+            "in": "query",
+            "description": "ID sorting",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "limit",
             "in": "query",
             "description": "Max results",
@@ -4739,7 +4749,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -5082,7 +5092,7 @@
           "required": true
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -5530,7 +5540,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -5884,7 +5894,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -6309,7 +6319,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -6977,7 +6987,7 @@
           "required": true
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -7304,7 +7314,7 @@
           "required": true
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -7505,7 +7515,7 @@
           "required": true
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -8778,7 +8788,7 @@
           "required": true
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Created",
             "content": {
               "application/json": {
@@ -9038,7 +9048,7 @@
             "description": "Caller caller ID in E.164 format"
           },
           "caller_private": {
-            "type": "boolean",
+            "type": "string",
             "description": "Flag to set caller ID to private"
           },
           "callee_phone_number": {
@@ -9055,7 +9065,7 @@
             "description": "Callee caller ID in E.164 format"
           },
           "callee_private": {
-            "type": "boolean",
+            "type": "string",
             "description": "Flag to set callee ID to private"
           }
         }
@@ -9155,7 +9165,7 @@
         "properties": {
           "voicemail": {
             "description": "Voicemail Object. See below for details.",
-            "$ref": "#/components/schemas/Voicemail"
+            "$ref": "#/components/schemas/VoicemailInput"
           },
           "call_notifications": {
             "description": "Call Notifications Object or NULL",
@@ -9169,17 +9179,13 @@
             "type": "string",
             "description": "Extension type"
           },
-          "allows_call_waiting": {
-            "type": "boolean",
-            "description": "Allows call waiting"
-          },
           "extension": {
             "type": "integer",
             "description": "Extension number (auto-generated if empty)",
             "format": "int32"
           },
           "include_in_directory": {
-            "type": "boolean",
+            "type": "string",
             "description": "Include in dial-by-name directory"
           },
           "name": {
@@ -9199,26 +9205,25 @@
             "description": "Recording lookup object"
           },
           "local_area_code": {
-            "type": "integer",
-            "description": "Local area code",
-            "format": "int32"
+            "type": "string",
+            "description": "Local area code"
           },
           "enable_outbound_calls": {
-            "type": "boolean",
+            "type": "string",
             "description": "Enable outgoing calls"
           },
           "enable_call_waiting": {
-            "type": "boolean",
+            "type": "string",
             "description": "Enable Call Waiting"
           }
         }
       },
-      "Voicemail": {
-        "title": "Voicemail",
+      "VoicemailInput": {
+        "title": "VoicemailInput",
         "type": "object",
         "properties": {
           "enabled": {
-            "type": "boolean",
+            "type": "string",
             "description": "Whether voicemail is enabled. Boolean."
           },
           "password": {
@@ -9227,7 +9232,7 @@
           },
           "greeting": {
             "description": "Voicemail Greeting Object. See below for details. Can be set to NULL to reset greeting options.",
-            "$ref": "#/components/schemas/Greeting"
+            "$ref": "#/components/schemas/GreetingInput"
           },
           "attachments": {
             "type": "string",
@@ -9244,8 +9249,8 @@
         },
         "description": "Voicemail Object. See below for details."
       },
-      "Greeting": {
-        "title": "Greeting",
+      "GreetingInput": {
+        "title": "GreetingInput",
         "type": "object",
         "properties": {
           "type": {
@@ -9261,7 +9266,7 @@
             "$ref": "#/components/schemas/MediaSummary"
           },
           "enable_leave_message_prompt": {
-            "type": "boolean",
+            "type": "string",
             "description": "Whether to prompt the caller with the following words after the voicemail greeting has been played: \"Please leave your message after the tone. When finished, hang up or press the pound key.\" Boolean."
           }
         },
@@ -9325,7 +9330,7 @@
         "properties": {
           "voicemail": {
             "description": "Voicemail Object. See below for details.",
-            "$ref": "#/components/schemas/Voicemail"
+            "$ref": "#/components/schemas/VoicemailInput"
           },
           "call_notifications": {
             "description": "Call Notifications Object or NULL",
@@ -9344,7 +9349,7 @@
             "description": "Timezone"
           },
           "include_in_directory": {
-            "type": "boolean",
+            "type": "string",
             "description": "Include in dial-by-name directory"
           },
           "extension": {
@@ -9353,7 +9358,7 @@
             "format": "int32"
           },
           "enable_outbound_calls": {
-            "type": "boolean",
+            "type": "string",
             "description": "Enable outgoing calls"
           },
           "usage_type": {
@@ -9365,7 +9370,7 @@
             "description": "Contact name"
           },
           "enable_call_waiting": {
-            "type": "boolean",
+            "type": "string",
             "description": "Enable Call Waiting"
           },
           "caller_id": {
@@ -9373,9 +9378,8 @@
             "description": "Caller ID"
           },
           "local_area_code": {
-            "type": "integer",
-            "description": "Local area code",
-            "format": "int32"
+            "type": "string",
+            "description": "Local area code"
           },
           "route": {
             "type": "string",
@@ -9438,27 +9442,89 @@
           "emails": {
             "type": "array",
             "items": {
-              "type": "object"
+              "$ref": "#/components/schemas/Email"
             },
             "description": "Email Addresses"
           },
           "phone_numbers": {
             "type": "array",
             "items": {
-              "type": "object"
+              "$ref": "#/components/schemas/PhoneNumberContact"
             },
             "description": "Phone Numbers"
           },
           "addresses": {
             "type": "array",
             "items": {
-              "type": "object"
+              "$ref": "#/components/schemas/AddressListContacts"
             },
             "description": "Addresses"
           },
           "group": {
             "type": "object",
             "description": "Contact Group"
+          }
+        }
+      },
+      "Email": {
+        "title": "Email",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Email type, one of: primary or alternate. Default is primary."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address. Required."
+          }
+        }
+      },
+      "PhoneNumberContact": {
+        "title": "PhoneNumberContact",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of phone number, must be one of: home, business, mobile, fax, pager. Default is home."
+          },
+          "number": {
+            "type": "string",
+            "description": "Phone number, as entered. Does not need to be formatted in any particular way. Required."
+          },
+          "normalized": {
+            "type": "string",
+            "description": "Phone number in E.164 format. Read-only."
+          }
+        }
+      },
+      "AddressListContacts": {
+        "title": "AddressListContacts",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Address type, one of: home or business. Default is home."
+          },
+          "street": {
+            "type": "string",
+            "description": "House number and street name, including apartment, suite, etc."
+          },
+          "city": {
+            "type": "string",
+            "description": "City"
+          },
+          "state": {
+            "type": "string",
+            "description": "State or province"
+          },
+          "zip": {
+            "type": "string",
+            "description": "Zip code or postal code"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country name"
           }
         }
       },
@@ -9534,7 +9600,7 @@
             "type": "object"
           },
           "allow_extension_dial": {
-            "type": "boolean"
+            "type": "string"
           },
           "keypress_wait_time": {
             "type": "integer",
@@ -9566,7 +9632,7 @@
             "type": "object"
           },
           "allow_extension_dial": {
-            "type": "boolean"
+            "type": "string"
           },
           "keypress_wait_time": {
             "type": "integer",
@@ -9643,11 +9709,11 @@
             "description": "Phone Name"
           },
           "block_incoming": {
-            "type": "boolean",
+            "type": "string",
             "description": "Block incoming calls"
           },
           "block_anonymous": {
-            "type": "boolean",
+            "type": "string",
             "description": "Block anonymous calls"
           },
           "caller_id": {
@@ -9713,11 +9779,11 @@
             "description": "Phone Name"
           },
           "block_incoming": {
-            "type": "boolean",
+            "type": "string",
             "description": "Block incoming calls"
           },
           "block_anonymous": {
-            "type": "boolean",
+            "type": "string",
             "description": "Block anonymous calls"
           },
           "caller_id": {
@@ -9831,7 +9897,7 @@
         "type": "object",
         "properties": {
           "is_new": {
-            "type": "boolean",
+            "type": "string",
             "description": "Status of SMS"
           }
         }
@@ -9996,7 +10062,7 @@
         "type": "object",
         "properties": {
           "is_new": {
-            "type": "boolean",
+            "type": "string",
             "description": "Status of voicemail"
           }
         }
@@ -10926,6 +10992,60 @@
         },
         "description": "The Device Summary Object is used to briefly represent a VoIP device. It consists of the ID and name only:"
       },
+      "Voicemail": {
+        "title": "Voicemail",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether voicemail is enabled. Boolean."
+          },
+          "password": {
+            "type": "string",
+            "description": "Password for accessing voicemail box. Must be digits only."
+          },
+          "greeting": {
+            "description": "Voicemail Greeting Object. See below for details. Can be set to NULL to reset greeting options.",
+            "$ref": "#/components/schemas/Greeting"
+          },
+          "attachments": {
+            "type": "string",
+            "description": "If notification emails are being used, this defines the format of the audio attachments. Can be \"wav\" for WAV format, \"mp3\" for MP3 format, or NULL to disable attachments."
+          },
+          "notifications": {
+            "description": "Voicemail Notifications Object. See below for details. Can be set to NULL to disable notifications.",
+            "$ref": "#/components/schemas/Notification"
+          },
+          "transcription": {
+            "type": "string",
+            "description": "Type of voicemail transcription to use. Can be \"human\" for high-quality manual transcriptions by human operators, \"automated\" for machine-generated transcriptions, or NULL to omit trancriptions. Changing this option will affect your monthly bill. Please see our Control Panel or contact Customer Service for details."
+          }
+        },
+        "description": "Voicemail Object. See below for details."
+      },
+      "Greeting": {
+        "title": "Greeting",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The greeting to play. Can be \"name\" for the name_greeting as described above, \"standard\" for the standard greeting, or \"alternate\" for an alternate greeting. See below for details."
+          },
+          "alternate": {
+            "description": "Greeting to be played when type=\"alternate\". Output is a Greeting Summary Object. Input must be a Greeting Lookup Object.",
+            "$ref": "#/components/schemas/MediaSummary"
+          },
+          "standard": {
+            "description": "Greeting to be played when type=\"standard\". Output is a Greeting Summary Object. Input must be a Greeting Lookup Object.",
+            "$ref": "#/components/schemas/MediaSummary"
+          },
+          "enable_leave_message_prompt": {
+            "type": "boolean",
+            "description": "Whether to prompt the caller with the following words after the voicemail greeting has been played: \"Please leave your message after the tone. When finished, hang up or press the pound key.\" Boolean."
+          }
+        },
+        "description": "Voicemail Greeting Object. See below for details. Can be set to NULL to reset greeting options."
+      },
       "RouteSummary": {
         "title": "RouteSummary",
         "type": "object",
@@ -11168,68 +11288,6 @@
           }
         },
         "description": "The Full Contact Object includes all of the properties in the Contact Summary Object, along with several more:"
-      },
-      "Email": {
-        "title": "Email",
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Email type, one of: primary or alternate. Default is primary."
-          },
-          "email": {
-            "type": "string",
-            "description": "Email address. Required."
-          }
-        }
-      },
-      "PhoneNumberContact": {
-        "title": "PhoneNumberContact",
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Type of phone number, must be one of: home, business, mobile, fax, pager. Default is home."
-          },
-          "number": {
-            "type": "string",
-            "description": "Phone number, as entered. Does not need to be formatted in any particular way. Required."
-          },
-          "normalized": {
-            "type": "string",
-            "description": "Phone number in E.164 format. Read-only."
-          }
-        }
-      },
-      "AddressListContacts": {
-        "title": "AddressListContacts",
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Address type, one of: home or business. Default is home."
-          },
-          "street": {
-            "type": "string",
-            "description": "House number and street name, including apartment, suite, etc."
-          },
-          "city": {
-            "type": "string",
-            "description": "City"
-          },
-          "state": {
-            "type": "string",
-            "description": "State or province"
-          },
-          "zip": {
-            "type": "string",
-            "description": "Zip code or postal code"
-          },
-          "country": {
-            "type": "string",
-            "description": "Country name"
-          }
-        }
       },
       "GroupListContacts": {
         "title": "GroupListContacts",
@@ -11569,8 +11627,9 @@
             "format": "int32"
           },
           "voip_id": {
-            "type": "string",
-            "description": "API Account ID"
+            "type": "integer",
+            "description": "API Account ID",
+            "format": "int32"
           },
           "status": {
             "type": "string",
