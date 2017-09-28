@@ -4,7 +4,9 @@
       "type" : "main",
       "apiKeyPrefix" : "Bearer",
       "apiKey" : "Place your API key here",
-      "accountId" : 1315091
+      "accountId" : 1315091,
+      "defaultLimit": 25,
+      "defaultOffset": 0
     }
   ]
 }

@@ -40,7 +40,7 @@ The **phonecom** package contains the code that adapts the generated Swagger cod
 There were 4 Go libraries that were used while developing the code. This libraries can be installed with go in the following way:
 ```bash
 go get -u github.com/urfave/cli
-go get -u github.com/go-resty/resty
+go get -u gopkg.in/go-resty/resty.v0
 go get -u github.com/yukithm/json2csv/cmd/json2csv
 go get -u github.com/stretchr/testify
 ``` 
@@ -291,17 +291,25 @@ create-account-queue
 create-account-route
 create-account-sms
 create-account-subaccount
+create-account-subaccount-pricing
 create-account-trunk
 create-account-extension-contact
 create-account-extension-contact-group
+create-account-oauth-client-redirect-uri
+create-account-payment-method
 
+delete-account-device
 delete-account-media
 delete-account-menu
 delete-account-queue
 delete-account-route
+delete-account-subaccount-pricing
 delete-account-trunk
 delete-account-extension-contact
 delete-account-extension-contact-group
+delete-account-oauth-client
+delete-account-oauth-client-redirect-uri
+delete-account-payment-method
 
 get-account
 get-account-application
@@ -311,12 +319,17 @@ get-account-express-service-code
 get-account-extension
 get-account-media
 get-account-menu
+get-account-oauth-client
+get-account-oauth-clients-redirect-uri
+get-account-payment-method
 get-account-phone-number
 get-account-queue
 get-account-route
 get-account-schedule
 get-account-sms
+get-account-subaccount-pricing
 get-account-trunk
+get-account-voicemail
 get-account-extension-contact
 get-account-extension-contact-group
 
@@ -328,13 +341,18 @@ list-account-express-service-codes
 list-account-extensions
 list-account-media
 list-account-menus
+list-account-oauth-clients
+list-account-oauth-clients-redirect-uris
+list-account-payment-methods
 list-account-phone-numbers
 list-account-queues
 list-account-routes
 list-account-schedules
 list-account-sms
 list-account-subaccounts
+list-account-subaccount-pricing
 list-account-trunks
+list-account-voicemail
 list-account-extension-caller-ids
 list-account-extension-contacts
 list-account-extension-contact-groups
@@ -352,6 +370,10 @@ replace-account-route
 replace-account-trunk
 replace-account-extension-contact
 replace-account-extension-contact-group
+
+patch-account-payment-method
+patch-account-sms
+patch-account-voicemail
 
  (default: "https://api.phone.com/v4/ping")
 ```

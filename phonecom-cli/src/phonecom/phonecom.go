@@ -221,6 +221,88 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 			return rh.handle(api.DeleteAccountMenu(accountId, id))
 		}
 
+	case swagger.OauthclientsApi:
+
+		if param.otherParams.clientId > 0 {
+			id = param.otherParams.clientId
+		}
+
+		switch command {
+
+		case listOauthClients:
+
+			return rh.handle(api.ListAccountOauthClients(accountId, filtersId, sortParams.sortId, limit, offset, fields))
+
+		case getOauthClient:
+
+			return rh.handle(api.GetAccountOauthClient(accountId, id))
+
+		case deleteOauthClient:
+
+			return rh.handle(api.DeleteAccountOauthClient(accountId, id))
+		}
+
+	case swagger.OauthclientsredirecturisApi:
+
+		if param.otherParams.clientId > 0 {
+			id = param.otherParams.clientId
+		}
+
+		if param.otherParams.uriId > 0 {
+			idSecondary = param.otherParams.uriId
+		}
+
+		switch command {
+
+		case listOauthClientsRedirectUris:
+
+			return rh.handle(api.ListAccountOauthClientsRedirectUris(accountId, id, filtersId, sortParams.sortId, limit, offset, fields))
+
+		case getOauthClientsRedirectUri:
+
+			return rh.handle(api.GetAccountOauthClientsRedirectUri(accountId, id, idSecondary))
+
+		case deleteOauthClientRedirectUri:
+
+			return rh.handle(api.DeleteAccountOauthClientsRedirectUri(accountId, id, idSecondary))
+
+		case createOauthClientRedirectUri:
+
+			params := createRedirectUriParams(input)
+			return rh.handle(api.CreateAccountOauthClientsRedirectUri(accountId, id, params))
+		}
+
+	case swagger.PaymentmethodsApi:
+
+		if param.otherParams.paymentId > 0 {
+			id = param.otherParams.paymentId
+		}
+
+		switch command {
+
+		case listPaymentMethods:
+
+			return rh.handle(api.ListAccountPaymentMethods(accountId, filtersId, sortParams.sortId, limit, offset, fields))
+
+		case getPaymentMethod:
+
+			return rh.handle(api.GetAccountPaymentMethod(accountId, id))
+
+		case deletePaymentMethod:
+
+			return rh.handle(api.DeleteAccountPaymentMethod(accountId, id))
+
+		case createPaymentMethod:
+
+			params := createPaymentParams(input)
+			return rh.handle(api.CreateAccountPaymentMethod(accountId, params))
+
+		case patchPaymentMethod:
+
+			params := patchPaymentParams(input)
+			return rh.handle(api.PatchAccountPaymentMethod(accountId, id, params))
+		}
+
 	case swagger.QueuesApi:
 
 		if param.otherParams.queueId > 0 {
@@ -310,7 +392,7 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 
 		case listSms:
 
-			return rh.handle(api.ListAccountSms(accountId, filtersId, filterParams.filtersDirection, filterParams.filtersFrom, sortParams.sortId, sortParams.sortCreatedAt, limit, offset, fields))
+			return rh.handle(api.ListAccountSms(accountId, filtersId, filterParams.filtersFrom, filterParams.filtersTo, filterParams.filtersDirection, filterParams.filtersExtension, filterParams.filtersCreatedAt, sortParams.sortId, sortParams.sortCreatedAt, limit, offset, fields))
 
 		case getSms:
 
@@ -324,6 +406,15 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 
 			params := createSmsParams(param.from, param.to, param.text, id)
 			return rh.handle(api.CreateAccountSms(accountId, params))
+
+		case patchSms:
+
+			if param.otherParams.smsId != "" {
+				idString = param.otherParams.smsId
+			}
+
+			params := patchSmsParams(input)
+			return rh.handle(api.PatchAccountSms(accountId, idString, params))
 		}
 
 	case swagger.AvailablenumbersApi:
@@ -347,6 +438,36 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 
 			params := createSubaccountParams(input, param.contact, param.billingContact)
 			return rh.handle(api.CreateAccountSubaccount(accountId, params))
+		}
+
+	case swagger.SubaccountpricingApi:
+
+		if param.otherParams.subaccountId > 0 {
+			id = param.otherParams.subaccountId
+		}
+
+		if param.otherParams.pricingId > 0 {
+			idSecondary = param.otherParams.pricingId
+		}
+
+		switch command {
+
+		case listPricing:
+
+			return rh.handle(api.ListAccountSubaccountPricing(accountId, id, filtersId, sortParams.sortId, limit, offset, fields))
+
+		case getPricing:
+
+			return rh.handle(api.GetAccountSubaccountPricing(accountId, id, idSecondary))
+
+		case createPricing:
+
+			params := CreatePricingParams(input)
+			return rh.handle(api.CreateAccountSubaccountPricing(accountId, id, params))
+
+		case deletePricing:
+
+			return rh.handle(api.DeleteAccountSubaccountPricing(accountId, id, idSecondary))
 		}
 
 	case swagger.AccountsApi:
@@ -445,6 +566,41 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 
 			params := createDeviceParams(input)
 			return rh.handle(api.ReplaceAccountDevice(accountId, id, params))
+
+		case deleteDevice:
+
+			return rh.handle(api.DeleteAccountDevice(accountId, id))
+		}
+
+	case swagger.ListenersApi:
+
+		if param.otherParams.listenerId > 0 {
+			id = param.otherParams.listenerId
+		}
+
+		switch command {
+
+		case listListeners:
+
+			return rh.handle(api.ListAccountListeners(accountId, filtersId, sortParams.sortId, limit, offset, fields))
+
+		case getListener:
+
+			return rh.handle(api.GetAccountListener(accountId, id))
+
+		case createListener:
+
+			params := createListenerParams(input)
+			return rh.handle(api.CreateAccountListener(accountId, params))
+
+		case replaceListener:
+
+			params := createListenerParams(input)
+			return rh.handle(api.ReplaceAccountListener(accountId, id, params))
+
+		case deleteListener:
+
+			return rh.handle(api.DeleteAccountListener(accountId, id))
 		}
 
 	case swagger.ExpressservicecodesApi:
@@ -628,6 +784,28 @@ func invokeCommand(rh ResponseHandler, param CliParams, api interface{}) (error,
 		case deleteTrunk:
 
 			return rh.handle(api.DeleteAccountTrunk(accountId, id))
+		}
+
+	case swagger.VoicemailApi:
+
+		if param.otherParams.voicemailId != "" {
+			idString = param.otherParams.voicemailId
+		}
+
+		switch command {
+
+		case listVoicemail:
+
+			return rh.handle(api.ListAccountVoicemail(accountId, filtersId, filterParams.filtersFrom, filterParams.filtersTo, true, filterParams.filtersCreatedAt, filterParams.filtersExtension, sortParams.sortId, sortParams.sortCreatedAt, limit, offset, fields))
+
+		case getVoicemail:
+
+			return rh.handle(api.GetAccountVoicemail(accountId, idString))
+
+		case patchVoicemail:
+
+			params := patchVoicemailParams(input)
+			return rh.handle(api.PatchAccountVoicemail(accountId, idString, params))
 		}
 
 	default:

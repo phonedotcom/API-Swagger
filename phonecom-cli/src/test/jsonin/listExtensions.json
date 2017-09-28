@@ -12,7 +12,5 @@
 	"sort[id]": "",
 	"sort[extension]": "",
 	"sort[name]": "",
-	"limit": 25,
-	"offset": 0,
 	"fields": ""
 }

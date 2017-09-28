@@ -10,7 +10,7 @@
 	"timezone": "America/Los_Angeles",
 	"local_area_code": 619,
 	"voicemail[greeting][enable_leave_message_prompt]": true,
-	"voicemail[enabled]": false,
+	"voicemail[enabled]": "0",
 	"enable_outbound_calls": true,
 	"enable_call_waiting": false,
 	"voicemail[password]": 12345,

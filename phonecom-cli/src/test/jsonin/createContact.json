@@ -2,15 +2,20 @@
 	"account_id": 1315091,
 	"extension_id": 1764590,
 	"first_name": "Geordi",
-	"middle_name": "middle name",
-	"last_name": "last name",
+	"middle_name": "middle namea",
+	"last_name": "last namea",
 	"prefix": "prefix",
-	"phonetic_first_name": "phoneticFirstName",
-	"phonetic_middle_name": "phoneticMiddleName",
-	"phonetic_last_name": "phoneticLastName",
-	"suffix": "suffix",
-	"nickname": "nickname",
-	"company": "company",
-	"department": "department",
-	"job_title": "jobTitle"
+	"phonetic_first_name": "phoneticFirstNamea",
+	"phonetic_middle_name": "phoneticMiddleNamea",
+	"phonetic_last_name": "phoneticLastNamea",
+	"suffix": "suffixa",
+	"nickname": "nicknamea",
+	"company": "companya",
+	"department": "departmenat",
+	"job_title": "jobTitlea",
+	"emails": [
+		{
+			"email": "test@dalieesegavored.com"
+		}
+	]
 }

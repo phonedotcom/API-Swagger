@@ -22,7 +22,7 @@
 	"voicemail[greeting][type]": "standard",
 	"caller_id": "+13168493322",
 	"local_area_code": 619,
-	"voicemail[enabled]": true,
+	"voicemail[enabled]": "1",
 	"voicemail[greeting][enable_leave_message_prompt]": true,
 	"voicemail[transcription]": "automated",
 	"voicemail[notifications][emails]": [

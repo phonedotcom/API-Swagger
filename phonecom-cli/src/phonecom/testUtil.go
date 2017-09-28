@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"github.com/urfave/cli"
 	"strconv"
+	"path"
+	"runtime"
+	"github.com/phonedotcom/API-SDK-go"
 )
 
 var commandFlag = "-command"
@@ -11,7 +14,10 @@ var commandFlag = "-command"
 func createCliConfig() CliConfig {
 
 	var cliConfig CliConfig
-	cliConfig.Path = "../../config.json"
+
+	_, filename, _, _ := runtime.Caller(1)
+	filepath := path.Join(path.Dir(filename), "../../config.json")
+	cliConfig.Path = filepath
 
 	return cliConfig
 }
@@ -120,7 +126,7 @@ func createCreateTrunkCliWithJsonIn(endpoint string, path string, trunkName stri
 	return doCreateCli(endpoint, flags)
 }
 
-func createReplaceCliWithJsonIn(endpoint string, path string, id int) (error, map[string]interface{}) {
+func createCliWithJsonInAndId(endpoint string, path string, id int) (error, map[string]interface{}) {
 
 	flags := []cli.Flag{
 
@@ -135,6 +141,30 @@ func createReplaceCliWithJsonIn(endpoint string, path string, id int) (error, ma
 		cli.StringFlag{
 			Name:  idLong,
 			Value: strconv.Itoa(id),
+		},
+		cli.BoolTFlag{
+			Name: verboseLong,
+		},
+	}
+
+	return doCreateCli(endpoint, flags)
+}
+
+func createReplaceCliWithJsonInString(endpoint string, path string, id string) (error, map[string]interface{}) {
+
+	flags := []cli.Flag{
+
+		cli.StringFlag{
+			Name:  commandLong,
+			Value: endpoint,
+		},
+		cli.StringFlag{
+			Name:  inputLong,
+			Value: path,
+		},
+		cli.StringFlag{
+			Name:  idLong,
+			Value: id,
 		},
 		cli.BoolTFlag{
 			Name: verboseLong,
@@ -668,6 +698,142 @@ func createFilterSortApplicationsDevicesMediaMenusQueusRoutesSchedulesTrunksCli3
 	return doCreateCli(endpoint, flags)
 }
 
+func createFilterSortOauthClientCli(endpoint string, filtersId []string, sortId string) (error, map[string]interface{}) {
+
+	filterValues := filtersId[0]
+	sortValues := sortId
+	flags := []cli.Flag{
+		cli.StringFlag{
+			Name:  commandLong,
+			Value: endpoint,
+		},
+		cli.BoolTFlag{
+			Name: verboseLong,
+		},
+		cli.IntFlag{
+			Name:  limitLong,
+			Value: 25,
+		},
+		cli.StringFlag{
+			Name:  filtersTypeLong,
+			Value: "id",
+		},
+		cli.StringFlag{
+			Name:  filtersValueLong,
+			Value: filterValues,
+		},
+		cli.StringFlag{
+			Name:  sortTypeLong,
+			Value: "id",
+		},
+		cli.StringFlag{
+			Name:  sortValueLong,
+			Value: sortValues,
+		},
+		cli.BoolTFlag{
+			Name: fullListLong,
+		},
+	}
+
+	return doCreateCli(endpoint, flags)
+}
+
+func createFilterSortOauthClientRedirectUriCli(endpoint string, id int, filtersId []string, sortId string) (error, map[string]interface{}) {
+
+	if id <= 0 {
+		return nil, nil
+	}
+
+	filterValues := filtersId[0]
+	sortValues := sortId
+	flags := []cli.Flag{
+		cli.StringFlag{
+			Name:  commandLong,
+			Value: endpoint,
+		},
+		cli.BoolTFlag{
+			Name: verboseLong,
+		},
+		cli.StringFlag{
+			Name:  idLong,
+			Value: strconv.Itoa(id),
+		},
+		cli.IntFlag{
+			Name:  limitLong,
+			Value: 25,
+		},
+		cli.StringFlag{
+			Name:  filtersTypeLong,
+			Value: "id",
+		},
+		cli.StringFlag{
+			Name:  filtersValueLong,
+			Value: filterValues,
+		},
+		cli.StringFlag{
+			Name:  sortTypeLong,
+			Value: "id",
+		},
+		cli.StringFlag{
+			Name:  sortValueLong,
+			Value: sortValues,
+		},
+		cli.BoolTFlag{
+			Name: fullListLong,
+		},
+	}
+
+	return doCreateCli(endpoint, flags)
+}
+
+func createFilterSortPricingCli(endpoint string, id int, filtersId []string, sortId string) (error, map[string]interface{}) {
+
+	if id <= 0 {
+		return nil, nil
+	}
+
+	filterValues := filtersId[0]
+	sortValues := sortId
+	flags := []cli.Flag{
+		cli.StringFlag{
+			Name:  commandLong,
+			Value: endpoint,
+		},
+		cli.BoolTFlag{
+			Name: verboseLong,
+		},
+		cli.StringFlag{
+			Name:  idLong,
+			Value: strconv.Itoa(id),
+		},
+		cli.IntFlag{
+			Name:  limitLong,
+			Value: 25,
+		},
+		cli.StringFlag{
+			Name:  filtersTypeLong,
+			Value: "id",
+		},
+		cli.StringFlag{
+			Name:  filtersValueLong,
+			Value: filterValues,
+		},
+		cli.StringFlag{
+			Name:  sortTypeLong,
+			Value: "id",
+		},
+		cli.StringFlag{
+			Name:  sortValueLong,
+			Value: sortValues,
+		},
+		cli.BoolTFlag{
+			Name: fullListLong,
+		},
+	}
+
+	return doCreateCli(endpoint, flags)
+}
+
 func createFilterSortSmsCli(endpoint string, filtersId []string, filtersDirection string, filtersFrom string, sortId string, sortCreatedAt string) (error, map[string]interface{}) {
 
 	filterValues := filtersId[0] + ";" + filtersDirection + ";" + filtersFrom
@@ -849,7 +1015,7 @@ func createCli(endpoint string) (error, map[string]interface{}) {
 		},
 		cli.IntFlag{
 			Name:  limitLong,
-			Value: 5,
+			Value: 25,
 		},
 	}
 
@@ -956,6 +1122,27 @@ func getFirstId(jsonObject map[string]interface{}) int {
 	}
 
 	return 0
+}
+
+func getFirstNAvailablePhoneNumbers(jsonObject map[string]interface{}, n int) []swagger.PhoneNumberContact {
+
+	phoneNumbersSlice := make([]swagger.PhoneNumberContact, n)
+
+	items := jsonObject["items"].([]interface{})
+	if len(items) > 0 {
+		for i := 0; i < n; i++ {
+			item := items[i].(map[string]interface{})
+			type_ := "business"
+			number := item["formatted"].(string)
+			normalized := item["phone_number"].(string)
+
+			phoneNumbersSlice[i] = swagger.PhoneNumberContact{type_, number, normalized}
+		}
+
+		return phoneNumbersSlice
+	}
+
+	return nil
 }
 
 func getFilters(jsonObject map[string]interface{}) map[string]interface{} {

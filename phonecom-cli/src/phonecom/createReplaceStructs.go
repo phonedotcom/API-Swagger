@@ -11,107 +11,20 @@ type ReplaceDeviceJson struct {
 	Name     string `json:"name"`
 }
 
-type CreateExtensionJson struct {
-	Voicemail           swagger.Voicemail         `json:"voicemail"`
-	CallNotifications   swagger.CallNotifications `json:"call_notifications"`
-	CallerId            string                    `json:"caller_id"`
-	UsageType           string                    `json:"usage_type"`
-	AllowsCallWaiting   bool                      `json:"allows_call_waiting"`
-	Extension           int32                     `json:"extension"`
-	IncludeInDirectory  bool                      `json:"include_in_directory"`
-	Name                string                    `json:"name"`
-	FullName            string                    `json:"full_name"`
-	Timezone            string                    `json:"timezone"`
-	NameGreeting        interface{}               `json:"name_greeting"`
-	LocalAreaCode       int32                     `json:"local_area_code"`
-	EnableOutboundCalls bool                      `json:"enable_outbound_calls"`
-	EnableCallWaiting   bool                      `json:"enable_call_waiting"`
-}
-
-type ReplaceExtensionJson struct {
-	ExtensionId         int32                     `json:"extension_id"`
-	Voicemail           swagger.Voicemail         `json:"voicemail"`
-	CallNotifications   swagger.CallNotifications `json:"call_notifications"`
-	NameGreeting        interface{}               `json:"name_greeting"`
-	Name                string                    `json:"name"`
-	Timezone            string                    `json:"timezone"`
-	IncludeInDirectory  bool                      `json:"include_in_directory"`
-	Extension           int32                     `json:"extension"`
-	EnableOutboundCalls bool                      `json:"enable_outbound_calls"`
-	UsageType           string                    `json:"usage_type"`
-	FullName            string                    `json:"full_name"`
-	EnableCallWaiting   bool                      `json:"enable_call_waiting"`
-	CallerId            string                    `json:"caller_id"`
-	LocalAreaCode       int32                     `json:"local_area_code"`
-	Route               string                    `json:"route"`
-}
-
-type CreateContactJson struct {
-	ExtensionId        int32  `json:"extension_id"`
-	FirstName          string `json:"first_name"`
-	MiddleName         string `json:"middle_name"`
-	LastName           string `json:"last_name"`
-	Prefix             string `json:"prefix"`
-	PhoneticFirstName  string `json:"phonetic_first_name"`
-	PhoneticMiddleName string `json:"phonetic_middle_name"`
-	PhoneticLastName   string `json:"phonetic_last_name"`
-	Suffix             string `json:"suffix"`
-	Nickname           string `json:"nickname"`
-	Company            string `json:"company"`
-	Department         string `json:"department"`
-	JobTitle           string `json:"job_title"`
-}
-
-type CreateGroupJson struct {
-	ExtensionId int32  `json:"extension_id"`
-	Name        string `json:"name"`
-}
-
 type CreateMenuJson struct {
 	Name               string `json:"name"`
-	AllowExtensionDial bool   `json:"allow_extension_dial"`
+	AllowExtensionDial string `json:"allow_extension_dial"`
 	KeypressWaitTime   int32  `json:"keypress_wait_time"`
 }
 
 type ReplaceMenuJson struct {
 	MenuId             int32  `json:"menu_id"`
 	Name               string `json:"name"`
-	AllowExtensionDial bool   `json:"allow_extension_dial"`
+	AllowExtensionDial string `json:"allow_extension_dial"`
 	KeypressWaitTime   int32  `json:"keypress_wait_time"`
 }
 
-type CreatePhoneNumberJson struct {
-	PhoneNumber       string                      `json:"phone_number"`
-	Route             interface{}                 `json:"route"`
-	Name              string                      `json:"name"`
-	BlockIncoming     bool                        `json:"block_incoming"`
-	BlockAnonymous    bool                        `json:"block_anonymous"`
-	CallerId          swagger.CallerIdPhoneNumber `json:"caller_id"`
-	SmsForwarding     swagger.SmsForwardingParams `json:"sms_forwarding"`
-	CallNotifications swagger.CallNotifications   `json:"call_notifications"`
-}
-
-type ReplacePhoneNumberJson struct {
-	NumberId          int32                       `json:"number_id"`
-	Route             interface{}                 `json:"route"`
-	Name              string                      `json:"name"`
-	BlockIncoming     bool                        `json:"block_incoming"`
-	BlockAnonymous    bool                        `json:"block_anonymous"`
-	CallerId          swagger.CallerIdPhoneNumber `json:"caller_id"`
-	SmsForwarding     swagger.SmsForwardingParams `json:"sms_forwarding"`
-	PoolItem          interface{}                 `json:"pool_item"`
-	CallNotifications swagger.CallNotifications   `json:"call_notifications"`
-}
-
 type CreateQueueJson struct {
-	Name         string `json:"name"`
-	MaxHoldTime  int32  `json:"max_hold_time"`
-	CallerIdType string `json:"caller_id_type"`
-	RingTime     int32  `json:"ring_time"`
-}
-
-type ReplaceQueueJson struct {
-	QueueId      int32  `json:"queue_id"`
 	Name         string `json:"name"`
 	MaxHoldTime  int32  `json:"max_hold_time"`
 	CallerIdType string `json:"caller_id_type"`
@@ -129,25 +42,7 @@ type RulesJson struct {
 
 type ActionsJson struct {
 	Action string    `json:"action"`
-	Queue  QueueJson `json:"queue"`
-}
-
-type QueueJson struct {
-	Id   int32  `json:"id"`
-	Name string `json:"name"`
-}
-
-type ReplaceRouteJson struct {
-	RouteId int32       `json:"route_id"`
-	Name    string      `json:"name"`
-	Rules   []RulesJson `json:"rules"`
-}
-
-type CreateSmsJson struct {
-	From        string `json:"from"`
-	To          string `json:"to"`
-	Text        string `json:"text"`
-	ExtensionId int32  `json:"extension_id"`
+	Queue  swagger.QueueSummary `json:"queue"`
 }
 
 type CreateSubaccountJson struct {
@@ -173,14 +68,6 @@ type AddressJson struct {
 }
 
 type CreateTrunkJson struct {
-	Name               string `json:"name"`
-	Uri                string `json:"uri"`
-	MaxConcurrentCalls int32  `json:"max_concurrent_calls"`
-	MaxMinutesPerMonth int32  `json:"max_minutes_per_month"`
-}
-
-type ReplaceTrunkJson struct {
-	TrunkId            int32  `json:"trunk_id"`
 	Name               string `json:"name"`
 	Uri                string `json:"uri"`
 	MaxConcurrentCalls int32  `json:"max_concurrent_calls"`

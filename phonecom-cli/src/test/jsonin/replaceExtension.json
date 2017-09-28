@@ -6,7 +6,7 @@
   "route":"API Cell Phone Route",
 
   "voicemail" : {
-    "enabled" : true,
+    "enabled" : "1",
     "password" : "12345",
     "greeting" : {
       "type" : "standard",

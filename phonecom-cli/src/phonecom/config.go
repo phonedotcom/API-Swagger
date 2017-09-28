@@ -22,6 +22,8 @@ type CliConfig struct {
 	Type         string `json:"type"`
 	AccountId    int32  `json:"accountId"`
 	Path         string `json:"path"`
+	DefaultLimit int32	`json:"defaultLimit"`
+	DefaultOffset	int32 `json:"defaultOffset"`
 }
 
 func (c *CliConfig) getConfig() CliConfig {
@@ -97,6 +99,9 @@ func (c *CliConfig) createOrReadCliConfig(param CliParams) (CliConfig, error) {
 			cliConfig.AccountId = param.accountId
 		}
 	}
+
+	cliConfig.DefaultLimit = param.limit
+	cliConfig.DefaultOffset = param.offset
 
 	return cliConfig, nil
 }

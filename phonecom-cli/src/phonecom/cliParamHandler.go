@@ -41,9 +41,10 @@ type CliParams struct {
 	sortParams   SortParams
 	otherParams  OtherParams
 
-	from string
-	to   string
-	text string
+	from 	string
+	to   	string
+	text 	string
+	isNew	string
 
 	mediaFilePath string
 
@@ -97,6 +98,7 @@ func createCliParams(context *cli.Context) (CliParams, error) {
 	from := context.String(fromLong)
 	to := context.String(toLong)
 	text := context.String(textLong)
+	isNew := context.String(isNewFlag)
 
 	mediaFilePath := context.String(mediaFileLong)
 
@@ -121,6 +123,17 @@ func createCliParams(context *cli.Context) (CliParams, error) {
 		limit = listParams.limit
 		offset = listParams.offset
 		fields = listParams.fields
+
+		var smsParams SmsParams
+		err, smsParams = getSmsParams(input)
+		if err != nil {
+			return par, err
+		}
+
+		from = smsParams.from
+		to = smsParams.to
+		text = smsParams.text
+
 
 		err, filterParams = getFiltersParams(input)
 
@@ -178,6 +191,7 @@ func createCliParams(context *cli.Context) (CliParams, error) {
 	par.from = from
 	par.to = to
 	par.text = text
+	par.isNew = isNew
 
 	par.mediaFilePath = mediaFilePath
 
@@ -292,7 +306,7 @@ func createCliParams(context *cli.Context) (CliParams, error) {
 				par.filterParams.filtersFrom = filter[0]
 
 			case "to":
-				par.filterParams.filtersTo = filter
+				par.filterParams.filtersTo = filter[0]
 
 			case "country_code":
 				par.filterParams.filtersCountryCode = filter

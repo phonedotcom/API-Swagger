@@ -21,6 +21,18 @@ func (r *ApiResolver) resolve() interface{} {
 
 		api = swagger.MenusApi{Configuration: r.config}
 
+	case listOauthClients, getOauthClient, deleteOauthClient:
+
+		api = swagger.OauthclientsApi{Configuration: r.config}
+
+	case listOauthClientsRedirectUris, getOauthClientsRedirectUri, createOauthClientRedirectUri, deleteOauthClientRedirectUri:
+
+		api = swagger.OauthclientsredirecturisApi{Configuration: r.config}
+
+	case listPaymentMethods, getPaymentMethod, createPaymentMethod, patchPaymentMethod, deletePaymentMethod:
+
+		api = swagger.PaymentmethodsApi{Configuration: r.config}
+
 	case listQueues, getQueue, createQueue, replaceQueue, deleteQueue:
 
 		api = swagger.QueuesApi{Configuration: r.config}
@@ -33,7 +45,7 @@ func (r *ApiResolver) resolve() interface{} {
 
 		api = swagger.SchedulesApi{Configuration: r.config}
 
-	case listSms, getSms, createSms:
+	case listSms, getSms, createSms, patchSms:
 
 		api = swagger.SmsApi{Configuration: r.config}
 
@@ -61,9 +73,13 @@ func (r *ApiResolver) resolve() interface{} {
 
 		api = swagger.CalllogsApi{Configuration: r.config}
 
-	case listDevices, getDevice, createDevice, replaceDevice:
+	case listDevices, getDevice, createDevice, replaceDevice, deleteDevice:
 
 		api = swagger.DevicesApi{Configuration: r.config}
+
+	case listListeners, getListener, createListener, replaceListener, deleteListener:
+
+		api = swagger.ListenersApi{Configuration: r.config}
 
 	case listExpressServiceCodes, getExpressServiceCode:
 
@@ -89,9 +105,17 @@ func (r *ApiResolver) resolve() interface{} {
 
 		api = swagger.PhonenumbersApi{Configuration: r.config}
 
+	case listPricing, getPricing, createPricing, deletePricing:
+
+		api = swagger.SubaccountpricingApi{Configuration: r.config}
+
 	case listTrunks, getTrunk, createTrunk, deleteTrunk, replaceTrunk:
 
 		api = swagger.TrunksApi{Configuration: r.config}
+
+	case listVoicemail, getVoicemail, patchVoicemail:
+
+		api = swagger.VoicemailApi{Configuration: r.config}
 
 	case createCall:
 

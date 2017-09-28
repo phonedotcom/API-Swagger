@@ -15,6 +15,12 @@ type ListParams struct {
 	fields    string
 }
 
+type SmsParams struct {
+	from	string
+	to 		string
+	text	string
+}
+
 func getListParams(inputFile string) (error, ListParams) {
 
 	err, data := readAndUnmarshal(inputFile)
@@ -26,9 +32,26 @@ func getListParams(inputFile string) (error, ListParams) {
 	}
 
 	params.accountId = getField(data["account_id"])
-	params.limit = getField(data["limit"])
-	params.offset = getField(data["offset"])
+	params.limit = getLimitField(data["limit"])
+	params.offset = getOffsetField(data["offset"])
 	params.fields = getFieldString(data["fields"])
+
+	return err, params
+}
+
+func getSmsParams(inputFile string) (error, SmsParams) {
+
+	err, data := readAndUnmarshal(inputFile)
+
+	var params SmsParams
+
+	if err != nil || data == nil {
+		return err, params
+	}
+
+	params.from = getFieldString(data["from"])
+	params.to = getFieldString(data["to"])
+	params.text = getFieldString(data["text"])
 
 	return err, params
 }
@@ -37,6 +60,28 @@ func getField(field interface{}) int32 {
 
 	if field == nil {
 		return -1
+	}
+
+	return int32(field.(float64))
+}
+
+func getLimitField(field interface{}) int32 {
+
+	if field == nil {
+		var cliConfig CliConfig
+		limit := cliConfig.getConfig().DefaultLimit
+		return limit
+	}
+
+	return int32(field.(float64))
+}
+
+func getOffsetField(field interface{}) int32 {
+
+	if field == nil {
+		var cliConfig CliConfig
+		offset := cliConfig.getConfig().DefaultOffset
+		return offset
 	}
 
 	return int32(field.(float64))
@@ -89,7 +134,8 @@ type FilterParams struct {
 	filtersPrice              []string
 	filtersCategory           []string
 	filtersFrom               string
-	filtersTo                 []string
+	filtersTo                 string
+	filtersIsNew			  bool
 	filtersIsTollFree         []string
 	filtersProvincePostalCode []string
 	filtersCountryPostalCode  []string
@@ -129,7 +175,7 @@ func getFiltersParams(inputFile string) (
 	params.filtersPrice = createStringArray(data["filters[price]"])
 	params.filtersCategory = createStringArray(data["filters[category]"])
 	params.filtersFrom = getFieldString(data["filters[from]"])
-	params.filtersTo = createStringArray(data["filters[to]"])
+	params.filtersTo = getFieldString(data["filters[to]"])
 	params.filtersIsTollFree = createStringArray(data["filters[is_toll_free]"])
 	params.filtersProvincePostalCode = createStringArray(data["filters[province_postal_code]"])
 	params.filtersCountryPostalCode = createStringArray(data["filters[country_postal_code]"])
@@ -159,20 +205,27 @@ type OtherParams struct {
 	groupBy       []string
 	applicationId int32
 	accountId     int32
+	subaccountId  int32
+	pricingId	  int32
 	extensionId   int32
 	callId        string
 	deviceId      int32
+	listenerId	  int32
 	codeId        int32
 	contactId     int32
 	groupId       int32
 	mediaId       int32
 	menuId        int32
+	clientId      int32
+	uriId         int32
+	paymentId	  int32
 	numberId      int32
 	queueId       int32
 	routeId       int32
 	scheduleId    int32
 	smsId         string
 	trunkId       int32
+	voicemailId	  string
 }
 
 func getOtherParams(inputFile string) (
@@ -188,15 +241,19 @@ func getOtherParams(inputFile string) (
 	}
 
 	params.groupBy = createStringArray(data["group_by"])
+	params.subaccountId = getField(data["subaccount_id"])
 	params.extensionId = getField(data["extension_id"])
 	params.callId = getFieldString(data["call_id"])
 	params.deviceId = getField(data["device_id"])
+	params.listenerId = getField(data["listener_id"])
 	params.codeId = getField(data["code_id"])
 	params.contactId = getField(data["contact_id"])
 	params.groupId = getField(data["group_id"])
 	params.mediaId = getField(data["media_id"])
 	params.menuId = getField(data["menu_id"])
+	params.clientId = getField(data["client_id"])
 	params.numberId = getField(data["number_id"])
+	params.paymentId = getField(data["pm_id"])
 	params.queueId = getField(data["queue_id"])
 	params.routeId = getField(data["route_id"])
 	params.scheduleId = getField(data["schedule_id"])
@@ -263,6 +320,22 @@ func getSortParams(inputFile string) (
 func createDeviceParams(inputFile string) swagger.CreateDeviceParams {
 
 	var params swagger.CreateDeviceParams
+	readAndUnmarshalFile(inputFile, &params)
+
+	return params
+}
+
+func createListenerParams(inputFile string) swagger.CreateListenerParams {
+
+	var params swagger.CreateListenerParams
+	readAndUnmarshalFile(inputFile, &params)
+
+	return params
+}
+
+func CreatePricingParams(inputFile string) swagger.CreatePricingParams {
+
+	var params swagger.CreatePricingParams
 	readAndUnmarshalFile(inputFile, &params)
 
 	return params
@@ -350,13 +423,29 @@ func createSmsParams(from string, to string, text string, extensionId int32) swa
 	return par
 }
 
+func patchVoicemailParams(inputFile string) swagger.PatchVoicemailParams {
+
+	var params swagger.PatchVoicemailParams
+	readAndUnmarshalFile(inputFile, &params)
+
+	return params
+}
+
+func patchSmsParams(inputFile string) swagger.PatchSmsParams {
+
+	var params swagger.PatchSmsParams
+	readAndUnmarshalFile(inputFile, &params)
+
+	return params
+}
+
 func createSubaccountParams(inputFile string, contact string, billingContact string) swagger.CreateSubaccountParams {
 
 	var params swagger.CreateSubaccountParams
 	if contact != "" {
 		readAndUnmarshalFile(inputFile, &params)
-		var contactObject swagger.ContactSubaccount
-		var billingContactObject swagger.ContactSubaccount
+		var contactObject swagger.ContactResponse
+		var billingContactObject swagger.ContactResponse
 		readAndUnmarshalFile(contact, &contactObject)
 		readAndUnmarshalFile(billingContact, &billingContactObject)
 		params.Contact = contactObject
@@ -400,6 +489,30 @@ func createContactParams(inputFile string) swagger.CreateContactParams {
 func createGroupParams(inputFile string) swagger.CreateGroupParams {
 
 	var params swagger.CreateGroupParams
+	readAndUnmarshalFile(inputFile, &params)
+
+	return params
+}
+
+func createRedirectUriParams(inputFile string) swagger.CreateRedirectUriParams {
+
+	var params swagger.CreateRedirectUriParams
+	readAndUnmarshalFile(inputFile, &params)
+
+	return params
+}
+
+func createPaymentParams(inputFile string) swagger.CreatePaymentParams {
+
+	var params swagger.CreatePaymentParams
+	readAndUnmarshalFile(inputFile, &params)
+
+	return params
+}
+
+func patchPaymentParams(inputFile string) swagger.PatchPaymentParams {
+
+	var params swagger.PatchPaymentParams
 	readAndUnmarshalFile(inputFile, &params)
 
 	return params

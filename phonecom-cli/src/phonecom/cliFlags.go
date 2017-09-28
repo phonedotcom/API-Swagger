@@ -44,6 +44,7 @@ const inputFormatLong = "inputFormat"
 const outputFormatLong = "outputFormat"
 const apiKeyLong = "api-key"
 const apiKeyPrefixLong = "api-key-prefix"
+const isNewFlag = "isNew"
 
 func getCliFlags() []cli.Flag {
 
@@ -113,6 +114,10 @@ func getCliFlags() []cli.Flag {
 		cli.StringFlag{
 			Name:  textLong,
 			Value: defaultText,
+			Usage: "SMS body",
+		},
+		cli.StringFlag{
+			Name:  isNewFlag,
 			Usage: "SMS body",
 		},
 		cli.StringFlag{
@@ -198,17 +203,25 @@ func getAllCommands() string {
 		createRoute + ", " +
 		createSms + ", " +
 		createSubaccount + ", " +
+		createPricing + ", " +
 		createTrunk + ", " +
 		createContact + ", " +
-		createGroup + "\n\n" +
+		createGroup + ", " +
+		createOauthClientRedirectUri + ", " +
+		createPaymentMethod + "\n\n" +
 
+		deleteDevice + ", " +
 		deleteMedia + ", " +
 		deleteMenu + ", " +
 		deleteQueue + ", " +
 		deleteRoute + ", " +
+		deletePricing + ", " +
 		deleteTrunk + ", " +
 		deleteContact + ", " +
-		deleteGroup + "\n\n" +
+		deleteGroup + ", " +
+		deleteOauthClient + ", " +
+		deleteOauthClientRedirectUri + ", " +
+		deletePaymentMethod + "\n\n" +
 
 		getAccount + ", " +
 		getApplication + ", " +
@@ -218,12 +231,17 @@ func getAllCommands() string {
 		getExtension + ", " +
 		getMedia + ", " +
 		getMenu + ", " +
+		getOauthClient + ", " +
+		getOauthClientsRedirectUri + ", " +
+		getPaymentMethod + ", " +
 		getPhoneNumber + ", " +
 		getQueue + ", " +
 		getRoute + ", " +
 		getSchedule + ", " +
 		getSms + ", " +
+		getPricing + ", " +
 		getTrunk + ", " +
+		getVoicemail + ", " +
 		getContact + ", " +
 		getGroup + "\n\n" +
 
@@ -235,13 +253,18 @@ func getAllCommands() string {
 		listExtensions + ", " +
 		listMedia + ", " +
 		listMenus + ", " +
+		listOauthClients + ", " +
+		listOauthClientsRedirectUris + ", " +
+		listPaymentMethods + ", " +
 		listPhoneNumbers + ", " +
 		listQueues + ", " +
 		listRoutes + ", " +
 		listSchedules + ", " +
 		listSms + ", " +
 		listSubaccounts + ", " +
+		listPricing + ", " +
 		listTrunks + ", " +
+		listVoicemail + ", " +
 		listCallerIds + ", " +
 		listContacts + ", " +
 		listGroups + ", " +
@@ -258,5 +281,9 @@ func getAllCommands() string {
 		replaceRoute + ", " +
 		replaceTrunk + ", " +
 		replaceContact + ", " +
-		replaceGroup + "\n\n"
+		replaceGroup + "\n\n" +
+
+		patchPaymentMethod + ", " +
+		patchSms + ", " +
+		patchVoicemail + "\n\n"
 }

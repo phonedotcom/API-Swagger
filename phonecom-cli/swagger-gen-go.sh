@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 scriptDir=`pwd`
-cd $scriptDir
-swaggerFilePath=../phonecom-apiv4.swagger.json
+swaggerFilePath=$scriptDir/phonecom-apiv4.swagger.json
 
 echo "SDK dir path: $scriptDir"
 
 mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:get -DremoteRepositories=central -Dartifact=io.swagger:swagger-codegen-cli:LATEST -Dpackaging=jar -Ddest=$scriptDir/swagger-codegen.jar
+
+cd $scriptDir
 
 dir=$scriptDir/src/github.com/phonedotcom/API-SDK-go
 rm -rf $dir

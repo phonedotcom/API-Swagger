@@ -201,6 +201,20 @@ func TestFilterSortListDevices(t *testing.T) {
 	assert.Equal(t, sortName, sorts["name"])
 }
 
+func TestListListeners(t *testing.T) {
+
+	var json map[string]interface{}
+	var err error
+
+	err, json = createCli(listListeners)
+	assert.NoError(t, err)
+
+	firstId := getFirstId(json)
+	err, json = createCliWithId(getListener, int(firstId))
+
+	assert.NoError(t, err)
+}
+
 func TestExpressServiceCodes(t *testing.T) {
 
 	var json map[string]interface{}
@@ -506,6 +520,113 @@ func TestFilterSortListMenus(t *testing.T) {
 	assert.Equal(t, sortName, sorts["name"])
 }
 
+func TestListOauthClients(t *testing.T) {
+
+	var json map[string]interface{}
+	var err error
+
+	err, json = createCli(listOauthClients)
+	assert.NoError(t, err)
+
+	firstId := getFirstId(json)
+	err, json = createCliWithId(getOauthClient, int(firstId))
+
+	assert.NoError(t, err)
+}
+
+func TestFilterSortListOauthClients(t *testing.T) {
+
+	idSlice := make([]string, 0)
+	expectedId := "1356077"
+	idSlice = append(idSlice, expectedId)
+	sortId := "asc"
+
+	err, response := createFilterSortOauthClientCli(listOauthClients, idSlice, sortId)
+	assert.NoError(t, err)
+
+	filters := getFilters(response)
+	id := filters["id"].(string)
+	assert.Equal(t, expectedId, id)
+
+	sorts := getSorts(response)
+	assert.Equal(t, sortId, sorts["id"])
+}
+
+func TestListOauthClientsRedirectUris(t *testing.T) {
+
+	var json map[string]interface{}
+	var err error
+
+	err, json = createCli(listOauthClients)
+	assert.NoError(t, err)
+	clientId := getFirstId(json)
+
+	err, json = createCliWithId(listOauthClientsRedirectUris, clientId)
+	assert.NoError(t, err)
+
+	firstId := getFirstId(json)
+	err, json = createCliWithIdIdSecondary(getOauthClientsRedirectUri, int(clientId), int(firstId))
+
+	assert.NoError(t, err)
+}
+
+func TestFilterSortListOauthClientsRedirectUris(t *testing.T) {
+
+	var json map[string]interface{}
+	var err error
+
+	err, json = createCli(listOauthClients)
+	assert.NoError(t, err)
+	clientId := getFirstId(json)
+
+	idSlice := make([]string, 0)
+	expectedId := "1356077"
+	idSlice = append(idSlice, expectedId)
+	sortId := "asc"
+
+	err, response := createFilterSortOauthClientRedirectUriCli(listOauthClientsRedirectUris, clientId, idSlice, sortId)
+	assert.NoError(t, err)
+
+	filters := getFilters(response)
+	id := filters["id"].(string)
+	assert.Equal(t, expectedId, id)
+
+	sorts := getSorts(response)
+	assert.Equal(t, sortId, sorts["id"])
+}
+
+func TestListPaymentMethods(t *testing.T) {
+
+	var json map[string]interface{}
+	var err error
+
+	err, json = createCli(listPaymentMethods)
+	assert.NoError(t, err)
+
+	firstId := getFirstId(json)
+	err, json = createCliWithId(getPaymentMethod, firstId)
+
+	assert.NoError(t, err)
+}
+
+func TestFilterSortListPaymentMethods(t *testing.T) {
+
+	idSlice := make([]string, 0)
+	expectedId := "1356077"
+	idSlice = append(idSlice, expectedId)
+	sortId := "asc"
+
+	err, response := createFilterSortOauthClientCli(listPaymentMethods, idSlice, sortId)
+	assert.NoError(t, err)
+
+	filters := getFilters(response)
+	id := filters["id"].(string)
+	assert.Equal(t, expectedId, id)
+
+	sorts := getSorts(response)
+	assert.Equal(t, sortId, sorts["id"])
+}
+
 func TestListPhoneNumbers(t *testing.T) {
 
 	var json map[string]interface{}
@@ -739,6 +860,49 @@ func TestFilterSortListSubaccounts(t *testing.T) {
 	assert.Equal(t, sortId, sorts["id"])
 }
 
+func TestListPricing(t *testing.T) {
+
+	var json map[string]interface{}
+	var err error
+
+	err, json = createCli(listSubaccounts)
+	assert.NoError(t, err)
+	subaccountId := getFirstId(json)
+
+	err, json = createCliWithId(listPricing, subaccountId)
+	assert.NoError(t, err)
+
+	firstId := getFirstId(json)
+	err, json = createCliWithIdIdSecondary(getPricing, subaccountId, int(firstId))
+
+	assert.NoError(t, err)
+}
+
+func TestFilterSortListPricing(t *testing.T) {
+
+	var json map[string]interface{}
+	var err error
+
+	err, json = createCli(listSubaccounts)
+	assert.NoError(t, err)
+	subaccountId := getFirstId(json)
+
+	idSlice := make([]string, 0)
+	expectedId := "1356077"
+	idSlice = append(idSlice, expectedId)
+	sortId := "asc"
+
+	err, response := createFilterSortPricingCli(listPricing, subaccountId, idSlice, sortId)
+	assert.NoError(t, err)
+
+	filters := getFilters(response)
+	id := filters["id"].(string)
+	assert.Equal(t, expectedId, id)
+
+	sorts := getSorts(response)
+	assert.Equal(t, sortId, sorts["id"])
+}
+
 func TestListTrunks(t *testing.T) {
 
 	var json map[string]interface{}
@@ -779,6 +943,38 @@ func TestFilterSortListTrunks(t *testing.T) {
 	assert.Equal(t, sortName, sorts["name"])
 }
 
+func TestListVoicemail(t *testing.T) {
+
+	var json map[string]interface{}
+	var err error
+
+	err, json = createCli(listVoicemail)
+	assert.NoError(t, err)
+
+	firstId := getFirstId(json)
+	err, json = createCliWithId(getVoicemail, int(firstId))
+
+	assert.NoError(t, err)
+}
+
+func TestFilterSortListVoicemail(t *testing.T) {
+
+	idSlice := make([]string, 0)
+	expectedId := "1356077"
+	idSlice = append(idSlice, expectedId)
+	sortId := "asc"
+
+	err, response := createFilterSortOauthClientCli(listVoicemail, idSlice, sortId)
+	assert.NoError(t, err)
+
+	filters := getFilters(response)
+	id := filters["id"].(string)
+	assert.Equal(t, expectedId, id)
+
+	sorts := getSorts(response)
+	assert.Equal(t, sortId, sorts["id"])
+}
+
 func TestListAvailablePhoneNumbers(t *testing.T) {
 
 	var err error
@@ -804,7 +1000,7 @@ func TestFilterSortListAvailablePhoneNumbers(t *testing.T) {
 	expectedCountryCode := "1"
 	countryCodeSlice = append(countryCodeSlice, expectedCountryCode)
 	npaSlice := make([]string, 0)
-	expectedNpa := "gt:10"
+	expectedNpa := "817"
 	npaSlice = append(npaSlice, expectedNpa)
 	nxxSlice := make([]string, 0)
 	expectedNxx := "831"
@@ -822,7 +1018,7 @@ func TestFilterSortListAvailablePhoneNumbers(t *testing.T) {
 	expectedCountry := "US"
 	countrySlice = append(countrySlice, expectedCountry)
 	priceSlice := make([]string, 0)
-	expectedPrice := "0"
+	expectedPrice := "449.99"
 	priceSlice = append(priceSlice, expectedPrice)
 	categorySlice := make([]string, 0) // check filter
 	expectedCategory := "10"
